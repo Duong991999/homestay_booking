@@ -1,0 +1,58 @@
+version: '3.8'
+services:
+  app:
+    build:
+      args:
+        user: nttduong
+        uid: 1000
+      dockerfile: Dockerfile.dev
+    image: laravel-app
+    #command: npm run watch
+    restart: unless-stopped
+    working_dir: /var/www/html/
+    volumes:
+      - ./:/var/www/html/
+      - /var/www/vendor
+    networks:
+      - laravel
+  client:
+    build:
+      context: .
+      dockerfile: Dockerfile.node
+    volumes:
+      - ./:/var/www/html/
+      - /var/www/node_modules
+    networks:
+      - laravel
+    depends_on:
+      - app
+  nginx:
+    image: nginx:stable-alpine
+    restart: unless-stopped
+    ports:
+      - 8080:80
+    volumes:
+      - ./:/var/www/html
+      - ./nginx/conf.d:/etc/nginx/conf.d/
+    networks:
+      - laravel
+  db:
+    image: mysql
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: laravel
+      MYSQL_ROOT_PASSWORD: liverpool
+      MYSQL_USER: nttduong
+      MYSQL_PASSWORD: liverpool
+    ports:
+      - "9999:3306"
+    volumes:
+      - dbdata:/var/lib/mysql
+    networks:
+      - laravel
+volumes:
+  dbdata:
+#Docker Networks
+networks:
+  laravel:
+    driver: bridge
