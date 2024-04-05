@@ -5,5 +5,10 @@ stop:
 restart:	stop start
 build:
 	docker-compose build app
-end:
+stop_v:
 	docker-compose down -v
+app:
+	docker exec -it app bash
+clear:
+	php artisan config:clear
+	php artisan cache:clear
