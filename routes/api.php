@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\AuthController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -23,6 +24,10 @@ Route::get('bookables/{bookable}/price', 'Api\BookablePriceController')
 
 Route::get('/booking-by-review/{reviewKey}', 'Api\BookingByReviewController')
     ->name('booking.by-review.show');
+
+Route::post('/register', [AuthController::class, 'register']);
+Route::post('/login', [AuthController::class, 'login']);
+Route::get('/user', [AuthController::class, 'user'])->middleware('auth:sanctum');
 
 Route::apiResource('reviews', 'Api\ReviewController')->only(['show', 'store']);
 

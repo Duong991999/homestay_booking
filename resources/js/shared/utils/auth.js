@@ -1,5 +1,5 @@
 export function isLoggedIn() {
-    return localStorage.getItem('isLoggedIn') == 'true';
+    return localStorage.getItem('isLoggedIn');
 }
 
 export function logIn() {
@@ -7,5 +7,5 @@ export function logIn() {
 }
 
 export function logOut() {
-    localStorage.setItem('isLoggedIn', false);
+    localStorage.clear();
 }
