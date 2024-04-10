@@ -1,32 +1,108 @@
 <template>
     <div>
-        <nav class="navbar navbar-dark navbar-expand-lg bg-primary border-bottom">
-            <router-link class="navbar-brand mr-auto" :to="{ name: 'home' }"
-                >HomestayBooking</router-link
-            >
-
-            <ul class="navbar-nav">
-                <li class="nav-item">
-                    <router-link class="nav-link" :to="{ name: 'basket' }">
+        <nav class="navbar-parent">
+            <div class="navbar-title">
+                <router-link class="navbar-brand" :to="{ name: 'home' }"
+                    >HomestayBooking</router-link
+                >
+                <div class="navbar-login">
+                    <router-link
+                        :to="{ name: 'basket' }"
+                        class="nav-link-1"
+                        style="text-decoration: none"
+                    >
                         Basket
                         <span v-if="itemsInBasket" class="badge badge-secondary">{{
                             itemsInBasket
                         }}</span>
                     </router-link>
-                </li>
 
-                <li class="nav-item" v-if="!isLoggedIn">
-                    <router-link :to="{ name: 'register' }" class="nav-link">Register</router-link>
-                </li>
+                    <router-link
+                        :to="{ name: 'register' }"
+                        class="nav-link-1"
+                        v-if="!isLoggedIn"
+                        style="text-decoration: none"
+                        >Register</router-link
+                    >
 
-                <li class="nav-item" v-if="!isLoggedIn">
-                    <router-link :to="{ name: 'login' }" class="nav-link">Sign-in</router-link>
-                </li>
+                    <router-link
+                        :to="{ name: 'login' }"
+                        class="nav-link-1"
+                        v-if="!isLoggedIn"
+                        style="text-decoration: none"
+                        >Sign-in</router-link
+                    >
 
-                <li class="nav-item" v-if="isLoggedIn">
-                    <a class="nav-link" href="#" @click.prevent="logout">Logout</a>
-                </li>
-            </ul>
+                    <a
+                        class="nav-link-1"
+                        href="#"
+                        @click.prevent="logout"
+                        style="text-decoration: none"
+                        v-if="isLoggedIn"
+                        >Logout</a
+                    >
+                </div>
+            </div>
+
+            <div class="narbar-d">
+                <div class="nav-item dropdown" v-if="!isLoggedIn">
+                    <a
+                        class="nav-link dropdown-toggle"
+                        href="#"
+                        id="navbarDropdown"
+                        role="button"
+                        data-toggle="dropdown"
+                        aria-haspopup="true"
+                        aria-expanded="false"
+                    >
+                        User Menu
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <!-- You can add more dropdown items here -->
+                        <router-link :to="{ name: 'profile' }" class="dropdown-item"
+                            >Profile</router-link
+                        >
+                    </div>
+                </div>
+                <div class="nav-item dropdown" v-if="!isLoggedIn">
+                    <a
+                        class="nav-link dropdown-toggle"
+                        href="#"
+                        id="navbarDropdown"
+                        role="button"
+                        data-toggle="dropdown"
+                        aria-haspopup="true"
+                        aria-expanded="false"
+                    >
+                        User Menu
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <!-- You can add more dropdown items here -->
+                        <router-link :to="{ name: 'profile' }" class="dropdown-item"
+                            >Profile</router-link
+                        >
+                    </div>
+                </div>
+                <div class="nav-item dropdown" v-if="!isLoggedIn">
+                    <a
+                        class="nav-link dropdown-toggle"
+                        href="#"
+                        id="navbarDropdown"
+                        role="button"
+                        data-toggle="dropdown"
+                        aria-haspopup="true"
+                        aria-expanded="false"
+                    >
+                        User Menu
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <!-- You can add more dropdown items here -->
+                        <router-link :to="{ name: 'profile' }" class="dropdown-item"
+                            >Profile</router-link
+                        >
+                    </div>
+                </div>
+            </div>
         </nav>
 
         <div class="container mt-4 mb-4 pr-4 pl-4">
@@ -68,3 +144,45 @@ export default {
     },
 };
 </script>
+
+<style scoped>
+.navbar-parent {
+    background-color: #003b95;
+}
+.navbar-brand {
+    color: aliceblue;
+    margin: 16px 16px 16px 30px;
+
+    justify-content: center;
+}
+.navbar-login {
+    flex-direction: row;
+}
+.navbar-item-1 {
+    padding: 16px;
+    justify-content: space-between;
+}
+
+.nav-link-1 {
+    background-color: aliceblue;
+    color: #003b95;
+    padding: 8px 20px;
+    margin: 10px;
+    justify-content: center;
+    border: 1px solid #003b95;
+    border-radius: 5px;
+}
+.navbar-title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.dropdown {
+    display: inline-block;
+    flex-direction: row;
+    border: 1px solid white;
+    border-radius: 20px;
+    margin: 16px;
+}
+</style>
