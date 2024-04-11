@@ -1,7 +1,7 @@
 <template>
     <div>
-        <div v-if="loading">Data is loading...</div>
-        <div v-else>
+		<v-fullloading :loading="loading" ></v-fullloading>
+        <div>
             <div class="row mb-4" v-for="row in rows" :key="'row' + row">
                 <div
                     class="col d-flex align-items-stretch"
@@ -50,7 +50,6 @@ export default {
     },
     created() {
         this.loading = true;
-
         axios.get('/api/bookables').then((response) => {
             this.bookables = response.data.data;
             this.loading = false;
