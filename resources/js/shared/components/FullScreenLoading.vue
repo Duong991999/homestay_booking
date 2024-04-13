@@ -11,11 +11,15 @@
   export default {
 	data() {
 	  return {
-		loading: false,
 		color: '#2c3e50',
 	  };
 	},
-	props: ['loading'],
+	props: {
+		loading: {
+			type: Boolean,
+			default: false
+		}
+	},
     methods: {
     },
   };
