@@ -142,7 +142,7 @@
                 <div class="carousel-item">
                     <img
                         class="d-block w-100"
-                        src="assets\image\nha-go-homestay-1.jpg"
+                        src="assets\image\homescreen1.jpg"
                         alt="Third slide"
                     />
                 </div>
