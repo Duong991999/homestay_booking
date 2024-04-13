@@ -125,25 +125,11 @@
                 <li data-target="#carouselExampleIndicators" data-slide-to="2"></li> -->
             </ol>
             <div class="carousel-inner">
-                <div class="carousel-item active">
+				<div v-for="(file, index) in list_home_screen" :class="'carousel-item' + (index ? ' active' : '')" >
                     <img
                         class="d-block w-100"
-                        src="assets/image/homescreen1.jpg"
-                        alt="First slide"
-                    />
-                </div>
-                <div class="carousel-item">
-                    <img
-                        class="d-block w-100"
-                        src="assets/image/homescreen2.jpg"
-                        alt="Second slide"
-                    />
-                </div>
-                <div class="carousel-item">
-                    <img
-                        class="d-block w-100"
-                        src="assets\image\homescreen1.jpg"
-                        alt="Third slide"
+                        :src="`assets/image/slide_home_screens/${file}`"
+                        :alt="`Slide ${index}`"
                     />
                 </div>
             </div>
@@ -175,11 +161,12 @@
 
 <script>
 import { mapState, mapGetters } from 'vuex';
-
+import CONST_FRONTEND from './const';
 export default {
     data() {
         return {
             lastSearch: this.$store.state.lastSearch,
+			list_home_screen: CONST_FRONTEND.home_screen_file
         };
     },
     computed: {
@@ -266,7 +253,7 @@ export default {
     box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
 }
 .carousel-item {
-    height: 80vh;
+    height: 40vh;
     min-height: 300px;
     background: no-repeat scroll center scroll;
 }
