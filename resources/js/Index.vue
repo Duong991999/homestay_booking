@@ -128,14 +128,14 @@
                 <div class="carousel-item active">
                     <img
                         class="d-block w-100"
-                        src="assets/image/hinh-anh-bat-mi-y-tuong-thiet-ke-homestay-doc-dao-hut-khach-so-1.jpg"
+                        src="assets/image/homescreen1.jpg"
                         alt="First slide"
                     />
                 </div>
                 <div class="carousel-item">
                     <img
                         class="d-block w-100"
-                        src="assets/image/hinh-anh-bat-mi-y-tuong-thiet-ke-homestay-doc-dao-hut-khach-so-1.jpg"
+                        src="assets/image/homescreen2.jpg"
                         alt="Second slide"
                     />
                 </div>
