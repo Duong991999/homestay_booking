@@ -4,7 +4,8 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Booking extends Model
+class Category extends Model
 {
-    protected $table = 'bookings';
+    protected $table = 'categories';
+	
 }

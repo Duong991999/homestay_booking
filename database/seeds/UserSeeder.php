@@ -15,6 +15,7 @@ class UserSeeder extends Seeder
     public function run()
     {
 		$admin = User::create([
+			'id' => 1,
 			'name' => 'admin',
 			'email' => "admin@booking.com",
             'password' => Hash::make("123456"),
@@ -22,12 +23,14 @@ class UserSeeder extends Seeder
 		$admin->assignRole('admin');
 
 		$user = User::create([
+			'id' => 2,
 			'name' => 'User 1',
 			'email' => "user1@booking.com",
             'password' => Hash::make("123456"),
 		]);
 		$user->assignRole('user');
 		$user = User::create([
+			'id' => 3,
 			'name' => 'User 2',
 			'email' => "user2@booking.com",
             'password' => Hash::make("123456"),
@@ -36,6 +39,7 @@ class UserSeeder extends Seeder
 
 
 		$company = User::create([
+			'id' => 4,
 			'name' => 'Company 1',
 			'email' => "company1@booking.com",
             'password' => Hash::make("123456"),
@@ -43,10 +47,27 @@ class UserSeeder extends Seeder
 		$company->assignRole('company');
 
 		$company = User::create([
+			'id' => 5,
 			'name' => 'Company 2',
 			'email' => "company2@booking.com",
             'password' => Hash::make("123456"),
 		]);
 		$company->assignRole('company');
+
+		$company = User::create([
+			'id' => 6,
+			'name' => 'Employee 1',
+			'email' => "employee1@booking.com",
+            'password' => Hash::make("123456"),
+		]);
+		$company->assignRole('employee');
+
+		$company = User::create([
+			'id' => 7,
+			'name' => 'Employee 2',
+			'email' => "employee2@booking.com",
+            'password' => Hash::make("123456"),
+		]);
+		$company->assignRole('employee');
     }
 }

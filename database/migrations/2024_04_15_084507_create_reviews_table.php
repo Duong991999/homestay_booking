@@ -16,15 +16,14 @@ class CreateReviewsTable extends Migration
         Schema::create('reviews', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->timestamps();
-
             $table->unsignedTinyInteger('rating');
             $table->text('content');
-
-            $table->unsignedBigInteger('bookable_id')->index();
-            $table->foreign('bookable_id')->references('id')->on('bookables');
-
+            $table->unsignedBigInteger('homestay_id')->index();
+            $table->foreign('homestay_id')->references('id')->on('homestays');
             $table->unsignedBigInteger('booking_id')->index()->nullable();
-            $table->foreign('booking_id')->references('id')->on('bookables');
+            $table->foreign('booking_id')->references('id')->on('bookings');
+            $table->unsignedBigInteger('user_id')->index();
+            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 
