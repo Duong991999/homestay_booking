@@ -101,58 +101,84 @@
                     >Logout</a
                 >
             </div>
-
-            <!--Check form-->
-            <!-- <form class="form-input">
-                <input type="text" id="fname" name="firstname" placeholder="Bạn muốn đi đâu" />
-                <div>
-                    <label for="example-datepicker">Choose a date</label>
-                    <b-form-datepicker
-                        id="example-datepicker"
-                        v-model="value"
-                        class="mb-2"
-                    ></b-form-datepicker>
-                    <p>Value: '{{ value }}'</p>
-                </div>
-                <input type="text" id="fname" name="firstname" placeholder="Bạn muốn đi đâu" />
-            </form> -->
-            <!--end-->
         </nav>
-        <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-            <ol class="carousel-indicators">
-                <!-- <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-                <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-                <li data-target="#carouselExampleIndicators" data-slide-to="2"></li> -->
-            </ol>
-            <div class="carousel-inner">
-				<div v-for="(file, index) in list_home_screen" :class="'carousel-item' + (index ? ' active' : '')" >
-                    <img
-                        class="d-block w-100"
-                        :src="`assets/image/slide_home_screens/${file}`"
-                        :alt="`Slide ${index}`"
-                    />
+        <div>
+            <div style="z-index: 1">
+                <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+                    <ol class="carousel-indicators"></ol>
+                    <div class="carousel-inner">
+                        <div
+                            v-for="(file, index) in list_home_screen"
+                            :class="'carousel-item' + (index ? ' active' : '')"
+                        >
+                            <img
+                                class="d-block w-100"
+                                :src="`assets/image/slide_home_screens/${file}`"
+                                :alt="`Slide ${index}`"
+                            />
+                        </div>
+                    </div>
+                    <a
+                        class="carousel-control-prev"
+                        href="#carouselExampleIndicators"
+                        role="button"
+                        data-slide="prev"
+                    >
+                        <!-- <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span> -->
+                    </a>
+                    <a
+                        class="carousel-control-next"
+                        href="#carouselExampleIndicators"
+                        role="button"
+                        data-slide="next"
+                    >
+                        <!-- <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span> -->
+                    </a>
                 </div>
             </div>
-            <a
-                class="carousel-control-prev"
-                href="#carouselExampleIndicators"
-                role="button"
-                data-slide="prev"
-            >
-                <!-- <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="sr-only">Previous</span> -->
-            </a>
-            <a
-                class="carousel-control-next"
-                href="#carouselExampleIndicators"
-                role="button"
-                data-slide="next"
-            >
-                <!-- <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="sr-only">Next</span> -->
-            </a>
+            <div class="container" style="z-index: 1">
+                <div class="row">
+                    <div class="col-lg-12 bg-white shadow p-4 rounded">
+                        <form>
+                            <div class="row align-items-end">
+                                <div class="col-lg-3">
+                                    <label class="form-label" style="font-weight: 500"
+                                        >Địa điểm</label
+                                    >
+                                    <input
+                                        type="place"
+                                        class="form-control shaw-none"
+                                        placeholder="Nơi bạn muốn đến"
+                                    />
+                                </div>
+                                <div class="col-lg-3">
+                                    <label class="form-label" style="font-weight: 500"
+                                        >Ngày nhận phòng</label
+                                    >
+                                    <input type="date" class="form-control shaw-none" />
+                                </div>
+                                <div class="col-lg-3">
+                                    <label class="form-label" style="font-weight: 500"
+                                        >Ngày trả phòng</label
+                                    >
+                                    <input type="date" class="form-control shaw-none" />
+                                </div>
+                                <div class="col-lg-1">
+                                    <button
+                                        class="btn btn-primary text-white shadow-none custom-bg"
+                                        type="submit"
+                                    >
+                                        Submit
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
         </div>
-
         <div class="container mt-4 mb-4 pr-4 pl-4">
             <router-view></router-view>
         </div>
@@ -162,11 +188,13 @@
 <script>
 import { mapState, mapGetters } from 'vuex';
 import CONST_FRONTEND from './const';
+import { button } from 'bootstrap';
+
 export default {
     data() {
         return {
             lastSearch: this.$store.state.lastSearch,
-			list_home_screen: CONST_FRONTEND.home_screen_file
+            list_home_screen: CONST_FRONTEND.home_screen_file,
         };
     },
     computed: {
@@ -218,9 +246,7 @@ export default {
 }
 .navbar-custom {
     height: 50px;
-    border-bottom: 0.5px inset #50555e;
 }
-
 .navbar-brand {
     font-size: 30px;
     color: rgb(21, 5, 245);
@@ -249,12 +275,12 @@ export default {
     justify-content: space-between;
 }
 .navbar-scrolled {
-    background-color: rgb(249, 249, 249);
+    background-color: rgb(28, 129, 251);
     box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
 }
 .carousel-item {
     height: 40vh;
-    min-height: 300px;
+    min-height: 450px;
     background: no-repeat scroll center scroll;
 }
 .dropdown {
@@ -271,13 +297,11 @@ export default {
     font-weight: 600;
     padding: 16px;
 }
-.form-input {
-    width: 100%;
-    padding: 12px 20px;
-    margin: 8px 0;
-    display: inline-block;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box;
+
+.custom-bg {
+    background-color: #4882da;
+}
+.custom-bg:hover {
+    background-color: #04419c;
 }
 </style>
