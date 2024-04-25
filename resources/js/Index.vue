@@ -293,7 +293,7 @@ export default {
 }
 .carousel-item {
     height: 40vh;
-    min-height: 300px;
+    min-height: 450px;
     background: no-repeat scroll center scroll;
 }
 .dropdown {
