@@ -4,8 +4,15 @@
             class="navbar navbar-custom navbar-expand-lg justify-content-between fixed-top text-center"
         >
             <router-link class="navbar-brand mb-0 h1" :to="{ name: 'home' }">
-                HomestayBooking</router-link
-            >
+                <img
+                    class=""
+                    src="assets/image/slide_home_screens/logo.jpg"
+                    height="40"
+                    alt="Homestaybooking"
+                    style="margin-right: 3px; border-radius: 40px"
+                />HomestayBooking
+            </router-link>
+
             <!-- Dropdowm -->
             <div class="narbar-d">
                 <div class="nav-item dropdown" v-if="!isLoggedIn">
@@ -185,7 +192,7 @@
                                     class="btn btn-primary text-white shadow-none custom-bg"
                                     type="submit"
                                 >
-                                    Submit
+                                    Tìm kiếm
                                 </button>
                             </div>
                         </div>
@@ -262,7 +269,7 @@ export default {
 
 .navbar-brand {
     font-size: 30px;
-    color: rgb(21, 5, 245);
+    color: rgb(237, 195, 169);
     justify-content: center;
 }
 .navbar-login {

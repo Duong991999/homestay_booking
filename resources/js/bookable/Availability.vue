@@ -1,7 +1,7 @@
 <template>
     <div>
         <h6 class="text-uppercase text-secondary font-weight-bolder">
-            Check Availability
+            Kiểm tra ngày
             <transition name="fade">
                 <span v-if="noAvailability" class="text-danger">(NOT AVAILABLE)</span>
                 <span v-if="hasAvailability" class="text-success">(AVAILABLE)</span>
@@ -10,9 +10,9 @@
 
         <div class="form-row">
             <div class="form-group col-md-6">
-                <label for="from">From</label>
+                <label for="from">Ngày nhận phòng</label>
                 <input
-                    type="text"
+                    type="date"
                     name="from"
                     class="form-control form-control-sm"
                     placeholder="Start date"
@@ -24,9 +24,9 @@
             </div>
 
             <div class="form-group col-md-6">
-                <label for="to">To</label>
+                <label for="to">Ngày trả phòng</label>
                 <input
-                    type="text"
+                    type="date"
                     name="to"
                     class="form-control form-control-sm"
                     placeholder="End date"
@@ -39,8 +39,10 @@
         </div>
 
         <button class="btn btn-secondary btn-block" @click="check" :disabled="loading">
-            <span v-if="!loading">Check!</span>
-            <span v-if="loading"> <i class="fas fa-circle-notch fa-spin"></i> Checking... </span>
+            <span v-if="!loading">Kiểm tra</span>
+            <span v-if="loading">
+                <i class="fas fa-circle-notch fa-spin"></i> Đang kiểm tra...
+            </span>
         </button>
     </div>
 </template>

@@ -1,6 +1,6 @@
 <template>
     <div style="padding: 1.25rem">
-        <h6 class="text-uppercase text-secondary font-weight-bolder pt-4">Review List</h6>
+        <h6 class="text-uppercase text-secondary font-weight-bolder pt-4">Bình luận</h6>
 
         <div v-if="loading">Loading...</div>
         <div v-else>
@@ -10,7 +10,7 @@
                 :key="index"
             >
                 <div class="row pt-4">
-                    <div class="col-md-6">Aaron Walker</div>
+                    <div class="col-md-6">{{ user }}</div>
                     <div class="col-md-6 d-flex justify-content-end">
                         <star-rating :value="review.rating" class="fa-lg"></star-rating>
                     </div>
@@ -30,6 +30,14 @@
 export default {
     props: {
         bookableId: [String, Number],
+        user: {
+            type: String,
+            default: 'Long',
+        },
+        content: {
+            type: String,
+            default: 'Ok ổn đó',
+        },
     },
     data() {
         return {

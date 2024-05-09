@@ -11,6 +11,11 @@ const routes = [
         name: 'home',
     },
     {
+        path: '/dashboard',
+        component: require('@/Dashboard.vue').default,
+        name: 'dashboard',
+    },
+    {
         path: '/bookable/:id',
         component: Bookable,
         name: 'bookable',
@@ -34,6 +39,11 @@ const routes = [
         path: '/auth/register',
         component: require('@/auth/Register.vue').default,
         name: 'register',
+    },
+    {
+        path: '/rooms/create',
+        component: require('@/company/Rooms/Create.vue').default,
+        name: 'room',
     },
 ];
 
