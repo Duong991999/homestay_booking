@@ -1,6 +1,6 @@
 <template>
     <div>
-		<v-fullloading :loading="loading" ></v-fullloading>
+        <v-fullloading :loading="loading"></v-fullloading>
         <div>
             <div class="row mb-4" v-for="row in rows" :key="'row' + row">
                 <div
@@ -32,7 +32,7 @@ export default {
         return {
             bookables: null,
             loading: false,
-            columns: 3,
+            columns: 4,
         };
     },
     computed: {

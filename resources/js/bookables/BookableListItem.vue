@@ -3,7 +3,11 @@
         <div class="card-body">
             <router-link style="text-decoration: none" :to="{ name: 'bookable', params: { id } }">
                 <a class="text-decoration-none">
-                    <img style="border-radius: 10px" class="w-80 card-img-top" :src="imageUrl" />
+                    <img
+                        style="border-top-left-radius: 10px; border-top-right-radius: 10px"
+                        class="w-80 card-img-top"
+                        :src="imageUrl"
+                    />
                     <h5 class="font-weight-bold" style="color: black">Homestay</h5>
                 </a>
             </router-link>
