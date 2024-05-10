@@ -200,6 +200,9 @@
                 </div>
             </div>
         </div>
+        <Checkbox>123</Checkbox>
+        <PrimaryButton>1</PrimaryButton>
+        <TextInput></TextInput>
         <div class="container mt-4 mb-4 pr-4 pl-4">
             <router-view></router-view>
         </div>
@@ -209,6 +212,10 @@
 <script>
 import { mapState, mapGetters } from 'vuex';
 import CONST_FRONTEND from './const';
+import PrimaryButton from '@/Components/PrimaryButton.vue';
+import Checkbox from './Components/Checkbox.vue';
+import TextInput from './Components/TextInput.vue';
+
 export default {
     data() {
         return {

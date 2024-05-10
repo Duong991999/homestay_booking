@@ -1,6 +1,6 @@
 require('./bootstrap');
 
-import Vue from "vue";
+import Vue from 'vue';
 import moment from 'moment';
 import VueRouter from 'vue-router';
 import Vuex from 'vuex';
@@ -13,15 +13,20 @@ import ValidationErrors from './shared/components/ValidationErrors.vue';
 import Loading from './shared/components/Loading.vue';
 import FullLoading from './shared/components/FullScreenLoading.vue';
 import storeDefinition from './store';
-import PulseLoader from 'vue-spinner/src/PulseLoader.vue'
-import DotLoader from 'vue-spinner/src/DotLoader.vue'
+import PulseLoader from 'vue-spinner/src/PulseLoader.vue';
+import DotLoader from 'vue-spinner/src/DotLoader.vue';
+import Checkbox from './Components/Checkbox.vue';
+import PrimaryButton from '@/Components/PrimaryButton.vue';
+import TextInput from './Components/TextInput.vue';
 
 window.Vue = require('vue');
 Vue.use(VueRouter);
 Vue.use(Vuex);
 
 Vue.filter('fromNow', (value) => moment(value).fromNow());
-
+Vue.component('TextInput', TextInput);
+Vue.component('PrimaryButton', PrimaryButton);
+Vue.component('Checkout', Checkbox);
 Vue.component('star-rating', StarRating);
 Vue.component('fatal-error', FatalError);
 Vue.component('success', Success);
@@ -31,20 +36,19 @@ Vue.component('v-fullloading', FullLoading);
 Vue.component('pulse-loader', PulseLoader);
 Vue.component('dot-loader', DotLoader);
 
-
 const store = new Vuex.Store(storeDefinition);
 
 window.axios.interceptors.request.use(
-	(config) => {
-		const token = localStorage.getItem('token');
-		if (token) {
-			config.headers.Authorization = `Bearer ${token}`;
-		}
-		return config;
-	},
-	(error) => {
-		return Promise.reject(error);
-	}
+    (config) => {
+        const token = localStorage.getItem('token');
+        if (token) {
+            config.headers.Authorization = `Bearer ${token}`;
+        }
+        return config;
+    },
+    (error) => {
+        return Promise.reject(error);
+    }
 );
 
 window.axios.interceptors.response.use(
