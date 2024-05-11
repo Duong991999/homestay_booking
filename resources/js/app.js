@@ -1,20 +1,20 @@
 require('./bootstrap');
 
-import Vue from "vue";
+import Vue from 'vue';
 import moment from 'moment';
 import VueRouter from 'vue-router';
 import Vuex from 'vuex';
 import Index from './Index.vue';
 import router from './routes';
-import FatalError from './shared/components/FatalError.vue';
-import StarRating from './shared/components/StarRating.vue';
-import Success from './shared/components/Success.vue';
-import ValidationErrors from './shared/components/ValidationErrors.vue';
-import Loading from './shared/components/Loading.vue';
-import FullLoading from './shared/components/FullScreenLoading.vue';
+import FatalError from './shared/Components/FatalError.vue';
+import StarRating from './shared/Components/StarRating.vue';
+import Success from './shared/Components/Success.vue';
+import ValidationErrors from './shared/Components/ValidationErrors.vue';
+import Loading from './shared/Components/Loading.vue';
+import FullLoading from './shared/Components/FullScreenLoading.vue';
 import storeDefinition from './store';
-import PulseLoader from 'vue-spinner/src/PulseLoader.vue'
-import DotLoader from 'vue-spinner/src/DotLoader.vue'
+import PulseLoader from 'vue-spinner/src/PulseLoader.vue';
+import DotLoader from 'vue-spinner/src/DotLoader.vue';
 
 window.Vue = require('vue');
 Vue.use(VueRouter);
@@ -31,20 +31,19 @@ Vue.component('v-fullloading', FullLoading);
 Vue.component('pulse-loader', PulseLoader);
 Vue.component('dot-loader', DotLoader);
 
-
 const store = new Vuex.Store(storeDefinition);
 
 window.axios.interceptors.request.use(
-	(config) => {
-		const token = localStorage.getItem('token');
-		if (token) {
-			config.headers.Authorization = `Bearer ${token}`;
-		}
-		return config;
-	},
-	(error) => {
-		return Promise.reject(error);
-	}
+    (config) => {
+        const token = localStorage.getItem('token');
+        if (token) {
+            config.headers.Authorization = `Bearer ${token}`;
+        }
+        return config;
+    },
+    (error) => {
+        return Promise.reject(error);
+    }
 );
 
 window.axios.interceptors.response.use(
