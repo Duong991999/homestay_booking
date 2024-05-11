@@ -108,22 +108,6 @@
                     >Logout</a
                 >
             </div>
-
-            <!--Check form-->
-            <!-- <form class="form-input">
-                <input type="text" id="fname" name="firstname" placeholder="Bạn muốn đi đâu" />
-                <div>
-                    <label for="example-datepicker">Choose a date</label>
-                    <b-form-datepicker
-                        id="example-datepicker"
-                        v-model="value"
-                        class="mb-2"
-                    ></b-form-datepicker>
-                    <p>Value: '{{ value }}'</p>
-                </div>
-                <input type="text" id="fname" name="firstname" placeholder="Bạn muốn đi đâu" />
-            </form> -->
-            <!--end-->
         </nav>
         <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
             <ol class="carousel-indicators">
@@ -200,6 +184,141 @@
                 </div>
             </div>
         </div>
+        <!-- Location noi bat  -->
+        <div class="location_choice">
+            <div>
+                <span
+                    style="
+                        font-size: 24px;
+                        line-height: 30px;
+                        font-weight: 500;
+                        color: rgb(42, 42, 46);
+                        padding-bottom: 8px;
+                        display: block;
+                        text-align: center;
+                    "
+                >
+                    Các địa điểm du lịch nổi bật
+                </span>
+                <div>
+                    <!--carousel-->
+                    <div id="carouselExample" class="carousel slide">
+                        <div class="carousel-inner-location" ref="carouselInner">
+                            <div class="carousel-item-location active" ref="carouselItem">
+                                <div class="cards-wrapper">
+                                    <div class="card">
+                                        <img
+                                            src="assets/image/slide_home_screens/_2.jpg"
+                                            class="card-img-top"
+                                            alt="..."
+                                        />
+                                        <div class="card-body">
+                                            <h5 class="card-title text-center">Địa điểm</h5>
+                                            <p class="card-text text-center">Số homestay</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="carousel-item-location">
+                                <div class="cards-wrapper">
+                                    <div class="card">
+                                        <img
+                                            src="assets/image/slide_home_screens/_1.jpg"
+                                            class="card-img-top"
+                                            alt="..."
+                                        />
+                                        <div class="card-body">
+                                            <h5 class="card-title text-center">Địa điểm</h5>
+                                            <p class="card-text text-center">Số homestay</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="carousel-item-location">
+                                <div class="cards-wrapper">
+                                    <div class="card">
+                                        <img
+                                            src="assets/image/slide_home_screens/_2.jpg"
+                                            class="card-img-top"
+                                            alt="..."
+                                        />
+                                        <div class="card-body">
+                                            <h5 class="card-title text-center">Địa điểm</h5>
+                                            <p class="card-text text-center">Số homestay</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="carousel-item-location">
+                                <div class="cards-wrapper">
+                                    <div class="card">
+                                        <img
+                                            src="assets/image/slide_home_screens/_2.jpg"
+                                            class="card-img-top"
+                                            alt="..."
+                                        />
+                                        <div class="card-body">
+                                            <h5 class="card-title text-center">Địa điểm</h5>
+                                            <p class="card-text text-center">Số homestay</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="carousel-item-location">
+                                <div class="cards-wrapper">
+                                    <div class="card">
+                                        <img
+                                            src="assets/image/slide_home_screens/_2.jpg"
+                                            class="card-img-top"
+                                            alt="..."
+                                        />
+                                        <div class="card-body">
+                                            <h5 class="card-title text-center">Địa điểm</h5>
+                                            <p class="card-text text-center">Số homestay</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="carousel-item-location">
+                                <div class="cards-wrapper">
+                                    <div class="card">
+                                        <img
+                                            src="assets/image/slide_home_screens/_2.jpg"
+                                            class="card-img-top"
+                                            alt="..."
+                                        />
+                                        <div class="card-body">
+                                            <h5 class="card-title text-center">Địa điểm</h5>
+                                            <p class="card-text text-center">Số homestay</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <button
+                            class="carousel-control-prev-location carousel-control-prev"
+                            type="button"
+                            data-target="#carouselExampleControls"
+                            data-slide="prev"
+                            @click="scrollPrevious"
+                        >
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Previous</span>
+                        </button>
+                        <button
+                            class="carousel-control-next-location carousel-control-next"
+                            type="button"
+                            data-target="#carouselExampleControls"
+                            data-slide="next"
+                            @click="scrollNext"
+                        >
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Next</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
         <div class="container mt-4 mb-4 pr-4 pl-4">
             <router-view></router-view>
         </div>
@@ -215,6 +334,9 @@ export default {
         return {
             lastSearch: this.$store.state.lastSearch,
             list_home_screen: CONST_FRONTEND.home_screen_file,
+            // carouselItems: [], // Assuming carouselItems is an array of items
+            scrollPosition: 0,
+            cardWidth: 0,
         };
     },
     computed: {
@@ -243,6 +365,27 @@ export default {
                 interval: 2000,
             });
         },
+        scrollNext() {
+            const carouselWidth = this.$refs.carouselInner.scrollWidth;
+            if (this.scrollPosition < carouselWidth - this.cardWidth * 3) {
+                console.log('Button clicked');
+                this.scrollPosition += this.cardWidth;
+                this.$refs.carouselInner.scrollTo({
+                    left: this.scrollPosition,
+                    behavior: 'smooth',
+                });
+            }
+        },
+        scrollPrevious() {
+            if (this.scrollPosition > 0) {
+                console.log('Button clicked');
+                this.scrollPosition -= this.cardWidth;
+                this.$refs.carouselInner.scrollTo({
+                    left: this.scrollPosition,
+                    behavior: 'smooth',
+                });
+            }
+        },
     },
     mounted() {
         // Add mounted hook to handle scroll event
@@ -256,6 +399,7 @@ export default {
         });
 
         this.initializeCarousel();
+        this.cardWidth = this.$refs.carouselItem.clientWidth; // Get card width on mount
     },
 };
 </script>
@@ -318,19 +462,40 @@ export default {
     font-weight: 600;
     padding: 16px;
 }
-.form-input {
-    width: 100%;
-    padding: 12px 20px;
-    margin: 8px 0;
-    display: inline-block;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box;
-}
 .custom-bg {
     background-color: #4882da;
 }
 .custom-bg:hover {
     background-color: #04419c;
+}
+.location_choice {
+    margin: 64px auto;
+    width: 90%;
+}
+@media (min-width: 500px) {
+    .carousel-inner-location {
+        display: flex;
+        padding: 1rem;
+        overflow-x: hidden;
+    }
+
+    .carousel-item-location {
+        display: inline-block;
+        margin-right: 0;
+        flex: 0 0 33.3%;
+    }
+}
+.card {
+    margin: 0 0.5em;
+    border: none;
+}
+.carousel-control-prev-location,
+.carousel-control-next-location {
+    background-color: #e1e1e1;
+    width: 6vh;
+    height: 6vh;
+    border-radius: 50%;
+    top: 50%;
+    transform: translateY(-50%);
 }
 </style>
