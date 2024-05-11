@@ -16,8 +16,6 @@ import storeDefinition from './store';
 import PulseLoader from 'vue-spinner/src/PulseLoader.vue';
 import DotLoader from 'vue-spinner/src/DotLoader.vue';
 
-import TextInput from './shared/components/TextInput.vue';
-
 window.Vue = require('vue');
 Vue.use(VueRouter);
 Vue.use(Vuex);

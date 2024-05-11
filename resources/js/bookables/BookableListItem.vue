@@ -1,5 +1,5 @@
 <template>
-    <div class="card w-80 border-0">
+    <div class="card w-100 border-0">
         <div class="card-body">
             <router-link style="text-decoration: none" :to="{ name: 'bookable', params: { id } }">
                 <a class="text-decoration-none">

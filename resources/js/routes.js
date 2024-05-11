@@ -16,11 +16,6 @@ const routes = [
         name: 'dashboard',
     },
     {
-        path: '/AuthenticatedLayout',
-        component: require('@/Layouts/AuthenticatedLayout.vue').default,
-        name: 'AuthenticatedLayout',
-    },
-    {
         path: '/bookable/:id',
         component: Bookable,
         name: 'bookable',
