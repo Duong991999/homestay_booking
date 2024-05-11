@@ -2,6 +2,19 @@
     <div>
         <v-fullloading :loading="loading"></v-fullloading>
         <div>
+            <span
+                style="
+                    font-size: 24px;
+                    line-height: 30px;
+                    font-weight: 500;
+                    color: rgb(42, 42, 46);
+                    padding-bottom: 8px;
+                    display: block;
+                    text-align: center;
+                "
+            >
+                Những nơi nghỉ dưỡng nổi bật
+            </span>
             <div class="row mb-4" v-for="row in rows" :key="'row' + row">
                 <div
                     class="col d-flex align-items-stretch"
