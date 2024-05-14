@@ -162,7 +162,7 @@
                 <span class="sr-only">Next</span> -->
             </a>
         </div>
-        <div class="container">
+        <div class="container" v-if="showSearchContainer">
             <div class="row">
                 <div class="col-lg-12 bg-white shadow p-4 rounded">
                     <form>
@@ -221,8 +221,16 @@ export default {
         return {
             lastSearch: this.$store.state.lastSearch,
             list_home_screen: CONST_FRONTEND.home_screen_file,
+			showSearchContainer: true
         };
     },
+
+	created() {
+		if(this.$route.name == 'bookable'){
+			this.showSearchContainer = false
+		}
+	},
+
     computed: {
         ...mapState({
             lastSearchComputed: 'lastSearch',
