@@ -1,52 +1,54 @@
 <template>
-    <div class="row">
-        <div class="col-md-8 pb-4">
-            <div class="card">
-                <div class="card-body">
-                    <div v-if="!loading">
-                        <h2>{{ bookable.title }}</h2>
-                        <hr />
-                        <article>{{ bookable.description }}</article>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 pb-4">
+                <div class="card">
+                    <div class="card-body">
+                        <div v-if="!loading">
+                            <h2>{{ bookable.title }}</h2>
+                            <hr />
+                            <article>{{ bookable.description }}</article>
+                        </div>
+                        <div v-else>Loading...</div>
                     </div>
-                    <div v-else>Loading...</div>
                 </div>
+
+                <review-list :bookable-id="this.$route.params.id"></review-list>
             </div>
+            <div class="col-md-4 pb-4">
+                <availability
+                    :bookable-id="this.$route.params.id"
+                    @availability="checkPrice($event)"
+                    class="mb-4"
+                ></availability>
 
-            <review-list :bookable-id="this.$route.params.id"></review-list>
-        </div>
-        <div class="col-md-4 pb-4">
-            <availability
-                :bookable-id="this.$route.params.id"
-                @availability="checkPrice($event)"
-                class="mb-4"
-            ></availability>
+                <transition name="fade">
+                    <price-breakdown v-if="price" :price="price" class="mb-4"></price-breakdown>
+                </transition>
 
-            <transition name="fade">
-                <price-breakdown v-if="price" :price="price" class="mb-4"></price-breakdown>
-            </transition>
+                <transition name="fade">
+                    <button
+                        class="btn btn-outline-secondary btn-block"
+                        v-if="price"
+                        @click="addToBasket"
+                        :disabled="inBasketAlready"
+                    >
+                        Book now
+                    </button>
+                </transition>
 
-            <transition name="fade">
                 <button
                     class="btn btn-outline-secondary btn-block"
-                    v-if="price"
-                    @click="addToBasket"
-                    :disabled="inBasketAlready"
+                    v-if="inBasketAlready"
+                    @click="removeFromBasket"
                 >
-                    Book now
+                    Remove from basket
                 </button>
-            </transition>
 
-            <button
-                class="btn btn-outline-secondary btn-block"
-                v-if="inBasketAlready"
-                @click="removeFromBasket"
-            >
-                Remove from basket
-            </button>
-
-            <div v-if="inBasketAlready" class="mt-4 text-muted warning">
-                Seems like you've added this object to basket already. If you want to change dates,
-                remove from the basket first.
+                <div v-if="inBasketAlready" class="mt-4 text-muted warning">
+                    Seems like you've added this object to basket already. If you want to change
+                    dates, remove from the basket first.
+                </div>
             </div>
         </div>
     </div>
@@ -56,6 +58,8 @@
 import Availability from './Availability';
 import ReviewList from './ReviewList';
 import PriceBreakdown from './PriceBreakdown';
+import ImageList from './ImageList.vue';
+
 import { mapState, mapGetters } from 'vuex';
 
 export default {
@@ -63,6 +67,7 @@ export default {
         Availability,
         ReviewList,
         PriceBreakdown,
+        ImageList,
     },
     data() {
         return {

@@ -203,7 +203,7 @@
                                 <input
                                     class="input__field"
                                     type="date"
-                                    v-model="inputValue"
+                                    v-model="star_day"
                                     @focus="isFocused = true"
                                     @blur="isFocused = false"
                                 />
@@ -213,7 +213,7 @@
                                 <input
                                     class="input__field"
                                     type="date"
-                                    v-model="inputValue"
+                                    v-model="close_day"
                                     @focus="isFocused = true"
                                     @blur="isFocused = false"
                                 />
@@ -392,6 +392,8 @@ export default {
             scrollPosition: 0,
             cardWidth: 0,
             inputValue: '',
+            star_day: '',
+            close_day: '',
             isFocused: false,
         };
     },
