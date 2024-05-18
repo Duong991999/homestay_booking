@@ -15,64 +15,6 @@
                 />HomestayBooking
             </router-link>
 
-            <!-- Dropdowm -->
-            <!-- <div class="narbar-d">
-                <div class="nav-item dropdown" v-if="!isLoggedIn">
-                    <a
-                        class="nav-link dropdown-toggle"
-                        href="#"
-                        id="navbarDropdown"
-                        role="button"
-                        data-toggle="dropdown"
-                        aria-haspopup="true"
-                        aria-expanded="false"
-                    >
-                        Lưu trú
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <router-link :to="{ name: 'profile' }" class="dropdown-item"
-                            >Profile</router-link
-                        >
-                    </div>
-                </div>
-                <div class="nav-item dropdown" v-if="!isLoggedIn">
-                    <a
-                        class="nav-link dropdown-toggle"
-                        href="#"
-                        id="navbarDropdown"
-                        role="button"
-                        data-toggle="dropdown"
-                        aria-haspopup="true"
-                        aria-expanded="false"
-                    >
-                        Chuyến bay
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <router-link :to="{ name: 'profile' }" class="dropdown-item"
-                            >Profile</router-link
-                        >
-                    </div>
-                </div>
-                <div class="nav-item dropdown" v-if="!isLoggedIn">
-                    <a
-                        class="nav-link dropdown-toggle"
-                        href="#"
-                        id="navbarDropdown"
-                        role="button"
-                        data-toggle="dropdown"
-                        aria-haspopup="true"
-                        aria-expanded="false"
-                    >
-                        Chuyến bay + khách sạn
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <router-link :to="{ name: 'profile' }" class="dropdown-item"
-                            >Profile</router-link
-                        >
-                    </div>
-                </div>
-            </div> -->
-
             <div class="navbar-login">
                 <router-link
                     :to="{ name: 'basket' }"
@@ -112,8 +54,8 @@
             </div>
         </nav>
         <!--carousel---->
-        <div class="container position-relative" style="top: 50px">
-            <div class="row g-4 g-lg-5" style="margin-top: 48px">
+        <div class="container position-relative" v-if="showContainer" style="margin-top: 100px">
+            <div class="row g-4 g-lg-5">
                 <div class="col-lg-6 position-relative mb-4 mb-md-0">
                     <h1 class="mb-4 mt-md-5 display-5 font-weight-bold">
                         Find the top <br /><span class="position-relative z-index-9">
@@ -141,11 +83,7 @@
                         class="carousel slide carousel-fade"
                         data-ride="carousel"
                     >
-                        <ol class="carousel-indicators">
-                            <!-- <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-                <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-                <li data-target="#carouselExampleIndicators" data-slide-to="2"></li> -->
-                        </ol>
+                        <ol class="carousel-indicators"></ol>
                         <div class="carousel-inner">
                             <div
                                 v-for="(file, index) in list_home_screen"
@@ -165,8 +103,6 @@
                             role="button"
                             data-slide="prev"
                         >
-                            <!-- <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="sr-only">Previous</span> -->
                         </a>
                         <a
                             class="carousel-control-next"
@@ -174,8 +110,6 @@
                             role="button"
                             data-slide="next"
                         >
-                            <!-- <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="sr-only">Next</span> -->
                         </a>
                     </div>
                 </div>
@@ -203,7 +137,7 @@
                                 <input
                                     class="input__field"
                                     type="date"
-                                    v-model="inputValue"
+                                    v-model="star_day"
                                     @focus="isFocused = true"
                                     @blur="isFocused = false"
                                 />
@@ -213,7 +147,7 @@
                                 <input
                                     class="input__field"
                                     type="date"
-                                    v-model="inputValue"
+                                    v-model="close_day"
                                     @focus="isFocused = true"
                                     @blur="isFocused = false"
                                 />
@@ -237,24 +171,22 @@
                     </form>
                 </div>
             </div>
-        </div>
-        <!-- Location noi bat  -->
-        <div class="location_choice pb-2 pb-lg-5">
-            <div>
-                <span
-                    style="
-                        font-size: 24px;
-                        line-height: 30px;
-                        font-weight: 500;
-                        color: rgb(42, 42, 46);
-                        padding-bottom: 8px;
-                        display: block;
-                        text-align: center;
-                    "
-                >
-                    Các địa điểm du lịch nổi bật
-                </span>
+            <div class="location_choice pb-2 pb-lg-5">
                 <div>
+                    <span
+                        style="
+                            font-size: 24px;
+                            line-height: 30px;
+                            font-weight: 500;
+                            color: rgb(42, 42, 46);
+                            padding-bottom: 8px;
+                            display: block;
+                            text-align: center;
+                        "
+                    >
+                        Các địa điểm du lịch nổi bật
+                    </span>
+
                     <!--carousel-->
                     <div id="carouselExample" class="carousel slide">
                         <div class="carousel-inner-location" ref="carouselInner">
@@ -372,9 +304,222 @@
                     </div>
                 </div>
             </div>
+            <!--about-->
+
+            <div class="container position-relative">
+                <div class="row justify-content-around align-items-center">
+                    <div class="col-lg-5 position-relative">
+                        <img
+                            src="assets/image/slide_home_screens/_2.jpg"
+                            alt="about1"
+                            class="rounded-3 position-relative"
+                            style="height: 500px; width: 100%; border-radius: 10px"
+                        />
+                    </div>
+                    <div class="col-lg-5">
+                        <h2 class="mb-3 mb-lg-5 font-weight-bold">The Best Holidays Start Here!</h2>
+                        <p class="mb-3 mb-lg-5 font-weight-light">
+                            Book your hotel with us and don't forget to grab an awesome hotel deal
+                            to save massive on your stay.
+                        </p>
+                        <div class="row g-4">
+                            <div class="col-sm-6">
+                                <div
+                                    class="icon-lg rounded-circle flex-centered text-center"
+                                    style="
+                                        width: 50px;
+                                        height: 50px;
+                                        background-color: rgb(12 188 135 / 54%);
+                                    "
+                                >
+                                    <img
+                                        src="assets/image/icon/restaurant.png"
+                                        alt=""
+                                        class="rounded-3 mx-auto"
+                                        style="width: 27px; height: 27px; margin-top: 10px"
+                                    />
+                                </div>
+                                <h5 class="mt-2 font-weight-bold">Quality Food</h5>
+                                <p class="mb-0">
+                                    Departure defective arranging rapturous did. Conduct denied
+                                    adding worthy little.
+                                </p>
+                            </div>
+                            <div class="col-sm-6">
+                                <div
+                                    class="icon-lg rounded-circle flex-centered text-center"
+                                    style="width: 50px; height: 50px; background-color: #df2c2c7d"
+                                >
+                                    <img
+                                        src="assets/image/icon/time.png"
+                                        alt=""
+                                        class="rounded-3 mx-auto"
+                                        style="width: 30px; height: 30px; margin-top: 10px"
+                                    />
+                                </div>
+                                <h5 class="mt-2 font-weight-bold">Quick Services</h5>
+                                <p class="mb-0">
+                                    Supposing so be resolving breakfast am or perfectly.
+                                </p>
+                            </div>
+                            <div class="col-sm-6">
+                                <div
+                                    class="icon-lg rounded-circle flex-centered text-center"
+                                    style="width: 50px; height: 50px; background-color: #df852c87"
+                                >
+                                    <img
+                                        src="assets/image/icon/secure.png"
+                                        alt=""
+                                        class="rounded-3 mx-auto"
+                                        style="width: 30px; height: 30px; margin-top: 10px"
+                                    />
+                                </div>
+                                <h5 class="mt-2 font-weight-bold">High Security</h5>
+                                <p class="mb-0">
+                                    Arranging rapturous did believe him all had supported.
+                                </p>
+                            </div>
+                            <div class="col-sm-6">
+                                <div
+                                    class="icon-lg rounded-circle flex-centered text-center"
+                                    style="width: 50px; height: 50px; background-color: #1b99c67d"
+                                >
+                                    <img
+                                        src="assets/image/icon/thunder.png"
+                                        alt=""
+                                        class="rounded-3 mx-auto"
+                                        style="width: 30px; height: 30px; margin-top: 10px"
+                                    />
+                                </div>
+                                <h5 class="mt-2 font-weight-bold">24 Hours Alert</h5>
+                                <p class="mb-0">Rapturous did believe him all had supported.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
+
         <div class="container mt-4 mb-4 pr-4 pl-4">
             <router-view></router-view>
+        </div>
+        <!--Comment-->
+        <div class="container">
+            <div id="carousel-comment" class="carousel slide" data-ride="carousel">
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <div
+                            class="row justify-content-between align-items-center"
+                            style="margin-top: 110px"
+                        >
+                            <div class="col-md-6 col-lg-5 position-relative">
+                                <image
+                                    class="d-block w-100 rounded-3"
+                                    src="assets/image/icon/like-comment.png"
+                                    alt="First slide"
+                                    style="width: 50px; height: 50px"
+                                />
+                                <img
+                                    class="d-block w-100 rounded-3 mx-auto"
+                                    src="assets/image/slide_home_screens/_1.jpg"
+                                    alt="First slide"
+                                />
+                            </div>
+                            <div class="col-md-6 col-lg-6">
+                                <span class="display-3 mb-0 text-primary">
+                                    <image
+                                        class="d-block w-100 rounded-3"
+                                        src="assets/image/icon/like-comment.png"
+                                        alt="First slide"
+                                        style="width: 50px; height: 50px"
+                                    />
+                                    <h5 class="fw-light">
+                                        Moonlight newspaper up its enjoyment agreeable depending.
+                                        Timed voice share led him to widen noisy young. At weddings
+                                        believed in laughing
+                                    </h5>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <div
+                            class="row justify-content-between align-items-center"
+                            style="margin-top: 110px"
+                        >
+                            <div class="col-md-6 col-lg-5 position-relative">
+                                <img
+                                    class="d-block w-100 rounded-3 mx-auto"
+                                    src="assets/image/slide_home_screens/_1.jpg"
+                                    alt="First slide"
+                                />
+                            </div>
+                            <div class="col-md-6 col-lg-6">
+                                <span class="display-3 mb-0 text-primary">
+                                    <img
+                                        class="rounded-3 mx-auto"
+                                        src="assets/image/icon/quote.png"
+                                        alt="First slide"
+                                        style="width: 50px; height: 50px"
+                                    />
+                                    <h5 class="fw-light">
+                                        Moonlight newspaper up its enjoyment agreeable depending.
+                                        Timed voice share led him to widen noisy young. At weddings
+                                        believed in laughing
+                                    </h5>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <div
+                            class="row justify-content-between align-items-center"
+                            style="margin-top: 110px"
+                        >
+                            <div class="col-md-6 col-lg-5 position-relative">
+                                <img
+                                    class="d-block w-100 rounded-3 mx-auto"
+                                    src="assets/image/slide_home_screens/_1.jpg"
+                                    alt="First slide"
+                                />
+                            </div>
+                            <div class="col-md-6 col-lg-6">
+                                <span class="display-3 mb-0 text-primary">
+                                    <img
+                                        class="rounded-3 mx-auto"
+                                        src="assets/image/icon/quote.png"
+                                        alt="First slide"
+                                        style="width: 50px; height: 50px"
+                                    />
+                                    <h5 class="fw-light">
+                                        Moonlight newspaper up its enjoyment agreeable depending.
+                                        Timed voice share led him to widen noisy young. At weddings
+                                        believed in laughing
+                                    </h5>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <a
+                    class="carousel-control-prev"
+                    href="#carousel-comment"
+                    role="button"
+                    data-slide="prev"
+                >
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a
+                    class="carousel-control-next"
+                    href="#carousel-comment"
+                    role="button"
+                    data-slide="next"
+                >
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
+            </div>
         </div>
     </div>
 </template>
@@ -392,9 +537,18 @@ export default {
             scrollPosition: 0,
             cardWidth: 0,
             inputValue: '',
+            star_day: '',
+            close_day: '',
             isFocused: false,
+            showContainer: true,
         };
     },
+    created() {
+        if (this.$route.name == 'bookable') {
+            this.showContainer = false;
+        }
+    },
+
     computed: {
         ...mapState({
             lastSearchComputed: 'lastSearch',
@@ -424,7 +578,6 @@ export default {
         scrollNext() {
             const carouselWidth = this.$refs.carouselInner.scrollWidth;
             if (this.scrollPosition < carouselWidth - this.cardWidth * 3) {
-                console.log('Button clicked');
                 this.scrollPosition += this.cardWidth;
                 this.$refs.carouselInner.scrollTo({
                     left: this.scrollPosition,
@@ -434,7 +587,6 @@ export default {
         },
         scrollPrevious() {
             if (this.scrollPosition > 0) {
-                console.log('Button clicked');
                 this.scrollPosition -= this.cardWidth;
                 this.$refs.carouselInner.scrollTo({
                     left: this.scrollPosition,
@@ -476,11 +628,6 @@ export default {
 .navbar-login {
     flex-direction: row;
 }
-.navbar-item-1 {
-    padding: 16px;
-    justify-content: space-between;
-}
-
 .nav-link-1 {
     background-color: aliceblue;
     color: #003b95;
@@ -525,8 +672,8 @@ export default {
     background-color: #04419c;
 }
 .location_choice {
-    margin: 200px auto;
-    width: 80%;
+    margin: 100px auto;
+    width: 100%;
 }
 @media (min-width: 500px) {
     .carousel-inner-location {

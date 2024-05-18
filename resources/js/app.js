@@ -30,7 +30,6 @@ Vue.component('v-loading', Loading);
 Vue.component('v-fullloading', FullLoading);
 Vue.component('pulse-loader', PulseLoader);
 Vue.component('dot-loader', DotLoader);
-
 const store = new Vuex.Store(storeDefinition);
 
 window.axios.interceptors.request.use(
