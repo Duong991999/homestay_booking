@@ -15,7 +15,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        factory(User::class, 100)->create();
+        // factory(User::class, 100)->create();
 
         // factory(Bookable::class, 100)->create();
 
@@ -42,6 +42,8 @@ class DatabaseSeeder extends Seeder
         //     $reviews = factory(Review::class, random_int(5, 30))->make();
         //     $bookable->reviews()->saveMany($reviews);
         // });
-		$this->call([RoleSeeder::class, UserSeeder::class]);
+		// $this->call([RoleSeeder::class, UserSeeder::class]);
+		$this->call([HomestaySeeder::class]);
+
     }
 }

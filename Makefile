@@ -12,3 +12,7 @@ app:
 clear:
 	php artisan config:clear
 	php artisan cache:clear
+reset:
+	php artisan db:wipe
+	php artisan migrate
+	php artisan db:seed
