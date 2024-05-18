@@ -7,7 +7,7 @@
             style="height: 80px"
             style="height: 80px"
         >
-            <router-link class="navbar-brand mb-0 h1" :to="{ name: 'home' }">
+            <router-link class="navbar-brand mb-0 h1" :to="{ name: 'welcome' }">
                 <img
                     class=""
                     src="assets/image/slide_home_screens/logo.jpg"
