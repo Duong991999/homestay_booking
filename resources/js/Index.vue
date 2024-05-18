@@ -1,11 +1,13 @@
 <template>
     <div>
         <!--Thanh nav-->
+        <!--Thanh nav-->
         <nav
             class="navbar navbar-custom navbar-expand-lg justify-content-between fixed-top text-center"
             style="height: 80px"
+            style="height: 80px"
         >
-            <router-link class="navbar-brand mb-0 h1" :to="{ name: 'welcome' }">
+            <router-link class="navbar-brand mb-0 h1" :to="{ name: 'home' }">
                 <img
                     class=""
                     src="assets/image/slide_home_screens/logo.jpg"
@@ -76,6 +78,7 @@ export default {
         return {
             lastSearch: this.$store.state.lastSearch,
             list_home_screen: CONST_FRONTEND.home_screen_file,
+            list_home_screen: CONST_FRONTEND.home_screen_file,
         };
     },
     computed: {
@@ -132,6 +135,7 @@ export default {
 .navbar-brand {
     font-size: 30px;
     color: rgb(237, 195, 169);
+    color: rgb(237, 195, 169);
     justify-content: center;
 }
 .navbar-login {
@@ -156,6 +160,8 @@ export default {
     box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
 }
 .carousel-item {
+    height: 600px;
+    min-height: 600px;
     height: 600px;
     min-height: 600px;
     background: no-repeat scroll center scroll;
