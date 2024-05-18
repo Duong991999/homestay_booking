@@ -540,15 +540,19 @@ export default {
             star_day: '',
             close_day: '',
             isFocused: false,
-            showContainer: true,
+            // showContainer: true,
         };
     },
     created() {
-        if (this.$route.name == 'bookable') {
-            this.showContainer = false;
-        }
+		// alert(123)
+        // if (this.$route.name == 'bookable') {
+        //     this.showContainer = false;
+        // }
     },
+	watch: {
+    // bất cứ lúc nào câu hỏi thay đổi, hàm bên dưới sẽ chạy
 
+    },
     computed: {
         ...mapState({
             lastSearchComputed: 'lastSearch',
@@ -560,6 +564,12 @@ export default {
         somethingElse() {
             return 1 + 2;
         },
+		showContainer() {
+			if (this.$route.name == 'bookable') {
+            	return false;
+        	}
+			return true
+		}
     },
     methods: {
         async logout() {
