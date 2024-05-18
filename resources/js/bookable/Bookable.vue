@@ -14,12 +14,10 @@
                     </div>
                 </div>
 
-                <review-list :bookable-id="this.$route.params.id"></review-list>
+                <review-list></review-list>
             </div>
             <div class="col-md-4 pb-4">
                 <availability
-                    :bookable-id="this.$route.params.id"
-                    @availability="checkPrice($event)"
                     class="mb-4"
                 ></availability>
 
@@ -30,9 +28,6 @@
                 <transition name="fade">
                     <button
                         class="btn btn-outline-secondary btn-block"
-                        v-if="price"
-                        @click="addToBasket"
-                        :disabled="inBasketAlready"
                     >
                         Book now
                     </button>
@@ -78,22 +73,11 @@ export default {
     },
     created() {
         this.loading = true;
-        axios.get(`/api/bookables/${this.$route.params.id}`).then((response) => {
-            this.bookable = response.data.data;
-            this.loading = false;
-        });
     },
     computed: {
         ...mapState({
             lastSearch: 'lastSearch',
         }),
-        inBasketAlready() {
-            if (null === this.bookable) {
-                return false;
-            }
-
-            return this.$store.getters.inBasketAlready(this.bookable.id);
-        },
     },
     methods: {
         async checkPrice(hasAvailability) {

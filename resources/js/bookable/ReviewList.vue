@@ -47,10 +47,6 @@ export default {
     },
     created() {
         this.loading = true;
-        axios
-            .get(`/api/bookables/${this.bookableId}/reviews`)
-            .then((response) => (this.reviews = response.data.data))
-            .then(() => (this.loading = false));
     },
 };
 </script>

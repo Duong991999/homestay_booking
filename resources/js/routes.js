@@ -19,6 +19,9 @@ const routes = [
         path: '/bookable/:id',
         component: Bookable,
         name: 'bookable',
+        meta: {
+            refresh: true,
+        },
     },
     {
         path: '/review/:id',
@@ -49,7 +52,7 @@ const routes = [
 
 const router = new VueRouter({
     routes, // short for `routes: routes`
-    mode: 'history',
+    // mode: 'history',
 });
 
 export default router;

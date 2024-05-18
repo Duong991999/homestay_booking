@@ -15,7 +15,7 @@
             >
                 Những nơi nghỉ dưỡng nổi bật
             </span>
-            <div class="row mb-4" v-for="row in rows" :key="'row' + row">
+            <div class="row" v-for="row in rows" :key="'row' + row">
                 <div
                     class="col d-flex align-items-stretch"
                     v-for="(bookable, column) in bookablesInRow(row)"
@@ -45,7 +45,7 @@ export default {
         return {
             bookables: null,
             loading: false,
-            columns: 4,
+            columns: 1,
         };
     },
     computed: {
