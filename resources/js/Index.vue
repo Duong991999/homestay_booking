@@ -43,18 +43,11 @@
                     >Sign-in</router-link
                 >
                 <router-link
-                    :to="{ name: 'catelory' }"
+                    :to="{ name: 'category' }"
                     class="nav-link-1"
-                    v-if="!isLoggedIn"
+                    v-if="isLoggedIn"
                     style="text-decoration: none"
-                    >Catelory</router-link
-                >
-                <router-link
-                    :to="{ name: 'catelory' }"
-                    class="nav-link-1"
-                    v-if="!isLoggedIn"
-                    style="text-decoration: none"
-                    >Catelory</router-link
+                    >Category</router-link
                 >
 
                 <a
