@@ -2,8 +2,6 @@
 
 namespace App\Http\Requests;
 
-use Illuminate\Support\Facades\Auth;
-
 class HomestayRequest extends BaseRequest
 {
 	/**
@@ -15,10 +13,14 @@ class HomestayRequest extends BaseRequest
 	{
 		return [
 			'user_id' => 'bail|nullable|exists:users,id',
+			'name' => 'required',
+			'content' => 'required',
 			'city_code' => 'required',
 			'district_code' => 'required',
 			'ward_code' => 'required',
-			'category_id' => 'bail|nullable|array'
+			'category_id' => 'bail|nullable|array',
+			'files' => 'nullable|array',
+			'files.*' => 'bail|image|mimes:jpeg,png,gif,jpg|max:2048',
 		];
 	}
 

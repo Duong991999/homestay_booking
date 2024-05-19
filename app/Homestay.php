@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
 
 class Homestay extends Model
 {
@@ -15,11 +16,19 @@ class Homestay extends Model
      * @var array
      */
     protected $fillable = [
-        'user_id', 'city_code', 'district_code', 'ward_code'
+        'name', 'content', 'user_id', 'city_code', 'district_code', 'ward_code'
     ];
 
 	public function categories(): BelongsToMany
 	{
 		return $this->belongsToMany(Category::class, 'category_homestay', 'homestay_id', 'category_id');
 	}
+
+	/**
+     * Get all of the homestay's files.
+     */
+    public function files(): MorphMany
+    {
+        return $this->morphMany(File::class, 'fileable');
+    }
 }

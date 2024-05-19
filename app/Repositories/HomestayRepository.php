@@ -1,6 +1,7 @@
 <?php
 namespace App\Repositories;
 
+use App\File;
 use App\Homestay;
 use App\Repositories\BaseRepository;
 use Illuminate\Database\QueryException;
@@ -16,7 +17,7 @@ class HomestayRepository extends BaseRepository implements HomestayRepositoryInt
         return Homestay::class;
     }
 
-	public function create($attributes = [])
+	public function createDetail($attributes = [])
 	{
 		try {
 			$result = DB::transaction(function() use($attributes){
@@ -24,7 +25,21 @@ class HomestayRepository extends BaseRepository implements HomestayRepositoryInt
 				if($attributes['category_id']){
 					$this->model->find($data['id'])->categories()->attach($attributes['category_id']);
 				}
-				return $this->find($data['id']);
+				if($attributes['files']){
+					$files = collect([]);
+					foreach ($attributes['files'] as $file) {
+						$name = "/homestay" .'/'. uniqid() . '.' . $file->extension();
+						$file->storePubliclyAs('public/assets', $name);
+						$upload = File::make([
+							'file_name' => $file->getClientOriginalName(),
+							'file_path' => $name,
+							'fileable_type' => Homestay::class
+						]);
+						$files->push($upload);
+					}
+				}
+				$this->model->find($data['id'])->files()->saveMany($files);
+				return $this->findDetail($data['id']);
 			});
 			return $result;
 		} catch(QueryException $e){
@@ -60,8 +75,8 @@ class HomestayRepository extends BaseRepository implements HomestayRepositoryInt
 		}
 	}
 
-	public function find($id){
-		$result = $this->model->with('categories')->find($id);
+	public function findDetail($id){
+		$result = $this->model->with('categories', 'files')->find($id);
 		return $result;
 	}
 }
