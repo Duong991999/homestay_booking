@@ -54,13 +54,18 @@ const routes = [
     },
     {
         path: '/company/inforbase',
-        component:require('@/company/InforBase.vue').default ,
+        component: require('@/company/InforBase.vue').default,
         name: 'inforbase',
     },
     {
         path: '/company/inforroom',
-        component:require('@/company/InforRoom.vue').default ,
+        component: require('@/company/InforRoom.vue').default,
         name: 'inforroom',
+    },
+    {
+        path: '/admin/catelory/index',
+        component: require('@/admin/catelory/Index.vue').default,
+        name: 'catelory.index',
     },
 ];
 
