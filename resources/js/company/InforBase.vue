@@ -19,7 +19,7 @@
                     <div>
                         <h
                             >Chúng tôi có thể gửi thư để xác nhận vị trí chỗ nghỉ của Quý vị nên hãy
-                            đảm bảo cung cấp địa chỉ chính xác – thông tin này sẽ khó thay đổi sau
+                            đảm bảo cung cấp địa chỉ chính xác - thông tin này sẽ khó thay đổi sau
                             đó.</h
                         >
                         <h6>Thành phố</h6>

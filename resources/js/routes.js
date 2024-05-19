@@ -18,9 +18,9 @@ const routes = [
         name: 'welcome',
     },
     {
-        path: '/company/catelory',
-        component: Catelory,
-        name: 'catelory',
+        path: '/company/category',
+        component: Category,
+        name: 'category',
     },
     {
         path: '/bookable/:id',
