@@ -4,7 +4,7 @@ import Bookable from '@/bookable/Bookable.vue';
 import Bookables from '@/bookables/Bookables.vue';
 import Review from '@/review/Review.vue';
 import Welcome from '@/auth/Welcome.vue';
-import Catelory from '@/company/Catelory';
+import Category from '@/company/Category';
 
 const routes = [
     {
@@ -17,11 +17,7 @@ const routes = [
         component: Welcome,
         name: 'welcome',
     },
-    {
-        path: '/company/catelory',
-        component: Catelory,
-        name: 'catelory',
-    },
+
     {
         path: '/bookable/:id',
         component: Bookable,
@@ -53,6 +49,11 @@ const routes = [
         name: 'login',
     },
     {
+        path: '/company/category',
+        component: Category,
+        name: 'category',
+    },
+    {
         path: '/company/inforbase',
         component: require('@/company/InforBase.vue').default,
         name: 'inforbase',
@@ -63,9 +64,14 @@ const routes = [
         name: 'inforroom',
     },
     {
-        path: '/admin/catelory/index',
-        component: require('@/admin/catelory/Index.vue').default,
-        name: 'catelory.index',
+        path: '/admin/category/index',
+        component: require('@/admin/category/Index.vue').default,
+        name: 'category.index',
+    },
+    {
+        path: '/admin/category/edit/:id',
+        component: require('@/admin/category/Edit.vue').default,
+        name: 'category.edit',
     },
 ];
 
