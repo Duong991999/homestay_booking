@@ -63,16 +63,6 @@ const routes = [
         component: require('@/company/InforRoom.vue').default,
         name: 'inforroom',
     },
-    {
-        path: '/admin/category/index',
-        component: require('@/admin/category/Index.vue').default,
-        name: 'category.index',
-    },
-    {
-        path: '/admin/category/edit/:id',
-        component: require('@/admin/category/Edit.vue').default,
-        name: 'category.edit',
-    },
 ];
 
 const router = new VueRouter({
