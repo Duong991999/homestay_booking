@@ -11,21 +11,7 @@
                         height: 400px;
                     "
                 >
-                    <!-- <div class="hover-element position-absolute w-100 h-100">
-                                <svg
-                                    width="1em"
-                                    height="1em"
-                                    viewBox="0 0 16 16"
-                                    fill="currentColor"
-                                    role="img"
-                                    focusable="false"
-                                    class="h4 text-white position-absolute top-50 start-50 translate-middle bg-dark rounded-1 p-2 lh-1"
-                                >
-                                    <path
-                                        d="M1.5 1a.5.5 0 0 0-.5.5v4a.5.5 0 0 1-1 0v-4A1.5 1.5 0 0 1 1.5 0h4a.5.5 0 0 1 0 1zM10 .5a.5.5 0 0 1 .5-.5h4A1.5 1.5 0 0 1 16 1.5v4a.5.5 0 0 1-1 0v-4a.5.5 0 0 0-.5-.5h-4a.5.5 0 0 1-.5-.5M.5 10a.5.5 0 0 1 .5.5v4a.5.5 0 0 0 .5.5h4a.5.5 0 0 1 0 1h-4A1.5 1.5 0 0 1 0 14.5v-4a.5.5 0 0 1 .5-.5m15 0a.5.5 0 0 1 .5.5v4a1.5 1.5 0 0 1-1.5 1.5h-4a.5.5 0 0 1 0-1h4a.5.5 0 0 0 .5-.5v-4a.5.5 0 0 1 .5-.5"
-                                    ></path>
-                                </svg>
-                            </div> -->
+                    
                 </div>
             </a>
         </div>
@@ -42,17 +28,7 @@
                                 height: 240px;
                             "
                         >
-                            <!-- <div class="hover-element position-absolute w-100 h-100">
-                                        <svg
-                                            width="1em"
-                                            height="1em"
-                                            viewBox="0 0 16 16"
-                                            fill="currentColor"
-                                            role="img"
-                                            focusable="false"
-                                            class="h4 text-white position-absolute top-50 start-50 translate-middle bg-dark rounded-1 p-2 lh-1"
-                                        ></svg>
-                                    </div> -->
+                          
                         </div>
                     </a>
                 </div>
@@ -67,17 +43,7 @@
                                 height: 150px;
                             "
                         >
-                            <!-- <div class="hover-element position-absolute w-100 h-100">
-                                        <svg
-                                            width="1em"
-                                            height="1em"
-                                            viewBox="0 0 16 16"
-                                            fill="currentColor"
-                                            role="img"
-                                            focusable="false"
-                                            class="h4 text-white position-absolute top-50 start-50 translate-middle bg-dark rounded-1 p-2 lh-1"
-                                        ></svg>
-                                    </div> -->
+                           
                         </div>
                     </a>
                 </div>

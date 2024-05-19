@@ -1,7 +1,6 @@
 <template>
     <div>
         <!--Thanh nav-->
-        <!--Thanh nav-->
         <nav
             class="navbar navbar-custom navbar-expand-lg justify-content-between fixed-top text-center"
             style="height: 80px"
@@ -70,11 +69,11 @@
         </nav>
 
         <div class="container-lg mt-2 mb-2 px-2">
-
-        <div class="container-lg mt-2 mb-2 px-2">
-            <router-view></router-view>
+            <div class="container-lg mt-2 mb-2 px-2">
+                <router-view></router-view>
+            </div>
         </div>
-    </div></div>
+    </div>
 </template>
 
 <script>
