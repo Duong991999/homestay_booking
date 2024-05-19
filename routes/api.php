@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\CategoryController;
+use App\Http\Controllers\Api\HomestayController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -47,4 +48,10 @@ Route::group(['prefix' => 'admin', 'middleware' => 'role:admin'], function(){
 		Route::post('/store', [CategoryController::class, 'store']);
 		Route::post('/update/{id}', [CategoryController::class, 'update']);
 	});
+});
+
+Route::group(['prefix' => 'homestay',], function(){
+	Route::post('/store', [HomestayController::class, 'store']);
+	Route::get('/show/{id}', [HomestayController::class, 'show']);
+	Route::post('/update/{id}', [HomestayController::class, 'update']);
 });

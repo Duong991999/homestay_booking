@@ -35,12 +35,10 @@ class AuthController extends Controller
 
     public function login(LoginRequest $request) {
         $user = User::where('email', $request->email)->first();
-
         if(!$user || !Hash::check($request->password, $user->password)) {
             return $this->error("Email hoac mat khau ko dung!", Response::HTTP_UNAUTHORIZED);
         }
         $token = $user->createToken(env("APP_TOKEN"))->plainTextToken;
-
         $data = [
             'user' => $user,
             'token' => $token

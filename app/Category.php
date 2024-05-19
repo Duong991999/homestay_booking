@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Category extends Model
 {
@@ -16,5 +17,10 @@ class Category extends Model
     protected $fillable = [
         'name',
     ];
+
+	public function homestays(): BelongsToMany
+	{
+		return $this->belongsToMany(Homestay::class, 'category_homestay', 'category_id', 'homestay_id');
+	}
 	
 }
