@@ -14,7 +14,7 @@
                         :class="{ 'is-invalid': homestayNameTouched && !homestayName }"
                     />
                     <div class="invalid-feedback" v-if="homestayNameTouched && !homestayName">
-                        Hãy nhập tên Homestay.
+                        Bạn chưa nhập tên Homestay.
                     </div>
                 </div>
 
@@ -26,6 +26,7 @@
                             đảm bảo cung cấp địa chỉ chính xác – thông tin này sẽ khó thay đổi sau
                             đó.
                         </p>
+                        <!--City-->
                         <div class="col-md-12">
                             <label for="citySelect">Tỉnh/Thành phố</label>
                             <select
@@ -40,9 +41,10 @@
                                 <option v-for="city in cities" :key="city">{{ city }}</option>
                             </select>
                             <div class="invalid-feedback" v-if="cityTouched && !selectedCity">
-                                Hãy chọn thành phố.
+                                Bạn chưa chọn thành phố.
                             </div>
                         </div>
+                        <!--District-->
                         <div class="col-md-12">
                             <label for="districtSelect">Thị xã / Quận / Huyện</label>
                             <select
@@ -62,15 +64,16 @@
                                 class="invalid-feedback"
                                 v-if="districtTouched && !selectedDistrict"
                             >
-                                Hãy chọn Thị xã / Quận / Huyện.
+                                Bạn chưa Thị xã / Quận / Huyện.
                             </div>
                         </div>
+                        <!--ward-->
                         <div class="col-md-12">
-                            <label for="townSelect">Xã / Phường / Thị trấn</label>
+                            <label for="wardSelect">Xã / Phường / Thị trấn</label>
                             <select
                                 v-model="selectedWard"
                                 class="custom-select"
-                                id="townSelect"
+                                id="wardSelect"
                                 required
                                 @blur="wardTouched = true"
                                 :class="{ 'is-invalid': wardTouched && !selectedWard }"
@@ -79,12 +82,36 @@
                                 <option v-for="ward in wards" :key="ward">{{ ward }}</option>
                             </select>
                             <div class="invalid-feedback" v-if="wardTouched && !selectedWard">
-                                Hãy chọn Xã / Phường / Thị trấn.
+                                Bạn chưa Xã / Phường / Thị trấn.
+                            </div>
+                        </div>
+
+                        <!--Category-->
+                        <div class="col-md-12">
+                            <label for="CategorySelect">Hình thức Homestay</label>
+                            <select
+                                v-model="selectedCategory"
+                                class="custom-select"
+                                id="CategorySelect"
+                                required
+                                @blur="categoryTouched = true"
+                                :class="{ 'is-invalid': categoryTouched && !selectedCategory }"
+                            >
+                                <option disabled value="">Lựa chọn hình thức</option>
+                                <option v-for="category in categories" :key="category">
+                                    {{ category }}
+                                </option>
+                            </select>
+                            <div
+                                class="invalid-feedback"
+                                v-if="categoryTouched && !selectedCategory"
+                            >
+                                Bạn chưa hình thức Homestay
                             </div>
                         </div>
                     </div>
                 </div>
-                <button type="submit" class="btn btn-primary">Tiếp tục</button>
+                <button type="submit" class="btn btn-primary">Đăng ký</button>
             </form>
         </div>
     </div>
@@ -97,11 +124,13 @@ const homestayName = ref('');
 const selectedCity = ref('');
 const selectedDistrict = ref('');
 const selectedWard = ref('');
+const selectedCategory = ref('');
 
 const homestayNameTouched = ref(false);
 const cityTouched = ref(false);
 const districtTouched = ref(false);
 const wardTouched = ref(false);
+const categoryTouched = ref(false);
 
 const cities = ref([
     'New York',
@@ -129,18 +158,28 @@ const wards = ref([
     'Ward 5',
     // Add more wards as needed
 ]);
+const categories = ref([
+    'Ward 1',
+    'Ward 2',
+    'Ward 3',
+    'Ward 4',
+    'Ward 5',
+    // Add more wards as needed
+]);
 
 const submitForm = () => {
     homestayNameTouched.value = true;
     cityTouched.value = true;
     districtTouched.value = true;
     wardTouched.value = true;
+    categoryTouched.value = true;
 
     if (
         !homestayName.value ||
         !selectedCity.value ||
         !selectedDistrict.value ||
-        !selectedWard.value
+        !selectedWard.value ||
+        !selectedCategory
     ) {
         return;
     }
