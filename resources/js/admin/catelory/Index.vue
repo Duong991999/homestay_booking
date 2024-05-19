@@ -85,7 +85,7 @@ export default {
     methods: {
         async fetchData() {
             try {
-                const response = await axios.post('/api/admin/category/index'); 
+                const response = await axios.post('/api/admin/category/index');
                 this.items = response.data;
             } catch (error) {
                 console.error('Error fetching data:', error);

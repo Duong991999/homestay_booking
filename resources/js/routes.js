@@ -3,7 +3,7 @@ import Basket from '@/basket/Basket.vue';
 import Bookable from '@/bookable/Bookable.vue';
 import Bookables from '@/bookables/Bookables.vue';
 import Review from '@/review/Review.vue';
-import Welcome from '@/user/Welcome.vue';
+import Welcome from '@/auth/Welcome.vue';
 import Catelory from '@/company/Catelory';
 
 const routes = [
@@ -13,7 +13,7 @@ const routes = [
         name: 'home',
     },
     {
-        path: '/user/welcome',
+        path: '/auth/welcome',
         component: Welcome,
         name: 'welcome',
     },
