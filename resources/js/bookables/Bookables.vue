@@ -62,11 +62,6 @@ export default {
         },
     },
     created() {
-        // this.loading = true;
-        // axios.get('/api/bookables').then((response) => {
-        //     this.bookables = response.data.data;
-        //     this.loading = false;
-        // });
     },
 };
 </script>
