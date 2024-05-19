@@ -1,5 +1,5 @@
 <template>
-    <div class="container position-relative" v-if="showContainer" style="margin-top: 100px">
+    <div class="container position-relative" style="margin-top: 100px">
         <div class="row g-4 g-lg-5">
             <div class="col-lg-6 position-relative mb-4 mb-md-0">
                 <h1 class="mb-4 mt-md-5 display-5 font-weight-bold">
@@ -341,7 +341,125 @@
                 </div>
             </div>
         </div>
+        <div id="carousel-comment" class="carousel slide" data-ride="carousel">
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <div
+                            class="row justify-content-between align-items-center"
+                            style="margin-top: 110px"
+                        >
+                            <div class="col-md-6 col-lg-5 position-relative">
+                                <image
+                                    class="d-block w-100 rounded-3"
+                                    src="assets/image/icon/like-comment.png"
+                                    alt="First slide"
+                                    style="width: 50px; height: 50px"
+                                />
+                                <img
+                                    class="d-block w-100 rounded-3 mx-auto"
+                                    src="assets/image/slide_home_screens/_1.jpg"
+                                    alt="First slide"
+                                />
+                            </div>
+                            <div class="col-md-6 col-lg-6">
+                                <span class="display-3 mb-0 text-primary">
+                                    <image
+                                        class="d-block w-100 rounded-3"
+                                        src="assets/image/icon/like-comment.png"
+                                        alt="First slide"
+                                        style="width: 50px; height: 50px"
+                                    />
+                                    <h5 class="fw-light">
+                                        Moonlight newspaper up its enjoyment agreeable depending.
+                                        Timed voice share led him to widen noisy young. At weddings
+                                        believed in laughing
+                                    </h5>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <div
+                            class="row justify-content-between align-items-center"
+                            style="margin-top: 110px"
+                        >
+                            <div class="col-md-6 col-lg-5 position-relative">
+                                <img
+                                    class="d-block w-100 rounded-3 mx-auto"
+                                    src="assets/image/slide_home_screens/_1.jpg"
+                                    alt="First slide"
+                                />
+                            </div>
+                            <div class="col-md-6 col-lg-6">
+                                <span class="display-3 mb-0 text-primary">
+                                    <img
+                                        class="rounded-3 mx-auto"
+                                        src="assets/image/icon/quote.png"
+                                        alt="First slide"
+                                        style="width: 50px; height: 50px"
+                                    />
+                                    <h5 class="fw-light">
+                                        Moonlight newspaper up its enjoyment agreeable depending.
+                                        Timed voice share led him to widen noisy young. At weddings
+                                        believed in laughing
+                                    </h5>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <div
+                            class="row justify-content-between align-items-center"
+                            style="margin-top: 110px"
+                        >
+                            <div class="col-md-6 col-lg-5 position-relative">
+                                <img
+                                    class="d-block w-100 rounded-3 mx-auto"
+                                    src="assets/image/slide_home_screens/_1.jpg"
+                                    alt="First slide"
+                                />
+                            </div>
+                            <div class="col-md-6 col-lg-6">
+                                <span class="display-3 mb-0 text-primary">
+                                    <img
+                                        class="rounded-3 mx-auto"
+                                        src="assets/image/icon/quote.png"
+                                        alt="First slide"
+                                        style="width: 50px; height: 50px"
+                                    />
+                                    <h5 class="fw-light">
+                                        Moonlight newspaper up its enjoyment agreeable depending.
+                                        Timed voice share led him to widen noisy young. At weddings
+                                        believed in laughing
+                                    </h5>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <a
+                    class="carousel-control-prev"
+                    href="#carousel-comment"
+                    role="button"
+                    data-slide="prev"
+                >
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a
+                    class="carousel-control-next"
+                    href="#carousel-comment"
+                    role="button"
+                    data-slide="next"
+                >
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
+            </div>
+     
     </div>
+    
+           
 </template>
 <script>
 import CONST_FRONTEND from '@/const';
@@ -370,12 +488,12 @@ export default {
         // bất cứ lúc nào câu hỏi thay đổi, hàm bên dưới sẽ chạy
     },
     computed: {
-        showContainer() {
-            if (this.$route.name == 'bookable') {
-                return false;
-            }
-            return true;
-        },
+        // showContainer() {
+        //     if (this.$route.name == 'bookable') {
+        //         return false;
+        //     }
+        //     return true;
+        // },
     },
     methods: {
         initializeCarousel() {

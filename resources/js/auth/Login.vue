@@ -1,5 +1,5 @@
 <template>
-    <div class="w-50 m-auto">
+    <div class="w-50 mx-auto" style="margin-top: 200px">
         <div class="card card-body">
             <form>
                 <div class="form-group">
@@ -22,14 +22,18 @@
                         name="password"
                         placeholder="Enter your password"
                         class="form-control"
-                        v-model="password"	
+                        v-model="password"
                         :class="[{ 'is-invalid': errorFor('password') }]"
                     />
                     <v-errors :errors="errorFor('password')"></v-errors>
                 </div>
-				<div class="invalid-feedback" v-if="message_errors" style="display: block; margin-bottom: 1.25rem">
-					{{ message_errors }}
-				</div>
+                <div
+                    class="invalid-feedback"
+                    v-if="message_errors"
+                    style="display: block; margin-bottom: 1.25rem"
+                >
+                    {{ message_errors }}
+                </div>
                 <button
                     type="submit"
                     class="btn btn-primary btn-lg btn-block"
@@ -63,28 +67,29 @@ export default {
             email: null,
             password: null,
             loading: false,
-			message_errors: null
-         };
+            message_errors: null,
+        };
     },
     methods: {
         async login() {
             this.loading = true;
             this.errors = null;
             try {
-				const response = await axios.post('/api/login', {
+                const response = await axios.post('/api/login', {
                     email: this.email,
                     password: this.password,
                 });
-				this.$store.dispatch('login', response.data.data);
+                this.$store.dispatch('login', response.data.data);
                 logIn();
 
                 this.$router.push({ name: 'home' });
             } catch (error) {
-				this.loading = true;
-                this.errors = error.response && (error.response.data.errors || !error.response.data.success);
-				if(!error.response.data.success){
-					this.message_errors = error.response.data.message;
-				}
+                this.loading = true;
+                this.errors =
+                    error.response && (error.response.data.errors || !error.response.data.success);
+                if (!error.response.data.success) {
+                    this.message_errors = error.response.data.message;
+                }
             }
             this.loading = false;
         },
