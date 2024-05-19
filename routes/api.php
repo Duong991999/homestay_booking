@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\CategoryController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -27,8 +28,16 @@ Route::get('/booking-by-review/{reviewKey}', 'Api\BookingByReviewController')
 
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
-Route::get('/user', [AuthController::class, 'user'])->middleware('auth:sanctum');
+Route::get('/user', [AuthController::class, 'user']);
 
 Route::apiResource('reviews', 'Api\ReviewController')->only(['show', 'store']);
 
 Route::post('checkout', 'Api\CheckoutController')->name('checkout');
+
+Route::group(['prefix' => 'admin', 'middleware' => 'role:admin'], function(){
+	Route::group(['prefix' => 'category'], function(){
+		Route::get('/list', [CategoryController::class, 'index']);
+		Route::get('/show/{id}', [CategoryController::class, 'show']);
+		
+	});
+});

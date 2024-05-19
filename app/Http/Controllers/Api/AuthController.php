@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Controllers\Controller;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -23,7 +22,7 @@ class AuthController extends Controller
 			'password' => Hash::make($fields['password']),
         ]);
 
-        $token = $user->createToken('myapptoken')->plainTextToken;
+        $token = $user->createToken(env('APP_TOKEN'))->plainTextToken;
 
         $data = [
             'user' => $user,
@@ -63,6 +62,6 @@ class AuthController extends Controller
     }
 
 	public function user(){
-		return auth()->user()->getRoleNames();
+		return auth()->user();
 	}
 }

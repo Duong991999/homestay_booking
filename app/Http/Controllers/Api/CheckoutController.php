@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Api;
 use App\Address;
 use App\Bookable;
 use App\Booking;
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 class CheckoutController extends Controller

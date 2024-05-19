@@ -1,12 +1,11 @@
 <?php
 
-use App\User;
 use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Role;
-use Illuminate\Support\Facades\Hash;
 
 class RoleSeeder extends Seeder
 {
+	const ROLE_LIST = ['admin', 'user', 'company', 'employee'];
     /**
      * Run the database seeds.
      *
@@ -14,8 +13,8 @@ class RoleSeeder extends Seeder
      */
     public function run()
     {
-        $adminRole = Role::firstOrCreate((['name' => 'admin']));
-		$userRole = Role::firstOrCreate((['name' => 'user']));
-		$companyRole = Role::firstOrCreate((['name' => 'company']));
+		foreach(self::ROLE_LIST as $role){
+			Role::firstOrCreate((['name' => $role]));
+		}
     }
 }
