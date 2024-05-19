@@ -51,6 +51,13 @@
                     style="text-decoration: none"
                     >Catelory</router-link
                 >
+                <router-link
+                    :to="{ name: 'catelory' }"
+                    class="nav-link-1"
+                    v-if="!isLoggedIn"
+                    style="text-decoration: none"
+                    >Catelory</router-link
+                >
 
                 <a
                     class="nav-link-1"
@@ -62,6 +69,8 @@
                 >
             </div>
         </nav>
+
+        <div class="container-lg mt-2 mb-2 px-2">
 
         <div class="container-lg mt-2 mb-2 px-2">
             <router-view></router-view>
