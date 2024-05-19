@@ -67,6 +67,11 @@ const routes = [
         component: require('@/admin/category/Index.vue').default,
         name: 'category.index',
     },
+    {
+        path: '/company/homestay/index',
+        component: require('@/company/homestay/Index.vue').default,
+        name: 'homestay.index',
+    },
 ];
 
 const router = new VueRouter({
