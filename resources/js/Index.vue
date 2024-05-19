@@ -50,7 +50,6 @@
                     >Catelory</router-link
                 >
 
-
                 <a
                     class="nav-link-1"
                     href="#"
@@ -62,7 +61,7 @@
             </div>
         </nav>
 
-        <div class="container mt-4 mb-4 pr-4 pl-4">
+        <div class="container-lg mt-2 mb-2 px-2">
             <router-view></router-view>
         </div>
     </div>
