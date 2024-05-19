@@ -15,29 +15,36 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::apiResource('bookables', 'Api\BookableController')->only(['index', 'show']);
-Route::get('bookables/{bookable}/availability', 'Api\BookableAvailabilityController')
-    ->name('bookables.availability.show');
-Route::get('bookables/{bookable}/reviews', 'Api\BookableReviewController')
-    ->name('bookables.reviews.index');
-Route::get('bookables/{bookable}/price', 'Api\BookablePriceController')
-    ->name('bookables.price.show');
+// Route::apiResource('bookables', 'Api\BookableController')->only(['index', 'show']);
+// Route::get('bookables/{bookable}/availability', 'Api\BookableAvailabilityController')
+//     ->name('bookables.availability.show');
+// Route::get('bookables/{bookable}/reviews', 'Api\BookableReviewController')
+//     ->name('bookables.reviews.index');
+// Route::get('bookables/{bookable}/price', 'Api\BookablePriceController')
+//     ->name('bookables.price.show');
 
-Route::get('/booking-by-review/{reviewKey}', 'Api\BookingByReviewController')
-    ->name('booking.by-review.show');
+// Route::get('/booking-by-review/{reviewKey}', 'Api\BookingByReviewController')
+//     ->name('booking.by-review.show');
 
-Route::post('/register', [AuthController::class, 'register']);
-Route::post('/login', [AuthController::class, 'login']);
-Route::get('/user', [AuthController::class, 'user']);
+// Route::post('/register', [AuthController::class, 'register']);
+// Route::post('/login', [AuthController::class, 'login']);
+// Route::get('/user', [AuthController::class, 'user']);
 
-Route::apiResource('reviews', 'Api\ReviewController')->only(['show', 'store']);
+// Route::apiResource('reviews', 'Api\ReviewController')->only(['show', 'store']);
 
-Route::post('checkout', 'Api\CheckoutController')->name('checkout');
+// Route::post('checkout', 'Api\CheckoutController')->name('checkout');
+
+Route::group(['prefix' => 'auth'], function(){
+	Route::post('/register', [AuthController::class, 'register']);
+	Route::post('/login', [AuthController::class, 'login']);
+	Route::get('/me', [AuthController::class, 'user']);
+});
 
 Route::group(['prefix' => 'admin', 'middleware' => 'role:admin'], function(){
 	Route::group(['prefix' => 'category'], function(){
-		Route::get('/list', [CategoryController::class, 'index']);
+		Route::get('/index', [CategoryController::class, 'index']);
 		Route::get('/show/{id}', [CategoryController::class, 'show']);
-		
+		Route::post('/store', [CategoryController::class, 'store']);
+		Route::post('/update/{id}', [CategoryController::class, 'update']);
 	});
 });

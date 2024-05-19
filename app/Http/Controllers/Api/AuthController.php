@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Http\Requests\LoginRequest;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -32,18 +33,13 @@ class AuthController extends Controller
 		return $this->success($data);
     }
 
-    public function login(Request $request) {
-        $fields = $request->validate([
-            'email' => 'required|string|email',
-            'password' => 'required|string'
-        ]);
+    public function login(LoginRequest $request) {
+        $user = User::where('email', $request->email)->first();
 
-        $user = User::where('email', $fields['email'])->first();
-
-        if(!$user || !Hash::check($fields['password'], $user->password)) {
+        if(!$user || !Hash::check($request->password, $user->password)) {
             return $this->error("Email hoac mat khau ko dung!", Response::HTTP_UNAUTHORIZED);
         }
-        $token = $user->createToken('myapptoken')->plainTextToken;
+        $token = $user->createToken(env("APP_TOKEN"))->plainTextToken;
 
         $data = [
             'user' => $user,
