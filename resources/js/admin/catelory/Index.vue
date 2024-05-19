@@ -34,7 +34,7 @@
                         <div class="d-flex align-items-center">
                             <div class="avatar avatar-xs flex-shrink-0"></div>
                             <div class="ms-2 d-flex justify-content-center">
-                                <h6 class="mb-0 fw-light">{{ item.name }}</h6>
+                                <h6 class="mb-0 fw-light">{{ item.name }}123</h6>
                             </div>
                         </div>
                     </div>
@@ -85,8 +85,8 @@ export default {
     methods: {
         async fetchData() {
             try {
-                const response = await axios.post('/api/admin/category/index');
-                this.items = response.data;
+                const response = await axios.get('/api/admin/category/index');
+                this.items = response.data.data;
             } catch (error) {
                 console.error('Error fetching data:', error);
             }

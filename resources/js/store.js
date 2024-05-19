@@ -11,7 +11,7 @@ export default {
         },
         isLoggedIn: false,
         user: {},
-		token: null
+        token: null,
     },
     mutations: {
         setLastSearch(state, payload) {
@@ -28,19 +28,17 @@ export default {
         },
         setUser(state, payload) {
             state.user = payload;
-			localStorage.setItem('user', payload); 
-
+            localStorage.setItem('user', payload);
         },
         setLoggedIn(state, payload) {
             state.isLoggedIn = payload;
-			localStorage.setItem('isLoggedIn', payload); 
+            localStorage.setItem('isLoggedIn', payload);
         },
 
-		setToken(state, token) {
-			state.token = token;
-			localStorage.setItem('token', token); 
-		}
-
+        setToken(state, token) {
+            state.token = token;
+            localStorage.setItem('token', token);
+        },
     },
     actions: {
         setLastSearch(context, payload) {
@@ -57,7 +55,7 @@ export default {
             if (basket) {
                 context.commit('setBasket', JSON.parse(basket));
             }
-			
+
             context.commit('setLoggedIn', isLoggedIn());
         },
         addToBasket({ commit, state }, payload) {
@@ -76,7 +74,7 @@ export default {
         async loadUser({ commit, dispatch, state }) {
             if (isLoggedIn()) {
                 try {
-                    const user = (await axios.get('/api/user')).data;
+                    const user = (await axios.get('/api/auth/me')).data;
                     commit('setUser', user);
                     commit('setLoggedIn', true);
                 } catch (error) {
@@ -90,12 +88,12 @@ export default {
             logOut();
         },
 
-		login({ commit }, data) {
-			commit('setUser', data.user);
-			commit('setLoggedIn', true);
-			commit('setToken', data.token);
-			logIn();
-		},
+        login({ commit }, data) {
+            commit('setUser', data.user);
+            commit('setLoggedIn', true);
+            commit('setToken', data.token);
+            logIn();
+        },
     },
     getters: {
         itemsInBasket: (state) => state.basket.items.length,
@@ -108,11 +106,11 @@ export default {
             };
         },
 
-		getToken(state) {
-			return state.token;
-		},
-		getUser(state) {
-			return state.user;
-		},
+        getToken(state) {
+            return state.token;
+        },
+        getUser(state) {
+            return state.user;
+        },
     },
 };

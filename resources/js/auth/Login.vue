@@ -75,7 +75,7 @@ export default {
             this.loading = true;
             this.errors = null;
             try {
-                const response = await axios.post('/api/login', {
+                const response = await axios.post('/api/auth/login', {
                     email: this.email,
                     password: this.password,
                 });

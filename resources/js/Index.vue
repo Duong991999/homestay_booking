@@ -5,7 +5,6 @@
         <nav
             class="navbar navbar-custom navbar-expand-lg justify-content-between fixed-top text-center"
             style="height: 80px"
-            style="height: 80px"
         >
             <router-link class="navbar-brand mb-0 h1" :to="{ name: 'welcome' }">
                 <img
@@ -75,7 +74,7 @@
         <div class="container-lg mt-2 mb-2 px-2">
             <router-view></router-view>
         </div>
-    </div>
+    </div></div>
 </template>
 
 <script>
