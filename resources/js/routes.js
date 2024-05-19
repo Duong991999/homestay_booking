@@ -3,12 +3,18 @@ import Basket from '@/basket/Basket.vue';
 import Bookable from '@/bookable/Bookable.vue';
 import Bookables from '@/bookables/Bookables.vue';
 import Review from '@/review/Review.vue';
+import Welcome from '@/user/Welcome.vue';
 
 const routes = [
     {
         path: '/',
         component: Bookables,
         name: 'home',
+    },
+    {
+        path: '/welcome',
+        component: Welcome,
+        name: 'welcome',
     },
     {
         path: '/bookable/:id',
@@ -39,7 +45,6 @@ const routes = [
 
 const router = new VueRouter({
     routes, // short for `routes: routes`
-    mode: 'history',
 });
 
 export default router;
