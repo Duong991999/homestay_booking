@@ -3,12 +3,24 @@ import Basket from '@/basket/Basket.vue';
 import Bookable from '@/bookable/Bookable.vue';
 import Bookables from '@/bookables/Bookables.vue';
 import Review from '@/review/Review.vue';
+import Welcome from '@/auth/Welcome.vue';
+import Catelory from '@/company/Catelory';
 
 const routes = [
     {
         path: '/',
         component: Bookables,
         name: 'home',
+    },
+    {
+        path: '/auth/welcome',
+        component: Welcome,
+        name: 'welcome',
+    },
+    {
+        path: '/company/catelory',
+        component: Catelory,
+        name: 'catelory',
     },
     {
         path: '/bookable/:id',
@@ -35,11 +47,30 @@ const routes = [
         component: require('@/auth/Register.vue').default,
         name: 'register',
     },
+    {
+        path: '/auth/login',
+        component: require('@/auth/Login.vue').default,
+        name: 'login',
+    },
+    {
+        path: '/company/inforbase',
+        component: require('@/company/InforBase.vue').default,
+        name: 'inforbase',
+    },
+    {
+        path: '/company/inforroom',
+        component: require('@/company/InforRoom.vue').default,
+        name: 'inforroom',
+    },
+    {
+        path: '/admin/catelory/index',
+        component: require('@/admin/catelory/Index.vue').default,
+        name: 'catelory.index',
+    },
 ];
 
 const router = new VueRouter({
     routes, // short for `routes: routes`
-    mode: 'history',
 });
 
 export default router;

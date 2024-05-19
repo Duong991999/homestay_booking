@@ -1,68 +1,19 @@
 <template>
     <div>
+        <!--Thanh nav-->
         <nav
             class="navbar navbar-custom navbar-expand-lg justify-content-between fixed-top text-center"
+            style="height: 80px"
         >
-            <router-link class="navbar-brand mb-0 h1" :to="{ name: 'home' }">
-                HomestayBooking</router-link
-            >
-            <!-- Dropdowm -->
-            <div class="narbar-d">
-                <div class="nav-item dropdown" v-if="!isLoggedIn">
-                    <a
-                        class="nav-link dropdown-toggle"
-                        href="#"
-                        id="navbarDropdown"
-                        role="button"
-                        data-toggle="dropdown"
-                        aria-haspopup="true"
-                        aria-expanded="false"
-                    >
-                        Lưu trú
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <router-link :to="{ name: 'profile' }" class="dropdown-item"
-                            >Profile</router-link
-                        >
-                    </div>
-                </div>
-                <div class="nav-item dropdown" v-if="!isLoggedIn">
-                    <a
-                        class="nav-link dropdown-toggle"
-                        href="#"
-                        id="navbarDropdown"
-                        role="button"
-                        data-toggle="dropdown"
-                        aria-haspopup="true"
-                        aria-expanded="false"
-                    >
-                        Chuyến bay
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <router-link :to="{ name: 'profile' }" class="dropdown-item"
-                            >Profile</router-link
-                        >
-                    </div>
-                </div>
-                <div class="nav-item dropdown" v-if="!isLoggedIn">
-                    <a
-                        class="nav-link dropdown-toggle"
-                        href="#"
-                        id="navbarDropdown"
-                        role="button"
-                        data-toggle="dropdown"
-                        aria-haspopup="true"
-                        aria-expanded="false"
-                    >
-                        Chuyến bay + khách sạn
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <router-link :to="{ name: 'profile' }" class="dropdown-item"
-                            >Profile</router-link
-                        >
-                    </div>
-                </div>
-            </div>
+            <router-link class="navbar-brand mb-0 h1" :to="{ name: 'welcome' }">
+                <img
+                    class=""
+                    src="assets/image/slide_home_screens/logo.jpg"
+                    height="40"
+                    alt="Homestaybooking"
+                    style="margin-right: 3px; border-radius: 40px"
+                />HomestayBooking
+            </router-link>
 
             <div class="navbar-login">
                 <router-link
@@ -91,6 +42,20 @@
                     style="text-decoration: none"
                     >Sign-in</router-link
                 >
+                <router-link
+                    :to="{ name: 'catelory' }"
+                    class="nav-link-1"
+                    v-if="!isLoggedIn"
+                    style="text-decoration: none"
+                    >Catelory</router-link
+                >
+                <router-link
+                    :to="{ name: 'catelory' }"
+                    class="nav-link-1"
+                    v-if="!isLoggedIn"
+                    style="text-decoration: none"
+                    >Catelory</router-link
+                >
 
                 <a
                     class="nav-link-1"
@@ -101,60 +66,12 @@
                     >Logout</a
                 >
             </div>
-
-            <!--Check form-->
-            <!-- <form class="form-input">
-                <input type="text" id="fname" name="firstname" placeholder="Bạn muốn đi đâu" />
-                <div>
-                    <label for="example-datepicker">Choose a date</label>
-                    <b-form-datepicker
-                        id="example-datepicker"
-                        v-model="value"
-                        class="mb-2"
-                    ></b-form-datepicker>
-                    <p>Value: '{{ value }}'</p>
-                </div>
-                <input type="text" id="fname" name="firstname" placeholder="Bạn muốn đi đâu" />
-            </form> -->
-            <!--end-->
         </nav>
-        <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-            <ol class="carousel-indicators">
-                <!-- <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-                <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-                <li data-target="#carouselExampleIndicators" data-slide-to="2"></li> -->
-            </ol>
-            <div class="carousel-inner">
-				<div v-for="(file, index) in list_home_screen" :class="'carousel-item' + (index ? ' active' : '')" >
-                    <img
-                        class="d-block w-100"
-                        :src="`assets/image/slide_home_screens/${file}`"
-                        :alt="`Slide ${index}`"
-                    />
-                </div>
-            </div>
-            <a
-                class="carousel-control-prev"
-                href="#carouselExampleIndicators"
-                role="button"
-                data-slide="prev"
-            >
-                <!-- <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="sr-only">Previous</span> -->
-            </a>
-            <a
-                class="carousel-control-next"
-                href="#carouselExampleIndicators"
-                role="button"
-                data-slide="next"
-            >
-                <!-- <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="sr-only">Next</span> -->
-            </a>
-        </div>
 
-        <div class="container mt-4 mb-4 pr-4 pl-4">
-            <router-view></router-view>
+        <div class="container-lg mt-2 mb-2 px-2">
+            <div class="container-lg mt-2 mb-2 px-2">
+                <router-view></router-view>
+            </div>
         </div>
     </div>
 </template>
@@ -166,7 +83,8 @@ export default {
     data() {
         return {
             lastSearch: this.$store.state.lastSearch,
-			list_home_screen: CONST_FRONTEND.home_screen_file
+            list_home_screen: CONST_FRONTEND.home_screen_file,
+            list_home_screen: CONST_FRONTEND.home_screen_file,
         };
     },
     computed: {
@@ -218,22 +136,17 @@ export default {
 }
 .navbar-custom {
     height: 50px;
-    border-bottom: 0.5px inset #50555e;
 }
 
 .navbar-brand {
     font-size: 30px;
-    color: rgb(21, 5, 245);
+    color: rgb(237, 195, 169);
+    color: rgb(237, 195, 169);
     justify-content: center;
 }
 .navbar-login {
     flex-direction: row;
 }
-.navbar-item-1 {
-    padding: 16px;
-    justify-content: space-between;
-}
-
 .nav-link-1 {
     background-color: aliceblue;
     color: #003b95;
@@ -253,8 +166,10 @@ export default {
     box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
 }
 .carousel-item {
-    height: 40vh;
-    min-height: 300px;
+    height: 600px;
+    min-height: 600px;
+    height: 600px;
+    min-height: 600px;
     background: no-repeat scroll center scroll;
 }
 .dropdown {
