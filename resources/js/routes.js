@@ -4,7 +4,7 @@ import Bookable from '@/bookable/Bookable.vue';
 import Bookables from '@/bookables/Bookables.vue';
 import Review from '@/review/Review.vue';
 import Welcome from '@/auth/Welcome.vue';
-import Catelory from '@/company/Catelory';
+import Category from '@/company/Category';
 
 const routes = [
     {
@@ -63,9 +63,9 @@ const routes = [
         name: 'inforroom',
     },
     {
-        path: '/admin/catelory/index',
-        component: require('@/admin/catelory/Index.vue').default,
-        name: 'catelory.index',
+        path: '/admin/category/index',
+        component: require('@/admin/category/Index.vue').default,
+        name: 'category.index',
     },
 ];
 
