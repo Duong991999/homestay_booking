@@ -34,5 +34,9 @@ class CategoryController extends Controller
 		return $this->success($data);
 	}
 
+	public function delete(Request $request){
+		$this->categoryRepo->delete($request->get('id'));
+		return $this->success();
+	}
 
 }

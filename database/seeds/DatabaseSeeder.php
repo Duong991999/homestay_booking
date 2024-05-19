@@ -43,7 +43,7 @@ class DatabaseSeeder extends Seeder
         //     $bookable->reviews()->saveMany($reviews);
         // });
 		$this->call([RoleSeeder::class, UserSeeder::class]);
-		$this->call([HomestaySeeder::class]);
+		// $this->call([HomestaySeeder::class]);
 
     }
 }
