@@ -4,6 +4,7 @@
         <nav
             class="navbar navbar-custom navbar-expand-lg justify-content-between fixed-top text-center"
             style="height: 80px"
+            v-if="user"
         >
             <router-link class="navbar-brand mb-0 h1" :to="{ name: 'welcome' }">
                 <img
@@ -60,7 +61,12 @@
                 >
             </div>
         </nav>
-
+        <!-- Second Navbar -->
+        <nav class="navbar sidebar navbar-expand-xl navbar-light" v-else>
+            <div class="d-flex align-items-center">
+                <!-- Sidebar content here -->
+            </div>
+        </nav>
         <div class="container-lg mt-2 mb-2 px-2">
             <div class="container-lg mt-2 mb-2 px-2">
                 <router-view></router-view>
@@ -76,7 +82,6 @@ export default {
     data() {
         return {
             lastSearch: this.$store.state.lastSearch,
-            list_home_screen: CONST_FRONTEND.home_screen_file,
             list_home_screen: CONST_FRONTEND.home_screen_file,
         };
     },

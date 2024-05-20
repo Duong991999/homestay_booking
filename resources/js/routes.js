@@ -63,6 +63,11 @@ const routes = [
         name: 'inforroom',
     },
     {
+        path: '/admin/index',
+        component: require('@/admin/Index.vue').default,
+        name: 'admin.index',
+    },
+    {
         path: '/admin/category/index',
         component: require('@/admin/category/Index.vue').default,
         name: 'category.index',
