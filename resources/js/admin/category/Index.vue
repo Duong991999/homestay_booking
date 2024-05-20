@@ -34,30 +34,46 @@
                         <div class="d-flex align-items-center">
                             <div class="avatar avatar-xs flex-shrink-0"></div>
                             <div class="ms-2 d-flex justify-content-center">
-                                <h6 class="mb-0 fw-light">{{ item.name }}123</h6>
+                                <template v-if="selectedItem !== item">
+                                    <h6 class="mb-0 fw-light">{{ item.name }}</h6>
+                                </template>
+                                <template v-else>
+                                    <input
+                                        v-model="editedItem.name"
+                                        class="form-control"
+                                        type="text"
+                                    />
+                                </template>
                             </div>
                         </div>
                     </div>
                     <div class="col-sm-4">
                         <div class="row d-flex justify-content-around">
-                            <a
-                                aria-current="page"
-                                href="#"
-                                class="router-link-active router-link-exact-active btn btn-info mb-0"
-                                @click="showItem(item)"
-                            >
-                                Show
-                            </a>
-                            <a
-                                aria-current="page"
+                            <button
                                 href="#"
                                 class="router-link-active router-link-exact-active btn btn-warning mb-0"
-                                @click="updateItem(item)"
+                                @click="startEdit(item)"
+                                v-if="selectedItem !== item"
                             >
-                                Update
-                            </a>
+                                Edit
+                            </button>
+                            <template v-else>
+                                <button
+                                    href="#"
+                                    class="router-link-active router-link-exact-active btn btn-primary mb-0"
+                                    @click="saveEdit(item)"
+                                >
+                                    Save
+                                </button>
+                                <button
+                                    href="#"
+                                    class="router-link-active router-link-exact-active btn btn-danger mb-0"
+                                    @click="cancelEdit"
+                                >
+                                    Cancel
+                                </button>
+                            </template>
                             <a
-                                aria-current="page"
                                 href="#"
                                 class="router-link-active router-link-exact-active btn btn-danger mb-0"
                                 @click="deleteItem(item)"
@@ -77,6 +93,11 @@ export default {
     data() {
         return {
             items: [],
+            selectedItem: null, // Track the selected item for editing
+            editedItem: {
+                id: '',
+                name: '',
+            }, // Track the edited item
         };
     },
     mounted() {
@@ -91,14 +112,34 @@ export default {
                 console.error('Error fetching data:', error);
             }
         },
-        showItem(item) {
-            console.log('Show', item);
+        startEdit(item) {
+            this.selectedItem = item;
+            this.editedItem = { ...item }; // Copy the item to be edited
         },
-        updateItem(item) {
-            console.log('Update', item);
+        async saveEdit() {
+            try {
+                const response = await axios.put(
+                    `/api/admin/category/update/${this.editedItem.id}`,
+                    this.editedItem
+                );
+                console.log('Item updated:', response.data);
+
+                const index = this.items.findIndex((item) => item.id === this.editedItem.id);
+                if (index !== -1) {
+                    this.$set(this.items, index, this.editedItem);
+                }
+
+                this.selectedItem = null; // Reset selectedItem
+            } catch (error) {
+                console.error('Error updating item:', error);
+            }
+        },
+        cancelEdit() {
+            this.selectedItem = null;
         },
         deleteItem(item) {
             console.log('Delete', item);
+            // Implement logic to delete item
         },
     },
 };
