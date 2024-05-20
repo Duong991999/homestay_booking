@@ -118,7 +118,7 @@ export default {
         },
         async saveEdit() {
             try {
-                const response = await axios.put(
+                const response = await axios.post(
                     `/api/admin/category/update/${this.editedItem.id}`,
                     this.editedItem
                 );
@@ -130,6 +130,7 @@ export default {
                 }
 
                 this.selectedItem = null; // Reset selectedItem
+				this.fetchData()
             } catch (error) {
                 console.error('Error updating item:', error);
             }

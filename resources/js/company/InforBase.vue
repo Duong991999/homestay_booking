@@ -17,11 +17,11 @@
                         >Homestay của bạn đang đăng ký nằm ở đâu?</label
                     >
                     <div>
-                        <h
-                            >Chúng tôi có thể gửi thư để xác nhận vị trí chỗ nghỉ của Quý vị nên hãy
-                            đảm bảo cung cấp địa chỉ chính xác – thông tin này sẽ khó thay đổi sau
-                            đó.</h
-                        >
+                        <p>
+							Chúng tôi có thể gửi thư để xác nhận vị trí chỗ nghỉ của Quý vị nên hãy
+                            đảm bảo cung cấp địa chỉ chính xác thông tin này sẽ khó thay đổi sau
+                            đó.
+						</p>
                         <h6>Thành phố</h6>
                         <input
                             type="email"
@@ -44,6 +44,11 @@
                         id="exampleFormControlInput1"
                         placeholder="Mã bưu chính"
                     />
+					<Multiselect
+					v-model="value"
+					:options="options"
+					mode="tags"
+				  />
                 </div>
             </form>
         </div>
@@ -52,3 +57,24 @@
         </router-link>
     </div>
 </template>
+<script>
+  import Multiselect from '@vueform/multiselect/dist/multiselect.vue2.js'
+
+  export default {
+    components: {
+      Multiselect,
+    },
+    data() {
+      return {
+        value: null,
+        options: [
+          'Batman',
+          'Robin',
+          'Joker',
+        ]
+      }
+    }
+  }
+</script>
+
+<style src="@vueform/multiselect/themes/default.css"></style>
