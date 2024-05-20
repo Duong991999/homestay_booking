@@ -44,11 +44,12 @@
                         id="exampleFormControlInput1"
                         placeholder="Mã bưu chính"
                     />
-					<Multiselect
-					v-model="value"
-					:options="options"
-					mode="tags"
-				  />
+				  <v-multi-select
+				  v-model="value"
+				  :options="options"
+				  mode="tags">
+
+				  </v-multi-select>
                 </div>
             </form>
         </div>
@@ -58,12 +59,9 @@
     </div>
 </template>
 <script>
-  import Multiselect from '@vueform/multiselect/dist/multiselect.vue2.js'
+//   import Multiselect from '@vueform/multiselect/dist/multiselect.vue2.js'
 
   export default {
-    components: {
-      Multiselect,
-    },
     data() {
       return {
         value: null,
@@ -76,5 +74,3 @@
     }
   }
 </script>
-
-<style src="@vueform/multiselect/themes/default.css"></style>

@@ -34,11 +34,6 @@ const routes = [
         name: 'basket',
     },
     {
-        path: '/auth/login',
-        component: require('@/auth/Login.vue').default,
-        name: 'login',
-    },
-    {
         path: '/auth/register',
         component: require('@/auth/Register.vue').default,
         name: 'register',
@@ -66,7 +61,7 @@ const routes = [
     {
         path: '/admin/category/index',
         component: require('@/admin/category/Index.vue').default,
-        name: 'inforroom',
+        name: 'category.index',
     },
 ];
 

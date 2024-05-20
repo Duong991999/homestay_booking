@@ -12,6 +12,7 @@ import Success from './shared/components/Success.vue';
 import ValidationErrors from './shared/components/ValidationErrors.vue';
 import Loading from './shared/components/Loading.vue';
 import FullLoading from './shared/components/FullScreenLoading.vue';
+import Multiselect from '@vueform/multiselect/dist/multiselect.vue2.js'
 import storeDefinition from './store';
 import PulseLoader from 'vue-spinner/src/PulseLoader.vue';
 import DotLoader from 'vue-spinner/src/DotLoader.vue';
@@ -30,6 +31,7 @@ Vue.component('v-loading', Loading);
 Vue.component('v-fullloading', FullLoading);
 Vue.component('pulse-loader', PulseLoader);
 Vue.component('dot-loader', DotLoader);
+Vue.component('v-multi-select', Multiselect);
 
 const store = new Vuex.Store(storeDefinition);
 
