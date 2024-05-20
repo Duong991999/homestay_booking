@@ -1,0 +1,2 @@
+multiple select:
+https://www.npmjs.com/package/@vueform/multiselect#multiselect-with-object-options
