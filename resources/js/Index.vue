@@ -46,9 +46,15 @@
                 <router-link
                     :to="{ name: 'category' }"
                     class="nav-link-1"
+<<<<<<< HEAD
                     v-if="isLoggedIn"
                     style="text-decoration: none"
                     >Category</router-link
+=======
+                    v-if="!isLoggedIn"
+                    style="text-decoration: none"
+                    >Catelory</router-link
+>>>>>>> 3cc30bd1812c5fe2af29aaa4969cb99068c00153
                 >
 
                 <a

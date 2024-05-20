@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Requests\HomestayRequest;
 use App\Repositories\HomeStayRepositoryInterface;
+use Illuminate\Http\Request;
 
 class HomestayController extends Controller
 {
@@ -19,11 +20,11 @@ class HomestayController extends Controller
 	}
 
 	public function show($id){
-		return $this->success($this->homestayRepo->find($id));
+		return $this->success($this->homestayRepo->findDetail($id));
 	}
 
 	public function store(HomestayRequest $request){
-		$data = $this->homestayRepo->create($request->all());
+		$data = $this->homestayRepo->createDetail($request->all());
 		return $this->success($data);
 	}
 
@@ -32,4 +33,8 @@ class HomestayController extends Controller
 		return $this->success($data);
 	}
 
+	public function delete(Request $request){
+		$this->homestayRepo->delete($request->get('id'));
+		return $this->success();
+	}
 }

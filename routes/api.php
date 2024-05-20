@@ -47,11 +47,14 @@ Route::group(['prefix' => 'admin', 'middleware' => 'role:admin'], function(){
 		Route::get('/show/{id}', [CategoryController::class, 'show']);
 		Route::post('/store', [CategoryController::class, 'store']);
 		Route::post('/update/{id}', [CategoryController::class, 'update']);
+		Route::post('/delete', [CategoryController::class, 'delete']);
 	});
 });
 
 Route::group(['prefix' => 'homestay',], function(){
 	Route::post('/store', [HomestayController::class, 'store']);
 	Route::get('/show/{id}', [HomestayController::class, 'show']);
+	Route::get('/index', [HomestayController::class, 'index']);
 	Route::post('/update/{id}', [HomestayController::class, 'update']);
+	Route::post('/delete', [HomestayController::class, 'delete']);
 });

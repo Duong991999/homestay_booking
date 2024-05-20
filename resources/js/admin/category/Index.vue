@@ -16,7 +16,11 @@
                     </div>
                 </div>
                 <div
+<<<<<<< HEAD
                     v-for="(item, index) in items"
+=======
+                    v-for="(homestay, index) in homestays"
+>>>>>>> 3cc30bd1812c5fe2af29aaa4969cb99068c00153
                     :key="index"
                     class="row row-cols-xl-7 align-items-lg-center border-bottom g-4 px-2 py-4"
                 >
@@ -25,7 +29,11 @@
                         <div class="d-flex align-items-center">
                             <div class="avatar avatar-xs flex-shrink-0"></div>
                             <div class="ms-2">
+<<<<<<< HEAD
                                 <h6 class="mb-0 fw-light">{{ item.id }}</h6>
+=======
+                                <h6 class="mb-0 fw-light">{{ homestay.id }}</h6>
+>>>>>>> 3cc30bd1812c5fe2af29aaa4969cb99068c00153
                             </div>
                         </div>
                     </div>
@@ -34,6 +42,7 @@
                         <div class="d-flex align-items-center">
                             <div class="avatar avatar-xs flex-shrink-0"></div>
                             <div class="ms-2 d-flex justify-content-center">
+<<<<<<< HEAD
                                 <template v-if="selectedItem !== item">
                                     <h6 class="mb-0 fw-light">{{ item.name }}</h6>
                                 </template>
@@ -44,11 +53,15 @@
                                         type="text"
                                     />
                                 </template>
+=======
+                                <h6 class="mb-0 fw-light">{{ homestay.name }}123</h6>
+>>>>>>> 3cc30bd1812c5fe2af29aaa4969cb99068c00153
                             </div>
                         </div>
                     </div>
                     <div class="col-sm-4">
                         <div class="row d-flex justify-content-around">
+<<<<<<< HEAD
                             <button
                                 href="#"
                                 class="router-link-active router-link-exact-active btn btn-warning mb-0"
@@ -77,6 +90,29 @@
                                 href="#"
                                 class="router-link-active router-link-exact-active btn btn-danger mb-0"
                                 @click="deleteItem(item)"
+=======
+                            <a
+                                aria-current="page"
+                                href="#"
+                                class="router-link-active router-link-exact-active btn btn-info mb-0"
+                                @click="showHomestay(homestay)"
+                            >
+                                Show
+                            </a>
+                            <a
+                                aria-current="page"
+                                href="#"
+                                class="router-link-active router-link-exact-active btn btn-warning mb-0"
+                                @click="updateHomestay(item)"
+                            >
+                                Update
+                            </a>
+                            <a
+                                aria-current="page"
+                                href="#"
+                                class="router-link-active router-link-exact-active btn btn-danger mb-0"
+                                @click="deleteHomestay(item)"
+>>>>>>> 3cc30bd1812c5fe2af29aaa4969cb99068c00153
                             >
                                 Delete
                             </a>
@@ -92,12 +128,16 @@
 export default {
     data() {
         return {
+<<<<<<< HEAD
             items: [],
             selectedItem: null, // Track the selected item for editing
             editedItem: {
                 id: '',
                 name: '',
             }, // Track the edited item
+=======
+            homestays: [],
+>>>>>>> 3cc30bd1812c5fe2af29aaa4969cb99068c00153
         };
     },
     mounted() {
@@ -107,11 +147,16 @@ export default {
         async fetchData() {
             try {
                 const response = await axios.get('/api/admin/category/index');
+<<<<<<< HEAD
                 this.items = response.data.data;
+=======
+                this.homestays = response.data.data;
+>>>>>>> 3cc30bd1812c5fe2af29aaa4969cb99068c00153
             } catch (error) {
                 console.error('Error fetching data:', error);
             }
         },
+<<<<<<< HEAD
         startEdit(item) {
             this.selectedItem = item;
             this.editedItem = { ...item }; // Copy the item to be edited
@@ -136,6 +181,16 @@ export default {
         },
         cancelEdit() {
             this.selectedItem = null;
+=======
+        showItem(item) {
+            console.log('Show', Homestay);
+        },
+        updateItem(item) {
+            console.log('Update', Homestay);
+        },
+        deleteItem(item) {
+            console.log('Delete', Homestay);
+>>>>>>> 3cc30bd1812c5fe2af29aaa4969cb99068c00153
         },
     },
 };

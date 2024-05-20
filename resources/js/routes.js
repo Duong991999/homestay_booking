@@ -17,11 +17,15 @@ const routes = [
         component: Welcome,
         name: 'welcome',
     },
+<<<<<<< HEAD
     {
         path: '/company/category',
         component: Category,
         name: 'category',
     },
+=======
+
+>>>>>>> 3cc30bd1812c5fe2af29aaa4969cb99068c00153
     {
         path: '/bookable/:id',
         component: Bookable,
@@ -53,6 +57,11 @@ const routes = [
         name: 'login',
     },
     {
+        path: '/company/category',
+        component: Category,
+        name: 'category',
+    },
+    {
         path: '/company/inforbase',
         component: require('@/company/InforBase.vue').default,
         name: 'inforbase',
@@ -63,6 +72,7 @@ const routes = [
         name: 'inforroom',
     },
     {
+<<<<<<< HEAD
         path: '/company/homestay/index',
         component: require('@/company/homestay/Index.vue').default,
         name: 'company.homestay.index',
@@ -81,6 +91,11 @@ const routes = [
         path: '/company/homestay/index',
         component: require('@/company/homestay/Index.vue').default,
         name: 'homestay.index',
+=======
+        path: '/admin/category/index',
+        component: require('@/admin/category/Index.vue').default,
+        name: 'inforroom',
+>>>>>>> 3cc30bd1812c5fe2af29aaa4969cb99068c00153
     },
 ];
 
