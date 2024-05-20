@@ -4,7 +4,7 @@
         <nav
             class="navbar navbar-custom navbar-expand-lg justify-content-between fixed-top text-center"
             style="height: 80px"
-            v-if="user"
+            v-if="showContainer"
         >
             <router-link class="navbar-brand mb-0 h1" :to="{ name: 'welcome' }">
                 <img
@@ -64,6 +64,7 @@
         <!-- Second Navbar -->
         <nav class="navbar sidebar navbar-expand-xl navbar-light" v-else>
             <div class="d-flex align-items-center">
+                Helo
                 <!-- Sidebar content here -->
             </div>
         </nav>
@@ -83,6 +84,7 @@ export default {
         return {
             lastSearch: this.$store.state.lastSearch,
             list_home_screen: CONST_FRONTEND.home_screen_file,
+            showContainer: true,
         };
     },
     computed: {
@@ -97,6 +99,7 @@ export default {
             return 1 + 2;
         },
     },
+
     methods: {
         async logout() {
             try {
@@ -110,6 +113,16 @@ export default {
             $('.carousel').carousel({
                 interval: 2000,
             });
+        },
+        watch: {
+            '$route.name'(newRouteName) {
+                // Check if the new route name is 'admin' and update showContainer accordingly
+                if (newRouteName === 'admin') {
+                    this.showContainer = false;
+                } else {
+                    this.showContainer = true;
+                }
+            },
         },
     },
     mounted() {

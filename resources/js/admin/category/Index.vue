@@ -137,7 +137,6 @@ export default {
         cancelEdit() {
             this.selectedItem = null;
         },
-       
     },
 };
 </script>
