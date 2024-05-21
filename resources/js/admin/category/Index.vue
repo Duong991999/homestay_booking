@@ -25,7 +25,7 @@
                         <div class="d-flex align-items-center">
                             <div class="avatar avatar-xs flex-shrink-0"></div>
                             <div class="ms-2">
-                                <h6 class="mb-0 fw-light">{{ item.id }}</h6>
+                                <h6 class="mb-0 fw-light">{{ index }}</h6>
                             </div>
                         </div>
                     </div>
@@ -34,16 +34,7 @@
                         <div class="d-flex align-items-center">
                             <div class="avatar avatar-xs flex-shrink-0"></div>
                             <div class="ms-2 d-flex justify-content-center">
-                                <template v-if="selectedItem !== item">
-                                    <h6 class="mb-0 fw-light">{{ item.name }}</h6>
-                                </template>
-                                <template v-else>
-                                    <input
-                                        v-model="editedItem.name"
-                                        class="form-control"
-                                        type="text"
-                                    />
-                                </template>
+                                <h6 class="mb-0 fw-light">{{ item.name }}</h6>
                             </div>
                         </div>
                     </div>
@@ -53,26 +44,9 @@
                                 href="#"
                                 class="router-link-active router-link-exact-active btn btn-warning mb-0"
                                 @click="startEdit(item)"
-                                v-if="selectedItem !== item"
                             >
                                 Edit
                             </button>
-                            <template v-else>
-                                <button
-                                    href="#"
-                                    class="router-link-active router-link-exact-active btn btn-primary mb-0"
-                                    @click="saveEdit(item)"
-                                >
-                                    Save
-                                </button>
-                                <button
-                                    href="#"
-                                    class="router-link-active router-link-exact-active btn btn-danger mb-0"
-                                    @click="cancelEdit"
-                                >
-                                    Cancel
-                                </button>
-                            </template>
                             <a
                                 href="#"
                                 class="router-link-active router-link-exact-active btn btn-danger mb-0"
@@ -85,9 +59,39 @@
                 </div>
             </div>
         </div>
+
+        <!-- Edit Modal -->
+        <div v-if="isEditModalVisible" class="modal-overlay">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="editModalLabel">Edit Item</h5>
+                        <button type="button" class="btn-close" @click="cancelEdit"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="mb-3">
+                            <label for="itemName" class="form-label">Name</label>
+                            <input
+                                v-model="editedItem.name"
+                                type="text"
+                                class="form-control"
+                                id="itemName"
+                            />
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" @click="cancelEdit">
+                            Cancel
+                        </button>
+                        <button type="button" class="btn btn-primary" @click="saveEdit">
+                            Save
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </template>
-
 <script>
 export default {
     data() {
@@ -98,6 +102,7 @@ export default {
                 id: '',
                 name: '',
             }, // Track the edited item
+            isEditModalVisible: false, // Track modal visibility
         };
     },
     mounted() {
@@ -115,6 +120,7 @@ export default {
         startEdit(item) {
             this.selectedItem = item;
             this.editedItem = { ...item }; // Copy the item to be edited
+            this.isEditModalVisible = true; // Show the modal
         },
         async saveEdit() {
             try {
@@ -130,13 +136,15 @@ export default {
                 }
 
                 this.selectedItem = null; // Reset selectedItem
-				this.fetchData()
+                this.fetchData();
+                this.isEditModalVisible = false; // Hide the modal
             } catch (error) {
                 console.error('Error updating item:', error);
             }
         },
         cancelEdit() {
             this.selectedItem = null;
+            this.isEditModalVisible = false; // Hide the modal
         },
         deleteItem(item) {
             console.log('Delete', item);
@@ -145,3 +153,25 @@ export default {
     },
 };
 </script>
+
+<style scoped>
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1050;
+}
+.modal-dialog {
+    position: relative;
+    max-width: 500px;
+    width: 100%;
+    background: white;
+    border-radius: 5px;
+}
+</style>
