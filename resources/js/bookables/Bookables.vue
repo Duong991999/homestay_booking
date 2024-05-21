@@ -45,7 +45,7 @@ export default {
         return {
             bookables: null,
             loading: false,
-            columns: 1,
+            columns: 4,
         };
     },
     computed: {
@@ -61,7 +61,6 @@ export default {
             return this.columns - this.bookablesInRow(row).length;
         },
     },
-    created() {
-    },
+    created() {},
 };
 </script>
