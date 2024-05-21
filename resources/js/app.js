@@ -1,4 +1,5 @@
 require('./bootstrap');
+require('@vueform/multiselect/themes/default.css')
 
 import Vue from 'vue';
 import moment from 'moment';
@@ -16,10 +17,12 @@ import Multiselect from '@vueform/multiselect/dist/multiselect.vue2.js'
 import storeDefinition from './store';
 import PulseLoader from 'vue-spinner/src/PulseLoader.vue';
 import DotLoader from 'vue-spinner/src/DotLoader.vue';
+import FlashMessage from '@smartweb/vue-flash-message';
 
 window.Vue = require('vue');
 Vue.use(VueRouter);
 Vue.use(Vuex);
+Vue.use(FlashMessage);
 
 Vue.filter('fromNow', (value) => moment(value).fromNow());
 

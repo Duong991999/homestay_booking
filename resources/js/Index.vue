@@ -189,4 +189,3 @@ export default {
     box-sizing: border-box;
 }
 </style>
-<style src="@vueform/multiselect/themes/default.css"></style>

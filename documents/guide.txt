@@ -1,2 +1,4 @@
 multiple select:
 https://www.npmjs.com/package/@vueform/multiselect#multiselect-with-object-options
+flash message:
+https://www.npmjs.com/package/@smartweb/vue-flash-message
