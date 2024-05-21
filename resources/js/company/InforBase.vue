@@ -1,76 +1,216 @@
 <template>
-    <div class="w-50 mx-auto" style="margin-top: 200px">
+    <div class="w-50 mx-auto" style="margin-top: 150px">
         <div class="card card-body">
-            <form>
+            <form @submit.prevent="submitForm">
                 <div class="form-group">
-                    <label for="exampleFormControlInput1">Homestay của bạn tên gì?</label>
+                    <label for="homestayName">Homestay của bạn tên gì?</label>
                     <input
-                        type="email"
+                        type="text"
                         class="form-control"
-                        id="exampleFormControlInput1"
+                        id="homestayName"
                         placeholder="Tên Homestay"
+                        v-model="homestayName"
+                        @blur="homestayNameTouched = true"
+                        :class="{ 'is-invalid': homestayNameTouched && !homestayName }"
                     />
+                    <div class="invalid-feedback" v-if="homestayNameTouched && !homestayName">
+                        Bạn chưa nhập tên Homestay.
+                    </div>
                 </div>
 
                 <div class="form-group">
-                    <label for="exampleFormControlInput1"
-                        >Homestay của bạn đang đăng ký nằm ở đâu?</label
-                    >
+                    <label for="addressInfo">Homestay của bạn đang đăng ký nằm ở đâu?</label>
                     <div>
                         <p>
-							Chúng tôi có thể gửi thư để xác nhận vị trí chỗ nghỉ của Quý vị nên hãy
-                            đảm bảo cung cấp địa chỉ chính xác thông tin này sẽ khó thay đổi sau
+                            Chúng tôi có thể gửi thư để xác nhận vị trí chỗ nghỉ của Quý vị nên hãy
+                            đảm bảo cung cấp địa chỉ chính xác – thông tin này sẽ khó thay đổi sau
                             đó.
-						</p>
-                        <h6>Thành phố</h6>
-                        <input
-                            type="email"
-                            class="form-control"
-                            id="exampleFormControlInput1"
-                            placeholder="Thành phố"
-                        />
-                        <h6>Địa chỉ</h6>
-                        <input
-                            type="email"
-                            class="form-control"
-                            id="exampleFormControlInput1"
-                            placeholder="Địa chỉ"
-                        />
-                    </div>
-                    <h6>Mã bưu chính</h6>
-                    <input
-                        type="email"
-                        class="form-control"
-                        id="exampleFormControlInput1"
-                        placeholder="Mã bưu chính"
-                    />
-				  <v-multi-select
-				  v-model="value"
-				  :options="options"
-				  mode="tags">
+                        </p>
+                        <!-- City -->
+                        <div class="col-md-12">
+                            <label for="citySelect">Tỉnh/Thành phố</label>
 
-				  </v-multi-select>
+                            <select
+                                v-model="selectedCity"
+                                class="custom-select"
+                                id="citySelect"
+                                required
+                                @blur="cityTouched = true"
+                                :class="{ 'is-invalid': cityTouched && !selectedCity }"
+                            >
+                                <option disabled value="">Lựa chọn Tỉnh / Thành phố</option>
+                                <option v-for="city in cities" :key="city">{{ city }}</option>
+                            </select>
+
+                            <div class="invalid-feedback" v-if="cityTouched && !selectedCity">
+                                Bạn chưa chọn thành phố.
+                            </div>
+                        </div>
+                        <!-- District -->
+                        <div class="col-md-12">
+                            <label for="districtSelect">Thị xã / Quận / Huyện</label>
+                            <select
+                                v-model="selectedDistrict"
+                                class="custom-select"
+                                id="districtSelect"
+                                required
+                                @blur="districtTouched = true"
+                                :class="{ 'is-invalid': districtTouched && !selectedDistrict }"
+                            >
+                                <option disabled value="">Lựa chọn Thị xã / Quận / Huyện</option>
+                                <option v-for="district in districts" :key="district">
+                                    {{ district }}
+                                </option>
+                            </select>
+                            <div
+                                class="invalid-feedback"
+                                v-if="districtTouched && !selectedDistrict"
+                            >
+                                Bạn chưa chọn Thị xã / Quận / Huyện.
+                            </div>
+                        </div>
+                        <!-- Ward -->
+                        <div class="col-md-12">
+                            <label for="wardSelect">Xã / Phường / Thị trấn</label>
+                            <select
+                                v-model="selectedWard"
+                                class="custom-select"
+                                id="wardSelect"
+                                required
+                                @blur="wardTouched = true"
+                                :class="{ 'is-invalid': wardTouched && !selectedWard }"
+                            >
+                                <option disabled value="">Lựa chọn Xã / Phường / Thị trấn</option>
+                                <option v-for="ward in wards" :key="ward">{{ ward }}</option>
+                            </select>
+                            <div class="invalid-feedback" v-if="wardTouched && !selectedWard">
+                                Bạn chưa chọn Xã / Phường / Thị trấn.
+                            </div>
+                        </div>
+                        <!-- Category -->
+                        <div class="col-md-12">
+                            <label for="CategorySelect">Hình thức Homestay</label>
+                            <v-multi-select v-model="value" :options="options" mode="tags">
+                            </v-multi-select>
+                        </div>
+                    </div>
                 </div>
+                <button type="submit" class="btn btn-primary">Đăng ký</button>
             </form>
         </div>
-        <router-link :to="{ name: 'inforroom' }" class="text-decoration-none">
-            <button class="">Tiếp tục</button>
-        </router-link>
     </div>
 </template>
-<script>
-//   import Multiselect from '@vueform/multiselect/dist/multiselect.vue2.js'
 
-  export default {
+<script>
+import { ref } from 'vue';
+
+export default {
     data() {
-      return {
-        value: null,
-        options: [
-          'Batman',
-          'Robin',
-          'Joker',
-        ]
-      }
-    }
-  }
+        return {
+            value: null,
+            options: [
+                'Batman',
+                'Robin',
+                'Joker',
+                'District 1',
+                'District 2',
+                'District 3',
+                'District 4',
+                'District 5',
+            ],
+        };
+    },
+
+    setup() {
+        const homestayName = ref('');
+        const selectedCity = ref('');
+        const selectedDistrict = ref('');
+        const selectedWard = ref('');
+        const selectedCategory = ref('');
+
+        const homestayNameTouched = ref(false);
+        const cityTouched = ref(false);
+        const districtTouched = ref(false);
+        const wardTouched = ref(false);
+        const categoryTouched = ref(false);
+
+        const submitForm = () => {
+            homestayNameTouched.value = true;
+            cityTouched.value = true;
+            districtTouched.value = true;
+            wardTouched.value = true;
+
+            if (
+                !homestayName.value ||
+                !selectedCity.value ||
+                !selectedDistrict.value ||
+                !selectedWard.value
+            ) {
+                return;
+            }
+
+            // Handle form submission
+            console.log('Form submitted successfully');
+        };
+
+        return {
+            homestayName,
+            selectedCity,
+            selectedDistrict,
+            selectedWard,
+            selectedCategory,
+            homestayNameTouched,
+            cityTouched,
+            districtTouched,
+            wardTouched,
+            categoryTouched,
+            submitForm,
+            cities: ref([
+                'Batman',
+                'Robin',
+                'Joker',
+                'District 1',
+                'District 2',
+                'District 3',
+                'District 4',
+                'District 5',
+                'New York',
+                'Los Angeles',
+                'Chicago',
+                'Houston',
+                'Phoenix',
+                // Add more cities as needed
+            ]),
+            districts: ref([
+                'District 1',
+                'District 2',
+                'District 3',
+                'District 4',
+                'District 5',
+                // Add more districts as needed
+            ]),
+            wards: ref([
+                'Ward 1',
+                'Ward 2',
+                'Ward 3',
+                'Ward 4',
+                'Ward 5',
+                // Add more wards as needed
+            ]),
+        };
+    },
+};
 </script>
+
+<style scoped>
+.invalid-feedback {
+    display: block;
+}
+.is-invalid {
+    border-color: #dc3545;
+}
+.option {
+    height: 10px;
+    overflow: auto;
+}
+</style>
