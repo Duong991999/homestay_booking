@@ -29,68 +29,43 @@
                         <!-- City -->
                         <div class="col-md-12">
                             <label for="citySelect">Tỉnh/Thành phố</label>
-
-                            <select
+                            <v-multi-select
                                 v-model="selectedCity"
-                                class="custom-select"
+                                :options="cities"
+                                mode="single"
                                 id="citySelect"
                                 required
-                                @blur="cityTouched = true"
-                                :class="{ 'is-invalid': cityTouched && !selectedCity }"
                             >
-                                <option disabled value="">Lựa chọn Tỉnh / Thành phố</option>
-                                <option v-for="city in cities" :key="city">{{ city }}</option>
-                            </select>
-
-                            <div class="invalid-feedback" v-if="cityTouched && !selectedCity">
-                                Bạn chưa chọn thành phố.
-                            </div>
+                            </v-multi-select>
                         </div>
                         <!-- District -->
                         <div class="col-md-12">
                             <label for="districtSelect">Thị xã / Quận / Huyện</label>
-                            <select
+                            <v-multi-select
                                 v-model="selectedDistrict"
-                                class="custom-select"
-                                id="districtSelect"
+                                :options="districts"
+                                mode="single"
+                                id="citySelect"
                                 required
-                                @blur="districtTouched = true"
-                                :class="{ 'is-invalid': districtTouched && !selectedDistrict }"
                             >
-                                <option disabled value="">Lựa chọn Thị xã / Quận / Huyện</option>
-                                <option v-for="district in districts" :key="district">
-                                    {{ district }}
-                                </option>
-                            </select>
-                            <div
-                                class="invalid-feedback"
-                                v-if="districtTouched && !selectedDistrict"
-                            >
-                                Bạn chưa chọn Thị xã / Quận / Huyện.
-                            </div>
+                            </v-multi-select>
                         </div>
                         <!-- Ward -->
                         <div class="col-md-12">
                             <label for="wardSelect">Xã / Phường / Thị trấn</label>
-                            <select
+                            <v-multi-select
                                 v-model="selectedWard"
-                                class="custom-select"
+                                :options="wards"
+                                mode="single"
                                 id="wardSelect"
                                 required
-                                @blur="wardTouched = true"
-                                :class="{ 'is-invalid': wardTouched && !selectedWard }"
                             >
-                                <option disabled value="">Lựa chọn Xã / Phường / Thị trấn</option>
-                                <option v-for="ward in wards" :key="ward">{{ ward }}</option>
-                            </select>
-                            <div class="invalid-feedback" v-if="wardTouched && !selectedWard">
-                                Bạn chưa chọn Xã / Phường / Thị trấn.
-                            </div>
+                            </v-multi-select>
                         </div>
                         <!-- Category -->
                         <div class="col-md-12">
                             <label for="CategorySelect">Hình thức Homestay</label>
-                            <v-multi-select v-model="value" :options="options" mode="tags">
+                            <v-multi-select v-model="value" :options="options" mode="tags" required>
                             </v-multi-select>
                         </div>
                     </div>
@@ -107,6 +82,9 @@ import { ref } from 'vue';
 export default {
     data() {
         return {
+            selectedCity: null,
+            selectedDistrict: null,
+            selectedWard: null,
             value: null,
             options: [
                 'Batman',
@@ -118,54 +96,7 @@ export default {
                 'District 4',
                 'District 5',
             ],
-        };
-    },
-
-    setup() {
-        const homestayName = ref('');
-        const selectedCity = ref('');
-        const selectedDistrict = ref('');
-        const selectedWard = ref('');
-        const selectedCategory = ref('');
-
-        const homestayNameTouched = ref(false);
-        const cityTouched = ref(false);
-        const districtTouched = ref(false);
-        const wardTouched = ref(false);
-        const categoryTouched = ref(false);
-
-        const submitForm = () => {
-            homestayNameTouched.value = true;
-            cityTouched.value = true;
-            districtTouched.value = true;
-            wardTouched.value = true;
-
-            if (
-                !homestayName.value ||
-                !selectedCity.value ||
-                !selectedDistrict.value ||
-                !selectedWard.value
-            ) {
-                return;
-            }
-
-            // Handle form submission
-            console.log('Form submitted successfully');
-        };
-
-        return {
-            homestayName,
-            selectedCity,
-            selectedDistrict,
-            selectedWard,
-            selectedCategory,
-            homestayNameTouched,
-            cityTouched,
-            districtTouched,
-            wardTouched,
-            categoryTouched,
-            submitForm,
-            cities: ref([
+            cities: [
                 'Batman',
                 'Robin',
                 'Joker',
@@ -180,23 +111,23 @@ export default {
                 'Houston',
                 'Phoenix',
                 // Add more cities as needed
-            ]),
-            districts: ref([
+            ],
+            districts: [
                 'District 1',
                 'District 2',
                 'District 3',
                 'District 4',
                 'District 5',
                 // Add more districts as needed
-            ]),
-            wards: ref([
+            ],
+            wards: [
                 'Ward 1',
                 'Ward 2',
                 'Ward 3',
                 'Ward 4',
                 'Ward 5',
                 // Add more wards as needed
-            ]),
+            ],
         };
     },
 };
@@ -208,9 +139,5 @@ export default {
 }
 .is-invalid {
     border-color: #dc3545;
-}
-.option {
-    height: 10px;
-    overflow: auto;
 }
 </style>
