@@ -10,10 +10,9 @@
                         id="homestayName"
                         placeholder="Tên Homestay"
                         v-model="homestayName"
-                        @blur="homestayNameTouched = true"
-                        :class="{ 'is-invalid': homestayNameTouched && !homestayName }"
+                        :class="{ 'is-invalid': false}"
                     />
-                    <div class="invalid-feedback" v-if="homestayNameTouched && !homestayName">
+                    <div class="invalid-feedback" v-if=" false">
                         Bạn chưa nhập tên Homestay.
                     </div>
                 </div>
@@ -31,10 +30,11 @@
                             <label for="citySelect">Tỉnh/Thành phố</label>
                             <v-multi-select
                                 v-model="selectedCity"
-                                :options="cities"
+                                :options="cityOptions"
                                 mode="single"
                                 id="citySelect"
                                 required
+								@change="selectedDistrict = ''"
                             >
                             </v-multi-select>
                         </div>
@@ -43,9 +43,10 @@
                             <label for="districtSelect">Thị xã / Quận / Huyện</label>
                             <v-multi-select
                                 v-model="selectedDistrict"
-                                :options="districts"
+                                :options="getDistrictOptions"
                                 mode="single"
                                 id="citySelect"
+								@change="selectedWard = ''"
                                 required
                             >
                             </v-multi-select>
@@ -55,7 +56,7 @@
                             <label for="wardSelect">Xã / Phường / Thị trấn</label>
                             <v-multi-select
                                 v-model="selectedWard"
-                                :options="wards"
+                                :options="getWardOptions"
                                 mode="single"
                                 id="wardSelect"
                                 required
@@ -77,11 +78,13 @@
 </template>
 
 <script>
-import { ref } from 'vue';
+import treeAddress from '@/address_tree.json';
 
 export default {
     data() {
         return {
+			homestayName: null,
+			cityOptions: this.getOptions(treeAddress),
             selectedCity: null,
             selectedDistrict: null,
             selectedWard: null,
@@ -130,6 +133,32 @@ export default {
             ],
         };
     },
+	methods:{
+		getOptions(objOptions){
+			let cityOptions = [];
+
+			for(let key in objOptions){
+				cityOptions.push({
+					value: key.toString(),
+					label: objOptions[key]['name']
+				})
+			}
+			return cityOptions
+		}
+	},
+	computed:{
+		getDistrictOptions(){
+			return this.selectedCity 
+			? this.getOptions(treeAddress[this.selectedCity]['quan-huyen'] ?? []) 
+			: [];
+		},
+		getWardOptions(){
+			return (this.selectedDistrict && this.selectedCity)
+			? this.getOptions(treeAddress[this.selectedCity]['quan-huyen'][this.selectedDistrict]['xa-phuong'] ?? []) 
+			: [];
+		}
+	}
+
 };
 </script>
 
