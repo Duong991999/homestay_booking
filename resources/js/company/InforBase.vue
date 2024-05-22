@@ -18,10 +18,9 @@
                     >
                     <div>
                         <p>
-							Chúng tôi có thể gửi thư để xác nhận vị trí chỗ nghỉ của Quý vị nên hãy
-                            đảm bảo cung cấp địa chỉ chính xác thông tin này sẽ khó thay đổi sau
-                            đó.
-						</p>
+                            Chúng tôi có thể gửi thư để xác nhận vị trí chỗ nghỉ của Quý vị nên hãy
+                            đảm bảo cung cấp địa chỉ chính xác thông tin này sẽ khó thay đổi sau đó.
+                        </p>
                         <h6>Thành phố</h6>
                         <input
                             type="email"
@@ -44,12 +43,8 @@
                         id="exampleFormControlInput1"
                         placeholder="Mã bưu chính"
                     />
-				  <v-multi-select
-				  v-model="value"
-				  :options="options"
-				  mode="tags">
-
-				  </v-multi-select>
+                    <v-multi-select v-model="value" :options="options" mode="tags">
+                    </v-multi-select>
                 </div>
             </form>
         </div>
@@ -61,16 +56,12 @@
 <script>
 //   import Multiselect from '@vueform/multiselect/dist/multiselect.vue2.js'
 
-  export default {
+export default {
     data() {
-      return {
-        value: null,
-        options: [
-          'Batman',
-          'Robin',
-          'Joker',
-        ]
-      }
-    }
-  }
+        return {
+            value: null,
+            options: ['Batman', 'Robin', 'Joker'],
+        };
+    },
+};
 </script>
