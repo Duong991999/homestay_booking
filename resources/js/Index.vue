@@ -134,7 +134,6 @@ export default {
 .navbar-brand {
     font-size: 30px;
     color: rgb(237, 195, 169);
-    color: rgb(237, 195, 169);
     justify-content: center;
 }
 .navbar-login {
