@@ -5,12 +5,18 @@ import Bookables from '@/bookables/Bookables.vue';
 import Review from '@/review/Review.vue';
 import Welcome from '@/auth/Welcome.vue';
 import Category from '@/company/Category';
+import Filter from '@/Auth/Filter';
 
 const routes = [
     {
         path: '/',
         component: Bookables,
         name: 'home',
+    },
+    {
+        path: '/filter',
+        component: Filter,
+        name: 'filter',
     },
     {
         path: '/auth/welcome',
