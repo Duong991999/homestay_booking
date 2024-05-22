@@ -55,6 +55,12 @@ const routes = [
         name: 'category',
     },
     {
+        path: '/company/homestay/index',
+        component: require('@/company/homestay/Index.vue').default,
+        name: 'company.homestay.index',
+    },
+
+    {
         path: '/company/inforbase',
         component: require('@/company/InforBase.vue').default,
         name: 'inforbase',
