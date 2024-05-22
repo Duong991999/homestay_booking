@@ -40,6 +40,7 @@
                     </div>
                     <div class="col-sm-4">
                         <div class="row d-flex justify-content-around">
+                            <!-- Button trigger modal -->
                             <button
                                 href="#"
                                 class="router-link-active router-link-exact-active btn btn-warning mb-0"
@@ -47,13 +48,13 @@
                             >
                                 Edit
                             </button>
-                            <a
+                            <button
                                 href="#"
                                 class="router-link-active router-link-exact-active btn btn-danger mb-0"
-                                @click="deleteItem(item)"
+                                @click="startDelete(item)"
                             >
                                 Delete
-                            </a>
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -61,35 +62,59 @@
         </div>
 
         <!-- Edit Modal -->
-        <div v-if="isEditModalVisible" class="modal-overlay">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="editModalLabel">Edit Item</h5>
-                        <button type="button" class="btn-close" @click="cancelEdit"></button>
-                    </div>
-                    <div class="modal-body">
-                        <div class="mb-3">
-                            <label for="itemName" class="form-label">Name</label>
-                            <input
-                                v-model="editedItem.name"
-                                type="text"
-                                class="form-control"
-                                id="itemName"
-                            />
+        <transition name="modal-slide-fade">
+            <div v-if="isEditModalVisible" class="modal-overlay">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="editModalLabel">Edit Item</h5>
                         </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" @click="cancelEdit">
-                            Cancel
-                        </button>
-                        <button type="button" class="btn btn-primary" @click="saveEdit">
-                            Save
-                        </button>
+                        <div class="modal-body">
+                            <div class="mb-3">
+                                <label for="itemName" class="form-label">Name</label>
+                                <input
+                                    v-model="editedItem.name"
+                                    type="text"
+                                    class="form-control"
+                                    id="itemName"
+                                />
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" @click="cancelEdit">
+                                Cancel
+                            </button>
+                            <button type="button" class="btn btn-primary" @click="saveEdit">
+                                Save
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </transition>
+        <!-- Delete Modal -->
+        <transition name="modal-slide-fade">
+            <div v-if="isDeleteModalVisible" class="modal-overlay">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="deleteModalLabel">Delete Item</h5>
+                        </div>
+                        <div class="modal-body">
+                            <p>Bạn xác nhận xóa Homestay này chứ?</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" @click="cancelDelete">
+                                Cancel
+                            </button>
+                            <button type="button" class="btn btn-danger" @click="confirmDelete">
+                                Delete
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </transition>
     </div>
 </template>
 <script>
@@ -102,7 +127,8 @@ export default {
                 id: '',
                 name: '',
             }, // Track the edited item
-            isEditModalVisible: false, // Track modal visibility
+            isEditModalVisible: false,
+            isDeleteModalVisible: false, // Track modal visibility
         };
     },
     mounted() {
@@ -146,9 +172,28 @@ export default {
             this.selectedItem = null;
             this.isEditModalVisible = false; // Hide the modal
         },
-        deleteItem(item) {
-            console.log('Delete', item);
-            // Implement logic to delete item
+        startDelete(item) {
+            this.selectedItem = item; // Track the item to be deleted
+            this.isDeleteModalVisible = true; // Show the delete modal
+        },
+        async confirmDelete() {
+            try {
+                await axios.post(`/api/admin/category/delete`);
+                console.log('Item deleted');
+
+                const index = this.items.findIndex((item) => item.id === this.selectedItem.id);
+                if (index !== -1) {
+                    this.items.splice(index, 1); // Remove the item from the array
+                }
+                this.selectedItem = null; // Reset selectedItem
+                this.isDeleteModalVisible = false; // Hide the delete modal
+            } catch (error) {
+                console.error('Error deleting item:', error);
+            }
+        },
+        cancelDelete() {
+            this.selectedItem = null;
+            this.isDeleteModalVisible = false; // Hide the delete modal
         },
     },
 };
@@ -173,5 +218,14 @@ export default {
     width: 100%;
     background: white;
     border-radius: 5px;
+}
+.modal-slide-fade-enter-active,
+.modal-slide-fade-leave-active {
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+.modal-slide-fade-enter,
+.modal-slide-fade-leave-to /* .modal-slide-fade-leave-active in <2.1.8 */ {
+    opacity: 0;
+    transform: translateY(-20px);
 }
 </style>
