@@ -5,6 +5,7 @@ import Bookables from '@/bookables/Bookables.vue';
 import Review from '@/review/Review.vue';
 import Welcome from '@/auth/Welcome.vue';
 import Category from '@/company/Category';
+import Filter from '@/auth/Filter';
 
 const routes = [
     {
@@ -27,6 +28,11 @@ const routes = [
         path: '/review/:id',
         component: Review,
         name: 'review',
+    },
+    {
+        path: '/filter',
+        component: Filter,
+        name: 'filter',
     },
     {
         path: '/basket',
