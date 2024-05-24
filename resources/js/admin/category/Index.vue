@@ -101,7 +101,7 @@
                             <h5 class="modal-title" id="deleteModalLabel">Delete Item</h5>
                         </div>
                         <div class="modal-body">
-                            <p>Bạn xác nhận xóa Homestay này chứ?</p>
+                            <p>Bạn xác nhận xóa Category Homestay này chứ?</p>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" @click="cancelDelete">
