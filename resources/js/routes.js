@@ -6,6 +6,8 @@ import Review from '@/review/Review.vue';
 import Welcome from '@/auth/Welcome.vue';
 import Category from '@/company/Category';
 import Filter from '@/Auth/Filter';
+import Amenities from '@/bookable/Amenities.vue';
+import Room from '@/bookable/Room.vue';
 
 const routes = [
     {
@@ -25,9 +27,24 @@ const routes = [
     },
 
     {
-        path: '/bookable/:id',
+        path: '/bookable',
         component: Bookable,
         name: 'bookable',
+    },
+    {
+        path: '/amenities',
+        component: Amenities,
+        name: 'amenitiese',
+    },
+    {
+        path: '/room',
+        component: Room,
+        name: 'room',
+    },
+    {
+        path: '/',
+        component: Room,
+        name: 'room',
     },
     {
         path: '/review/:id',
