@@ -93,6 +93,16 @@ const routes = [
         component: require('@/admin/category/Index.vue').default,
         name: 'category.index',
     },
+    {
+        path: '/company/bookings/index',
+        component: require('@/company/bookings/Index.vue').default,
+        name: 'company.booking.index',
+    },
+    {
+        path: '/company/guests/index',
+        component: require('@/company/guests/Index.vue').default,
+        name: 'company.guests.index',
+    },
 ];
 
 const router = new VueRouter({
