@@ -8,6 +8,7 @@ import Category from '@/company/Category';
 import Filter from '@/Auth/Filter';
 import Amenities from '@/bookable/Amenities.vue';
 import Room from '@/bookable/Room.vue';
+import InforRoom from '@/company/InforRoom.vue';
 
 const routes = [
     {
@@ -37,9 +38,9 @@ const routes = [
         name: 'amenitiese',
     },
     {
-        path: '/room',
-        component: Room,
-        name: 'room',
+        path: '/inforroom',
+        component: InforRoom,
+        name: 'inforroom',
     },
     {
         path: '/',
