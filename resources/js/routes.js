@@ -103,6 +103,11 @@ const routes = [
         component: require('@/company/guests/Index.vue').default,
         name: 'company.guests.index',
     },
+    {
+        path: '/company/index',
+        component: require('@/company/Index.vue').default,
+        name: 'company.index',
+    },
 ];
 
 const router = new VueRouter({

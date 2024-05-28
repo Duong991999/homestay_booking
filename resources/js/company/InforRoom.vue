@@ -111,7 +111,7 @@
             </div>
         </div>
 
-        <div class="card shadow w-100" v-for="(room, index) in rooms" :key="index">
+        <div class="card shadow w-100" v-for="(typeroom, index) in typerooms" :key="index">
             <div
                 class="card-header border-bottom d-flex justify-content-between align-items-center"
                 style="
@@ -139,7 +139,7 @@
                                 <input
                                     class="form-control"
                                     type="text"
-                                    v-model="room.name"
+                                    v-model="typeroom.name"
                                     placeholder="Enter name"
                                 />
                             </div>
@@ -175,7 +175,7 @@
                                 <input
                                     class="form-control"
                                     type="text"
-                                    v-model="room.price"
+                                    v-model="typeroom.price"
                                     placeholder="Enter price"
                                 />
                             </div>
@@ -185,12 +185,74 @@
                     <div class="col-md-6">
                         <label class="form-label">Additional info</label>
                     </div>
+
+                    <!---list-->
+                    <div id="app" class="col-md-12">
+                        <div class="card w-100 m-0">
+                            <div class="card-body">
+                                <div class="container">
+                                    <div class="bg-light rounded d-none d-lg-block">
+                                        <div class="row g-4">
+                                            <div class="col-sm-6 d-flex justify-content-center">
+                                                <h6 class="mb-0">Name</h6>
+                                            </div>
+                                            <div class="col-sm-6 d-flex justify-content-center">
+                                                <h6 class="mb-0">Action</h6>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div
+                                        v-for="(room, index) in rooms"
+                                        :key="index"
+                                        class="row g-4 mt-2"
+                                    >
+                                        <div class="col-sm-6 d-flex justify-content-center">
+                                            <small class="d-block d-lg-none">Name</small>
+                                            <div class="d-flex align-items-center">
+                                                <div class="avatar avatar-xs flex-shrink-0"></div>
+                                                <div class="ms-2 d-flex justify-content-center">
+                                                    <input
+                                                        v-model="room.name"
+                                                        class="form-control"
+                                                        placeholder="Room Name"
+                                                    />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="row d-flex justify-content-around">
+                                                <button
+                                                    class="btn btn-warning mb-0"
+                                                    @click="startEdit(room)"
+                                                >
+                                                    Edit
+                                                </button>
+                                                <button
+                                                    class="btn btn-danger mb-0"
+                                                    @click="startDelete(index, roomIndex)"
+                                                >
+                                                    Delete
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row g-4 mt-4">
+                                        <div class="col-12 d-flex justify-content-center">
+                                            <button class="btn btn-primary" @click="addRoom(index)">
+                                                Add New Room
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
         <div class="card-body">
             <div class="col-12">
-                <button @click="addRoom" class="btn btn-sm btn-primary-soft mb-0">
+                <button @click="addtypeRoom" class="btn btn-sm btn-primary-soft mb-0">
                     <svg
                         width="1em"
                         height="1em"
@@ -207,7 +269,7 @@
                             d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4"
                         ></path>
                     </svg>
-                    Add New Room
+                    Add New Option Room
                 </button>
             </div>
         </div>
@@ -232,20 +294,37 @@ export default {
                 'Fitness Centre',
                 'Bar',
             ],
-            rooms: [{ name: '', image: '', price: '' }],
+            typerooms: [{ name: '', image: '', price: '', rooms: [] }],
+            rooms: [],
         };
     },
     methods: {
-        addRoom() {
-            this.rooms.push({ name: '', image: '', price: '' });
+        addtypeRoom() {
+            this.typerooms.push({ name: '', image: '', price: '', rooms: [] });
         },
         removeRoom(index) {
-            this.rooms.splice(index, 1);
+            this.typerooms.splice(index, 1);
         },
         onFileChange(event, index) {
             const file = event.target.files[0];
             if (file) {
-                this.rooms[index].image = URL.createObjectURL(file);
+                this.typerooms[index].image = URL.createObjectURL(file);
+            }
+        },
+        addRoom(index) {
+            this.typerooms[index].rooms.push({
+                name: '', // Initialize with empty value
+            });
+        },
+        startEdit(room) {
+            // Logic for editing the room can be implemented here
+            alert(`Editing room: ${room.name}`);
+        },
+        startDelete(typeroomIndex, roomIndex) {
+            // Confirm deletion
+            if (confirm('Are you sure you want to delete this room?')) {
+                // Remove the room from the rooms array of the specified type of room
+                this.typerooms[typeroomIndex].rooms.splice(roomIndex, 1);
             }
         },
     },
