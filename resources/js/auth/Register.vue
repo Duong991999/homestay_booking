@@ -1,5 +1,5 @@
 <template>
-    <div class="row justify-content-center h-100" style="margin-top: 10px">
+    <div class="row justify-content-center h-100" style="margin-top: 80px">
         <div class="col-12">
             <div class="shadow bg-mode rounded-3 overflow-hidden" style="border-radius: 20px">
                 <div class="row g-0 align-items-center">
