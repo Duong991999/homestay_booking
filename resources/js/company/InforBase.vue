@@ -1,5 +1,6 @@
 <template>
     <div class="mx-auto" style="margin-top: 150px">
+        <v-fullloading :loading="loading"></v-fullloading>
         <div class="card shadow w-100" style="border-radius: 20px">
             <!----><!----><!---->
             <div
@@ -22,7 +23,7 @@
                                 type="text"
                                 class="form-control"
                                 placeholder="Tên Homestay"
-                                v-model="homestay.homestayName"
+                                v-model="homestay.name"
                                 :class="[{ 'is-invalid': errorFor('homestayName') }]"
                                 style="height: 40px; border-radius: 10px"
                             />
@@ -42,7 +43,7 @@
                             <div class="col-md-12">
                                 <label for="citySelect">Tỉnh/Thành phố</label>
                                 <v-multi-select
-                                    v-model="homestay.selectedCity"
+                                    v-model="homestay.city_code"
                                     :options="cityOptions"
                                     mode="single"
                                     id="citySelect"
@@ -56,7 +57,7 @@
                             <div class="col-md-12">
                                 <label for="districtSelect">Thị xã / Quận / Huyện</label>
                                 <v-multi-select
-                                    v-model="homestay.selectedDistrict"
+                                    v-model="homestay.district_code"
                                     :options="getDistrictOptions"
                                     mode="single"
                                     id="citySelect"
@@ -70,7 +71,7 @@
                             <div class="col-md-12">
                                 <label for="wardSelect">Xã / Phường / Thị trấn</label>
                                 <v-multi-select
-                                    v-model="homestay.selectedWard"
+                                    v-model="homestay.ward_code"
                                     :options="getWardOptions"
                                     mode="single"
                                     id="wardSelect"
@@ -84,8 +85,8 @@
                             <div class="col-md-12">
                                 <label for="CategorySelect">Hình thức Homestay</label>
                                 <v-multi-select
-                                    v-model="homestay.category"
-                                    :options="options"
+                                    v-model="homestay.category_id"
+                                    :options="categoryOptions"
                                     mode="tags"
                                     style="border-radius: 10px"
                                 >
@@ -134,13 +135,15 @@ export default {
             selectedWard: null,
             loading: false,
             homestay: {
-                homestayName: null,
+                name: null,
                 content: null,
-                selectedCity: null,
-                selectedDistrict: null,
-                selectedWard: null,
-                category: null,
+                city_code: null,
+                district_code: null,
+                ward_code: null,
+                category_id: [],
+				categories: [],
             },
+			categoryOptions:[]
         };
     },
     methods: {
@@ -169,20 +172,38 @@ export default {
     },
     computed: {
         getDistrictOptions() {
-            return this.selectedCity
-                ? this.getOptions(treeAddress[this.selectedCity]['quan-huyen'] ?? [])
+            return this.homestay.city_code
+                ? this.getOptions(treeAddress[this.homestay.city_code]['quan-huyen'] ?? [])
                 : [];
         },
         getWardOptions() {
-            return this.selectedDistrict && this.selectedCity
+            return this.homestay.district_code && this.homestay.city_code
                 ? this.getOptions(
-                      treeAddress[this.selectedCity]['quan-huyen'][this.selectedDistrict][
+                      treeAddress[this.homestay.city_code]['quan-huyen'][this.homestay.district_code][
                           'xa-phuong'
                       ] ?? []
                   )
                 : [];
         },
-    },
+	},
+	async created() {
+		this.loading = true;
+		const responseCategory = await axios.get(`/api/admin/category/index`);
+		this.categoryOptions = responseCategory.data.data.map(category =>{
+			return {
+				value: category.id,
+				label: category.name
+			}
+		})
+		const response = await axios.get(`/api/homestay/show/${this.$route.params.id}`);
+        this.homestay = response.data.data
+		let idList = [];
+		this.homestay.categories.forEach(category => {
+			idList.push(category.id)
+		});
+		this.homestay.category_id = idList
+		this.loading = false;
+	},
 };
 </script>
 
