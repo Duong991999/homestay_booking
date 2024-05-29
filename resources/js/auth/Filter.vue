@@ -20,7 +20,7 @@
                             <span>$ 600</span><span>$ 1500</span>
                         </div>
                         <div>
-                            <vue-slider v-model="value" :enable-cross="false"></vue-slider>
+                            <!-- <vue-slider v-model="value" :enable-cross="false"></vue-slider> -->
                         </div>
                     </div>
                 </div>
@@ -88,7 +88,7 @@
                     <div class="form-size-lg form-control-borderless">
                         <label class="form-label">Homestay Type</label
                         ><!---->
-                        <v-multi-select
+                        <!-- <v-multi-select
                             v-model="selecteCategory"
                             placeholder="Select your character"
                             :options="CategoryOptions"
@@ -100,7 +100,7 @@
                                 height: 46px;
                             "
                         >
-                        </v-multi-select>
+                        </v-multi-select> -->
                     </div>
                 </div>
                 <div class="col-12" style="padding-top: 30px; padding-bottom: 30px">
