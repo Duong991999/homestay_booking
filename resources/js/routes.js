@@ -11,11 +11,7 @@ import Room from '@/bookable/Room.vue';
 import InforRoom from '@/company/InforRoom.vue';
 
 const routes = [
-    {
-        path: '/',
-        component: Bookables,
-        name: 'home',
-    },
+   
     {
         path: '/filter',
         component: Filter,
