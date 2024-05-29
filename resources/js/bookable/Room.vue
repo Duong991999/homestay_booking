@@ -1,0 +1,184 @@
+<template>
+    <div class="card bg-transparent border-0" id="room-options" style="margin-top: 50px">
+        <div class="card-header border-bottom bg-transparent px-0 pt-0">
+            <div class="d-sm-flex justify-content-sm-between align-items-center">
+                <h3 class="mb-2 mb-sm-0 font-weight-bold">Room Options</h3>
+                <div class="col-sm-6 p-0">
+                    <v-multi-select
+                        v-model="selectedRoom"
+                        placeholder="Select Room"
+                        :options="roomOptions"
+                        mode="single"
+                        id="roomSelect"
+                        style="border-radius: 10px"
+                    ></v-multi-select>
+                </div>
+            </div>
+        </div>
+        <div class="card-body pt-4 p-0">
+            <div class="card shadow p-3" v-for="(room, index) in rooms" :key="index">
+                <div class="row g-4">
+                    <div class="col-md-5 position-relative">
+                        <img
+                            :src="room.image"
+                            alt="..."
+                            width="200px"
+                            style="border-radius: 15px"
+                        />
+                        <button
+                            type="button"
+                            class="btn btn-link text-decoration-underline p-0 mb-0 mt-1"
+                            @click="showModal(room)"
+                        >
+                            <svg
+                                width="1em"
+                                height="1em"
+                                viewBox="0 0 16 16"
+                                fill="currentColor"
+                                role="img"
+                                focusable="false"
+                                class="me-1"
+                            >
+                                <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0"></path>
+                                <path
+                                    d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8m8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7"
+                                ></path>
+                            </svg>
+                            View more details
+                        </button>
+                    </div>
+                    <div class="col-md-7">
+                        <div
+                            class="card-body d-flex flex-column h-100"
+                            style="padding-left: 10px; padding-top: 0px; padding-bottom: 0px"
+                        >
+                            <h5 class="card-title">
+                                <a href="#">{{ room.title }}</a>
+                            </h5>
+                            <ul class="nav nav-divider mb-2">
+                                <li
+                                    class="nav-item"
+                                    v-for="(feature, index) in room.features"
+                                    :key="index"
+                                >
+                                    {{ feature }}
+                                </li>
+                                <li class="nav-item">
+                                    <a href="#" class="mb-0 text-primary">More+</a>
+                                </li>
+                            </ul>
+                            <p v-if="room.cancellation" class="text-success mb-0">
+                                {{ room.cancellation }}
+                            </p>
+                            <div
+                                class="d-sm-flex justify-content-sm-between align-items-center mt-auto"
+                            >
+                                <div class="d-flex align-items-center">
+                                    <h5 class="fw-bold mb-0 me-1">{{ room.price }}</h5>
+                                    <span class="mb-0 me-2">/day</span>
+                                    <span class="text-decoration-line-through mb-0">{{
+                                        room.originalPrice
+                                    }}</span>
+                                </div>
+                                <div class="mt-3 mt-sm-0">
+                                    <a href="#" class="btn btn-sm btn-primary mb-0">Select Room</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Modal -->
+            <div
+                class="modal fade"
+                id="detailsModal"
+                tabindex="-1"
+                aria-labelledby="detailsModalLabel"
+                aria-hidden="true"
+            >
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="detailsModalLabel">
+                                {{ modalRoom.title }}
+                            </h5>
+                            <button
+                                type="button"
+                                class="close"
+                                data-dismiss="modal"
+                                aria-label="Close"
+                            >
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <img :src="modalRoom.image" alt="..." class="img-fluid mb-3" />
+                            <p><strong>Features:</strong></p>
+                            <ul>
+                                <li v-for="(feature, index) in modalRoom.features" :key="index">
+                                    {{ feature }}
+                                </li>
+                            </ul>
+                            <p v-if="modalRoom.cancellation" class="text-success">
+                                {{ modalRoom.cancellation }}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>
+
+<script>
+export default {
+    data() {
+        return {
+            selectedRoom: null,
+            roomOptions: ['Vip', 'No Vip'],
+            rooms: [
+                {
+                    image: 'assets/image/slide_home_screens/_1.jpg',
+                    title: 'Luxury Room with Balcony',
+                    features: ['Air Conditioning', 'Wifi', 'Kitchen'],
+                    price: '$750',
+                    originalPrice: '$1000',
+                    cancellation: null,
+                },
+                {
+                    image: 'assets/image/slide_home_screens/_1.jpg',
+                    title: 'Luxury Room with Balcony',
+                    features: ['Air Conditioning', 'Wifi', 'Kitchen'],
+                    price: '$750',
+                    originalPrice: '$1000',
+                    cancellation: 'Free Cancellation till 7 Jan 2022',
+                },
+            ],
+            modalRoom: {},
+        };
+    },
+    methods: {
+        showModal(room) {
+            this.modalRoom = room;
+            const modal = new bootstrap.Modal(document.getElementById('detailsModal'));
+            modal.show();
+        },
+    },
+};
+</script>
+
+<style>
+.card {
+    margin: 0;
+    border-radius: 15px;
+    margin-bottom: 20px;
+}
+.nav-item {
+    font-size: 13px;
+}
+.nav-divider .nav-item + .nav-item:before {
+    content: '•';
+    padding: 0 0.7rem;
+    opacity: 0.8;
+}
+</style>

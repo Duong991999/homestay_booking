@@ -5,6 +5,10 @@ import Bookables from '@/bookables/Bookables.vue';
 import Review from '@/review/Review.vue';
 import Welcome from '@/auth/Welcome.vue';
 import Category from '@/company/Category';
+import Filter from '@/Auth/Filter';
+import Amenities from '@/bookable/Amenities.vue';
+import Room from '@/bookable/Room.vue';
+import InforRoom from '@/company/InforRoom.vue';
 
 const routes = [
     {
@@ -13,15 +17,35 @@ const routes = [
         name: 'home',
     },
     {
+        path: '/filter',
+        component: Filter,
+        name: 'filter',
+    },
+    {
         path: '/auth/welcome',
         component: Welcome,
         name: 'welcome',
     },
 
     {
-        path: '/bookable/:id',
+        path: '/bookable',
         component: Bookable,
         name: 'bookable',
+    },
+    {
+        path: '/amenities',
+        component: Amenities,
+        name: 'amenitiese',
+    },
+    {
+        path: '/inforroom',
+        component: InforRoom,
+        name: 'inforroom',
+    },
+    {
+        path: '/',
+        component: Room,
+        name: 'room',
     },
     {
         path: '/review/:id',
@@ -49,6 +73,12 @@ const routes = [
         name: 'category',
     },
     {
+        path: '/company/homestay/index',
+        component: require('@/company/homestay/Index.vue').default,
+        name: 'company.homestay.index',
+    },
+
+    {
         path: '/company/inforbase',
         component: require('@/company/InforBase.vue').default,
         name: 'inforbase',
@@ -62,6 +92,21 @@ const routes = [
         path: '/admin/category/index',
         component: require('@/admin/category/Index.vue').default,
         name: 'category.index',
+    },
+    {
+        path: '/company/bookings/index',
+        component: require('@/company/bookings/Index.vue').default,
+        name: 'company.booking.index',
+    },
+    {
+        path: '/company/guests/index',
+        component: require('@/company/guests/Index.vue').default,
+        name: 'company.guests.index',
+    },
+    {
+        path: '/company/index',
+        component: require('@/company/Index.vue').default,
+        name: 'company.index',
     },
 ];
 
