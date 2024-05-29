@@ -1,5 +1,5 @@
 require('./bootstrap');
-require('@vueform/multiselect/themes/default.css')
+require('@vueform/multiselect/themes/default.css');
 
 import Vue from 'vue';
 import moment from 'moment';
@@ -13,11 +13,12 @@ import Success from './shared/components/Success.vue';
 import ValidationErrors from './shared/components/ValidationErrors.vue';
 import Loading from './shared/components/Loading.vue';
 import FullLoading from './shared/components/FullScreenLoading.vue';
-import Multiselect from '@vueform/multiselect/dist/multiselect.vue2.js'
+import Multiselect from '@vueform/multiselect/dist/multiselect.vue2.js';
 import storeDefinition from './store';
 import PulseLoader from 'vue-spinner/src/PulseLoader.vue';
 import DotLoader from 'vue-spinner/src/DotLoader.vue';
 import FlashMessage from '@smartweb/vue-flash-message';
+import FooterComponent from './shared/components/Footer.vue';
 
 window.Vue = require('vue');
 Vue.use(VueRouter);
@@ -25,7 +26,7 @@ Vue.use(Vuex);
 Vue.use(FlashMessage);
 
 Vue.filter('fromNow', (value) => moment(value).fromNow());
-
+Vue.component('footer-component', FooterComponent);
 Vue.component('star-rating', StarRating);
 Vue.component('fatal-error', FatalError);
 Vue.component('success', Success);

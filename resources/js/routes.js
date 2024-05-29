@@ -11,11 +11,15 @@ import Room from '@/bookable/Room.vue';
 import InforRoom from '@/company/InforRoom.vue';
 
 const routes = [
-   
     {
         path: '/filter',
         component: Filter,
         name: 'filter',
+    },
+    {
+        path: '/auth/aboutus',
+        component: require('@/auth/AboutUs.vue').default,
+        name: 'auth.aboutus',
     },
     {
         path: '/auth/welcome',
