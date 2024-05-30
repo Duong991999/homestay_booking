@@ -29,7 +29,7 @@ class HomestayController extends Controller
 	}
 
 	public function update(HomestayRequest $request, $id){
-		$data = $this->homestayRepo->update($id, $request->all());
+		$data = $this->homestayRepo->updateDetail($id, $request->all());
 		return $this->success($data);
 	}
 

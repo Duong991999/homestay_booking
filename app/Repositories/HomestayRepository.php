@@ -60,7 +60,7 @@ class HomestayRepository extends BaseRepository implements HomestayRepositoryInt
 				if($attributes['category_id']){
 					$this->model->find($id)->categories()->sync($attributes['category_id']);
 				}
-				if($attributes['delete_file_id']){
+				if($attributes['delete_file_id'] ?? false){
 					File::destroy($attributes['delete_file_id']);
 				}
 				if($attributes['files'] ?? false){
@@ -76,6 +76,7 @@ class HomestayRepository extends BaseRepository implements HomestayRepositoryInt
 						]);
 						$files->push($upload);
 					}
+					$this->model->find($id)->files()->saveMany($files);
 				}
 				return $this->findDetail($id);
 			});
