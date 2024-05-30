@@ -43,6 +43,11 @@ const routes = [
         name: 'inforroom',
     },
     {
+        path: '/bookable/Congratulation',
+        component: require('@/bookable/Congratulation.vue').default,
+        name: 'congratulation',
+    },
+    {
         path: '/',
         component: Room,
         name: 'room',
@@ -88,6 +93,12 @@ const routes = [
         component: require('@/company/InforRoom.vue').default,
         name: 'inforroom',
     },
+    {
+        path: '/company/room/index',
+        component: require('@/company/room/Index.vue').default,
+        name: 'room.index',
+    },
+
     {
         path: '/admin/category/index',
         component: require('@/admin/category/Index.vue').default,
