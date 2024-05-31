@@ -170,7 +170,7 @@ export default {
             }
             return cityOptions;
         },
-        async update() {					
+        async update() {	
             this.loading = true;
 			const formData = new FormData();
 			for (let i = 0; i < this.fileData.files.length; i++) {
@@ -180,6 +180,10 @@ export default {
 			for (let i = 0; i < this.homestay.category_id.length; i++) {
 				let id =this.homestay.category_id[i];
 				formData.append('category_id[' + i + ']', id);
+			}
+			for (let i = 0; i < this.fileData.deleted_id.length; i++) {
+				let file =this.fileData.deleted_id[i];
+				formData.append('delete_file_id[' + i + ']', file);
 			}
 			formData.append('name', this.homestay.name);
 			formData.append('content', this.homestay.content);
