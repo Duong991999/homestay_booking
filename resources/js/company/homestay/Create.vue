@@ -116,7 +116,7 @@
                     </div>
                     <button
                         type="submit"
-                        class="btn btn-primary"
+                        class="btn btn-primary btn-submit  "
                         :disabled="loading"
                         @click.prevent="create"
                     >
@@ -240,5 +240,11 @@ export default {
 }
 .col-md-12 {
     margin-bottom: 20px;
+}
+.btn-submit {
+    position: absolute;
+    bottom: 15px;
+    right: 15px;
+    border-radius: 10px;
 }
 </style>

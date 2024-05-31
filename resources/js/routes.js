@@ -78,8 +78,8 @@ const routes = [
         name: 'company.homestay.index',
     },
     {
-        path: '/company/inforbase/:id',
-        component: require('@/company/InforBase.vue').default,
+        path: '/company/homestay/edit/:id',
+        component: require('@/company/homestay/Edit.vue').default,
         name: 'inforbase',
     },
     {

@@ -130,7 +130,7 @@
 
 <script>
 import treeAddress from '@/address_tree.json';
-import validationErrors from '../shared/mixins/validationErrors';
+import validationErrors from '@/shared/mixins/validationErrors';
 
 export default {
     mixins: [validationErrors],
