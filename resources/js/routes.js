@@ -1,13 +1,13 @@
 import VueRouter from 'vue-router';
 import Basket from '@/basket/Basket.vue';
-import Bookable from '@/bookable/Bookable.vue';
+import Detail from '@/homestay/Detail.vue';
 import Bookables from '@/bookables/Bookables.vue';
 import Review from '@/review/Review.vue';
 import Welcome from '@/auth/Welcome.vue';
 import Category from '@/company/Category';
 import Filter from '@/Auth/Filter';
-import Amenities from '@/bookable/Amenities.vue';
-import Room from '@/bookable/Room.vue';
+import Amenities from '@/homestay/Amenities.vue';
+import Room from '@/homestay/Room.vue';
 import InforRoom from '@/company/InforRoom.vue';
 
 const routes = [
@@ -28,14 +28,20 @@ const routes = [
     },
 
     {
-        path: '/bookable',
-        component: Bookable,
-        name: 'bookable',
+        path: '/detail',
+        component: Detail,
+        name: 'detail',
     },
     {
         path: '/amenities',
         component: Amenities,
         name: 'amenitiese',
+    },
+
+    {
+        path: '/room',
+        component: require('@/homestay/Room.vue').default,
+        name: 'room',
     },
     {
         path: '/inforroom',
@@ -43,8 +49,8 @@ const routes = [
         name: 'inforroom',
     },
     {
-        path: '/bookable/Congratulation',
-        component: require('@/bookable/Congratulation.vue').default,
+        path: '/homestay/Congratulation',
+        component: require('@/homestay/Congratulation.vue').default,
         name: 'congratulation',
     },
     {
