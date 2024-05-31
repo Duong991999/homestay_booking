@@ -1,6 +1,6 @@
 <template>
     <div class="mx-auto" style="margin-top: 150px">
-        <v-fullloading :loading="loading"></v-fullloading>
+        <!-- <v-fullloading :loading="loading"></v-fullloading> -->
         <div class="card shadow w-100" style="border-radius: 20px">
             <!----><!----><!---->
             <div
@@ -11,7 +11,7 @@
                     background-color: #fff;
                 "
             >
-                <h4 class="mb-0 title">Cập nhập Homestay</h4>
+                <h4 class="mb-0 title">Tạo Homestay</h4>
             </div>
 
             <div class="card-body">
@@ -118,9 +118,9 @@
                         type="submit"
                         class="btn btn-primary"
                         :disabled="loading"
-                        @click.prevent="update"
+                        @click.prevent="create"
                     >
-                        Cập nhật
+                        Đăng kí
                     </button>
                 </form>
             </div>
@@ -130,7 +130,7 @@
 
 <script>
 import treeAddress from '@/address_tree.json';
-import validationErrors from '../shared/mixins/validationErrors';
+import validationErrors from '@/shared/mixins/validationErrors';
 
 export default {
     mixins: [validationErrors],
@@ -154,10 +154,6 @@ export default {
                 files: [],
             },
             categoryOptions: [],
-            fileData: {
-                files: [],
-                deleted_id: [],
-            },
             message_errors: '',
         };
     },
@@ -173,28 +169,11 @@ export default {
             }
             return cityOptions;
         },
-        async update() {
+        async create() {
+            echo('1');
             this.loading = true;
-            const formData = new FormData();
-            for (let i = 0; i < this.fileData.files.length; i++) {
-                let file = this.fileData.files[i];
-                formData.append('files[' + i + ']', file);
-            }
-            for (let i = 0; i < this.homestay.category_id.length; i++) {
-                let id = this.homestay.category_id[i];
-                formData.append('category_id[' + i + ']', id);
-            }
-            formData.append('name', this.homestay.name);
-            formData.append('content', this.homestay.content);
-            formData.append('city_code', this.homestay.city_code);
-            formData.append('district_code', this.homestay.district_code);
-            formData.append('ward_code', this.homestay.ward_code);
-
             try {
-                const response = await axios.post(
-                    `/api/homestay/update/${this.$route.params.id}`,
-                    formData
-                );
+                const response = await axios.post(`/api/homestay/store`, this.homestay);
                 if (response.data.success) {
                     this.flashMessage.success({
                         title: 'Cập nhật thành công',
@@ -212,15 +191,6 @@ export default {
         },
         handleFileChange(obj) {
             this.fileData = obj;
-        },
-        async loadHomestay() {
-            const response = await axios.get(`/api/homestay/show/${this.$route.params.id}`);
-            this.homestay = response.data.data;
-            let idList = [];
-            this.homestay.categories.forEach((category) => {
-                idList.push(category.id);
-            });
-            this.homestay.category_id = idList;
         },
         async loadCategoryOptions() {
             const responseCategory = await axios.get(`/api/admin/category/index`);
@@ -251,7 +221,6 @@ export default {
     async created() {
         this.loading = true;
         await this.loadCategoryOptions();
-        await this.loadHomestay();
         this.loading = false;
     },
 };
