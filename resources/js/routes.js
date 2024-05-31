@@ -83,6 +83,11 @@ const routes = [
         name: 'inforbase',
     },
     {
+        path: '/company/inforbase',
+        component: require('@/company/InforBase.vue').default,
+        name: 'createHomestay',
+    },
+    {
         path: '/company/inforroom',
         component: require('@/company/InforRoom.vue').default,
         name: 'inforroom',

@@ -11,7 +11,7 @@
                     background-color: #fff;
                 "
             >
-                <h4 class="mb-0 title">Tạo Homestay</h4>
+                <h4 class="mb-0 title">{{ title }}</h4>
             </div>
 
             <div class="card-body">
@@ -155,7 +155,9 @@ export default {
 				files:[],
 				deleted_id:[]
 			},
-			message_errors: ''
+			message_errors: '',
+            isCreate: true,
+            title: null
         };
     },
     methods: {
@@ -246,9 +248,19 @@ export default {
         },
 	},
 	async created() {
+        if(this.$route.params.id){
+            this.isCreate = false;
+        }
 		this.loading = true;
 		await this.loadCategoryOptions();
-		await this.loadHomestay();
+
+        if(this.isCreate){
+            this.title = 'create';
+        }else{
+            this.title = 'Update';
+            await this.loadHomestay();
+
+        }
 		this.loading = false;
 	},
 };
