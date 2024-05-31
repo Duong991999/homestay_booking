@@ -120,6 +120,11 @@ const routes = [
         component: require('@/company/Index.vue').default,
         name: 'company.index',
     },
+    {
+        path: '/profile',
+        component: require('@/profile/Index.vue').default,
+        name: 'profile',
+    },
 ];
 
 const router = new VueRouter({
