@@ -22,7 +22,7 @@ const routes = [
         name: 'auth.aboutus',
     },
     {
-        path: '/auth/welcome',
+        path: '/',
         component: Welcome,
         name: 'welcome',
     },
@@ -46,11 +46,6 @@ const routes = [
         path: '/bookable/Congratulation',
         component: require('@/bookable/Congratulation.vue').default,
         name: 'congratulation',
-    },
-    {
-        path: '/',
-        component: Room,
-        name: 'room',
     },
     {
         path: '/review/:id',
