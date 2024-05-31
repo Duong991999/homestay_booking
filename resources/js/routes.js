@@ -1,41 +1,47 @@
 import VueRouter from 'vue-router';
 import Basket from '@/basket/Basket.vue';
-import Bookable from '@/bookable/Bookable.vue';
+import Detail from '@/homestay/Detail.vue';
 import Bookables from '@/bookables/Bookables.vue';
 import Review from '@/review/Review.vue';
 import Welcome from '@/auth/Welcome.vue';
 import Category from '@/company/Category';
 import Filter from '@/Auth/Filter';
-import Amenities from '@/bookable/Amenities.vue';
-import Room from '@/bookable/Room.vue';
+import Amenities from '@/homestay/Amenities.vue';
+import Room from '@/homestay/Room.vue';
 import InforRoom from '@/company/InforRoom.vue';
 
 const routes = [
-    {
-        path: '/',
-        component: Bookables,
-        name: 'home',
-    },
     {
         path: '/filter',
         component: Filter,
         name: 'filter',
     },
     {
-        path: '/auth/welcome',
+        path: '/auth/aboutus',
+        component: require('@/auth/AboutUs.vue').default,
+        name: 'auth.aboutus',
+    },
+    {
+        path: '/',
         component: Welcome,
         name: 'welcome',
     },
 
     {
-        path: '/bookable',
-        component: Bookable,
-        name: 'bookable',
+        path: '/detail',
+        component: Detail,
+        name: 'detail',
     },
     {
         path: '/amenities',
         component: Amenities,
         name: 'amenitiese',
+    },
+
+    {
+        path: '/room',
+        component: require('@/homestay/Room.vue').default,
+        name: 'room',
     },
     {
         path: '/inforroom',
@@ -43,9 +49,9 @@ const routes = [
         name: 'inforroom',
     },
     {
-        path: '/',
-        component: Room,
-        name: 'room',
+        path: '/homestay/Congratulation',
+        component: require('@/homestay/Congratulation.vue').default,
+        name: 'congratulation',
     },
     {
         path: '/review/:id',
@@ -88,6 +94,12 @@ const routes = [
         name: 'inforroom',
     },
     {
+        path: '/company/room/index',
+        component: require('@/company/room/Index.vue').default,
+        name: 'room.index',
+    },
+
+    {
         path: '/admin/category/index',
         component: require('@/admin/category/Index.vue').default,
         name: 'category.index',
@@ -106,6 +118,11 @@ const routes = [
         path: '/company/index',
         component: require('@/company/Index.vue').default,
         name: 'company.index',
+    },
+    {
+        path: '/profile',
+        component: require('@/profile/Index.vue').default,
+        name: 'profile',
     },
 ];
 

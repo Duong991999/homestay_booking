@@ -6,15 +6,23 @@
             class="navbar navbar-custom navbar-expand-lg justify-content-between fixed-top text-center"
             style="height: 80px"
         >
-            <router-link class="navbar-brand mb-0 h1" :to="{ name: 'welcome' }">
-                <img
-                    class=""
-                    src="assets/image/slide_home_screens/logo.jpg"
-                    height="40"
-                    alt="Homestaybooking"
-                    style="margin-right: 3px; border-radius: 40px"
-                />HomestayBooking
-            </router-link>
+            <div>
+                <router-link class="navbar-brand mb-0 h1" :to="{ name: 'welcome' }">
+                    <img
+                        class=""
+                        src="assets/image/slide_home_screens/logo.jpg"
+                        height="40"
+                        alt="Homestaybooking"
+                        style="margin-right: 3px; border-radius: 40px"
+                    />HomestayBooking
+                </router-link>
+                <router-link
+                    :to="{ name: 'auth.aboutus' }"
+                    class="justify-content-between"
+                    style="text-decoration: none; font-size: 17px"
+                    >Về chúng tôi</router-link
+                >
+            </div>
 
             <div class="navbar-login">
                 <router-link
@@ -67,6 +75,7 @@
                 <router-view></router-view>
             </div>
         </div>
+        <footer-component></footer-component>
     </div>
 </template>
 
@@ -77,7 +86,6 @@ export default {
     data() {
         return {
             lastSearch: this.$store.state.lastSearch,
-            list_home_screen: CONST_FRONTEND.home_screen_file,
             list_home_screen: CONST_FRONTEND.home_screen_file,
         };
     },
@@ -135,8 +143,8 @@ export default {
 .navbar-brand {
     font-size: 30px;
     color: rgb(237, 195, 169);
-    color: rgb(237, 195, 169);
     justify-content: center;
+    margin-right: 4rem;
 }
 .navbar-login {
     flex-direction: row;
@@ -188,5 +196,8 @@ export default {
     border: 1px solid #ccc;
     border-radius: 4px;
     box-sizing: border-box;
+}
+.btn-sm {
+    padding: 0.25rem 0rem;
 }
 </style>
