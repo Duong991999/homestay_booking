@@ -65,6 +65,7 @@
                                     class="form-control"
                                     type="text"
                                     placeholder="Enter total floors"
+                                    style="border-radius: 10px; height: 40px"
                                 />
                             </div>
                         </fieldset>
@@ -84,6 +85,7 @@
                                     class="form-control"
                                     type="text"
                                     placeholder="Enter total rooms"
+                                    style="border-radius: 10px; height: 40px"
                                 />
                             </div>
                         </fieldset>
@@ -103,6 +105,7 @@
                                     class="form-control"
                                     type="text"
                                     placeholder="Enter area in sq.ft"
+                                    style="border-radius: 10px; height: 40px"
                                 />
                             </div>
                         </fieldset>
@@ -141,6 +144,7 @@
                                     type="text"
                                     v-model="typeroom.name"
                                     placeholder="Enter name"
+                                    style="border-radius: 10px; height: 40px"
                                 />
                             </div>
                         </fieldset>
@@ -159,6 +163,7 @@
                                     class="form-control"
                                     @change="onFileChange($event, index)"
                                     accept="image/gif, image/jpeg, image/png"
+                                    style="border-radius: 10px; height: 40px"
                                 />
                             </div>
                         </fieldset>
@@ -177,13 +182,23 @@
                                     type="text"
                                     v-model="typeroom.price"
                                     placeholder="Enter price"
+                                    style="border-radius: 10px; height: 40px"
                                 />
                             </div>
                         </fieldset>
                     </div>
                     <div class="col-md-6"></div>
                     <div class="col-md-6">
-                        <label class="form-label">Additional info</label>
+                        <label for="CategorySelect">Tiện ích</label>
+                        <v-multi-select
+                            v-model="amenities"
+                            :options="options"
+                            mode="tags"
+                            placeholder="Enter amenities "
+                            style="border-radius: 10px; height: 40px"
+                        >
+                        </v-multi-select>
+                        <!-- <v-errors :errors="errorFor('category')"></v-errors> -->
                     </div>
 
                     <!---list-->
