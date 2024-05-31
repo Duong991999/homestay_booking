@@ -1,5 +1,6 @@
 <template>
     <div>
+		<FlashMessage :position="'right top'"></FlashMessage>
         <!--Thanh nav-->
         <nav
             class="navbar navbar-custom navbar-expand-lg justify-content-between fixed-top text-center"
