@@ -28,7 +28,7 @@ const routes = [
     },
 
     {
-        path: '/detail',
+        path: 'homestay/detail/:id',
         component: Detail,
         name: 'detail',
     },
@@ -83,7 +83,7 @@ const routes = [
         component: require('@/company/homestay/Index.vue').default,
         name: 'company.homestay.index',
     },
-	{
+    {
         path: '/company/inforbase/:id',
         component: require('@/company/InforBase.vue').default,
         name: 'inforbase',
@@ -128,6 +128,11 @@ const routes = [
         path: '/profile',
         component: require('@/profile/Index.vue').default,
         name: 'profile',
+    },
+    {
+        path: '/homestay/checkdate',
+        component: require('@/homestay/Checkdate.vue').default,
+        name: 'checkdate',
     },
 ];
 

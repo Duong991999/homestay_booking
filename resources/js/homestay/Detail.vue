@@ -4,49 +4,22 @@
             <div class="card bg-transparent w-100 border-0" style="padding-right: 30px">
                 <!----><!----><!---->
                 <div class="card-header border-bottom bg-transparent px-0 pt-0">
-                    <h3 class="mb-0 font-weight-bold">About This Hotel</h3>
+                    <h3 class="mb-0 font-weight-bold">{{ homestay.name }}</h3>
                 </div>
                 <div class="card-body pt-4 p-0">
                     <!----><!---->
-                    <h5 class="fw-light mb-4 font-weight-bold">Main Highlights</h5>
-                    <p class="mb-3">
-                        Demesne far-hearted suppose venture excited see had has. Dependent on so
-                        extremely delivered by. Yet no jokes worse her why.
-                        <b>Bed one supposing breakfast day fulfilled off depending questions.</b>
-                    </p>
-                    <p class="mb-0">
-                        Delivered dejection necessary objection do Mr prevailed. Mr feeling does
-                        chiefly cordial in do. Water timed folly right aware if oh truth. Large
-                        above be to means. Dashwood does provide stronger is.
-                    </p>
-                    <div class="collapse" id="collapseContent">
-                        <p class="my-3">
-                            We focus a great deal on the understanding of behavioral psychology and
-                            influence triggers which are crucial for becoming a well rounded Digital
-                            Marketer. We understand that theory is important to build a solid
-                            foundation, we understand that theory alone isn't going to get the job
-                            done so that's why this rickets is packed with practical hands-on
-                            examples that you can follow step by step.
-                        </p>
-                        <p class="mb-0">
-                            Behavioral psychology and influence triggers which are crucial for
-                            becoming a well rounded Digital Marketer. We understand that theory is
-                            important to build a solid foundation, we understand that theory alone
-                            isn't going to get the job done so that's why this tickets is packed
-                            with practical hands-on examples that you can follow step by step.
-                        </p>
+                    <div class="row">
+                        <div class="col-6">
+                            <h5 class="fw-light mb-4 font-weight-bold">Main Highlights</h5>
+                        </div>
+                        <div class="col-6">
+                            <h6>Hình thức :{{ homestay.category }}</h6>
+                        </div>
                     </div>
-                    <a
-                        class="p-0 mb-4 mt-2 btn-more d-flex align-items-center collapsed"
-                        data-bs-toggle="collapse"
-                        href="#collapseContent"
-                        role="button"
-                        aria-expanded="false"
-                        aria-controls="collapseContent"
-                    >
-                        See <span class="see-more ms-1">more</span
-                        ><span class="see-less ms-1">less</span></a
-                    >
+                    <p class="mb-3">
+                        {{ homestay.content }}
+                    </p>
+
                     <h5 class="fw-light mb-2 font-weight-bold">Advantages</h5>
                     <ul class="list-group list-group-borderless mb-0">
                         <li
@@ -78,20 +51,34 @@
             </div>
             <div><room></room></div>
         </div>
-        <div class="col-xl-5 order-xl-2"></div>
+        <div class="col-xl-5 order-xl-2">
+            <checkdate></checkdate>
+        </div>
     </div>
 </template>
 
 <script>
 import Amenities from './Amenities';
 import Room from './Room';
+import Checkdate from './Checkdate';
 export default {
     components: {
         Amenities,
         Room,
+        Checkdate,
     },
     data() {
         return {
+            homestay: {
+                name: null,
+                content: null,
+                city_code: null,
+                district_code: null,
+                ward_code: null,
+                category_id: [],
+                categories: [],
+                files: [],
+            },
             advantages: [
                 'Every hotel staff to have Proper PPT kit for COVID-19',
                 'Every staff member wears face masks and gloves at all service times.',
@@ -100,6 +87,26 @@ export default {
             ],
         };
     },
+    methods:{
+
+
+    },
+    async created() {
+        if(this.$route.params.id){
+            this.isCreate = false;
+        }
+		this.loading = true;
+		await this.loadCategoryOptions();
+
+        if(this.isCreate){
+            this.title = 'create';
+        }else{
+            this.title = 'Update';
+            await this.loadHomestay();
+
+        }
+		this.loading = false;
+	},
 };
 </script>
 
