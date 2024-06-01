@@ -307,9 +307,7 @@
                                         class="rounded-3 position-relative"
                                         style="height: 17px; width: 13px; padding-top: 7px"
                                     />
-                                    <h style="color: aliceblue; font-size: 17px; font-weight: 1px">
-                                        Hà Nội
-                                    </h>
+                                    <h6 style="color: aliceblue; font-weight: 1px">Hà Nội</h6>
                                 </div>
                             </div>
                         </div>
@@ -357,9 +355,9 @@
                                         class="rounded-3 position-relative"
                                         style="height: 17px; width: 13px; padding-top: 7px"
                                     />
-                                    <h style="color: aliceblue; font-size: 17px; font-weight: 1px">
+                                    <h6 style="color: aliceblue; font-size: 17px; font-weight: 1px">
                                         Hà Nội
-                                    </h>
+                                    </h6>
                                 </div>
                             </div>
                         </div>
@@ -407,9 +405,9 @@
                                         class="rounded-3 position-relative"
                                         style="height: 17px; width: 13px; padding-top: 7px"
                                     />
-                                    <h style="color: aliceblue; font-size: 17px; font-weight: 1px">
+                                    <h6 style="color: aliceblue; font-size: 17px; font-weight: 1px">
                                         Hà Nội
-                                    </h>
+                                    </h6>
                                 </div>
                             </div>
                         </div>
@@ -457,9 +455,9 @@
                                         class="rounded-3 position-relative"
                                         style="height: 17px; width: 13px; padding-top: 7px"
                                     />
-                                    <h style="color: aliceblue; font-size: 17px; font-weight: 1px">
+                                    <h6 style="color: aliceblue; font-size: 17px; font-weight: 1px">
                                         Hà Nội
-                                    </h>
+                                    </h6>
                                 </div>
                             </div>
                         </div>
