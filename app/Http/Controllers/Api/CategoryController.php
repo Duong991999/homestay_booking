@@ -17,7 +17,7 @@ class CategoryController extends Controller
     }
 
 	public function index(){
-		return $this->success($this->categoryRepo->getAll());
+		return $this->success($this->categoryRepo->paginateAll(10));
 	}
 
 	public function show($id){
