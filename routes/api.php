@@ -3,6 +3,7 @@
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\CategoryController;
 use App\Http\Controllers\Api\HomestayController;
+use App\Http\Controllers\Api\RoomTypeController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -57,4 +58,12 @@ Route::group(['prefix' => 'homestay',], function(){
 	Route::get('/index', [HomestayController::class, 'index']);
 	Route::post('/update/{id}', [HomestayController::class, 'update']);
 	Route::post('/delete', [HomestayController::class, 'delete']);
+});
+
+Route::group(['prefix' => 'room-type',], function(){
+	Route::post('/store', [RoomTypeController::class, 'store']);
+	Route::get('/show/{id}', [RoomTypeController::class, 'show']);
+	Route::get('/index', [RoomTypeController::class, 'myRoomType']);
+	Route::post('/update/{id}', [RoomTypeController::class, 'update']);
+	Route::post('/delete', [RoomTypeController::class, 'delete']);
 });

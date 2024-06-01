@@ -100,7 +100,7 @@ class CreateTable extends Migration
      */
     public function down()
     {
-		$arrayTables = ['homestays', 'room_types', 'rooms', 'categories', 'category_homestay', 'bookings', 'booking_details', 'booking_detail_records'];
+		$arrayTables = ['booking_detail_records', 'booking_details', 'bookings', 'category_homestay', 'categories', 'rooms', 'room_types', 'homestays'];
 		foreach($arrayTables as $table){
 			Schema::dropIfExists($table);
 		}
