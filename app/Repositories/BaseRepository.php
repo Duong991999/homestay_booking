@@ -32,6 +32,11 @@ abstract class BaseRepository implements BaseRepositoryInterface
         return $this->model->all();
     }
 
+	public function paginateAll($itemPerPage = 10)
+    {
+        return $this->model->paginate($itemPerPage);
+    }
+
     public function find($id)
     {
         $result = $this->model->find($id);

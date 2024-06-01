@@ -33,6 +33,7 @@
         "@smartweb/vue-flash-message": "^0.6.10",
         "@vueform/multiselect": "^2.6.7",
         "html2pdf.js": "^0.10.1",
+        "laravel-vue-pagination": "^2.3.0",
         "vue-spinner": "^1.0.4"
     }
 }

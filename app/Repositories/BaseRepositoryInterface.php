@@ -10,6 +10,12 @@ interface BaseRepositoryInterface
      */
     public function getAll();
 
+	/**
+     * Get all
+     * @return mixed
+     */
+    public function paginateAll($itemPerPage = 10);
+
     /**
      * Get one
      * @param $id
