@@ -28,7 +28,7 @@ class HomestayRequest extends BaseRequest
 	{
 		if (!$this->get('user_id')) {
 			$this->merge([
-				'user_id'   =>  auth()->user()->id
+				'user_id' => auth()->user()->id
 			]);
 		}
 	}

@@ -2,7 +2,6 @@
 
 use App\Homestay;
 use Illuminate\Database\Seeder;
-use Spatie\Permission\Models\Role;
 
 class HomestaySeeder extends Seeder
 {

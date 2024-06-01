@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 
 class RoomType extends Model
@@ -31,4 +32,14 @@ class RoomType extends Model
     {
         return $this->morphMany(File::class, 'fileable');
     }
+
+	public function room_counts(): HasMany
+	{
+		return $this->hasMany(RoomCount::class);
+	}
+
+	public function booking_details(): HasMany
+	{
+		return $this->hasMany(BookingDetail::class);
+	}
 }

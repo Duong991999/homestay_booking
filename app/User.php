@@ -43,4 +43,9 @@ class User extends Authenticatable
 		return $this->hasMany(Homestay::class);
 	}
 
+	public function bookings(): HasMany
+	{
+		return $this->hasMany(Booking::class);
+	}
+
 }

@@ -28,7 +28,7 @@ class CreateTable extends Migration
             $table->foreign('homestay_id')->references('id')->on('homestays')->onDelete('cascade');
             $table->string('name');
 			$table->unsignedBigInteger('price')->default(0);
-			$table->unsignedInteger('count');
+			$table->unsignedInteger('count')->default(0);
             $table->timestamps();
         });
 		Schema::create('rooms', function (Blueprint $table) {
@@ -56,8 +56,8 @@ class CreateTable extends Migration
         });
 		Schema::create('bookings', function (Blueprint $table) {
             $table->bigIncrements('id');
-			$table->unsignedBigInteger('homstay_id')->index();
-            $table->foreign('homstay_id')->references('id')->on('homestays')->onDelete('cascade');
+			$table->unsignedBigInteger('homestay_id')->index();
+            $table->foreign('homestay_id')->references('id')->on('homestays')->onDelete('cascade');
 			$table->unsignedBigInteger('user_id')->index()->nullable();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
 			$table->date('checkin_date');
@@ -72,12 +72,10 @@ class CreateTable extends Migration
             $table->bigIncrements('id');
 			$table->unsignedBigInteger('booking_id')->index();
             $table->foreign('booking_id')->references('id')->on('bookings')->onDelete('cascade');
-			$table->unsignedBigInteger('category_id')->index();
-            $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
 			$table->unsignedInteger('count');
 			$table->unsignedBigInteger('room_type_id')->index();
             $table->foreign('room_type_id')->references('id')->on('room_types')->onDelete('cascade');
-			$table->json('room_id_list');
+			$table->json('room_id_list')->nullable();
             $table->timestamps();
         });
 		Schema::create('booking_detail_records', function (Blueprint $table) {
