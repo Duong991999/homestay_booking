@@ -43,7 +43,7 @@
                                 <div>
                                     <h class="font-weight-bold"> Rất tốt</h>
                                     <br />
-                                    <h>34 views</h>
+                                    <h5>34 views</h5>
                                 </div>
                                 <div
                                     class="bg-primary ml-2 d-flex align-items-center justify-content-center rounded-right rounded-top"
@@ -64,7 +64,7 @@
                         class="row d-flex justify-content-between"
                         style="margin-top: 10px; padding-left: 10px; border-left: 2px solid black"
                     >
-                        <h>Tiện ích</h>
+                        <h5>Tiện ích</h5>
 
                         <div>
                             <h class="font-weight-bold">Giá mỗi đêm</h><br />
