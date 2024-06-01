@@ -39,6 +39,7 @@ Vue.component('v-image-multiple-input', ImageMultipleInput);
 Vue.component('pulse-loader', PulseLoader);
 Vue.component('dot-loader', DotLoader);
 Vue.component('v-multi-select', Multiselect);
+Vue.component('pagination', require('laravel-vue-pagination'));
 
 const store = new Vuex.Store(storeDefinition);
 
