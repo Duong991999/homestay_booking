@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="card shawdow w-100">
+        <div class="card shawdow w-100" style="margin-top: 100px">
             <h6 class="text-uppercase text-secondary font-weight-bolder">Check Availability</h6>
 
             <div class="mt-2 mb-2">
@@ -212,6 +212,45 @@
                                 </h5>
 
                                 <!---->
+                                <div class="row align-items-center" style="margin-right: 10px">
+                                    <button class="btn btn-md btn-link">
+                                        <svg
+                                            width="1em"
+                                            height="1em"
+                                            viewBox="0 0 16 16"
+                                            fill="currentColor"
+                                            role="img"
+                                            focusable="false"
+                                            class="fs-5 fa-fw"
+                                        >
+                                            <path
+                                                d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"
+                                            ></path>
+                                            <path
+                                                d="M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8"
+                                            ></path>
+                                        </svg>
+                                    </button>
+                                    <h6 class="guest-selector-count mb-0"></h6>
+                                    <button class="btn btn-md btn-link">
+                                        <svg
+                                            width="1em"
+                                            height="1em"
+                                            viewBox="0 0 16 16"
+                                            fill="currentColor"
+                                            role="img"
+                                            focusable="false"
+                                            class="fs-5 fa-fw"
+                                        >
+                                            <path
+                                                d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"
+                                            ></path>
+                                            <path
+                                                d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4"
+                                            ></path>
+                                        </svg>
+                                    </button>
+                                </div>
 
                                 <div
                                     class="d-sm-flex justify-content-sm-between align-items-center mt-auto"
@@ -257,7 +296,11 @@ export default {
             ],
             quantity: 1,
             minValue: 1,
-            maxValue: 10, // Thay đổi giá trị tối đa nếu cần
+            maxValue: 10, // Thay đổi giá trị tối đa nếu cần,
+            star_day: null,
+            close_day: null,
+            loading: false,
+            check: false,
         };
     },
     computed: {
@@ -273,7 +316,7 @@ export default {
             this.isDropdownVisible = false;
         },
         decreaseCount(type) {
-            if (type === 'adults' && this.adults > 1) {
+            if (type === 'adults' && this.adults > 0) {
                 this.adults--;
             } else if (type === 'children' && this.children > 0) {
                 this.children--;

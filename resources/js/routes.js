@@ -28,7 +28,7 @@ const routes = [
     },
 
     {
-        path: 'homestay/detail/:id',
+        path: '/homestay/detail',
         component: Detail,
         name: 'detail',
     },
