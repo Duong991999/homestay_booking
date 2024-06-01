@@ -60,8 +60,6 @@ class CreateTable extends Migration
             $table->foreign('homstay_id')->references('id')->on('homestays')->onDelete('cascade');
 			$table->unsignedBigInteger('user_id')->index()->nullable();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-			$table->unsignedBigInteger('employee_id')->index()->nullable();
-            $table->foreign('employee_id')->references('id')->on('users')->onDelete('cascade');
 			$table->date('checkin_date');
 			$table->date('checkout_date');
 			$table->unsignedInteger('status')->default(0);

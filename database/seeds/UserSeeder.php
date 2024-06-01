@@ -52,21 +52,5 @@ class UserSeeder extends Seeder
             'password' => Hash::make("123456"),
 		]);
 		$company->assignRole('company');
-
-		$company = User::create([
-			'id' => 6,
-			'name' => 'Employee 1',
-			'email' => "employee1@booking.com",
-            'password' => Hash::make("123456"),
-		]);
-		$company->assignRole('employee');
-
-		$company = User::create([
-			'id' => 7,
-			'name' => 'Employee 2',
-			'email' => "employee2@booking.com",
-            'password' => Hash::make("123456"),
-		]);
-		$company->assignRole('employee');
     }
 }
