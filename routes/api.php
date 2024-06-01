@@ -4,6 +4,7 @@ use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\CategoryController;
 use App\Http\Controllers\Api\HomestayController;
 use App\Http\Controllers\Api\RoomTypeController;
+use App\Http\Controllers\Api\RoomController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -42,13 +43,14 @@ Route::group(['prefix' => 'auth'], function(){
 	Route::get('/me', [AuthController::class, 'user']);
 });
 
-Route::group(['prefix' => 'admin', 'middleware' => 'role:admin'], function(){
+Route::group(['prefix' => 'admin', 'middleware' => 'role:admin|company'], function(){
 	Route::group(['prefix' => 'category'], function(){
 		Route::get('/index', [CategoryController::class, 'index']);
+		Route::get('/all', [CategoryController::class, 'all']);
 		Route::get('/show/{id}', [CategoryController::class, 'show']);
-		Route::post('/store', [CategoryController::class, 'store']);
-		Route::post('/update/{id}', [CategoryController::class, 'update']);
-		Route::post('/delete', [CategoryController::class, 'delete']);
+		Route::post('/store', [CategoryController::class, 'store'])->middleware('role:admin');
+		Route::post('/update/{id}', [CategoryController::class, 'update'])->middleware('role:admin');
+		Route::post('/delete', [CategoryController::class, 'delete'])->middleware('role:admin');
 	});
 });
 
@@ -66,4 +68,13 @@ Route::group(['prefix' => 'room-type',], function(){
 	Route::get('/index', [RoomTypeController::class, 'myRoomType']);
 	Route::post('/update/{id}', [RoomTypeController::class, 'update']);
 	Route::post('/delete', [RoomTypeController::class, 'delete']);
+});
+
+Route::group(['prefix' => 'room',], function(){
+	Route::post('/store', [RoomController::class, 'store']);
+	Route::get('/show/{id}', [RoomController::class, 'show']);
+	Route::get('/index/{id}', [RoomController::class, 'myRoom']);
+	Route::get('/all/{id}', [RoomController::class, 'all']);
+	Route::post('/update/{id}', [RoomController::class, 'update']);
+	Route::post('/delete', [RoomController::class, 'delete']);
 });

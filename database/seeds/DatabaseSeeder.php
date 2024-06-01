@@ -42,7 +42,7 @@ class DatabaseSeeder extends Seeder
         //     $reviews = factory(Review::class, random_int(5, 30))->make();
         //     $bookable->reviews()->saveMany($reviews);
         // });
-		$this->call([RoleSeeder::class, UserSeeder::class]);
+		$this->call([RoleSeeder::class, UserSeeder::class, CategorySeeder::class]);
 		// $this->call([HomestaySeeder::class]);
 
     }

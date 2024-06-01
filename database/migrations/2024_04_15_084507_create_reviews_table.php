@@ -16,7 +16,7 @@ class CreateReviewsTable extends Migration
         Schema::create('reviews', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->timestamps();
-            $table->unsignedTinyInteger('rating');
+            $table->unsignedInteger('rating');
             $table->text('content');
             $table->unsignedBigInteger('homestay_id')->index();
             $table->foreign('homestay_id')->references('id')->on('homestays');

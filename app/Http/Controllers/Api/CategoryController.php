@@ -20,6 +20,10 @@ class CategoryController extends Controller
 		return $this->success($this->categoryRepo->paginateAll());
 	}
 
+	public function all(){
+		return $this->success($this->categoryRepo->getAll());
+	}
+
 	public function show($id){
 		return $this->success($this->categoryRepo->find($id));
 	}

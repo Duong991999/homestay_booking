@@ -222,7 +222,7 @@ export default {
 			this.homestay.category_id = idList
 		},
 		async loadCategoryOptions() {
-			const responseCategory = await axios.get(`/api/admin/category/index`);
+			const responseCategory = await axios.get(`/api/admin/category/all`);
 			this.categoryOptions = responseCategory.data.data.map(category => {
 				return {
 					value: category.id,

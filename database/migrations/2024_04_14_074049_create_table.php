@@ -36,8 +36,8 @@ class CreateTable extends Migration
 			$table->unsignedBigInteger('room_type_id')->index();
             $table->foreign('room_type_id')->references('id')->on('room_types')->onDelete('cascade');
             $table->string('name');
-			$table->unsignedTinyInteger('status');
-			$table->unsignedBigInteger('user_id')->index()->default(null);
+			$table->unsignedInteger('status')->default(0);
+			$table->unsignedBigInteger('user_id')->index()->nullable()->default(null);
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });
@@ -64,7 +64,7 @@ class CreateTable extends Migration
             $table->foreign('employee_id')->references('id')->on('users')->onDelete('cascade');
 			$table->date('checkin_date');
 			$table->date('checkout_date');
-			$table->unsignedTinyInteger('status');
+			$table->unsignedInteger('status')->default(0);
 			$table->string('guest_name')->nullable();
 			$table->string('phone_number')->nullable();
 			$table->unsignedBigInteger('bill_value')->default(0);

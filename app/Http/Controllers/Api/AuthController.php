@@ -34,7 +34,7 @@ class AuthController extends Controller
     }
 
     public function login(LoginRequest $request) {
-        $user = User::where('email', $request->email)->first();
+        $user = User::where('email', $request->email)->with('roles')->first();
         if(!$user || !Hash::check($request->password, $user->password)) {
             return $this->error("Email hoac mat khau ko dung!", Response::HTTP_UNAUTHORIZED);
         }
