@@ -222,6 +222,7 @@
                                             role="img"
                                             focusable="false"
                                             class="fs-5 fa-fw"
+                                            @click="decreaseCount('count', index)"
                                         >
                                             <path
                                                 d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"
@@ -231,7 +232,7 @@
                                             ></path>
                                         </svg>
                                     </button>
-                                    <h6 class="guest-selector-count mb-0"></h6>
+                                    <h6 class="guest-selector-count mb-0">{{ room.count }}</h6>
                                     <button class="btn btn-md btn-link">
                                         <svg
                                             width="1em"
@@ -241,10 +242,12 @@
                                             role="img"
                                             focusable="false"
                                             class="fs-5 fa-fw"
+                                            @click="increaseCount('count', index)"
                                         >
                                             <path
                                                 d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"
                                             ></path>
+
                                             <path
                                                 d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4"
                                             ></path>
@@ -265,6 +268,12 @@
                     </div>
                 </div>
             </div>
+            <button class="btn btn-secondary btn-block" @click="check" :disabled="loading">
+                <span v-if="!loading">Check!</span>
+                <span v-if="loading">
+                    <i class="fas fa-circle-notch fa-spin"></i> Checking...
+                </span>
+            </button>
         </div>
     </div>
 </template>
@@ -281,6 +290,7 @@ export default {
                     image: 'assets/image/slide_home_screens/_1.jpg',
                     title: 'Luxury Room with Balcony',
                     features: ['Air Conditioning', 'Wifi', 'Kitchen'],
+                    count: 0,
                     price: '$750',
 
                     cancellation: null,
@@ -290,6 +300,7 @@ export default {
                     title: 'Luxury Room with Balcony',
                     features: ['Air Conditioning', 'Wifi', 'Kitchen'],
                     price: '$750',
+                    count: 0,
 
                     cancellation: 'Free Cancellation till 7 Jan 2022',
                 },
@@ -305,7 +316,7 @@ export default {
     },
     computed: {
         displayOccupants() {
-            return `${this.adults} Adults, ${this.children} Children`;
+            return `${this.adults} Adults, ${this.children} Children `;
         },
     },
     methods: {
@@ -315,18 +326,22 @@ export default {
         closeDropdown() {
             this.isDropdownVisible = false;
         },
-        decreaseCount(type) {
+        decreaseCount(type, index = null) {
             if (type === 'adults' && this.adults > 0) {
                 this.adults--;
             } else if (type === 'children' && this.children > 0) {
                 this.children--;
+            } else if (type === 'count' && index !== null && this.rooms[index].count > 0) {
+                this.rooms[index].count--;
             }
         },
-        increaseCount(type) {
+        increaseCount(type, index = null) {
             if (type === 'adults') {
                 this.adults++;
             } else if (type === 'children') {
                 this.children++;
+            } else if (type === 'count' && index !== null) {
+                this.rooms[index].count++;
             }
         },
         handleClickOutside(event) {
