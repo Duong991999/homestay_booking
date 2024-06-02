@@ -31,4 +31,8 @@ class Homestay extends Model
     {
         return $this->morphMany(File::class, 'fileable');
     }
+
+	public function room_types(){
+		return $this->hasMany(RoomType::class);
+	}
 }

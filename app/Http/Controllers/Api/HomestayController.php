@@ -23,6 +23,10 @@ class HomestayController extends Controller
 		return $this->success($this->homestayRepo->findDetail($id));
 	}
 
+	public function showDetail($id){
+		return $this->success($this->homestayRepo->findDetailRoom($id));
+	}
+
 	public function store(HomestayRequest $request){
 		$data = $this->homestayRepo->createDetail($request->all());
 		return $this->success($data);

@@ -59,6 +59,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'role:admin|company'], functi
 Route::group(['prefix' => 'homestay',], function(){
 	Route::post('/store', [HomestayController::class, 'store']);
 	Route::get('/show/{id}', [HomestayController::class, 'show']);
+	Route::get('/show-detail/{id}', [HomestayController::class, 'showDetail']);
 	Route::get('/index', [HomestayController::class, 'index']);
 	Route::post('/update/{id}', [HomestayController::class, 'update']);
 	Route::post('/delete', [HomestayController::class, 'delete']);

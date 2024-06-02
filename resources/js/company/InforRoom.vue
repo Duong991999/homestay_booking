@@ -244,7 +244,7 @@
                                                 </button>
                                                 <button
                                                     class="btn btn-danger mb-0"
-                                                    @click="startDelete(index, roomIndex)"
+                                                    @click="startDelete(index)"
                                                 >
                                                     Delete
                                                 </button>
@@ -311,6 +311,8 @@ export default {
             ],
             typerooms: [{ name: '', image: '', price: '', rooms: [] }],
             rooms: [],
+            content: null,
+            amenities: null,
         };
     },
     methods: {
@@ -326,20 +328,16 @@ export default {
                 this.typerooms[index].image = URL.createObjectURL(file);
             }
         },
-        addRoom(index) {
-            this.typerooms[index].rooms.push({
-                name: '', // Initialize with empty value
-            });
+        addRoom() {
+            this.rooms.push({ name: '' });
         },
         startEdit(room) {
             // Logic for editing the room can be implemented here
             alert(`Editing room: ${room.name}`);
         },
-        startDelete(typeroomIndex, roomIndex) {
-            // Confirm deletion
-            if (confirm('Are you sure you want to delete this room?')) {
-                // Remove the room from the rooms array of the specified type of room
-                this.typerooms[typeroomIndex].rooms.splice(roomIndex, 1);
+        startDelete(index) {
+            if (this.rooms.length > 1) {
+                this.rooms.splice(index, 1);
             }
         },
     },
