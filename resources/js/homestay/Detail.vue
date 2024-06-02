@@ -4,11 +4,18 @@
             <div class="card bg-transparent w-100 border-0" style="padding-right: 30px">
                 <!----><!----><!---->
                 <div class="card-header border-bottom bg-transparent px-0 pt-0">
-                    <h3 class="mb-0 font-weight-bold">About This Hotel</h3>
+                    <h3 class="mb-0 font-weight-bold">{{ homestay.name }}</h3>
                 </div>
                 <div class="card-body pt-4 p-0">
                     <!----><!---->
-                    <h5 class="fw-light mb-4 font-weight-bold">Main Highlights</h5>
+                    <div class="row">
+                        <div class="col-6">
+                            <h5 class="fw-light mb-4 font-weight-bold">Main Highlights</h5>
+                        </div>
+                        <div class="col-6">
+                            <h6>Hình thức :{{ homestay.category }}</h6>
+                        </div>
+                    </div>
                     <p class="mb-3">
                         Demesne far-hearted suppose venture excited see had has. Dependent on so
                         extremely delivered by. Yet no jokes worse her why.
@@ -78,17 +85,21 @@
             </div>
             <div><room></room></div>
         </div>
-        <div class="col-xl-5 order-xl-2"></div>
+        <div class="col-xl-5 order-xl-2">
+            <checkdate></checkdate>
+        </div>
     </div>
 </template>
 
 <script>
 import Amenities from './Amenities';
 import Room from './Room';
+import Checkdate from './Checkdate';
 export default {
     components: {
         Amenities,
         Room,
+        Checkdate,
     },
     data() {
         return {
@@ -98,6 +109,16 @@ export default {
                 'Hotel staff ensures to maintain social distancing at all times.',
                 'The hotel has In-Room Dining options available',
             ],
+            homestay: {
+                name: null,
+                content: null,
+                city_code: null,
+                district_code: null,
+                ward_code: null,
+                category_id: [],
+                categories: [],
+                files: [],
+            },
         };
     },
 };
