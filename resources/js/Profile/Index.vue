@@ -28,7 +28,6 @@
                             id="uploadfile-1"
                             class="form-control d-none form-control"
                             type="file"
-                            capture="false"
                             directory="false"
                         />
                     </div>
@@ -57,7 +56,6 @@
                         class="form-control flatpickr-input"
                         type="text"
                         placeholder="Enter date of birth"
-                        readonly="readonly"
                     />
                 </div>
                 <div class="col-md-6">
