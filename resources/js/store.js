@@ -73,10 +73,14 @@ export default {
         },
         async loadUser({ commit, dispatch, state }) {
             if (isLoggedIn()) {
-                try {
-                    const user = (await axios.get('/api/auth/me')).data;
-                    commit('setUser', user);
-                    commit('setLoggedIn', true);
+				try {
+					const user = (await axios.get('/api/auth/me')).data;
+					if (user) {
+						commit('setUser', user);
+						commit('setLoggedIn', true);
+					} else {
+						dispatch('logout');
+					}
                 } catch (error) {
                     dispatch('logout');
                 }
