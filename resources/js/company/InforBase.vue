@@ -104,16 +104,29 @@
                                 ></textarea>
                                 <v-errors :errors="errorFor('content')"></v-errors>
                             </div>
-							<div class="col-md-12">
+                            <div class="col-md-12">
                                 <label>Ảnh giới thiệu</label>
-                                <v-image-multiple-input @file-selected="handleFileChange" :imageList="homestay.files">
-								</v-image-multiple-input>
+                                <v-image-multiple-input
+                                    @file-selected="handleFileChange"
+                                    :imageList="homestay.files"
+                                >
+                                </v-image-multiple-input>
                             </div>
                         </div>
                     </div>
                     <button
+                        v-if="isCreate"
                         type="submit"
-                        class="btn btn-primary"
+                        class="btn btn-primary btn-submit"
+                        :disabled="loading"
+                        @click.prevent="create"
+                    >
+                        Đăng kí
+                    </button>
+                    <button
+                        v-else
+                        type="submit"
+                        class="btn btn-primary btn-submit"
                         :disabled="loading"
                         @click.prevent="update"
                     >
@@ -147,17 +160,17 @@ export default {
                 district_code: null,
                 ward_code: null,
                 category_id: [],
-				categories: [],
-				files: []
-			},
-			categoryOptions: [],
-			fileData: {
-				files:[],
-				deleted_id:[]
-			},
-			message_errors: '',
+                categories: [],
+                files: [],
+            },
+            categoryOptions: [],
+            fileData: {
+                files: [],
+                deleted_id: [],
+            },
+            message_errors: '',
             isCreate: true,
-            title: null
+            title: null,
         };
     },
     methods: {
@@ -172,66 +185,108 @@ export default {
             }
             return cityOptions;
         },
-        async update() {	
+        async create() {
             this.loading = true;
-			const formData = new FormData();
-			for (let i = 0; i < this.fileData.files.length; i++) {
-				let file =this.fileData.files[i];
-				formData.append('files[' + i + ']', file);
-			}
-			for (let i = 0; i < this.homestay.category_id.length; i++) {
-				let id =this.homestay.category_id[i];
-				formData.append('category_id[' + i + ']', id);
-			}
-			for (let i = 0; i < this.fileData.deleted_id.length; i++) {
-				let file =this.fileData.deleted_id[i];
-				formData.append('delete_file_id[' + i + ']', file);
-			}
-			formData.append('name', this.homestay.name);
-			formData.append('content', this.homestay.content);
-			formData.append('city_code', this.homestay.city_code);
-			formData.append('district_code', this.homestay.district_code);
-			formData.append('ward_code', this.homestay.ward_code);
+            const formData = new FormData();
+            for (let i = 0; i < this.fileData.files.length; i++) {
+                let file = this.fileData.files[i];
+                formData.append('files[' + i + ']', file);
+            }
+            for (let i = 0; i < this.homestay.category_id.length; i++) {
+                let id = this.homestay.category_id[i];
+                formData.append('category_id[' + i + ']', id);
+            }
+            for (let i = 0; i < this.fileData.deleted_id.length; i++) {
+                let file = this.fileData.deleted_id[i];
+                formData.append('delete_file_id[' + i + ']', file);
+            }
+            formData.append('name', this.homestay.name);
+            formData.append('content', this.homestay.content);
+            formData.append('city_code', this.homestay.city_code);
+            formData.append('district_code', this.homestay.district_code);
+            formData.append('ward_code', this.homestay.ward_code);
 
-			try {
-				const response = await axios.post(`/api/homestay/update/${this.$route.params.id}`, formData);
-				if (response.data.success) {
-					this.flashMessage.success({
-						title: 'Cập nhật thành công',
-						time: 2000
-					});
-				}
-			} catch (error) {
-                this.errors = error.response && (error.response.data.errors || !error.response.data.success);
+            try {
+                const response = await axios.post(`/api/homestay/store`, formData);
+                if (response.data.success) {
+                    this.flashMessage.success({
+                        title: 'Đăng kí thành công',
+                        time: 2000,
+                    });
+                }
+            } catch (error) {
+                this.errors =
+                    error.response && (error.response.data.errors || !error.response.data.success);
                 if (!error.response.data.success) {
                     this.message_errors = error.response.data.message;
                 }
             }
             this.loading = false;
-		},
-		handleFileChange(obj) {
-			this.fileData = obj;
-		},
-		async loadHomestay() {
-			const response = await axios.get(`/api/homestay/show/${this.$route.params.id}`);
-			this.homestay = response.data.data
-			let idList = [];
-			this.homestay.categories.forEach(category => {
-				idList.push(category.id)
-			});
-			this.homestay.category_id = idList
-		},
-		async loadCategoryOptions() {
-			const responseCategory = await axios.get(`/api/admin/category/all`);
-			this.categoryOptions = responseCategory.data.data.map(category => {
-				return {
-					value: category.id,
-					label: category.name
-				}
-			})
-		}
-	},
-	computed: {
+        },
+        async update() {
+            this.loading = true;
+            const formData = new FormData();
+            for (let i = 0; i < this.fileData.files.length; i++) {
+                let file = this.fileData.files[i];
+                formData.append('files[' + i + ']', file);
+            }
+            for (let i = 0; i < this.homestay.category_id.length; i++) {
+                let id = this.homestay.category_id[i];
+                formData.append('category_id[' + i + ']', id);
+            }
+            for (let i = 0; i < this.fileData.deleted_id.length; i++) {
+                let file = this.fileData.deleted_id[i];
+                formData.append('delete_file_id[' + i + ']', file);
+            }
+            formData.append('name', this.homestay.name);
+            formData.append('content', this.homestay.content);
+            formData.append('city_code', this.homestay.city_code);
+            formData.append('district_code', this.homestay.district_code);
+            formData.append('ward_code', this.homestay.ward_code);
+
+            try {
+                const response = await axios.post(
+                    `/api/homestay/update/${this.$route.params.id}`,
+                    formData
+                );
+                if (response.data.success) {
+                    this.flashMessage.success({
+                        title: 'Cập nhật thành công',
+                        time: 2000,
+                    });
+                }
+            } catch (error) {
+                this.errors =
+                    error.response && (error.response.data.errors || !error.response.data.success);
+                if (!error.response.data.success) {
+                    this.message_errors = error.response.data.message;
+                }
+            }
+            this.loading = false;
+        },
+        handleFileChange(obj) {
+            this.fileData = obj;
+        },
+        async loadHomestay() {
+            const response = await axios.get(`/api/homestay/show/${this.$route.params.id}`);
+            this.homestay = response.data.data;
+            let idList = [];
+            this.homestay.categories.forEach((category) => {
+                idList.push(category.id);
+            });
+            this.homestay.category_id = idList;
+        },
+        async loadCategoryOptions() {
+            const responseCategory = await axios.get(`/api/admin/category/index`);
+            this.categoryOptions = responseCategory.data.data.map((category) => {
+                return {
+                    value: category.id,
+                    label: category.name,
+                };
+            });
+        },
+    },
+    computed: {
         getDistrictOptions() {
             return this.homestay.city_code
                 ? this.getOptions(treeAddress[this.homestay.city_code]['quan-huyen'] ?? [])
@@ -240,29 +295,28 @@ export default {
         getWardOptions() {
             return this.homestay.district_code && this.homestay.city_code
                 ? this.getOptions(
-                      treeAddress[this.homestay.city_code]['quan-huyen'][this.homestay.district_code][
-                          'xa-phuong'
-                      ] ?? []
+                      treeAddress[this.homestay.city_code]['quan-huyen'][
+                          this.homestay.district_code
+                      ]['xa-phuong'] ?? []
                   )
                 : [];
         },
-	},
-	async created() {
-        if(this.$route.params.id){
+    },
+    async created() {
+        if (this.$route.params.id) {
             this.isCreate = false;
         }
-		this.loading = true;
-		await this.loadCategoryOptions();
+        this.loading = true;
+        await this.loadCategoryOptions();
 
-        if(this.isCreate){
-            this.title = 'create';
-        }else{
-            this.title = 'Update';
+        if (this.isCreate) {
+            this.title = 'Đăng kí Homestay';
+        } else {
+            this.title = 'Cập nhập Homestay';
             await this.loadHomestay();
-
         }
-		this.loading = false;
-	},
+        this.loading = false;
+    },
 };
 </script>
 
@@ -280,5 +334,11 @@ export default {
 }
 .col-md-12 {
     margin-bottom: 20px;
+}
+.btn-submit {
+    position: absolute;
+    bottom: 15px;
+    right: 15px;
+    border-radius: 10px;
 }
 </style>
