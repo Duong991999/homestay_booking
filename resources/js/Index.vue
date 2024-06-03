@@ -1,6 +1,6 @@
 <template>
     <div>
-		<FlashMessage :position="'right top'"></FlashMessage>
+        <FlashMessage :position="'right top'"></FlashMessage>
         <!--Thanh nav-->
         <nav
             class="navbar navbar-custom navbar-expand-lg justify-content-between fixed-top text-center"
@@ -26,17 +26,6 @@
 
             <div class="navbar-login">
                 <router-link
-                    :to="{ name: 'basket' }"
-                    class="nav-link-1"
-                    style="text-decoration: none"
-                >
-                    Basket
-                    <span v-if="itemsInBasket" class="badge badge-secondary">{{
-                        itemsInBasket
-                    }}</span>
-                </router-link>
-
-                <router-link
                     :to="{ name: 'register' }"
                     class="nav-link-1"
                     v-if="!isLoggedIn"
@@ -50,13 +39,6 @@
                     v-if="!isLoggedIn"
                     style="text-decoration: none"
                     >Sign-in</router-link
-                >
-                <router-link
-                    :to="{ name: 'category' }"
-                    class="nav-link-1"
-                    v-if="!isLoggedIn"
-                    style="text-decoration: none"
-                    >Catelory</router-link
                 >
 
                 <a
@@ -150,12 +132,12 @@ export default {
     flex-direction: row;
 }
 .nav-link-1 {
-    background-color: aliceblue;
-    color: #003b95;
+    background-color: rgb(248, 236, 223);
+    color: rgb(253, 143, 75);
     padding: 8px 20px;
     margin: 10px;
     justify-content: center;
-    border: 1px solid #003b95;
+    border: 1px solid rgb(253, 143, 75);
     border-radius: 5px;
 }
 .navbar-title {
