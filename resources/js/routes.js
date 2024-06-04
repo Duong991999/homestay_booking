@@ -129,6 +129,16 @@ const routes = [
         component: require('@/profile/Index.vue').default,
         name: 'profile',
     },
+    {
+        path: '/formcheck',
+        component: require('@/homestay/FormCheck.vue').default,
+        name: 'formcheck',
+    },
+    {
+        path: '/imagelist',
+        component: require('@/homestay/ImageList.vue').default,
+        name: 'imagelist',
+    },
 ];
 
 const router = new VueRouter({
