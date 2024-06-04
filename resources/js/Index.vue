@@ -1,6 +1,6 @@
 <template>
     <div>
-		<FlashMessage :position="'right top'"></FlashMessage>
+        <FlashMessage :position="'right top'"></FlashMessage>
         <!--Thanh nav-->
         <nav
             class="navbar navbar-custom navbar-expand-lg justify-content-between fixed-top text-center"
@@ -71,9 +71,7 @@
         </nav>
 
         <div class="container-lg mt-2 mb-2 px-2">
-            <div class="container-lg mt-2 mb-2 px-2">
-                <router-view></router-view>
-            </div>
+            <router-view></router-view>
         </div>
         <footer-component></footer-component>
     </div>
