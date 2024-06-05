@@ -152,6 +152,9 @@ const routes = [
         path: '/company/reviewlist',
         component: require('@/company/reviewlist/ReviewList.vue').default,
         name: 'reviewlist',
+        path: '/homestay/checkdate',
+        component: require('@/homestay/Checkdate.vue').default,
+        name: 'checkdate',
     },
 ];
 
