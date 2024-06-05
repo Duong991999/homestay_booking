@@ -139,6 +139,11 @@ const routes = [
         component: require('@/homestay/ImageList.vue').default,
         name: 'imagelist',
     },
+    {
+        path: '/user/mybooking',
+        component: require('@/user/mybooking/MyBooking.vue').default,
+        name: 'mybooking',
+    },
 ];
 
 const router = new VueRouter({
