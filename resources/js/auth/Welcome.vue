@@ -65,7 +65,7 @@
                 <h6 class="d-none d-xl-block mb-3">Check Availability</h6>
                 <form
                     class="card shadow rounded-3 position-relative p-4 pe-md-5 pb-5 pb-md-4"
-                    style="width: 900px; border-radius: 30px"
+                    style="width: 950px; border-radius: 20px"
                 >
                     <div class="row g-4 align-items-center">
                         <div class="input col-lg-4">
@@ -752,6 +752,7 @@ export default {
     font-weight: bold;
     color: #888; /* Đổi màu chữ nếu cần */
     z-index: 1;
+    border-radius: 10px;
 }
 
 .input__field {
@@ -759,7 +760,7 @@ export default {
     width: 100%;
     border: 2px solid #ccc;
     padding: 10px;
-    border-radius: 5px;
+    border-radius: 10px;
 }
 
 .input__field:focus + .input__label,
@@ -767,5 +768,6 @@ export default {
     top: -10px; /* Điều chỉnh vị trí khi input field được focus */
     font-size: 12px; /* Điều chỉnh kích thước chữ khi input field được focus */
     color: #333; /* Đổi màu chữ khi input field được focus */
+    border-radius: 10px;
 }
 </style>

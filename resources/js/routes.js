@@ -1,20 +1,13 @@
 import VueRouter from 'vue-router';
 import Basket from '@/basket/Basket.vue';
 import Detail from '@/homestay/Detail.vue';
-import HomestayList from '@/user/homestay/HomestayList.vue';
 import Welcome from '@/auth/Welcome.vue';
 import Category from '@/company/Category';
-import Filter from '@/Auth/Filter';
 import Amenities from '@/homestay/Amenities.vue';
 import Room from '@/homestay/Room.vue';
 import InforRoom from '@/company/InforRoom.vue';
 
 const routes = [
-    {
-        path: '/filter',
-        component: Filter,
-        name: 'filter',
-    },
     {
         path: '/auth/aboutus',
         component: require('@/auth/AboutUs.vue').default,
@@ -144,17 +137,19 @@ const routes = [
         name: 'mybooking',
     },
     {
-        path: '/homestaylist',
-        component: HomestayList,
-        name: 'homstaylist',
-    },
-    {
         path: '/company/reviewlist',
         component: require('@/company/reviewlist/ReviewList.vue').default,
         name: 'reviewlist',
+    },
+    {
         path: '/homestay/checkdate',
         component: require('@/homestay/Checkdate.vue').default,
         name: 'checkdate',
+    },
+    {
+        path: '/sreach',
+        component: require('@/user/homestay/Sreach.vue').default,
+        name: 'sreach',
     },
 ];
 
