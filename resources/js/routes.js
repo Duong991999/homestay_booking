@@ -2,7 +2,6 @@ import VueRouter from 'vue-router';
 import Basket from '@/basket/Basket.vue';
 import Detail from '@/homestay/Detail.vue';
 import HomestayList from '@/user/homestay/HomestayList.vue';
-import Review from '@/review/Review.vue';
 import Welcome from '@/auth/Welcome.vue';
 import Category from '@/company/Category';
 import Filter from '@/Auth/Filter';
@@ -53,11 +52,11 @@ const routes = [
         component: require('@/homestay/Congratulation.vue').default,
         name: 'congratulation',
     },
-    {
-        path: '/review/:id',
-        component: Review,
-        name: 'review',
-    },
+    // {
+    //     path: '/review/:id',
+    //     component: Review,
+    //     name: 'review',
+    // },
     {
         path: '/basket',
         component: Basket,
