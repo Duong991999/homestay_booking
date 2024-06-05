@@ -1,7 +1,7 @@
 <template>
     <div>
-        <div class="card shawdow w-100" style="margin-top: 100px">
-            <h6 class="text-uppercase text-secondary font-weight-bolder">Check Availability</h6>
+        <div class="card w-100" style="margin-top: 100px">
+            <h6 class="text-uppercase font-weight-bolder m-4">Tra cứu ngày</h6>
 
             <div class="mt-2 mb-2">
                 <div class="row justify-content-around">
@@ -25,8 +25,7 @@
                         />
                         <span class="input__label">Ngày trả phòng</span>
                     </div>
-                    <div class="col-md-5">
-                        <label class="small">Occupant</label>
+                    <div class="col-md-5 mt-4">
                         <div
                             class="form-border-bottom d-flex align-items-center"
                             ref="dropdownContainer"
@@ -42,6 +41,7 @@
                                         :value="displayOccupants"
                                         @click="toggleDropdown"
                                     />
+                                    <span class="input__label">Khách hàng</span>
                                     <ul
                                         class="dropdown-menu guest-selector-dropdown w-100"
                                         :class="{ show: isDropdownVisible }"
@@ -170,25 +170,36 @@
                     <div class="col-lg-5"></div>
                 </div>
             </div>
-
-            <button class="btn btn-secondary btn-block" @click="check" :disabled="loading">
-                <span v-if="!loading">Check!</span>
-                <span v-if="loading">
-                    <i class="fas fa-circle-notch fa-spin"></i> Checking...
-                </span>
-            </button>
+            <div class="d-flex justify-content-center">
+                <button
+                    class="btn border-0 m-2"
+                    @click="check"
+                    :disabled="loading"
+                    style="
+                        background-color: rgb(240 181 145 / 50%);
+                        color: #ef7d4ae6;
+                        width: 250px;
+                        border-radius: 10px;
+                    "
+                >
+                    <span v-if="!loading">Tra cứu ngày</span>
+                    <span v-if="loading">
+                        <i class="fas fa-circle-notch fa-spin"></i> Checking...
+                    </span>
+                </button>
+            </div>
         </div>
 
         <div class="card bg-transparent border-0" style="margin-top: 50px">
             <div class="card-header border-bottom bg-transparent px-0 pt-0">
                 <div class="d-sm-flex justify-content-sm-between align-items-center">
-                    <h3 class="mb-2 mb-sm-0 font-weight-bold">Booking Room</h3>
+                    <h3 class="mb-2 mb-sm-0 font-weight-bold">Đặt phòng</h3>
                     <div class="col-sm-6 p-0"></div>
                 </div>
             </div>
             <div class="card-body pt-4 p-0">
                 <div
-                    class="card shadow p-3"
+                    class="card p-3"
                     v-for="(room, index) in rooms"
                     :key="index"
                     style="width: 400px"
@@ -268,12 +279,25 @@
                     </div>
                 </div>
             </div>
-            <button class="btn btn-secondary btn-block" @click="check" :disabled="loading">
-                <span v-if="!loading">Check!</span>
-                <span v-if="loading">
-                    <i class="fas fa-circle-notch fa-spin"></i> Checking...
-                </span>
-            </button>
+            <div class="d-flex justify-content-center">
+                <button
+                    class="btn border-0 m-2"
+                    @click="check"
+                    :disabled="loading"
+                    style="
+                        background-color: rgb(240 181 145 / 50%);
+                        color: #ef7d4ae6;
+                        width: 500px;
+                        height: 50px;
+                        border-radius: 10px;
+                    "
+                >
+                    <span v-if="!loading">Đặt phòng</span>
+                    <span v-if="loading">
+                        <i class="fas fa-circle-notch fa-spin"></i> Checking...
+                    </span>
+                </button>
+            </div>
         </div>
     </div>
 </template>

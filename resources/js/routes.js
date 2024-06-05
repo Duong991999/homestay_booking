@@ -1,8 +1,7 @@
 import VueRouter from 'vue-router';
 import Basket from '@/basket/Basket.vue';
 import Detail from '@/homestay/Detail.vue';
-import Bookables from '@/bookables/Bookables.vue';
-import Review from '@/review/Review.vue';
+import HomestayList from '@/user/homestay/HomestayList.vue';
 import Welcome from '@/auth/Welcome.vue';
 import Category from '@/company/Category';
 import Filter from '@/Auth/Filter';
@@ -53,11 +52,11 @@ const routes = [
         component: require('@/homestay/Congratulation.vue').default,
         name: 'congratulation',
     },
-    {
-        path: '/review/:id',
-        component: Review,
-        name: 'review',
-    },
+    // {
+    //     path: '/review/:id',
+    //     component: Review,
+    //     name: 'review',
+    // },
     {
         path: '/basket',
         component: Basket,
@@ -130,6 +129,29 @@ const routes = [
         name: 'profile',
     },
     {
+        path: '/formcheck',
+        component: require('@/homestay/FormCheck.vue').default,
+        name: 'formcheck',
+    },
+    {
+        path: '/imagelist',
+        component: require('@/homestay/ImageList.vue').default,
+        name: 'imagelist',
+    },
+    {
+        path: '/user/mybooking',
+        component: require('@/user/mybooking/MyBooking.vue').default,
+        name: 'mybooking',
+    },
+    {
+        path: '/homestaylist',
+        component: HomestayList,
+        name: 'homstaylist',
+    },
+    {
+        path: '/company/reviewlist',
+        component: require('@/company/reviewlist/ReviewList.vue').default,
+        name: 'reviewlist',
         path: '/homestay/checkdate',
         component: require('@/homestay/Checkdate.vue').default,
         name: 'checkdate',

@@ -1,55 +1,49 @@
 <template>
     <div class="row g-2">
-        <div class="col-md-6 image-item">
+        <div class="col-md-6" style="height: 400px; padding-right: 0">
             <a class="glightbox" href="assets/image/slide_home_screens/_1.jpg">
                 <div
-                    class="card card-grid-lg card-element-hover card-overlay-hover overflow-hidden border-0"
+                    class="card-grid-sm card-element-hover card-overlay-hover overflow-hidden border-0"
                     style="
                         background-image: url('assets/image/slide_home_screens/_1.jpg');
                         background-position: left center;
                         background-size: cover;
                         height: 400px;
                     "
-                >
-                    
-                </div>
+                ></div>
             </a>
         </div>
-        <div class="col-md-6 image-item">
+        <div class="col-md-6">
             <div class="row g-2">
                 <div class="col-12">
                     <a class="glightbox" href="assets/image/slide_home_screens/_1.jpg">
                         <div
-                            class="card card-grid-sm card-element-hover card-overlay-hover overflow-hidden border-0"
+                            class="card-grid-sm card-element-hover card-overlay-hover overflow-hidden border-0"
                             style="
                                 background-image: url('assets/image/slide_home_screens/_1.jpg');
                                 background-position: left center;
                                 background-size: cover;
                                 height: 240px;
                             "
-                        >
-                          
-                        </div>
+                        ></div>
                     </a>
                 </div>
                 <div class="col-md-6" style="margin-top: 8px">
                     <a class="glightbox" href="assets/image/slide_home_screens/_1.jpg">
                         <div
-                            class="card card-grid-sm card-element-hover card-overlay-hover overflow-hidden border-0"
+                            class="card-grid-sm card-element-hover card-overlay-hover overflow-hidden border-0"
                             style="
                                 background-image: url('assets/image/slide_home_screens/_1.jpg');
                                 background-position: left center;
                                 background-size: cover;
                                 height: 150px;
                             "
-                        >
-                           
-                        </div>
+                        ></div>
                     </a>
                 </div>
                 <div class="col-md-6" style="margin-top: 8px; padding-left: 0px">
                     <div
-                        class="card card-grid-sm overflow-hidden"
+                        class="card-grid-sm overflow-hidden"
                         style="
                             background-image: url('assets/image/slide_home_screens/_1.jpg');
                             background-position: left center;
@@ -77,16 +71,7 @@
 </template>
 <script></script>
 <style scoped>
-.list {
-    width: 100%;
-    height: 408px;
-}
-.image-item {
-    padding-left: 8px;
-    padding-right: 8px;
-    margin-top: 8px;
-}
-.card {
+.card-grid-sm {
     border-radius: 20px;
 }
 </style>
