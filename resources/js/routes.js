@@ -149,6 +149,11 @@ const routes = [
         component: HomestayList,
         name: 'homstaylist',
     },
+    {
+        path: '/company/reviewlist',
+        component: require('@/company/reviewlist/ReviewList.vue').default,
+        name: 'reviewlist',
+    },
 ];
 
 const router = new VueRouter({

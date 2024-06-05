@@ -48,11 +48,10 @@
                             <thead class="table-light">
                                 <tr>
                                     <th scope="col" class="border-0 rounded-start">#</th>
-                                    <th scope="col" class="border-0">Name</th>
-                                    <th scope="col" class="border-0">Type</th>
+                                    <th scope="col" class="border-0">Loại phòng</th>
+                                    <th scope="col" class="border-0">Số phòng</th>
                                     <th scope="col" class="border-0">Date</th>
                                     <th scope="col" class="border-0">Status</th>
-                                    <th scope="col" class="border-0">Payment</th>
                                     <th scope="col" class="border-0 rounded-end">Action</th>
                                 </tr>
                             </thead>
@@ -75,11 +74,7 @@
                                             {{ booking.status }}
                                         </div>
                                     </td>
-                                    <td>
-                                        <div :class="`badge bg-${booking.paymentColor}`">
-                                            {{ booking.payment }}
-                                        </div>
-                                    </td>
+
                                     <td>
                                         <a :href="booking.link" class="btn btn-sm btn-light mb-0"
                                             >View</a
