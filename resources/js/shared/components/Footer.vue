@@ -1,5 +1,5 @@
 <template>
-    <footer class="pt-5" style="background-color: #000000de">
+    <footer class="pt-5" style="background-color: #000000de; margin-top: 100px">
         <div class="container">
             <div class="row g-4">
                 <div class="col-lg-4" style="padding-right: 30px">
