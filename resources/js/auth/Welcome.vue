@@ -3,8 +3,8 @@
         <div class="row g-4 g-lg-5">
             <div class="col-lg-6 position-relative mb-4 mb-md-0">
                 <h1 class="mb-4 mt-md-5 display-5 font-weight-bold">
-                    Tìm kiếm hàng đầu <br /><span class="position-relative z-index-9">
-                        những Homestay tốt nhất
+                    Find the top <br /><span class="position-relative z-index-9">
+                        Homestay nearby.
                         <span
                             class="position-absolute top-50 start-50 translate-middle z-index-n1 d-none d-md-block mt-4"
                             style="top: 0px; fill: antiquewhite"
@@ -17,8 +17,8 @@
                     ></span>
                 </h1>
                 <p class="mb-4">
-                    Chúng tôi mang đến cho bạn không chỉ một lựa chọn lưu trú mà còn là một trải
-                    nghiệm phù hợp túi tiền của bạn để tận hưởng sự sang trọng.
+                    We bring you not only a stay option, but an experience in your budget to enjoy
+                    the luxury.
                 </p>
             </div>
 
@@ -62,7 +62,7 @@
         <!--Form-->
         <div class="row position-absolute" style="top: 500px; z-index: 1">
             <div class="col-xl-10 position-relative z-1 mt-n3 mt-xl-n9">
-                <h6 class="d-none d-xl-block mb-3">Tìm kiếm</h6>
+                <h6 class="d-none d-xl-block mb-3">Check Availability</h6>
                 <form
                     class="card shadow rounded-3 position-relative p-4 pe-md-5 pb-5 pb-md-4"
                     style="width: 900px; border-radius: 30px"
@@ -196,12 +196,10 @@
                     />
                 </div>
                 <div class="col-lg-5">
-                    <h2 class="mb-3 mb-lg-5 font-weight-bold">
-                        Những ngày nghỉ tuyệt vời nhất bắt đầu từ đây!
-                    </h2>
+                    <h2 class="mb-3 mb-lg-5 font-weight-bold">The Best Holidays Start Here!</h2>
                     <p class="mb-3 mb-lg-5 font-weight-light">
-                        Hãy đặt phòng Homestay với chúng tôi và đừng quên nhận ưu đãi Homestay tuyệt
-                        vời để tiết kiệm đáng kể cho kỳ nghỉ của bạn.
+                        Book your hotel with us and don't forget to grab an awesome hotel deal to
+                        save massive on your stay.
                     </p>
                     <div class="row g-4">
                         <div class="col-sm-6">
@@ -220,10 +218,10 @@
                                     style="width: 27px; height: 27px; margin-top: 10px"
                                 />
                             </div>
-                            <h5 class="mt-2 font-weight-bold">Thực phẩm chất lượng</h5>
+                            <h5 class="mt-2 font-weight-bold">Quality Food</h5>
                             <p class="mb-0">
-                                Khởi hành khiếm khuyết sắp xếp say mê đã làm. Hành vi từ chối thêm
-                                xứng đáng một chút.
+                                Departure defective arranging rapturous did. Conduct denied adding
+                                worthy little.
                             </p>
                         </div>
                         <div class="col-sm-6">
@@ -238,7 +236,7 @@
                                     style="width: 30px; height: 30px; margin-top: 10px"
                                 />
                             </div>
-                            <h5 class="mt-2 font-weight-bold">Dịch vụ nhanh chóng</h5>
+                            <h5 class="mt-2 font-weight-bold">Quick Services</h5>
                             <p class="mb-0">Supposing so be resolving breakfast am or perfectly.</p>
                         </div>
                         <div class="col-sm-6">
@@ -253,10 +251,9 @@
                                     style="width: 30px; height: 30px; margin-top: 10px"
                                 />
                             </div>
-                            <h5 class="mt-2 font-weight-bold">Bảo mật cao</h5>
+                            <h5 class="mt-2 font-weight-bold">High Security</h5>
                             <p class="mb-0">
-                                Việc sắp xếp chu đáo đã khiến tất cả mọi người đều tin rằng họ đã
-                                được hỗ trợ tận tình.
+                                Arranging rapturous did believe him all had supported.
                             </p>
                         </div>
                         <div class="col-sm-6">
@@ -271,8 +268,8 @@
                                     style="width: 30px; height: 30px; margin-top: 10px"
                                 />
                             </div>
-                            <h5 class="mt-2 font-weight-bold">Dịch vụ 24 giờ</h5>
-                            <p class="mb-0">Phục vụ quý khách mọi thời điểm</p>
+                            <h5 class="mt-2 font-weight-bold">24 Hours Alert</h5>
+                            <p class="mb-0">Rapturous did believe him all had supported.</p>
                         </div>
                     </div>
                 </div>
@@ -281,7 +278,7 @@
         <!--tab-->
         <div class="container" style="margin-top: 80px">
             <div class="row mb-4">
-                <div class="col-12 text-center"><h2 class="mb-0">Các Khách Sạn Nổi Bật</h2></div>
+                <div class="col-12 text-center"><h2 class="mb-0">Featured Hotels</h2></div>
             </div>
             <div class="row">
                 <div class="col-sm-6 col-xl-3">
@@ -310,7 +307,13 @@
                                         class="rounded-3 position-relative"
                                         style="height: 17px; width: 13px; padding-top: 7px"
                                     />
+<<<<<<< room
                                     <h6 style="color: aliceblue; font-weight: 1px">Hà Nội</h6>
+=======
+                                    <h6 style="color: aliceblue; font-size: 17px; font-weight: 1px">
+                                        Hà Nội
+                                    </h6>
+>>>>>>> master
                                 </div>
                             </div>
                         </div>
@@ -361,6 +364,10 @@
                                     <h6 style="color: aliceblue; font-size: 17px; font-weight: 1px">
                                         Hà Nội
                                     </h6>
+<<<<<<< room
+=======
+                                
+>>>>>>> master
                                 </div>
                             </div>
                         </div>
@@ -515,10 +522,9 @@
                                     style="width: 50px; height: 50px"
                                 />
                                 <h5 class="fw-light">
-                                    Nhật báo Moonlight nâng cao sự thích thú của nó tùy thuộc vào
-                                    tính dễ chịu. Giọng nói được chia sẻ theo thời gian đã dẫn anh
-                                    ta đến việc mở rộng sự ồn ào của tuổi trẻ. Tại các đám cưới, mọi
-                                    người tin vào tiếng cười.
+                                    Moonlight newspaper up its enjoyment agreeable depending. Timed
+                                    voice share led him to widen noisy young. At weddings believed
+                                    in laughing
                                 </h5>
                             </span>
                         </div>

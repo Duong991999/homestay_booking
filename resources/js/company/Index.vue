@@ -1,5 +1,5 @@
 <template>
-    <section class="pt-4" style="margin-top: 100px">
+    <section class="pt-4">
         <div class="container">
             <div class="card rounded-3 border w-100">
                 <div class="d-sm-flex align-items-center">
