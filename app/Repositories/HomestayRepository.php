@@ -118,4 +118,9 @@ class HomestayRepository extends BaseRepository implements HomestayRepositoryInt
 		$result = $this->model->with('categories', 'files')->find($id);
 		return $result;
 	}
+
+	public function findDetailRoom($id){
+		$result = $this->model->with('categories', 'files', 'room_types.files')->find($id);
+		return $result;
+	}
 }

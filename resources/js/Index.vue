@@ -104,7 +104,7 @@ export default {
     methods: {
         async logout() {
             try {
-                axios.post('/logout');
+                await axios.post('/api/auth/logout');
                 this.$store.dispatch('logout');
             } catch (error) {
                 this.$store.dispatch('logout');
