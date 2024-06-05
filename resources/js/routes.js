@@ -1,7 +1,7 @@
 import VueRouter from 'vue-router';
 import Basket from '@/basket/Basket.vue';
 import Detail from '@/homestay/Detail.vue';
-import Bookables from '@/bookables/Bookables.vue';
+import HomestayList from '@/user/homestay/HomestayList.vue';
 import Review from '@/review/Review.vue';
 import Welcome from '@/auth/Welcome.vue';
 import Category from '@/company/Category';
@@ -143,6 +143,11 @@ const routes = [
         path: '/user/mybooking',
         component: require('@/user/mybooking/MyBooking.vue').default,
         name: 'mybooking',
+    },
+    {
+        path: '/homestaylist',
+        component: HomestayList,
+        name: 'homstaylist',
     },
 ];
 
