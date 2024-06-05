@@ -37,6 +37,7 @@ class RoomTypeRepository extends BaseRepository implements RoomTypeRepositoryInt
 					}
 					$this->model->find($data['id'])->files()->saveMany($files);
 				}
+				app(HomestayRepository::class)->updatePriceToHomeStay($data['homestay_id']);
 				return $this->findDetail($data['id']);
 			});
 			return $result;
@@ -74,7 +75,9 @@ class RoomTypeRepository extends BaseRepository implements RoomTypeRepositoryInt
 					}
 					$this->model->find($id)->files()->saveMany($files);
 				}
-				return $this->findDetail($id);
+				$data = $this->findDetail($id);
+				app(HomestayRepository::class)->updatePriceToHomeStay($data['homestay_id']);
+				return $data;
 			});
 			return $result;
 		} catch(QueryException $e){
@@ -111,7 +114,7 @@ class RoomTypeRepository extends BaseRepository implements RoomTypeRepositoryInt
 	}
 
 	public function myRoomType($itemPerPage = 10){
-		$myHomeStayId = Auth::user()->homestays()->first()->id;
+		$myHomeStayId = Auth::user()->homestays()->first()->id ?? -1;
 		return $this->model->where('homestay_id', $myHomeStayId)->paginate($itemPerPage);
 	}
 

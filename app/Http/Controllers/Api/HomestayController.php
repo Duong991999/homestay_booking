@@ -16,6 +16,12 @@ class HomestayController extends Controller
     }
 
 	public function index(){
+		return $this->success($this->homestayRepo->paginateAll());
+	}
+	public function paginateSearch(Request $request){
+		return $this->success($this->homestayRepo->paginateSearch($request->all()));
+	}
+	public function all(){
 		return $this->success($this->homestayRepo->getAll());
 	}
 

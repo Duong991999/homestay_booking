@@ -55,7 +55,10 @@ class AuthController extends Controller
         ];
     }
 
-	public function user(){
-		return auth()->user();
+	public function user()
+	{
+		return $this->success(User::with(['roles', 'homestays' => function ($q) {
+			return $q->first();
+		}])->find(auth()->user()->id));
 	}
 }
