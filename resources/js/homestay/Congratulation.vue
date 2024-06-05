@@ -183,7 +183,7 @@
 </template>
 
 <script>
-import html2pdf from 'html2pdf.js';
+// import html2pdf from 'html2pdf.js';
 
 export default {
     methods: {
@@ -220,4 +220,5 @@ export default {
 .items-center svg {
     vertical-align: middle;
 }
+
 </style>

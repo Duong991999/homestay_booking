@@ -129,6 +129,11 @@ const routes = [
         component: require('@/profile/Index.vue').default,
         name: 'profile',
     },
+    {
+        path: '/homestay/checkdate',
+        component: require('@/homestay/Checkdate.vue').default,
+        name: 'checkdate',
+    },
 ];
 
 const router = new VueRouter({
