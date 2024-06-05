@@ -1,5 +1,5 @@
 <template>
-    <div><div></div>
+    <div>
         <success v-if="success">You've left a review, thank you very much!</success>
         <fatal-error v-if="error"></fatal-error>
         <div class="row" v-if="!success && !error">
