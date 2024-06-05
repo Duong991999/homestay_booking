@@ -41,14 +41,35 @@
                     >Sign-in</router-link
                 >
 
-                <a
-                    class="nav-link-1"
-                    href="#"
-                    @click.prevent="logout"
-                    style="text-decoration: none"
-                    v-if="isLoggedIn"
-                    >Logout</a
-                >
+                <div class="dropdown show border-0" v-if="isLoggedIn">
+                    <a
+                        class="nav-link dropdown-toggle p-0"
+                        role="button"
+                        id="dropdownMenuLink"
+                        data-toggle="dropdown"
+                        aria-haspopup="true"
+                        aria-expanded="dropdown.isOpen"
+                        style="background-color: rgb(255 255 255)"
+                    >
+                        <img
+                            src="https://s3.eu-central-1.amazonaws.com/bootstrapbaymisc/blog/24_days_bootstrap/fox.jpg"
+                            width="40"
+                            height="40"
+                            class="rounded-circle"
+                        />
+                    </a>
+
+                    <div
+                        class="dropdown-menu dropdown-menu-right"
+                        aria-labelledby="dropdownMenuLink"
+                        style="border-radius: 10px"
+                        :class="{ show: dropdown.isOpen }"
+                    >
+                        <a class="dropdown-item" href="#">Thông tin</a>
+                        <a class="dropdown-item" href="#">Đơn đặt phòng của tôi</a>
+                        <a class="dropdown-item" @click.prevent="logout"> Đăng xuất</a>
+                    </div>
+                </div>
             </div>
         </nav>
 
@@ -67,6 +88,9 @@ import CONST_FRONTEND from './const';
 export default {
     data() {
         return {
+            dropdown: {
+                isOpen: false,
+            },
             lastSearch: this.$store.state.lastSearch,
             list_home_screen: CONST_FRONTEND.home_screen_file,
         };
@@ -96,6 +120,9 @@ export default {
             $('.carousel').carousel({
                 interval: 2000,
             });
+        },
+        toggleDropdown() {
+            this.dropdown.isOpen = !this.dropdown.isOpen;
         },
     },
     mounted() {
@@ -146,7 +173,7 @@ export default {
     justify-content: space-between;
 }
 .navbar-scrolled {
-    background-color: rgb(249, 249, 249);
+    background-color: rgb(255 255 255);
     box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
 }
 .carousel-item {
@@ -181,5 +208,17 @@ export default {
 }
 .btn-sm {
     padding: 0.25rem 0rem;
+}
+.dropdown-item {
+    display: block;
+    width: 100%;
+    padding: 0.25rem 0.5rem;
+    clear: both;
+    font-weight: 400;
+    color: #eeae72;
+    text-align: inherit;
+    white-space: nowrap;
+    background-color: transparent;
+    border: 0;
 }
 </style>
