@@ -86,6 +86,7 @@
             <div><room></room></div>
         </div>
         <div class="col-xl-5 order-xl-2">
+			<FullCalendar :options="calendarOptions" />
             <checkdate></checkdate>
         </div>
     </div>
@@ -95,14 +96,25 @@
 import Amenities from './Amenities';
 import Room from './Room';
 import Checkdate from './Checkdate';
+import FullCalendar from '@fullcalendar/vue'
+import dayGridPlugin from '@fullcalendar/daygrid'
 export default {
     components: {
         Amenities,
         Room,
         Checkdate,
+		FullCalendar
     },
     data() {
         return {
+			calendarOptions: {
+				plugins: [dayGridPlugin],
+				initialView: 'dayGridMonth',
+				weekends: false,
+				events: [
+					{ title: 'Meeting', start: new Date() }
+				]
+			},
             advantages: [
                 'Every hotel staff to have Proper PPT kit for COVID-19',
                 'Every staff member wears face masks and gloves at all service times.',
