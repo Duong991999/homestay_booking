@@ -142,11 +142,6 @@ const routes = [
         name: 'reviewlist',
     },
     {
-        path: '/homestay/checkdate',
-        component: require('@/homestay/Checkdate.vue').default,
-        name: 'checkdate',
-    },
-    {
         path: '/search',
         component: require('@/user/homestay/Search.vue').default,
         name: 'search',
