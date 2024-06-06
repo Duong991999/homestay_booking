@@ -2,7 +2,7 @@
     <div class="container">
         <div class="row g-4">
             <div
-                v-for="(card, index) in cards"
+                v-for="(card, index) in items"
                 :key="index"
                 class="col-md-6 col-xl-4"
                 style="padding: 15px"
@@ -10,14 +10,14 @@
                 <div class="card shadow pb-0 w-100" style="border-radius: 1rem">
                     <img
                         class="card-img-top"
-                        :src="card.image"
-                        :alt="card.title"
+                        :src="card.file_path"
+                        :alt="card.file_name"
                         style="border-top-left-radius: 1rem; border-top-right-radius: 1rem"
                     />
                     <div class="card-body">
-                        <h5 class="card-title font-weight-bold">{{ card.title }}</h5>
-                        <h6 class="p-0">Catelory</h6>
+                        <h5 class="card-title font-weight-bold">{{ card.name }}</h5>
                         <small>Địa chỉ</small>
+                        <small>{{card.address}}</small>
 
                         <ul class="nav nav-divider mb-2 mb-sm-3">
                             <div class="nav-item">
@@ -31,17 +31,19 @@
                                 </li>
                             </div>
                         </ul>
-                        <h6>{{ card.min }}-{{ card.max }}</h6>
+                        <h6>{{ card.min_price }}-{{ card.max_price }}</h6>
                     </div>
                     <div class="card-footer border-top">
                         <div class="d-flex justify-content-between align-items-center">
                             <a
-                                href="/booking_v/directories/detail"
+                                :href="card.url"
                                 class="btn btn-link p-0 mb-0 items-center"
                             >
                                 View detail
                             </a>
-                        </div>
+							<!-- <router-link :to="{ name: 'detail', params }">Go to About Page</router-link> -->
+							<router-link :to="{ name: 'detail', params: { id: card.id } }">Detail</router-link>
+						</div>
                     </div>
                 </div>
             </div>
@@ -98,6 +100,12 @@ export default {
             ],
         };
     },
+	props: {
+		items: {
+			type: Array,
+			default: []
+		}
+	},
 };
 </script>
 

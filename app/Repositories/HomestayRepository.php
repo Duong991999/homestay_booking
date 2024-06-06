@@ -127,6 +127,7 @@ class HomestayRepository extends BaseRepository implements HomestayRepositoryInt
 	public function paginateSearch($attributes)
 	{
 		$name = $attributes['name'] ?? '';
+		$categories = $attributes['categories'] ?? '';
 		$address = $attributes['address'] ?? '';
 		$rating = $attributes['rating'] ?? '';
 		$minPrice = $attributes['min_price'] ?? null;
@@ -134,9 +135,7 @@ class HomestayRepository extends BaseRepository implements HomestayRepositoryInt
 		$cityCode = $attributes['city_code'] ?? null;
 		$districtCode = $attributes['district_code'] ?? null;
 		$wardCode = $attributes['ward_code'] ?? null;
-		$query = $this->model->query()->with(['categories:name', 'files' => function ($q) {
-			return $q->first();
-		}]);
+		$query = $this->model->query()->with(['categories:name', 'files']);
 		if ($name) {
 			$query = $query->where('name', 'LIKE', "%$name%");
 		}
@@ -161,7 +160,12 @@ class HomestayRepository extends BaseRepository implements HomestayRepositoryInt
 				->where('max_price', '>=', $minPrice);
 			});
 		}
-		return $query->paginate(10)->appends(Request::query());
+		if ($categories) {
+			$query = $query->whereHas('categories', function($q) use ($categories){
+				$q->whereIn('id', $categories);
+			});
+		}
+		return $query->paginate(1)->appends(Request::query());
 	}
 
 	public function updatePriceToHomeStay($id){

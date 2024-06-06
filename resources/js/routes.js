@@ -20,7 +20,7 @@ const routes = [
     },
 
     {
-        path: '/homestay/detail',
+        path: '/homestay/detail/:id',
         component: Detail,
         name: 'detail',
     },

@@ -47,7 +47,7 @@
                                     :options="cityOptions"
                                     mode="single"
                                     id="citySelect"
-                                    @change="selectedDistrict = ''"
+                                    @change="homestay.district_code = ''"
                                     style="border-radius: 10px"
                                 >
                                 </v-multi-select>
@@ -61,7 +61,7 @@
                                     :options="getDistrictOptions"
                                     mode="single"
                                     id="citySelect"
-                                    @change="selectedWard = ''"
+                                    @change="homestay.ward_code = ''"
                                     style="border-radius: 10px"
                                 >
                                 </v-multi-select>
@@ -268,7 +268,6 @@ export default {
 			formData.append('district_name', district_name);
 			formData.append('ward_name', ward_name);
 			formData.append('address', `${city_name}-${district_name}-${ward_name}`);
-			console.log(formData);
             try {
                 const response = await axios.post(
                     `/api/homestay/update/${this.$route.params.id}`,
