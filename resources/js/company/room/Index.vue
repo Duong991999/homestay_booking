@@ -17,11 +17,7 @@
                 >
                     <div class="row g-4">
                         <div class="col-md-3 col-lg-2">
-                            <img
-                                :src="listing.image"
-                                class="card-img rounded-2 m-2"
-                                alt="Card image"
-                            />
+                            <img :src="listing.image" class="card-img rounded-2" alt="Card image" />
                         </div>
                         <div class="col-lg-10" ms="9">
                             <div class="card-body position-relative d-flex flex-column p-0 h-100">
