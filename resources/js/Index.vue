@@ -73,6 +73,70 @@
             </div>
         </nav>
 
+        <!-- <section class="" style="margin-top: 100px">
+            <div class="container">
+                <div class="card rounded-3 border">
+                    <div class="d-sm-flex align-items-center justify-content-between px-4 pt-4">
+                        <div class="d-flex align-items-center">
+                            <div class="avatar avatar-xl mr-3">
+                                <img
+                                    class="avatar-img rounded-circle"
+                                    src=" assets/image/icon/user.png"
+                                    width="40"
+                                    alt="Avatar"
+                                />
+                            </div>
+                            <h4 class="mb-0"><span class="fw-light">Hi</span> Jacqueline Miller</h4>
+                        </div>
+                        <div class="navbar-expand-xl d-xl-block d-none">
+                            <ul class="nav nav-tabs justify-content-center border-bottom-0">
+                                <li class="nav-item">
+                                    <router-link
+                                        to="/admin/category/index"
+                                        class="nav-link-2"
+                                        active-class="active"
+                                        >Dashboard</router-link
+                                    >
+                                </li>
+                                <li class="nav-item">
+                                    <router-link
+                                        to="/company/homestay/index"
+                                        class="nav-link-2"
+                                        active-class="active"
+                                        >Listings</router-link
+                                    >
+                                </li>
+                                <li class="nav-item">
+                                    <router-link
+                                        to="/company/guests/index"
+                                        class="nav-link-2"
+                                        active-class="active"
+                                        >Bookings</router-link
+                                    >
+                                </li>
+                                <li class="nav-item">
+                                    <router-link
+                                        to="/company/reviewlist"
+                                        class="nav-link-2"
+                                        active-class="active"
+                                        >Reviews</router-link
+                                    >
+                                </li>
+                                <li class="nav-item">
+                                    <router-link
+                                        to="/company/inforroom"
+                                        class="nav-link-2"
+                                        active-class="active"
+                                        >Settings</router-link
+                                    >
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section> -->
+
         <div class="container-lg mt-2 mb-2 px-2">
             <div class="container-lg mt-2 mb-2 px-2">
                 <router-view></router-view>
@@ -129,7 +193,7 @@ export default {
         // Add mounted hook to handle scroll event
         const navEl = document.querySelector('.navbar');
         window.addEventListener('scroll', () => {
-            if (window.scrollY >= 200) {
+            if (window.scrollY >= 50) {
                 navEl.classList.add('navbar-scrolled');
             } else {
                 navEl.classList.remove('navbar-scrolled');
@@ -143,7 +207,7 @@ export default {
 
 <style scoped>
 .navbar {
-    transition: all 0.5s;
+    transition: all 0.1s;
 }
 .navbar-custom {
     height: 50px;
@@ -166,6 +230,22 @@ export default {
     justify-content: center;
     border: 1px solid rgb(253, 143, 75);
     border-radius: 5px;
+}
+.nav-link-2 {
+    font-weight: 500;
+    font-size: 16px;
+    border: 0;
+    text-decoration: none;
+    margin: 10px;
+    padding: 10px 20px;
+    border-radius: 20px;
+    color: rgb(237, 195, 169);
+    transition: color 0.3s ease;
+}
+
+.nav-link-2:hover,
+.nav-link-2.active {
+    color: rgb(253, 143, 75);
 }
 .navbar-title {
     display: flex;
