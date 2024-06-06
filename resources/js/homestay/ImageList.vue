@@ -4,12 +4,7 @@
             <a class="glightbox" href="assets/image/slide_home_screens/_1.jpg">
                 <div
                     class="card-grid-sm card-element-hover card-overlay-hover overflow-hidden border-0"
-                    style="
-                        background-image: url('assets/image/slide_home_screens/_1.jpg');
-                        background-position: left center;
-                        background-size: cover;
-                        height: 400px;
-                    "
+                    :style="items[0]?.style"
                 ></div>
             </a>
         </div>
@@ -19,12 +14,8 @@
                     <a class="glightbox" href="assets/image/slide_home_screens/_1.jpg">
                         <div
                             class="card-grid-sm card-element-hover card-overlay-hover overflow-hidden border-0"
-                            style="
-                                background-image: url('assets/image/slide_home_screens/_1.jpg');
-                                background-position: left center;
-                                background-size: cover;
-                                height: 240px;
-                            "
+							:style="items[1]?.style"
+
                         ></div>
                     </a>
                 </div>
@@ -32,24 +23,16 @@
                     <a class="glightbox" href="assets/image/slide_home_screens/_1.jpg">
                         <div
                             class="card-grid-sm card-element-hover card-overlay-hover overflow-hidden border-0"
-                            style="
-                                background-image: url('assets/image/slide_home_screens/_1.jpg');
-                                background-position: left center;
-                                background-size: cover;
-                                height: 150px;
-                            "
+							:style="items[2]?.style"
+
                         ></div>
                     </a>
                 </div>
                 <div class="col-md-6" style="margin-top: 8px; padding-left: 0px">
                     <div
                         class="card-grid-sm overflow-hidden"
-                        style="
-                            background-image: url('assets/image/slide_home_screens/_1.jpg');
-                            background-position: left center;
-                            background-size: cover;
-                            height: 150px;
-                        "
+						:style="items[3]?.style"
+
                     >
                         <div class="bg-overlay bg-dark opacity-7"></div>
                         <a
@@ -69,7 +52,23 @@
         </div>
     </div>
 </template>
-<script></script>
+<script>
+  export default {
+	data() {
+	  return {
+		color: '#2c3e50',
+	  };
+	},
+	props: {
+		items: {
+			type: Array,
+			default: []
+		}
+	},
+    methods: {
+    }
+  };
+</script>
 <style scoped>
 .card-grid-sm {
     border-radius: 20px;

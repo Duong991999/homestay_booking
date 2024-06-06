@@ -16,11 +16,11 @@
             </div>
         </div>
         <div class="card-body pt-4 p-0">
-            <div class="card shadow p-3" v-for="(room, index) in rooms" :key="index">
+            <div class="card shadow p-3" v-for="(room, index) in items" :key="index">
                 <div class="row g-4">
                     <div class="col-md-5 position-relative">
                         <img
-                            :src="room.image"
+                            :src="room?.files[0]?.file_path ?? 'assets/image/slide_home_screens/_1.jpg'"
                             alt="..."
                             width="200px"
                             style="border-radius: 15px"
@@ -53,16 +53,16 @@
                             style="padding-left: 10px; padding-top: 0px; padding-bottom: 0px"
                         >
                             <h5 class="card-title">
-                                <a href="#">{{ room.title }}</a>
+                                <a href="#">{{ room.name }}</a>
                             </h5>
                             <ul class="nav nav-divider mb-2">
-                                <li
+                                <!-- <li
                                     class="nav-item"
                                     v-for="(feature, index) in room.features"
                                     :key="index"
                                 >
                                     {{ feature }}
-                                </li>
+                                </li> -->
                                 <li class="nav-item">
                                     <a href="#" class="mb-0 text-primary">More+</a>
                                 </li>
@@ -100,7 +100,7 @@
                     <div class="modal-content">
                         <div class="modal-header">
                             <h5 class="modal-title" id="detailsModalLabel">
-                                {{ modalRoom.title }}
+                                {{ modalRoom?.name }}
                             </h5>
                             <button
                                 type="button"
@@ -112,15 +112,15 @@
                             </button>
                         </div>
                         <div class="modal-body">
-                            <img :src="modalRoom.image" alt="..." class="img-fluid mb-3" />
+                            <img :src=" modalRoom?.files[0]?.file_path" alt="..." class="img-fluid mb-3" />
                             <p><strong>Features:</strong></p>
                             <ul>
-                                <li v-for="(feature, index) in modalRoom.features" :key="index">
+                                <li v-for="(feature, index) in modalRoom?.features ?? []" :key="index">
                                     {{ feature }}
                                 </li>
                             </ul>
-                            <p v-if="modalRoom.cancellation" class="text-success">
-                                {{ modalRoom.cancellation }}
+                            <p v-if="modalRoom?.cancellation ?? false" class="text-success">
+                                {{ modalRoom?.cancellation }}
                             </p>
                         </div>
                     </div>
@@ -154,12 +154,18 @@ export default {
                     cancellation: 'Free Cancellation till 7 Jan 2022',
                 },
             ],
-            modalRoom: {},
+            modalRoom: null,
         };
     },
+	props: {
+		items: {
+			type: Array,
+		}
+	},
     methods: {
         showModal(room) {
             this.modalRoom = room;
+			console.log(this.modalRoom?.files[0]?.file_path);
             const modal = new bootstrap.Modal(document.getElementById('detailsModal'));
             modal.show();
         },

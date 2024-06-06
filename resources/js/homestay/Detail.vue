@@ -1,6 +1,7 @@
 <template>
     <div class="w-100" style="margin-top: 100px">
-        <image-list></image-list>
+		<v-fullloading :loading="loading"></v-fullloading>
+        <image-list :items="files"></image-list>
         <div class="row g-4 g-xl-5">
             <div class="col-xl-7">
                 <div class="card bg-transparent w-100 border-0" style="padding-right: 30px">
@@ -19,18 +20,9 @@
                             </div>
                         </div>
                         <p class="mb-3">
-                            Demesne far-hearted suppose venture excited see had has. Dependent on so
-                            extremely delivered by. Yet no jokes worse her why.
-                            <b
-                                >Bed one supposing breakfast day fulfilled off depending
-                                questions.</b
-                            >
+                            {{ homestay.content }}
                         </p>
-                        <p class="mb-0">
-                            Delivered dejection necessary objection do Mr prevailed. Mr feeling does
-                            chiefly cordial in do. Water timed folly right aware if oh truth. Large
-                            above be to means. Dashwood does provide stronger is.
-                        </p>
+                        
                         <div class="collapse" id="collapseContent">
                             <p class="my-3">
                                 We focus a great deal on the understanding of behavioral psychology
@@ -89,7 +81,9 @@
                 <div>
                     <amenities></amenities>
                 </div>
-                <div><room></room></div>
+                <div>
+					<room :items="rooms"></room>
+				</div>
             </div>
             <div class="col-xl-5 order-xl-2">
                 <div>
@@ -224,7 +218,7 @@
                                                         class="form-control form-control-lg"
                                                         style="border-radius: 10px"
                                                     >
-                                                        {{ room.count }}
+                                                        {{ room.count_booking??0 }}
                                                     </h6>
                                                 </div>
                                                 <div class="col-md-4">
@@ -236,9 +230,9 @@
                                                         class="form-control form-control-lg border-0"
                                                         style="border-radius: 10px"
                                                     >
-                                                        {{ room.count }} x {{ room.price }} =
+                                                        {{ room.count_booking ?? 0 }} x {{ room.price }} =
                                                         {{
-                                                            formatCurrency(room.price * room.count)
+                                                            formatCurrency(room.price * room.count_booking??0)
                                                         }}
                                                     </h6>
                                                 </div>
@@ -507,7 +501,7 @@
                                     <div class="row g-4">
                                         <div class="col-md-3 position-relative">
                                             <img
-                                                :src="room.image"
+                                                :src="room?.files[0]?.file_path"
                                                 alt="..."
                                                 width="100px"
                                                 style="border-radius: 15px"
@@ -523,7 +517,7 @@
                                                 "
                                             >
                                                 <h5 class="card-title">
-                                                    <a href="#">{{ room.title }}</a>
+                                                    <a href="#">{{ room?.name }}123</a>
                                                 </h5>
 
                                                 <!---->
@@ -551,7 +545,7 @@
                                                         </svg>
                                                     </button>
                                                     <h6 class="guest-selector-count mb-0">
-                                                        {{ room.count }}
+                                                        {{ room.count_booking??0 }}
                                                     </h6>
                                                     <button class="btn btn-md btn-link">
                                                         <svg
@@ -630,11 +624,13 @@ export default {
     },
     data() {
         return {
-            rooms: [
-                { id: 1, type: 'Vip-1', count: 6, price: 200 },
-                { id: 2, type: 'Deluxe', count: 10, price: 150 },
-                { id: 3, type: 'Standard', count: 15, price: 100 },
-            ],
+			rooms:[],
+			x: [10, 20, 30] ,// Khởi tạo mảng x với giá trị ban đầu
+            // rooms: [
+            //     { id: 1, type: 'Vip-1', count: 6, price: 200 },
+            //     { id: 2, type: 'Deluxe', count: 10, price: 150 },
+            //     { id: 3, type: 'Standard', count: 15, price: 100 },
+            // ],
             totalCost: 0,
             advantages: [
                 'Every hotel staff to have Proper PPT kit for COVID-19',
@@ -655,33 +651,14 @@ export default {
             isDropdownVisible: false,
             adults: 1,
             children: 0,
-            rooms: [
-                {
-                    image: 'assets/image/slide_home_screens/_1.jpg',
-                    title: 'Luxury Room with Balcony',
-                    features: ['Air Conditioning', 'Wifi', 'Kitchen'],
-                    count: 0,
-                    price: '$750',
-
-                    cancellation: null,
-                },
-                {
-                    image: 'assets/image/slide_home_screens/_1.jpg',
-                    title: 'Luxury Room with Balcony',
-                    features: ['Air Conditioning', 'Wifi', 'Kitchen'],
-                    price: '$750',
-                    count: 0,
-
-                    cancellation: 'Free Cancellation till 7 Jan 2022',
-                },
-            ],
             quantity: 1,
             minValue: 1,
-            maxValue: 10, // Thay đổi giá trị tối đa nếu cần,
+            maxValue: 10,
             star_day: null,
             close_day: null,
             loading: false,
             check: false,
+			files: [],
         };
     },
     computed: {
@@ -690,6 +667,27 @@ export default {
         },
     },
     methods: {
+		async loadData(){
+			this.loading= true
+            const response = await axios.get(`/api/homestay/show-detail/${this.$route.params.id}`);
+            this.homestay = response.data.data;
+			console.log(this.homestay);
+            let idList = [];
+            this.homestay.categories.forEach((category) => {
+                idList.push(category.id);
+            });
+            this.homestay.category_id = idList;
+			this.files = this.homestay.files
+			this.rooms = this.homestay.room_types.map((item) => {
+				item.count_booking = 0;
+				return item
+			})
+			this.files[0].style=`background-image: url(${this?.files[0]?.file_path ?? 'assets/image/slide_home_screens/_1.jpg'});background-position: left center;background-size: cover;height: 400px;`
+			this.files[1].style=`background-image: url(${this?.files[0]?.file_path ?? 'assets/image/slide_home_screens/_1.jpg'});background-position: left center;background-size: cover;height: 240px;`
+			this.files[2].style=`background-image: url(${this?.files[0]?.file_path ?? 'assets/image/slide_home_screens/_1.jpg'});background-position: left center;background-size: cover;height: 150px;`
+			this.files[3].style=`background-image: url(${this?.files[0]?.file_path ?? 'assets/image/slide_home_screens/_1.jpg'});background-position: left center;background-size: cover;height: 150px;`
+			this.loading= false
+		},
         toggleDropdown() {
             this.isDropdownVisible = !this.isDropdownVisible;
         },
@@ -701,8 +699,8 @@ export default {
                 this.adults--;
             } else if (type === 'children' && this.children > 0) {
                 this.children--;
-            } else if (type === 'count' && index !== null && this.rooms[index].count > 0) {
-                this.rooms[index].count--;
+            } else if (type === 'count' && index !== null && this.rooms[index].count_booking > 0) {
+				this.rooms[index].count_booking --
             }
         },
         increaseCount(type, index = null) {
@@ -711,7 +709,8 @@ export default {
             } else if (type === 'children') {
                 this.children++;
             } else if (type === 'count' && index !== null) {
-                this.rooms[index].count++;
+				roomUpdate.count_booking = roomUpdate.count_booking + 1
+				Vue.set(this.rooms, index, roomUpdate)
             }
         },
         handleClickOutside(event) {
@@ -730,7 +729,7 @@ export default {
         },
         calculateTotalCost() {
             this.totalCost = this.rooms.reduce((total, room) => {
-                return total + room.price * room.count;
+                return total + room.price * (room.count_booking ?? 0);
             }, 0);
         },
         formatCurrency(value) {
@@ -746,6 +745,11 @@ export default {
     },
     beforeUnmount() {
         document.removeEventListener('click', this.handleClickOutside);
+    },
+	async created() {
+        this.loading = true;
+        await this.loadData()
+        this.loading = false;
     },
 };
 </script>
