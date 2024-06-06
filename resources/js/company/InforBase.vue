@@ -47,7 +47,6 @@
                                     :options="cityOptions"
                                     mode="single"
                                     id="citySelect"
-                                    @change="homestay.district_code = ''"
                                     style="border-radius: 10px"
                                 >
                                 </v-multi-select>
@@ -61,7 +60,6 @@
                                     :options="getDistrictOptions"
                                     mode="single"
                                     id="citySelect"
-                                    @change="homestay.ward_code = ''"
                                     style="border-radius: 10px"
                                 >
                                 </v-multi-select>
