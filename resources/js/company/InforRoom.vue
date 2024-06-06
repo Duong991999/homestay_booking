@@ -31,7 +31,9 @@
                                 />
                             </div>
                         </fieldset>
-                        <fieldset class="mt-4">
+                    </div>
+                    <div class="col-md-6">
+                        <fieldset class="">
                             <legend
                                 tabindex="-1"
                                 class="form-label bv-no-focus-ring col-form-label pt-0"
@@ -49,7 +51,7 @@
                             </div>
                         </fieldset>
                     </div>
-                    <div class="col-md-6 pl-4">
+                    <div class="col-md-6 mt-4">
                         <legend
                             tabindex="-1"
                             class="form-label bv-no-focus-ring col-form-label pt-0"
@@ -61,6 +63,16 @@
                             :imageList="roomtype.files"
                         >
                         </v-image-multiple-input>
+                    </div>
+                    <div class="col-md-6 mt-4">
+                        <label>Mô tả</label>
+                        <textarea
+                            class="form-control"
+                            v-model="roomtype.content"
+                            id="exampleFormControlTextarea1"
+                            rows="3"
+                            style="border-radius: 10px"
+                        ></textarea>
                     </div>
                 </div>
 
@@ -142,6 +154,7 @@ export default {
     data() {
         return {
             roomtype: {
+                content: null,
                 name: null,
                 price: null,
                 files: [],
