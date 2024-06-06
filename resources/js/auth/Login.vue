@@ -124,8 +124,7 @@ export default {
                 });
                 this.$store.dispatch('login', response.data.data);
                 logIn();
-
-                this.$router.push({ name: 'home' });
+                this.$router.push({ name: 'welcome' });
             } catch (error) {
                 this.loading = true;
                 this.errors =

@@ -57,8 +57,12 @@ class AuthController extends Controller
 
 	public function user()
 	{
-		return $this->success(User::with(['roles', 'homestays' => function ($q) {
-			return $q->first();
-		}])->find(auth()->user()->id));
+		if(auth()->user()){
+			return $this->success(User::with(['roles', 'homestays' => function ($q) {
+				return $q->first();
+			}])->find(auth()->user()->id));
+		}else{
+			return $this->success([]);
+		}
 	}
 }
