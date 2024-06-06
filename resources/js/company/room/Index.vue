@@ -1,13 +1,16 @@
 <template>
-    <div class="col-12" style="margin-top: 50px">
+    <div class="col-12" style="margin-top: 100px">
         <div class="card border w-100">
-            <div class="card-header border-bottom">
-                <h5 class="card-header-title">
-                    My Listings
-                    <span class="badge bg-primary bg-opacity-10 ms-2"
-                        >{{ listings.length }} Items</span
-                    >
-                </h5>
+            <div class="card-header border-bottom" style="background-color: white">
+                <div class="row d-flex justify-content-between">
+                    <h5 class="card-header-title ml-4">
+                        Quản lý phòng
+                        <span class="badge ms-2 ml-4">{{ listings.length }} Loại Phòng</span>
+                    </h5>
+                    <router-link to="" class="btn btn-sm btn-success mb-0 ms-auto">
+                        Add New Room Type
+                    </router-link>
+                </div>
             </div>
             <div class="card-body">
                 <div
@@ -36,42 +39,166 @@
                                         <span class="mb-0 me-2">/day</span>
                                     </div>
                                     <div class=" " style="margin-right: 20px">
-                                        <button class="btn btn-sm btn-primary mb-0" type="button">
-                                            <svg
-                                                width="1em"
-                                                height="1em"
-                                                viewBox="0 0 16 16"
-                                                fill="currentColor"
-                                                role="img"
-                                                focusable="false"
-                                                class="fa-fw mb-1"
-                                            >
-                                                <path
-                                                    d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"
-                                                ></path>
-                                                <path
-                                                    fill-rule="evenodd"
-                                                    d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z"
-                                                ></path>
-                                            </svg>
-                                            Edit
+                                        <button
+                                            class="btn btn-sm btn-primary mb-0"
+                                            @click="
+                                            (listing)"
+                                            type="button"
+                                        >
+                                            <img src="assets/image/icon/file.png  " width="20" />
                                         </button>
-                                        <button class="btn btn-sm btn-danger mb-0" type="button">
-                                            <svg
-                                                width="1em"
-                                                height="1em"
-                                                viewBox="0 0 16 16"
-                                                fill="currentColor"
-                                                role="img"
-                                                focusable="false"
-                                                class="fa-fw mb-1"
-                                            >
-                                                <path
-                                                    d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5M11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47M8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5"
-                                                ></path>
-                                            </svg>
-                                            Delete
+                                        <button
+                                            href="#"
+                                            class="btn btn-sm btn-danger p-2 ml-2"
+                                            style="border-radius: 10px; background-color: #ff5050"
+                                            @click.prevent="showDeleteModal(booking)"
+                                        >
+                                            <img src="assets/image/icon/bin.png  " width="20" />
                                         </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Edit Room Type Modal -->
+        <div
+            class="modal fade"
+            id="editRoomTypeModal"
+            tabindex="-1"
+            aria-labelledby="editRoomTypeModalLabel"
+            aria-hidden="true"
+        >
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="editRoomTypeModalLabel">Edit Room Type</h5>
+                        <button
+                            type="button"
+                            class="btn-close"
+                            data-bs-dismiss="modal"
+                            aria-label="Close"
+                        ></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row pl-4">
+                            <div class="col-md-6">
+                                <fieldset>
+                                    <legend
+                                        tabindex="-1"
+                                        class="form-label bv-no-focus-ring col-form-label pt-0"
+                                    >
+                                        Tên phòng *
+                                    </legend>
+                                    <div>
+                                        <input
+                                            class="form-control"
+                                            v-model="roomtype.name"
+                                            type="text"
+                                            placeholder="Thêm tên phòng"
+                                            style="border-radius: 10px; height: 40px"
+                                        />
+                                    </div>
+                                </fieldset>
+                                <fieldset class="mt-4">
+                                    <legend
+                                        tabindex="-1"
+                                        class="form-label bv-no-focus-ring col-form-label pt-0"
+                                    >
+                                        Giá phòng *
+                                    </legend>
+                                    <div>
+                                        <input
+                                            class="form-control"
+                                            type="text"
+                                            v-model="roomtype.price"
+                                            placeholder="Thêm giá phòng"
+                                            style="border-radius: 10px; height: 40px"
+                                        />
+                                    </div>
+                                </fieldset>
+                            </div>
+                            <div class="col-md-6 pl-4">
+                                <legend
+                                    tabindex="-1"
+                                    class="form-label bv-no-focus-ring col-form-label pt-0"
+                                >
+                                    Ảnh giới thiệu
+                                </legend>
+                                <v-image-multiple-input
+                                    @file-selected="handleFileChange"
+                                    :imageList="roomtype.files"
+                                >
+                                </v-image-multiple-input>
+                            </div>
+                        </div>
+
+                        <!---list-->
+                        <div class="col-md-12 pl-0" style="margin-top: 40px">
+                            <legend
+                                tabindex="-1"
+                                class="form-label bv-no-focus-ring col-form-label pl-4"
+                            >
+                                Danh sách phòng
+                            </legend>
+                            <div class="card w-100">
+                                <div class="card-body">
+                                    <div class="container">
+                                        <div class="bg-light rounded d-none d-lg-block">
+                                            <div class="row g-4">
+                                                <div
+                                                    class="col-sm-6 d-flex justify-content-center pb-2"
+                                                >
+                                                    <h6 class="font-weight-bold">Số phòng</h6>
+                                                </div>
+                                                <div
+                                                    class="col-sm-6 d-flex justify-content-center pb-2"
+                                                >
+                                                    <h6 class="font-weight-bold">Hoạt động</h6>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div
+                                            v-for="(room, index) in roomtype.rooms"
+                                            :key="index"
+                                            class="row g-4 mt-2"
+                                        >
+                                            <div class="col-sm-6 d-flex justify-content-center">
+                                                <small class="d-block d-lg-none">Số phòng</small>
+                                                <div class="d-flex align-items-center">
+                                                    <div
+                                                        class="avatar avatar-xs flex-shrink-0"
+                                                    ></div>
+                                                    <div class="ms-2 d-flex justify-content-center">
+                                                        <input
+                                                            v-model="room.name"
+                                                            class="form-control"
+                                                            placeholder="Room Name"
+                                                        />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <div class="row d-flex justify-content-around">
+                                                    <button
+                                                        class="btn btn-danger mb-0"
+                                                        @click="deleteRoom(index)"
+                                                    >
+                                                        Xóa
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row g-4 mt-4">
+                                            <div class="col-12 d-flex justify-content-center">
+                                                <button class="btn btn-primary" @click="addRoom">
+                                                    Thêm phòng mới
+                                                </button>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -87,6 +214,13 @@
 export default {
     data() {
         return {
+            roomtype: {
+                name: null,
+                price: null,
+                files: [],
+                rooms: [],
+            },
+
             listings: [
                 {
                     image: 'assets/image/slide_home_screens/_1.jpg',
@@ -94,9 +228,35 @@ export default {
                     address: '31J W Spark Street, California - 24578',
                     price: 1586,
                 },
+                {
+                    image: 'assets/image/slide_home_screens/_1.jpg',
+                    title: 'Pride moon Village ',
+                    address: '31J W Spark Street, California - 24578',
+                    price: 1586,
+                },
                 // Add more listings as needed
             ],
+            currentRoom: {
+                title: '',
+                image: '',
+                price: 0,
+            },
         };
+    },
+    methods: {
+        openEditModal(listing) {
+            this.currentRoom = { ...listing };
+            const modal = new bootstrap.Modal(document.getElementById('editRoomTypeModal'));
+            modal.show();
+        },
+        updateRoomType() {
+            const index = this.listings.findIndex((room) => room.title === this.currentRoom.title);
+            if (index !== -1) {
+                this.listings.splice(index, 1, this.currentRoom);
+            }
+            const modal = bootstrap.Modal.getInstance(document.getElementById('editRoomTypeModal'));
+            modal.hide();
+        },
     },
 };
 </script>

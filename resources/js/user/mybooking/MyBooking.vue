@@ -1,6 +1,6 @@
 <template>
     <div>
-        <!-- Modal -->
+        <!-- Booking Modal -->
         <div
             class="modal fade"
             id="bookingModal"
@@ -59,7 +59,6 @@
                             <div class="row">
                                 <div class="col-md-8">
                                     <label class="form-label d-block">Loại phòng</label>
-
                                     <div class="">
                                         <h6
                                             class="form-control form-control-lg"
@@ -91,10 +90,52 @@
                         <button
                             type="button"
                             class="btn btn-secondary"
-                            @click="closeModal"
+                            @click="closeModal('bookingModal')"
                             aria-label="Close"
                         >
                             Close
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Review Modal -->
+        <div
+            class="modal fade"
+            id="reviewModal"
+            tabindex="-1"
+            aria-labelledby="reviewModalLabel"
+            aria-hidden="true"
+        >
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content" style="border-radius: 10px">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="reviewModalLabel">Đánh giá homestay</h5>
+                    </div>
+                    <div class="modal-body">
+                        <div class="mb-3">
+                            <label for="comment" class="form-label">Nhận xét</label>
+                            <textarea
+                                id="comment"
+                                class="form-control"
+                                v-model="reviewComment"
+                                rows="4"
+                                style="border-radius: 10px"
+                            ></textarea>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button
+                            type="button"
+                            class="btn btn-secondary"
+                            @click="closeModal('reviewModal')"
+                            aria-label="Close"
+                        >
+                            Hủy
+                        </button>
+                        <button type="button" class="btn btn-primary" @click="submitReview">
+                            Gửi đánh giá
                         </button>
                     </div>
                 </div>
@@ -115,35 +156,27 @@
                     </div>
                     <div class="card-body pb-0">
                         <div class="row g-3 align-items-center justify-content-between mb-3">
-                            <div class="col-md-8">
-                                <form class="rounded position-relative">
+                            <div class="col-md-8 row">
+                                <form class="position-relative col-md-10">
                                     <input
                                         class="form-control pe-5"
                                         type="search"
                                         placeholder="Search"
                                         aria-label="Search"
+                                        style="height: 40px; border-radius: 10px"
                                     />
-                                    <button
-                                        class="btn border-0 px-3 py-0 position-absolute top-50 end-0 translate-middle-y"
-                                        type="submit"
-                                    >
-                                        <svg
-                                            class="svg-inline--fa fa-magnifying-glass"
-                                            aria-hidden="true"
-                                            focusable="false"
-                                            data-prefix="fas"
-                                            data-icon="magnifying-glass"
-                                            role="img"
-                                            xmlns="http://www.w3.org/2000/svg"
-                                            viewBox="0 0 512 512"
-                                        >
-                                            <path
-                                                fill="currentColor"
-                                                d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z"
-                                            ></path>
-                                        </svg>
-                                    </button>
                                 </form>
+                                <button
+                                    class="btn px-3 col-md-2"
+                                    type="submit"
+                                    style="
+                                        background-color: antiquewhite;
+                                        color: #ff5050;
+                                        border-radius: 10px;
+                                    "
+                                >
+                                    Tìm Kiếm
+                                </button>
                             </div>
                         </div>
 
@@ -152,17 +185,9 @@
                             <li class="nav-item">
                                 <a
                                     class="nav-link"
-                                    :class="{ active: selectedTab === 'All' }"
+                                    :class="{ active: selectedTab === 'All ' }"
                                     @click="selectedTab = 'All'"
-                                    >All</a
-                                >
-                            </li>
-                            <li class="nav-item">
-                                <a
-                                    class="nav-link"
-                                    :class="{ active: selectedTab === 'Booked' }"
-                                    @click="selectedTab = 'Booked'"
-                                    >Booked</a
+                                    >Tất cả</a
                                 >
                             </li>
                             <li class="nav-item">
@@ -170,7 +195,24 @@
                                     class="nav-link"
                                     :class="{ active: selectedTab === 'Reserved' }"
                                     @click="selectedTab = 'Reserved'"
-                                    >Reserved</a
+                                    >Chờ xử lý</a
+                                >
+                            </li>
+                            <li class="nav-item">
+                                <a
+                                    class="nav-link"
+                                    :class="{ active: selectedTab === 'Booked' }"
+                                    @click="selectedTab = 'Booked'"
+                                    >Thành công</a
+                                >
+                            </li>
+
+                            <li class="nav-item">
+                                <a
+                                    class="nav-link"
+                                    :class="{ active: selectedTab === 'Completed' }"
+                                    @click="selectedTab = 'Completed'"
+                                    >Hoàn thành</a
                                 >
                             </li>
                         </ul>
@@ -189,27 +231,39 @@
                                 <tbody class="border-top-0">
                                     <tr v-for="(booking, index) in filteredBookings" :key="index">
                                         <td>
-                                            <h6 class="mb-0">{{ index + 1 }}</h6>
+                                            <h6 class="p-2 mb-0">{{ index + 1 }}</h6>
                                         </td>
                                         <td>
-                                            <h6 class="mb-0">
+                                            <h6 class="p-2 mb-0">
                                                 <a :href="booking.link">{{ booking.name }}</a>
                                             </h6>
                                         </td>
                                         <td>
-                                            <h6 class="mb-0 fw-light">{{ booking.date }}</h6>
+                                            <h6 class="p-2 mb-0 fw-light">{{ booking.date }}</h6>
                                         </td>
                                         <td>
-                                            <div :class="`bg-${booking.statusColor} badge`">
+                                            <div
+                                                class="m-2"
+                                                :class="`bg-${booking.statusColor} badge`"
+                                            >
                                                 {{ booking.status }}
                                             </div>
                                         </td>
                                         <td>
                                             <a
                                                 href="#"
-                                                class="btn btn-sm btn-light mb-0"
+                                                class="btn btn-sm btn-light p-2 ml-2"
+                                                style="border-radius: 10px"
                                                 @click.prevent="showModal(booking)"
-                                                >View</a
+                                                ><img src="assets/image/icon/eye.png  " width="20"
+                                            /></a>
+                                            <a
+                                                v-if="booking.status === 'Completed'"
+                                                href="#"
+                                                class="btn btn-sm btn-warning p-2 ml-2"
+                                                style="border-radius: 10px"
+                                                @click.prevent="showReviewModal(booking)"
+                                                >Đánh giá</a
                                             >
                                         </td>
                                     </tr>
@@ -230,6 +284,7 @@ export default {
     data() {
         return {
             selectedBooking: {},
+            reviewComment: '',
             selectedTab: 'All',
             bookings: [
                 {
@@ -260,6 +315,13 @@ export default {
                     statusColor: 'success',
                     link: '/booking_v/agent/bookings',
                 },
+                {
+                    name: 'Ocean View Suite',
+                    date: 'Dec 1 - 5',
+                    status: 'Completed',
+                    statusColor: 'secondary',
+                    link: '/booking_v/agent/bookings',
+                },
             ],
             rooms: [
                 { id: 1, type: 'Vip-1', count: 6 },
@@ -282,14 +344,21 @@ export default {
             const modal = new Modal(document.getElementById('bookingModal'));
             modal.show();
         },
-        closeModal() {
-            const modal = Modal.getInstance(document.getElementById('bookingModal'));
+        closeModal(modalId) {
+            const modal = Modal.getInstance(document.getElementById(modalId));
             modal.hide();
+        },
+        showReviewModal(booking) {
+            this.selectedBooking = booking;
+            this.reviewComment = '';
+            const modal = new Modal(document.getElementById('reviewModal'));
+            modal.show();
+        },
+        submitReview() {
+            // Handle the review submission logic here
+            console.log(`Review for ${this.selectedBooking.name}: ${this.reviewComment}`);
+            this.closeModal('reviewModal');
         },
     },
 };
 </script>
-
-<style scoped>
-/* Add any custom styles here */
-</style>
