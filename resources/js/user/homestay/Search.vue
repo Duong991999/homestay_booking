@@ -236,6 +236,9 @@ export default {
             ],
             isFocused: false,
             value: [0, 10],
+			address: '',
+			checkinDate: '',
+			checkoutDate
         };
     },
     methods: {
@@ -243,6 +246,21 @@ export default {
             this.show = !this.show;
         },
     },
+	async created(){
+		if (this.$route.params.id) {
+            this.isCreate = false;
+        }
+        this.loading = true;
+        await this.loadCategoryOptions();
+
+        if (this.isCreate) {
+            this.title = 'Đăng kí Homestay';
+        } else {
+            this.title = 'Cập nhập Homestay';
+            await this.loadHomestay();
+        }
+        this.loading = false;
+	}
 };
 </script>
 

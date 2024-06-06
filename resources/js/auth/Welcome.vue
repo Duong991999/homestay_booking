@@ -72,7 +72,7 @@
                             <input
                                 class="input__field"
                                 type="text"
-                                v-model="inputValue"
+                                v-model="address"
                                 @focus="isFocused = true"
                                 @blur="isFocused = false"
                             />
@@ -82,7 +82,7 @@
                             <input
                                 class="input__field"
                                 type="date"
-                                v-model="star_day"
+                                v-model="checkinDate"
                                 @focus="isFocused = true"
                                 @blur="isFocused = false"
                             />
@@ -92,7 +92,7 @@
                             <input
                                 class="input__field"
                                 type="date"
-                                v-model="close_day"
+                                v-model="checkoutDate"
                                 @focus="isFocused = true"
                                 @blur="isFocused = false"
                             />
@@ -103,6 +103,7 @@
                             <button
                                 class="btn btn-primary custom-bg border-0"
                                 type="submit"
+								@click.prevent="searchHomestay()"
                                 style="border-radius: 50px; width: 4rem; height: 4rem"
                             >
                                 <img
@@ -633,6 +634,9 @@ export default {
                 },
                 // Add more slides as needed
             ],
+			address: '',
+			checkinDate: '',
+			checkoutDate: '',
         };
     },
     created() {
@@ -677,6 +681,13 @@ export default {
                 });
             }
         },
+		searchHomestay(){
+			this.$router.push({ name: 'search', query:{
+				address: this.address,
+				checkinDate: this.checkinDate,
+				checkoutDate: this.checkoutDate,
+			} });
+		}
     },
     mounted() {
         // Add mounted hook to handle scroll event

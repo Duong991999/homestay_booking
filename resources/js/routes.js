@@ -147,9 +147,10 @@ const routes = [
         name: 'checkdate',
     },
     {
-        path: '/sreach',
-        component: require('@/user/homestay/Sreach.vue').default,
-        name: 'sreach',
+        path: '/search',
+        component: require('@/user/homestay/Search.vue').default,
+        name: 'search',
+		props: (route) => ({ query: route.query })
     },
 ];
 
