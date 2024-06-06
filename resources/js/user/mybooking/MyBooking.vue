@@ -109,7 +109,7 @@
                         <h5 class="card-header-title">
                             Đơn đặt phòng của tôi
                             <span class="badge bg-primary bg-opacity-10 text-primary ms-2"
-                                >{{ bookings.length }} Đơn
+                                >{{ filteredBookings.length }} Đơn
                             </span>
                         </h5>
                     </div>
@@ -146,7 +146,36 @@
                                 </form>
                             </div>
                         </div>
-                        <div class="table-responsive border-0">
+
+                        <!-- Tabs -->
+                        <ul class="nav nav-tabs">
+                            <li class="nav-item">
+                                <a
+                                    class="nav-link"
+                                    :class="{ active: selectedTab === 'All' }"
+                                    @click="selectedTab = 'All'"
+                                    >All</a
+                                >
+                            </li>
+                            <li class="nav-item">
+                                <a
+                                    class="nav-link"
+                                    :class="{ active: selectedTab === 'Booked' }"
+                                    @click="selectedTab = 'Booked'"
+                                    >Booked</a
+                                >
+                            </li>
+                            <li class="nav-item">
+                                <a
+                                    class="nav-link"
+                                    :class="{ active: selectedTab === 'Reserved' }"
+                                    @click="selectedTab = 'Reserved'"
+                                    >Reserved</a
+                                >
+                            </li>
+                        </ul>
+
+                        <div class="table-responsive border-0 mt-3">
                             <table class="table align-middle p-4 mb-0 table-hover table-shrink">
                                 <thead class="table-light">
                                     <tr>
@@ -158,7 +187,7 @@
                                     </tr>
                                 </thead>
                                 <tbody class="border-top-0">
-                                    <tr v-for="(booking, index) in bookings" :key="index">
+                                    <tr v-for="(booking, index) in filteredBookings" :key="index">
                                         <td>
                                             <h6 class="mb-0">{{ index + 1 }}</h6>
                                         </td>
@@ -201,6 +230,7 @@ export default {
     data() {
         return {
             selectedBooking: {},
+            selectedTab: 'All',
             bookings: [
                 {
                     name: 'Deluxe Pool View',
@@ -211,29 +241,23 @@ export default {
                 },
                 {
                     name: 'Deluxe Pool View with Breakfast',
-
                     date: 'Nov 24 - 28',
                     status: 'Booked',
                     statusColor: 'success',
-
                     link: '/booking_v/agent/bookings',
                 },
                 {
                     name: 'Luxury Room with Balcony',
-
                     date: 'Nov 24 - 28',
                     status: 'Reserved',
                     statusColor: 'info',
-
                     link: '/booking_v/agent/bookings',
                 },
                 {
                     name: 'Deluxe Room Twin Bed With Balcony',
-
                     date: 'Nov 28 - 30',
                     status: 'Booked',
                     statusColor: 'success',
-
                     link: '/booking_v/agent/bookings',
                 },
             ],
@@ -243,6 +267,14 @@ export default {
                 { id: 3, type: 'Standard', count: 15 },
             ],
         };
+    },
+    computed: {
+        filteredBookings() {
+            if (this.selectedTab === 'All') {
+                return this.bookings;
+            }
+            return this.bookings.filter((booking) => booking.status === this.selectedTab);
+        },
     },
     methods: {
         showModal(booking) {

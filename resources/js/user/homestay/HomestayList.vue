@@ -2,12 +2,12 @@
     <div class="container">
         <div class="row g-4">
             <div
-                v-for="(card, index) in paginatedCards"
+                v-for="(card, index) in cards"
                 :key="index"
                 class="col-md-6 col-xl-4"
                 style="padding: 15px"
             >
-                <div class="card shadow pb-0 w-100 h-100" style="border-radius: 1rem">
+                <div class="card shadow pb-0 w-100" style="border-radius: 1rem">
                     <img
                         class="card-img-top"
                         :src="card.image"
@@ -15,9 +15,9 @@
                         style="border-top-left-radius: 1rem; border-top-right-radius: 1rem"
                     />
                     <div class="card-body">
-                        <h5 class="card-title">{{ card.title }}</h5>
+                        <h5 class="card-title font-weight-bold">{{ card.title }}</h5>
+                        <h6 class="p-0">Catelory</h6>
                         <small>Địa chỉ</small>
-                        <h6 class="">Catelory</h6>
 
                         <ul class="nav nav-divider mb-2 mb-sm-3">
                             <div class="nav-item">
@@ -31,7 +31,7 @@
                                 </li>
                             </div>
                         </ul>
-                        <h6>Giá</h6>
+                        <h6>{{ card.min }}-{{ card.max }}</h6>
                     </div>
                     <div class="card-footer border-top">
                         <div class="d-flex justify-content-between align-items-center">
@@ -46,24 +46,6 @@
                 </div>
             </div>
         </div>
-        <nav>
-            <ul class="pagination justify-content-center mt-4">
-                <li class="page-item" :class="{ disabled: currentPage === 1 }">
-                    <a class="page-link" @click="changePage(currentPage - 1)"><</a>
-                </li>
-                <li
-                    v-for="page in pagesToShow"
-                    :key="page"
-                    class="page-item"
-                    :class="{ active: currentPage === page }"
-                >
-                    <a class="page-link" @click="changePage(page)">{{ page }}</a>
-                </li>
-                <li class="page-item" :class="{ disabled: currentPage === totalPages }">
-                    <a class="page-link" @click="changePage(currentPage + 1)">></a>
-                </li>
-            </ul>
-        </nav>
     </div>
 </template>
 
@@ -78,330 +60,43 @@ export default {
                     title: 'Card title 1',
                     features: ['Air Conditioning', 'Wifi', 'Kitchen', 'Pool'],
                     link: '#',
+                    min: '100',
+                    max: '200',
                 },
                 {
                     image: 'assets/image/slide_home_screens/_1.jpg',
                     title: 'Card title 2',
                     features: ['Air Conditioning', 'Wifi', 'Gym'],
                     link: '#',
+                    min: '100',
+                    max: '200',
                 },
                 {
                     image: 'assets/image/slide_home_screens/_2.jpg',
                     title: 'Card title 3',
                     features: ['Air Conditioning', 'Wifi', 'Kitchen', 'Garden'],
                     link: '#',
+                    min: '100',
+                    max: '200',
                 },
                 {
                     image: 'assets/image/slide_home_screens/_2.jpg',
                     title: 'Card title 4',
                     features: ['Wifi', 'Kitchen', 'Pool'],
                     link: '#',
+                    min: '100',
+                    max: '200',
                 },
                 {
                     image: 'assets/image/slide_home_screens/_2.jpg',
                     title: 'Card title 5',
                     features: ['Air Conditioning', 'Kitchen', 'Pool'],
                     link: '#',
-                },
-                {
-                    image: 'assets/image/slide_home_screens/_1.jpg',
-                    title: 'Card title 6',
-                    features: ['Air Conditioning', 'Wifi', 'Gym', 'Pool'],
-                    link: '#',
-                },
-                {
-                    image: 'assets/image/slide_home_screens/_0.jpg',
-                    title: 'Card title 1',
-                    features: ['Air Conditioning', 'Wifi', 'Kitchen', 'Pool'],
-                    link: '#',
-                },
-                {
-                    image: 'assets/image/slide_home_screens/_1.jpg',
-                    title: 'Card title 2',
-                    features: ['Air Conditioning', 'Wifi', 'Gym'],
-                    link: '#',
-                },
-                {
-                    image: 'assets/image/slide_home_screens/_2.jpg',
-                    title: 'Card title 3',
-                    features: ['Air Conditioning', 'Wifi', 'Kitchen', 'Garden'],
-                    link: '#',
-                },
-                {
-                    image: 'assets/image/slide_home_screens/_3.jpg',
-                    title: 'Card title 4',
-                    features: ['Wifi', 'Kitchen', 'Pool'],
-                    link: '#',
-                },
-                {
-                    image: 'assets/image/slide_home_screens/_1.jpg',
-                    title: 'Card title 5',
-                    features: ['Air Conditioning', 'Kitchen', 'Pool'],
-                    link: '#',
-                },
-                {
-                    image: 'assets/image/slide_home_screens/_1.jpg',
-                    title: 'Card title 6',
-                    features: ['Air Conditioning', 'Wifi', 'Gym', 'Pool'],
-                    link: '#',
-                },
-                {
-                    image: 'assets/image/slide_home_screens/_0.jpg',
-                    title: 'Card title 1',
-                    features: ['Air Conditioning', 'Wifi', 'Kitchen', 'Pool'],
-                    link: '#',
-                },
-                {
-                    image: 'assets/image/slide_home_screens/_1.jpg',
-                    title: 'Card title 2',
-                    features: ['Air Conditioning', 'Wifi', 'Gym'],
-                    link: '#',
-                },
-                {
-                    image: 'assets/image/slide_home_screens/_2.jpg',
-                    title: 'Card title 3',
-                    features: ['Air Conditioning', 'Wifi', 'Kitchen', 'Garden'],
-                    link: '#',
-                },
-                {
-                    image: 'assets/image/slide_home_screens/_2.jpg',
-                    title: 'Card title 4',
-                    features: ['Wifi', 'Kitchen', 'Pool'],
-                    link: '#',
-                },
-                {
-                    image: 'assets/image/slide_home_screens/_2.jpg',
-                    title: 'Card title 5',
-                    features: ['Air Conditioning', 'Kitchen', 'Pool'],
-                    link: '#',
-                },
-                {
-                    image: 'assets/image/slide_home_screens/_2.jpg',
-                    title: 'Card title 6',
-                    features: ['Air Conditioning', 'Wifi', 'Gym', 'Pool'],
-                    link: '#',
-                },
-                {
-                    image: 'assets/image/slide_home_screens/_0.jpg',
-                    title: 'Card title 1',
-                    features: ['Air Conditioning', 'Wifi', 'Kitchen', 'Pool'],
-                    link: '#',
-                },
-                {
-                    image: 'assets/image/slide_home_screens/_1.jpg',
-                    title: 'Card title 2',
-                    features: ['Air Conditioning', 'Wifi', 'Gym'],
-                    link: '#',
-                },
-                {
-                    image: 'assets/image/slide_home_screens/_2.jpg',
-                    title: 'Card title 3',
-                    features: ['Air Conditioning', 'Wifi', 'Kitchen', 'Garden'],
-                    link: '#',
-                },
-                {
-                    image: 'assets/image/slide_home_screens/_2.jpg',
-                    title: 'Card title 4',
-                    features: ['Wifi', 'Kitchen', 'Pool'],
-                    link: '#',
-                },
-                {
-                    image: 'assets/image/slide_home_screens/_2.jpg',
-                    title: 'Card title 5',
-                    features: ['Air Conditioning', 'Kitchen', 'Pool'],
-                    link: '#',
-                },
-                {
-                    image: 'assets/image/slide_home_screens/_1.jpg',
-                    title: 'Card title 6',
-                    features: ['Air Conditioning', 'Wifi', 'Gym', 'Pool'],
-                    link: '#',
-                },
-                {
-                    image: 'assets/image/slide_home_screens/_0.jpg',
-                    title: 'Card title 1',
-                    features: ['Air Conditioning', 'Wifi', 'Kitchen', 'Pool'],
-                    link: '#',
-                },
-                {
-                    image: 'assets/image/slide_home_screens/_1.jpg',
-                    title: 'Card title 2',
-                    features: ['Air Conditioning', 'Wifi', 'Gym'],
-                    link: '#',
-                },
-                {
-                    image: 'assets/image/slide_home_screens/_2.jpg',
-                    title: 'Card title 3',
-                    features: ['Air Conditioning', 'Wifi', 'Kitchen', 'Garden'],
-                    link: '#',
-                },
-                {
-                    image: 'assets/image/slide_home_screens/_3.jpg',
-                    title: 'Card title 4',
-                    features: ['Wifi', 'Kitchen', 'Pool'],
-                    link: '#',
-                },
-                {
-                    image: 'assets/image/slide_home_screens/_1.jpg',
-                    title: 'Card title 5',
-                    features: ['Air Conditioning', 'Kitchen', 'Pool'],
-                    link: '#',
-                },
-                {
-                    image: 'assets/image/slide_home_screens/_1.jpg',
-                    title: 'Card title 6',
-                    features: ['Air Conditioning', 'Wifi', 'Gym', 'Pool'],
-                    link: '#',
-                },
-                {
-                    image: 'assets/image/slide_home_screens/_0.jpg',
-                    title: 'Card title 1',
-                    features: ['Air Conditioning', 'Wifi', 'Kitchen', 'Pool'],
-                    link: '#',
-                },
-                {
-                    image: 'assets/image/slide_home_screens/_1.jpg',
-                    title: 'Card title 2',
-                    features: ['Air Conditioning', 'Wifi', 'Gym'],
-                    link: '#',
-                },
-                {
-                    image: 'assets/image/slide_home_screens/_2.jpg',
-                    title: 'Card title 3',
-                    features: ['Air Conditioning', 'Wifi', 'Kitchen', 'Garden'],
-                    link: '#',
-                },
-                {
-                    image: 'assets/image/slide_home_screens/_2.jpg',
-                    title: 'Card title 4',
-                    features: ['Wifi', 'Kitchen', 'Pool'],
-                    link: '#',
-                },
-                {
-                    image: 'assets/image/slide_home_screens/_2.jpg',
-                    title: 'Card title 5',
-                    features: ['Air Conditioning', 'Kitchen', 'Pool'],
-                    link: '#',
-                },
-                {
-                    image: 'assets/image/slide_home_screens/_2.jpg',
-                    title: 'Card title 6',
-                    features: ['Air Conditioning', 'Wifi', 'Gym', 'Pool'],
-                    link: '#',
-                },
-                {
-                    image: 'assets/image/slide_home_screens/_0.jpg',
-                    title: 'Card title 1',
-                    features: ['Air Conditioning', 'Wifi', 'Kitchen', 'Pool'],
-                    link: '#',
-                },
-                {
-                    image: 'assets/image/slide_home_screens/_1.jpg',
-                    title: 'Card title 2',
-                    features: ['Air Conditioning', 'Wifi', 'Gym'],
-                    link: '#',
-                },
-                {
-                    image: 'assets/image/slide_home_screens/_2.jpg',
-                    title: 'Card title 3',
-                    features: ['Air Conditioning', 'Wifi', 'Kitchen', 'Garden'],
-                    link: '#',
-                },
-                {
-                    image: 'assets/image/slide_home_screens/_3.jpg',
-                    title: 'Card title 4',
-                    features: ['Wifi', 'Kitchen', 'Pool'],
-                    link: '#',
-                },
-                {
-                    image: 'assets/image/slide_home_screens/_2.jpg',
-                    title: 'Card title 5',
-                    features: ['Air Conditioning', 'Kitchen', 'Pool'],
-                    link: '#',
-                },
-                {
-                    image: 'assets/image/slide_home_screens/_2.jpg',
-                    title: 'Card title 6',
-                    features: ['Air Conditioning', 'Wifi', 'Gym', 'Pool'],
-                    link: '#',
-                },
-                {
-                    image: 'assets/image/slide_home_screens/_0.jpg',
-                    title: 'Card title 1',
-                    features: ['Air Conditioning', 'Wifi', 'Kitchen', 'Pool'],
-                    link: '#',
-                },
-                {
-                    image: 'assets/image/slide_home_screens/_1.jpg',
-                    title: 'Card title 2',
-                    features: ['Air Conditioning', 'Wifi', 'Gym'],
-                    link: '#',
-                },
-                {
-                    image: 'assets/image/slide_home_screens/_2.jpg',
-                    title: 'Card title 3',
-                    features: ['Air Conditioning', 'Wifi', 'Kitchen', 'Garden'],
-                    link: '#',
-                },
-                {
-                    image: 'assets/image/slide_home_screens/_2.jpg',
-                    title: 'Card title 4',
-                    features: ['Wifi', 'Kitchen', 'Pool'],
-                    link: '#',
-                },
-                {
-                    image: 'assets/image/slide_home_screens/_2.jpg',
-                    title: 'Card title 5',
-                    features: ['Air Conditioning', 'Kitchen', 'Pool'],
-                    link: '#',
-                },
-                {
-                    image: 'assets/image/slide_home_screens/_2.jpg',
-                    title: 'Card title 6',
-                    features: ['Air Conditioning', 'Wifi', 'Gym', 'Pool'],
-                    link: '#',
+                    min: '100',
+                    max: '200',
                 },
             ],
-            currentPage: 1,
-            itemsPerPage: 9,
         };
-    },
-    computed: {
-        totalPages() {
-            return Math.ceil(this.cards.length / this.itemsPerPage);
-        },
-        paginatedCards() {
-            const start = (this.currentPage - 1) * this.itemsPerPage;
-            const end = start + this.itemsPerPage;
-            return this.cards.slice(start, end);
-        },
-        pagesToShow() {
-            const pages = [];
-            const total = this.totalPages;
-            const current = this.currentPage;
-            if (total <= 5) {
-                for (let i = 1; i <= total; i++) {
-                    pages.push(i);
-                }
-            } else {
-                if (current <= 3) {
-                    pages.push(1, 2, 3, 4, '...', total);
-                } else if (current >= total - 2) {
-                    pages.push(1, '...', total - 3, total - 2, total - 1, total);
-                } else {
-                    pages.push(1, '...', current - 1, current, current + 1, '...', total);
-                }
-            }
-            return pages;
-        },
-    },
-    methods: {
-        changePage(page) {
-            if (page === '...') return;
-            if (page > 0 && page <= this.totalPages) {
-                this.currentPage = page;
-            }
-        },
     },
 };
 </script>
