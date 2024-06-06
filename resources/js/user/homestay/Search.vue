@@ -1,13 +1,13 @@
 <template>
     <div class="container" style="margin-top: 80px">
-        <div>
+        <div class="d-flex justify-content-center">
             <img
                 src="assets/image/fake/sreach.jpg"
                 width="100%"
                 height="500"
                 style="border-radius: 20px"
             />
-            <div class="row position-absolute" style="top: 400px; z-index: 1; right: 265px">
+            <div class="row position-absolute" style="top: 400px; z-index: 1">
                 <div class="col-xl-12 position-relative z-1 mt-n3 mt-xl-n9">
                     <form
                         class="card shadow rounded-3 position-relative p-4 pe-md-5 pb-5 pb-md-4"
@@ -236,9 +236,9 @@ export default {
             ],
             isFocused: false,
             value: [0, 10],
-			address: '',
-			checkinDate: '',
-			checkoutDate
+            address: '',
+            checkinDate: '',
+            checkoutDate,
         };
     },
     methods: {
@@ -246,8 +246,8 @@ export default {
             this.show = !this.show;
         },
     },
-	async created(){
-		if (this.$route.params.id) {
+    async created() {
+        if (this.$route.params.id) {
             this.isCreate = false;
         }
         this.loading = true;
@@ -260,7 +260,7 @@ export default {
             await this.loadHomestay();
         }
         this.loading = false;
-	}
+    },
 };
 </script>
 
