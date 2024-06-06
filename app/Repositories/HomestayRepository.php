@@ -165,7 +165,7 @@ class HomestayRepository extends BaseRepository implements HomestayRepositoryInt
 				$q->whereIn('id', $categories);
 			});
 		}
-		return $query->paginate(1)->appends(Request::query());
+		return $query->paginate(10)->appends(Request::query());
 	}
 
 	public function updatePriceToHomeStay($id){

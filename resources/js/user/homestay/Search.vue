@@ -246,20 +246,28 @@ export default {
             }
             return cityOptions;
         },
-		async fetchData(page = 1) {
-			console.log(this.homestay)
+		async fetchData(page = 1, firstLoading = false) {
 			this.loading = true;
 			try {
-				const response = await axios.get(`/api/homestay/search?page=${page}`, {
-					params:{
+				let par;
+				if(firstLoading){
+					par = {
+						address: this.homestay.address,
+						checkinDate: this.homestay.checkinDate,
+						checkoutDate: this.homestay.checkoutDate,
+					}
+				}else{
+					par = {
 						...this.homestay,
 						min_price: this.minToMaxPrice[0],
 						max_price: this.minToMaxPrice[1],
 					}
+				}
+				const response = await axios.get(`/api/homestay/search?page=${page}`, {
+					params:par
 				});
 				this.data = response.data.data;
 				this.homestayList = this.formatData(this.data.data)
-				console.log(this.homestayList)
 			} catch (error) {
 				console.error('Error fetching data:', error);
 			}
@@ -286,7 +294,7 @@ export default {
 			})
 		}
 	},
-	async created() {
+	created() {
 		if (this.$route.query.address) {
 			this.homestay.address = this.$route.query.address;
 		}
@@ -296,7 +304,8 @@ export default {
 		if (this.$route.query.checkoutDate) {
 			this.homestay.checkoutDate = this.$route.query.checkoutDate;
 		}
-		await this.loadCategoryOptions();
+		this.fetchData(1, true)
+		this.loadCategoryOptions();
 	},
 	computed: {
 		getDistrictOptions() {

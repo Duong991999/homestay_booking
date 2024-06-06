@@ -35,13 +35,6 @@
                     </div>
                     <div class="card-footer border-top">
                         <div class="d-flex justify-content-between align-items-center">
-                            <a
-                                :href="card.url"
-                                class="btn btn-link p-0 mb-0 items-center"
-                            >
-                                View detail
-                            </a>
-							<!-- <router-link :to="{ name: 'detail', params }">Go to About Page</router-link> -->
 							<router-link :to="{ name: 'detail', params: { id: card.id } }">Detail</router-link>
 						</div>
                     </div>
@@ -55,49 +48,6 @@
 export default {
     data() {
         return {
-            cards: [
-                // Danh sách các thẻ (khoảng 20-30 thẻ để thử nghiệm phân trang)
-                {
-                    image: 'assets/image/slide_home_screens/_0.jpg',
-                    title: 'Card title 1',
-                    features: ['Air Conditioning', 'Wifi', 'Kitchen', 'Pool'],
-                    link: '#',
-                    min: '100',
-                    max: '200',
-                },
-                {
-                    image: 'assets/image/slide_home_screens/_1.jpg',
-                    title: 'Card title 2',
-                    features: ['Air Conditioning', 'Wifi', 'Gym'],
-                    link: '#',
-                    min: '100',
-                    max: '200',
-                },
-                {
-                    image: 'assets/image/slide_home_screens/_2.jpg',
-                    title: 'Card title 3',
-                    features: ['Air Conditioning', 'Wifi', 'Kitchen', 'Garden'],
-                    link: '#',
-                    min: '100',
-                    max: '200',
-                },
-                {
-                    image: 'assets/image/slide_home_screens/_2.jpg',
-                    title: 'Card title 4',
-                    features: ['Wifi', 'Kitchen', 'Pool'],
-                    link: '#',
-                    min: '100',
-                    max: '200',
-                },
-                {
-                    image: 'assets/image/slide_home_screens/_2.jpg',
-                    title: 'Card title 5',
-                    features: ['Air Conditioning', 'Kitchen', 'Pool'],
-                    link: '#',
-                    min: '100',
-                    max: '200',
-                },
-            ],
         };
     },
 	props: {
