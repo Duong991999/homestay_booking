@@ -2,7 +2,6 @@ import VueRouter from 'vue-router';
 import Basket from '@/basket/Basket.vue';
 import Detail from '@/homestay/Detail.vue';
 import Welcome from '@/auth/Welcome.vue';
-import Category from '@/company/Category';
 import Amenities from '@/homestay/Amenities.vue';
 import Room from '@/homestay/Room.vue';
 import InforRoom from '@/company/InforRoom.vue';
@@ -65,11 +64,7 @@ const routes = [
         component: require('@/auth/Login.vue').default,
         name: 'login',
     },
-    {
-        path: '/company/category',
-        component: Category,
-        name: 'category',
-    },
+
     {
         path: '/company/homestay/index',
         component: require('@/company/homestay/Index.vue').default,
@@ -111,11 +106,7 @@ const routes = [
         component: require('@/company/guests/Index.vue').default,
         name: 'company.guests.index',
     },
-    {
-        path: '/company/index',
-        component: require('@/company/Index.vue').default,
-        name: 'company.index',
-    },
+
     {
         path: '/profile',
         component: require('@/profile/Index.vue').default,
@@ -145,7 +136,7 @@ const routes = [
         path: '/search',
         component: require('@/user/homestay/Search.vue').default,
         name: 'search',
-		props: (route) => ({ query: route.query })
+        props: (route) => ({ query: route.query }),
     },
 ];
 
