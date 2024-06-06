@@ -62,7 +62,7 @@ class AuthController extends Controller
 				return $q->first();
 			}])->find(auth()->user()->id));
 		}else{
-			return $this->success([]);
+			return $this->success();
 		}
 	}
 }
