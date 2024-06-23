@@ -64,6 +64,7 @@ Route::group(['prefix' => 'homestay',], function(){
 	Route::get('/search', [HomestayController::class, 'paginateSearch']);
 	Route::post('/update/{id}', [HomestayController::class, 'update']);
 	Route::post('/delete', [HomestayController::class, 'delete']);
+	Route::get('/status/{id}', [RoomController::class, 'status']);
 });
 
 Route::group(['prefix' => 'room-type',], function(){
@@ -81,6 +82,7 @@ Route::group(['prefix' => 'room',], function(){
 	Route::get('/all/{id}', [RoomController::class, 'all']);
 	Route::post('/update/{id}', [RoomController::class, 'update']);
 	Route::post('/delete', [RoomController::class, 'delete']);
+
 });
 
 Route::group(['prefix' => 'booking',], function(){
@@ -90,4 +92,6 @@ Route::group(['prefix' => 'booking',], function(){
 	Route::get('/all/{id}', [BookingController::class, 'all']);
 	Route::post('/update/{id}', [BookingController::class, 'update']);
 	Route::post('/delete', [BookingController::class, 'delete']);
+	Route::get('/room-assign/{id}', [BookingController::class, 'assign']);
+
 });
