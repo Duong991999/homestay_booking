@@ -24,6 +24,7 @@ class BookingController extends Controller
 	}
 
 	public function store(BookingRequest $request){
+		// dd($request->all());die;
 		$data = $this->bookingRepo->createDetail($request->all());
 		return $this->success($data);
 	}

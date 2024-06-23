@@ -10,7 +10,7 @@ class Booking extends Model
 {
     protected $table = 'bookings';
 	protected $fillable = [
-        'homestay_id', 'user_id', 'checkin_date', 'checkout_date', 'status', 'guest_name', 'bill_value'
+        'homestay_id', 'user_id', 'checkin_date', 'checkout_date', 'status', 'guest_name', 'bill_value', 'email', 'phone_number'
     ];
 
 	public function user(): BelongsTo

@@ -38,7 +38,7 @@ class BookingRepository extends BaseRepository implements BookingRepositoryInter
 		$roomTypeIdList = array_column($bookingDetails, 'room_type_id');
 		$roomData = RoomType::with(['room_counts' => function ($q) use ($checkinDate, $checkoutDate) {
 			$q->whereDate('date', '>=', $checkinDate)
-				->whereDate('date', '<=', $checkoutDate);
+				->whereDate('date', '<', $checkoutDate);
 		}])->whereIn('id', $roomTypeIdList)->get()->toArray();
 		$roomCountUpdate = ['update' => [], 'create' => []];
 
@@ -49,7 +49,7 @@ class BookingRepository extends BaseRepository implements BookingRepositoryInter
 			$roomType = $this->findByColumn($roomData, 'id', $roomTypeId);
 			$roomCounts = $roomType['room_counts'];
 			$roomTypeCount = $roomType['count'];
-			while ($currentDate <= $checkoutDate) {
+			while ($currentDate < $checkoutDate) {
 				$daySlot = $this->findByColumn($roomCounts, 'date', $currentDate);
 
 				$currentSlot = $roomTypeCount - ($daySlot ? $daySlot['count'] : 0);
@@ -85,7 +85,6 @@ class BookingRepository extends BaseRepository implements BookingRepositoryInter
 		$data = $this->checkCanBooking($attributes['booking_details'], $attributes['checkin_date'], $attributes['checkout_date']);
 		if ($data['status']) {
 			$roomCount = $data['room_count'];
-
 			try {
 				$result = DB::transaction(function () use ($attributes, $data, $roomCount) {
 					$booking = parent::create($attributes);
