@@ -9,7 +9,7 @@
                     background-color: #fff;
                 "
             >
-                <h5 class="mb-0 font-weight-bold">Thêm loại phòng</h5>
+                <h5 class="mb-0 font-weight-bold">Sửa loại phòng</h5>
             </div>
             <div class="card-body">
                 <div class="row pl-4">
@@ -101,7 +101,18 @@
                                         </div>
                                     </div>
                                     <div class="col-sm-6">
-                                        <div class="row d-flex justify-content-around">
+                                        <div class="row d-flex d-flex justify-content-center">
+                                            <a
+                                                class="btn btn-success mb-0 mr-4"
+                                                @click="saveRoom(index)"
+                                            >
+                                                <img
+                                                    src="assets/image/icon/save.png"
+                                                    alt="delete"
+                                                    width="15"
+                                                    height="20"
+                                                />
+                                            </a>
                                             <a
                                                 class="btn btn-danger mb-0"
                                                 @click="deleteRoom(index)"
