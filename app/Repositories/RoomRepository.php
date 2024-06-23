@@ -96,12 +96,24 @@ class RoomRepository extends BaseRepository implements RoomRepositoryInterface
 			$q->where('homestay_id', $id);
 		})->get(['id'])->toArray();
 		$bookedRooms = array_column($rooms, 'id');
-		$roomsFilter = $this->model->with(['room_type'=> function($q){
-			return $q->select('id', 'name');
+
+		// $roomsFilter = $this->model->with(['room_type'=> function($q){
+		// 	return $q->select('id', 'name');
+		// }])
+		// ->select('id', 'name', 'room_type_id')
+		// ->selectRaw("IF(id IN (" . implode(',', $bookedRooms) . "), 1, 0) AS current_status") // 1: phòng đã book, 0: phòng đang trống
+		// ->get()->toArray();
+
+		$roomsFilter = RoomType::with(['rooms' => function ($q) use ($bookedRooms) {
+			if ($bookedRooms) {
+				return $q->select('id', 'name', 'room_type_id')->selectRaw("IF(id IN (" . implode(',', $bookedRooms) . "), 1, 0) AS current_status"); // 1: phòng đã book, 0: phòng đang trống
+
+			} else {
+				return $q->select('id', 'name', 'room_type_id')->selectRaw("0 AS current_status");
+			}
 		}])
-		->select('id', 'name', 'room_type_id')
-		->selectRaw("IF(id IN (" . implode(',', $bookedRooms) . "), 1, 0) AS current_status") // 1: phòng đã book, 0: phòng đang trống
-		->get()->toArray();
+			->select('id', 'name')
+			->get()->toArray();
 		return $roomsFilter;
 	}
 
