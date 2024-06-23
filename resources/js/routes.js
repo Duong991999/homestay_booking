@@ -152,6 +152,11 @@ const routes = [
         component: require('@/company/Dashboard.vue').default,
         name: 'dashboard',
     },
+    {
+        path: '/company/room/editroom',
+        component: require('@/company/room/EditRoom.vue').default,
+        name: 'room.editroom',
+    },
 ];
 
 const router = new VueRouter({
