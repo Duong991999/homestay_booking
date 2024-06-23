@@ -248,10 +248,6 @@ export default {
     display: flex;
     align-items: center;
 }
-.col-xl-3 {
-    flex: 0 0 10%;
-    max-width: 25%;
-}
 .card {
     width: 250px;
     height: auto;
