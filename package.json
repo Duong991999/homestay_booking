@@ -34,6 +34,7 @@
         "@vueform/multiselect": "^2.6.7",
         "html2pdf.js": "^0.10.1",
         "laravel-vue-pagination": "^2.3.0",
+        "vue-apexcharts": "^1.6.2",
         "vue-slider-component": "^3.2.24",
         "vue-spinner": "^1.0.4",
         "vue-star-rating": "^1.7.0"

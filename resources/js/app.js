@@ -15,6 +15,7 @@ import Loading from './shared/components/Loading.vue';
 import FullLoading from './shared/components/FullScreenLoading.vue';
 import ImageMultipleInput from './shared/components/ImageMultipleInput.vue';
 import Multiselect from '@vueform/multiselect/dist/multiselect.vue2.js';
+import VueApexCharts from 'vue-apexcharts';
 
 import storeDefinition from './store';
 import PulseLoader from 'vue-spinner/src/PulseLoader.vue';
@@ -26,6 +27,7 @@ window.Vue = require('vue');
 Vue.use(VueRouter);
 Vue.use(Vuex);
 Vue.use(FlashMessage);
+Vue.use(VueApexCharts);
 
 Vue.filter('fromNow', (value) => moment(value).fromNow());
 Vue.component('footer-component', FooterComponent);
@@ -40,6 +42,7 @@ Vue.component('pulse-loader', PulseLoader);
 Vue.component('dot-loader', DotLoader);
 Vue.component('v-multi-select', Multiselect);
 Vue.component('pagination', require('laravel-vue-pagination'));
+Vue.component('apexchart', VueApexCharts);
 
 const store = new Vuex.Store(storeDefinition);
 

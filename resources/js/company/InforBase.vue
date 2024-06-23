@@ -147,7 +147,7 @@ export default {
             message_errors: null,
             homestayName: null,
             cityOptions: this.getOptions(treeAddress),
-			districtOptions: [],
+            districtOptions: [],
             wardOptions: [],
             selectedCity: null,
             selectedDistrict: null,
@@ -174,16 +174,16 @@ export default {
         };
     },
     methods: {
-		getLabelByValue(options, value) {
-			find = null;
-			options.forEach(function (option) {
-				if (option.value.toString() == value.toString()) {
-					find = option;
-					return
-				}
-			})
-			return find ? find?.label : find
-		},
+        getLabelByValue(options, value) {
+            find = null;
+            options.forEach(function (option) {
+                if (option.value.toString() == value.toString()) {
+                    find = option;
+                    return;
+                }
+            });
+            return find ? find?.label : find;
+        },
         getOptions(objOptions) {
             let cityOptions = [];
 
@@ -215,13 +215,16 @@ export default {
             formData.append('city_code', this.homestay.city_code);
             formData.append('district_code', this.homestay.district_code);
             formData.append('ward_code', this.homestay.ward_code);
-			let city_name = this.getLabelByValue(this.cityOptions, this.homestay.city_code)
-			let district_name = this.getLabelByValue(this.districtOptions, this.homestay.district_code)
-			let ward_name = this.getLabelByValue(this.wardOptions, this.homestay.ward_code)
-			formData.append('city_name', city_name);
-			formData.append('district_name', district_name);
-			formData.append('ward_name', ward_name);
-			formData.append('address', `${city_name}-${district_name}-${ward_name}`);
+            let city_name = this.getLabelByValue(this.cityOptions, this.homestay.city_code);
+            let district_name = this.getLabelByValue(
+                this.districtOptions,
+                this.homestay.district_code
+            );
+            let ward_name = this.getLabelByValue(this.wardOptions, this.homestay.ward_code);
+            formData.append('city_name', city_name);
+            formData.append('district_name', district_name);
+            formData.append('ward_name', ward_name);
+            formData.append('address', `${city_name}-${district_name}-${ward_name}`);
             try {
                 const response = await axios.post(`/api/homestay/store`, formData);
                 if (response.data.success) {
@@ -259,13 +262,16 @@ export default {
             formData.append('city_code', this.homestay.city_code);
             formData.append('district_code', this.homestay.district_code);
             formData.append('ward_code', this.homestay.ward_code);
-			let city_name = this.getLabelByValue(this.cityOptions, this.homestay.city_code)
-			let district_name = this.getLabelByValue(this.districtOptions, this.homestay.district_code)
-			let ward_name = this.getLabelByValue(this.wardOptions, this.homestay.ward_code)
-			formData.append('city_name', city_name);
-			formData.append('district_name', district_name);
-			formData.append('ward_name', ward_name);
-			formData.append('address', `${city_name}-${district_name}-${ward_name}`);
+            let city_name = this.getLabelByValue(this.cityOptions, this.homestay.city_code);
+            let district_name = this.getLabelByValue(
+                this.districtOptions,
+                this.homestay.district_code
+            );
+            let ward_name = this.getLabelByValue(this.wardOptions, this.homestay.ward_code);
+            formData.append('city_name', city_name);
+            formData.append('district_name', district_name);
+            formData.append('ward_name', ward_name);
+            formData.append('address', `${city_name}-${district_name}-${ward_name}`);
             try {
                 const response = await axios.post(
                     `/api/homestay/update/${this.$route.params.id}`,
@@ -309,25 +315,26 @@ export default {
         },
     },
     computed: {
-		getDistrictOptions() {
-			let districtOptions = this.homestay.city_code
-				? this.getOptions(treeAddress[this.homestay.city_code]['quan-huyen'] ?? [])
-				: [];
-			this.districtOptions = districtOptions
-			return districtOptions
-		},
-		getWardOptions() {
-			let wardOptions = this.homestay.district_code && this.homestay.city_code
-				? this.getOptions(
-					treeAddress[this.homestay.city_code]['quan-huyen'][
-					this.homestay.district_code
-					]['xa-phuong'] ?? []
-				)
-				: [];
-			this.wardOptions = wardOptions
-			return wardOptions
-		},
-	},
+        getDistrictOptions() {
+            let districtOptions = this.homestay.city_code
+                ? this.getOptions(treeAddress[this.homestay.city_code]['quan-huyen'] ?? [])
+                : [];
+            this.districtOptions = districtOptions;
+            return districtOptions;
+        },
+        getWardOptions() {
+            let wardOptions =
+                this.homestay.district_code && this.homestay.city_code
+                    ? this.getOptions(
+                          treeAddress[this.homestay.city_code]['quan-huyen'][
+                              this.homestay.district_code
+                          ]['xa-phuong'] ?? []
+                      )
+                    : [];
+            this.wardOptions = wardOptions;
+            return wardOptions;
+        },
+    },
     async created() {
         if (this.$route.params.id) {
             this.isCreate = false;
