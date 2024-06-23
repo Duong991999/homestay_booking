@@ -40,6 +40,12 @@
                     :to="{ name: 'room.index' }"
                     class="justify-content-between mr-4"
                     style="text-decoration: none; font-size: 17px; color: rgb(237, 195, 169)"
+                    >Quản lý loại phòng</router-link
+                >
+                <router-link
+                    :to="{ name: 'company.roomstatus.index' }"
+                    class="justify-content-between mr-4"
+                    style="text-decoration: none; font-size: 17px; color: rgb(237, 195, 169)"
                     >Quản lý phòng</router-link
                 >
                 <router-link

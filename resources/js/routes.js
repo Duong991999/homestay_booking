@@ -157,6 +157,11 @@ const routes = [
         component: require('@/company/room/EditRoom.vue').default,
         name: 'room.editroom',
     },
+    {
+        path: '/company/roomstatus/index',
+        component: require('@/company/roomstatus/Index.vue').default,
+        name: 'company.roomstatus.index',
+    },
 ];
 
 const router = new VueRouter({
