@@ -5,6 +5,7 @@ use App\Repositories\BaseRepository;
 use App\Repositories\RoomTypeRepositoryInterface;
 use App\RoomType;
 use App\File;
+use App\Room;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Http\Response;
@@ -23,6 +24,16 @@ class RoomTypeRepository extends BaseRepository implements RoomTypeRepositoryInt
 		try {
 			$result = DB::transaction(function() use($attributes){
 				$data = $this->model->create($attributes);
+				if($attributes['rooms'] ?? false){
+					$rooms = collect([]);
+					foreach ($attributes['rooms'] as $room) {
+						$newRoom = Room::make([
+							'name' => $room,
+						]);
+						$rooms->push($newRoom);
+					}
+					$this->model->find($data['id'])->rooms()->saveMany($rooms);
+				}
 				if($attributes['files'] ?? false){
 					$files = collect([]);
 					foreach ($attributes['files'] as $file) {
@@ -119,7 +130,7 @@ class RoomTypeRepository extends BaseRepository implements RoomTypeRepositoryInt
 	}
 
 	public function findDetail($id){
-		$result = $this->model->with('files')->find($id);
+		$result = $this->model->with(['files', 'rooms'])->find($id);
 		return $result;
 	}
 

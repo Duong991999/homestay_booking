@@ -152,6 +152,7 @@ export default {
                 files: [],
                 deleted_id: [],
             },
+			rooms: []
         };
     },
     methods: {
@@ -161,6 +162,9 @@ export default {
             for (let i = 0; i < this.fileData.files.length; i++) {
                 let file = this.fileData.files[i];
                 formData.append('files[' + i + ']', file);
+            }
+			for (let i = 0; i < this.roomtype.rooms.length; i++) {
+                formData.append('rooms[' + i + ']', this.roomtype.rooms[i].name);
             }
             for (let i = 0; i < this.fileData.deleted_id.length; i++) {
                 let file = this.fileData.deleted_id[i];
