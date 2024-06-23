@@ -1,13 +1,11 @@
 <template>
-    <div class="row">
+    <div class="row" style="margin-top: 100px">
         <div class="col-12">
             <div class="card border w-100">
                 <div class="card-header border-bottom">
                     <h5 class="card-header-title">
-                        Bookings
-                        <span class="badge bg-primary bg-opacity-10 text-primary ms-2"
-                            >20 Rooms</span
-                        >
+                        Đặt phòng
+                        <span class="badge bg-opacity-10 text-primary ms-2">20 Đơn</span>
                     </h5>
                 </div>
                 <div class="card-body pb-0">
@@ -43,42 +41,93 @@
                             </form>
                         </div>
                     </div>
+                    <ul class="nav nav-tabs">
+                        <li class="nav-item">
+                            <a
+                                class="nav-link"
+                                :class="{ active: selectedTab === 'All' }"
+                                @click="selectedTab = 'All'"
+                                >All</a
+                            >
+                        </li>
+
+                        <li class="nav-item">
+                            <a
+                                class="nav-link"
+                                :class="{ active: selectedTab === 'Chờ duyệt' }"
+                                hờ
+                                @click="selectedTab = 'Chờ duyệt'"
+                                >Chờ duyệt</a
+                            >
+                        </li>
+
+                        <li class="nav-item">
+                            <a
+                                class="nav-link"
+                                :class="{ active: selectedTab === 'Đã duyệt' }"
+                                @click="selectedTab = 'Đã duyệt'"
+                                >Đã duyệt</a
+                            >
+                        </li>
+                        <li class="nav-item">
+                            <a
+                                class="nav-link"
+                                :class="{ active: selectedTab === 'Nhận phòng' }"
+                                @click="selectedTab = 'Nhận phòng'"
+                                >Nhận phòng</a
+                            >
+                        </li>
+                        <li class="nav-item">
+                            <a
+                                class="nav-link"
+                                :class="{ active: selectedTab === 'Trả phòng' }"
+                                @click="selectedTab = 'Trả phòng'"
+                                >Trả phòng</a
+                            >
+                        </li>
+                    </ul>
                     <div class="table-responsive border-0">
                         <table class="table align-middle p-4 mb-0 table-hover table-shrink">
                             <thead class="table-light">
                                 <tr>
                                     <th scope="col" class="border-0 rounded-start">#</th>
-                                    <th scope="col" class="border-0">Loại phòng</th>
-                                    <th scope="col" class="border-0">Số phòng</th>
-                                    <th scope="col" class="border-0">Date</th>
-                                    <th scope="col" class="border-0">Status</th>
+                                    <th scope="col" class="border-0">Khách</th>
+                                    <th scope="col" class="border-0">Ngày đặt</th>
+                                    <th scope="col" class="border-0">Ngày nhận phòng</th>
+                                    <th scope="col" class="border-0">Ngày trả phòng</th>
+                                    <th scope="col" class="border-0">Trạng thái</th>
                                     <th scope="col" class="border-0 rounded-end">Action</th>
                                 </tr>
                             </thead>
                             <tbody class="border-top-0">
-                                <tr v-for="(booking, index) in bookings" :key="index">
+                                <tr v-for="(booking, index) in filteredBookings" :key="index">
                                     <td>
                                         <h6 class="mb-0">{{ index + 1 }}</h6>
                                     </td>
                                     <td>
                                         <h6 class="mb-0">
-                                            <a :href="booking.link">{{ booking.name }}</a>
+                                            <a :href="booking.link">{{ booking.guest }}</a>
                                         </h6>
                                     </td>
-                                    <td>{{ booking.type }}</td>
+                                    <td>{{ booking.date }}</td>
                                     <td>
-                                        <h6 class="mb-0 fw-light">{{ booking.date }}</h6>
+                                        <h6 class="mb-0 fw-light">{{ booking.checkin }}</h6>
+                                    </td>
+                                    <td>
+                                        <h6 class="mb-0 fw-light">{{ booking.checkout }}</h6>
                                     </td>
                                     <td>
                                         <div :class="`bg-${booking.statusColor} badge`">
                                             {{ booking.status }}
                                         </div>
                                     </td>
-
                                     <td>
-                                        <a :href="booking.link" class="btn btn-sm btn-light mb-0"
-                                            >View</a
+                                        <button
+                                            @click="viewBooking(booking)"
+                                            class="btn btn-sm btn-light mb-0"
                                         >
+                                            View
+                                        </button>
                                     </td>
                                 </tr>
                             </tbody>
@@ -87,6 +136,38 @@
                 </div>
             </div>
         </div>
+
+        <!-- Modal -->
+        <div
+            v-if="selectedBooking"
+            class="modal fade show"
+            style="display: block"
+            tabindex="-1"
+            role="dialog"
+        >
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">{{ selectedBooking.guest }}</h5>
+                        <button type="button" class="close" @click="closeModal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <p><strong>Ngày đặt:</strong> {{ selectedBooking.date }}</p>
+                        <p><strong>Ngày nhận phòng:</strong> {{ selectedBooking.checkin }}</p>
+                        <p><strong>Ngày trả phòng:</strong> {{ selectedBooking.checkout }}</p>
+                        <p><strong>Trạng thái:</strong> {{ selectedBooking.status }}</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" @click="closeModal">
+                            Close
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div v-if="selectedBooking" class="modal-backdrop fade show"></div>
     </div>
 </template>
 
@@ -96,107 +177,53 @@ export default {
         return {
             bookings: [
                 {
-                    name: 'Deluxe Pool View',
-                    type: 'With Breakfast',
-                    date: 'Nov 22 - 25',
-                    status: 'Booked',
+                    guest: 'John Doe',
+                    date: '2024-06-01',
+                    checkin: '2024-06-10',
+                    checkout: '2024-06-15',
+                    status: 'Confirmed',
                     statusColor: 'success',
-                    payment: 'Full Payment',
-                    paymentColor: 'success',
-                    link: '/booking_v/agent/bookings',
+                    link: '#',
                 },
                 {
-                    name: 'Deluxe Pool View with Breakfast',
-                    type: 'Free Cancellation | Breakfast only',
-                    date: 'Nov 24 - 28',
-                    status: 'Booked',
-                    statusColor: 'success',
-                    payment: 'On Property',
-                    paymentColor: 'warning',
-                    link: '/booking_v/agent/bookings',
-                },
-                {
-                    name: 'Luxury Room with Balcony',
-                    type: 'Free Cancellation | Breakfast + Lunch/Dinner',
-                    date: 'Nov 24 - 28',
-                    status: 'Reserved',
-                    statusColor: 'info',
-                    payment: 'Half Payment',
-                    paymentColor: 'info',
-                    link: '/booking_v/agent/bookings',
-                },
-                {
-                    name: 'Deluxe Room Twin Bed With Balcony',
-                    type: 'Free Cancellation',
-                    date: 'Nov 28 - 30',
-                    status: 'Booked',
-                    statusColor: 'success',
-                    payment: 'Full Payment',
-                    paymentColor: 'success',
-                    link: '/booking_v/agent/bookings',
-                },
-                {
-                    name: 'Deluxe Room Twin Bed With Balcony',
-                    type: 'Free Cancellation | Breakfast only',
-                    date: 'Nov 28 - 30',
-                    status: 'Available',
+                    guest: 'Jane Smith',
+                    date: '2024-06-05',
+                    checkin: '2024-06-20',
+                    checkout: '2024-06-25',
+                    status: 'Pending',
                     statusColor: 'warning',
-                    payment: 'On Property',
-                    paymentColor: 'warning',
-                    link: '/booking_v/agent/bookings',
+                    link: '#',
                 },
                 {
-                    name: 'Premium Room With Balcony',
-                    type: 'Free Cancellation | Breakfast only',
-                    date: 'Nov 14 - 18',
-                    status: 'Cancel',
+                    guest: 'Michael Brown',
+                    date: '2024-06-07',
+                    checkin: '2024-06-15',
+                    checkout: '2024-06-20',
+                    status: 'Cancelled',
                     statusColor: 'danger',
-                    payment: 'Half Payment',
-                    paymentColor: 'info',
-                    link: '/booking_v/agent/bookings',
+                    link: '#',
                 },
-                {
-                    name: 'Deluxe Room King Bed with Balcony',
-                    type: 'Free Cancellation',
-                    date: 'Nov 28 - 30',
-                    status: 'Reserved',
-                    statusColor: 'info',
-                    payment: 'Full Payment',
-                    paymentColor: 'success',
-                    link: '/booking_v/agent/bookings',
-                },
-                {
-                    name: 'Superior Room',
-                    type: 'With Breakfast',
-                    date: 'Nov 22 - 25',
-                    status: 'Booked',
-                    statusColor: 'success',
-                    payment: 'Full Payment',
-                    paymentColor: 'success',
-                    link: '/booking_v/agent/bookings',
-                },
-                {
-                    name: 'Studio Suite King',
-                    type: 'Free Cancellation | Breakfast only',
-                    date: 'Nov 21 - 24',
-                    status: 'Reserved',
-                    statusColor: 'info',
-                    payment: 'Half Payment',
-                    paymentColor: 'info',
-                    link: '/booking_v/agent/bookings',
-                },
-                {
-                    name: 'Rock Family Suite',
-                    type: 'Free Cancellation | Breakfast + Lunch/Dinner',
-                    date: 'Dec 02 - 06',
-                    status: 'Booked',
-                    statusColor: 'success',
-                    payment: 'Full Payment',
-                    paymentColor: 'success',
-                    link: '/booking_v/agent/bookings',
-                },
+                // Add more bookings here...
             ],
+            selectedTab: 'All',
+            selectedBooking: null,
         };
+    },
+    computed: {
+        filteredBookings() {
+            if (this.selectedTab === 'All') {
+                return this.bookings;
+            }
+            return this.bookings.filter((booking) => booking.status === this.selectedTab);
+        },
+    },
+    methods: {
+        viewBooking(booking) {
+            this.selectedBooking = booking;
+        },
+        closeModal() {
+            this.selectedBooking = null;
+        },
     },
 };
 </script>
@@ -204,5 +231,24 @@ export default {
 <style scoped>
 .table-responsive {
     margin-bottom: 15px;
+}
+
+.modal {
+    display: block;
+    background: rgba(0, 0, 0, 0.5);
+}
+
+.modal-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.nav-tabs .nav-link.active {
+    background-color: #007bff;
+    color: white;
 }
 </style>

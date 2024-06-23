@@ -9,7 +9,7 @@
                     background-color: #fff;
                 "
             >
-                <h5 class="mb-0 font-weight-bold">Thêm loại phòng</h5>
+                <h5 class="mb-0 font-weight-bold">Sửa loại phòng</h5>
             </div>
             <div class="card-body">
                 <div class="row pl-4">
@@ -101,7 +101,18 @@
                                         </div>
                                     </div>
                                     <div class="col-sm-6">
-                                        <div class="row d-flex justify-content-around">
+                                        <div class="row d-flex d-flex justify-content-center">
+                                            <a
+                                                class="btn btn-success mb-0 mr-4"
+                                                @click="saveRoom(index)"
+                                            >
+                                                <img
+                                                    src="assets/image/icon/save.png"
+                                                    alt="delete"
+                                                    width="15"
+                                                    height="20"
+                                                />
+                                            </a>
                                             <a
                                                 class="btn btn-danger mb-0"
                                                 @click="deleteRoom(index)"
@@ -157,7 +168,6 @@ export default {
                 files: [],
                 deleted_id: [],
             },
-			rooms: []
         };
     },
     methods: {
@@ -167,9 +177,6 @@ export default {
             for (let i = 0; i < this.fileData.files.length; i++) {
                 let file = this.fileData.files[i];
                 formData.append('files[' + i + ']', file);
-            }
-			for (let i = 0; i < this.roomtype.rooms.length; i++) {
-                formData.append('rooms[' + i + ']', this.roomtype.rooms[i].name);
             }
             for (let i = 0; i < this.fileData.deleted_id.length; i++) {
                 let file = this.fileData.deleted_id[i];
