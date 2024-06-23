@@ -572,7 +572,7 @@ export default {
 				item.count_booking = 0;
 				return item
 			})
-			console.log(this.rooms);
+			console.log(this.files);
 			this.files[0].style = `background-image: url(${this?.files[0]?.file_path ?? 'assets/image/slide_home_screens/_1.jpg'});background-position: left center;background-size: cover;height: 400px;`
 			this.files[1].style = `background-image: url(${this?.files[0]?.file_path ?? 'assets/image/slide_home_screens/_1.jpg'});background-position: left center;background-size: cover;height: 240px;`
 			this.files[2].style = `background-image: url(${this?.files[0]?.file_path ?? 'assets/image/slide_home_screens/_1.jpg'});background-position: left center;background-size: cover;height: 150px;`
