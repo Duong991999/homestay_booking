@@ -41,33 +41,69 @@
                     >Sign-in</router-link
                 >
 
-                <div class="dropdown show border-0" v-if="isLoggedIn">
-                    <a
-                        class="nav-link dropdown-toggle p-0"
-                        role="button"
-                        id="dropdownMenuLink"
-                        data-toggle="dropdown"
-                        aria-haspopup="true"
-                        aria-expanded="dropdown.isOpen"
-                        style="background-color: rgb(255 255 255)"
-                    >
+                <div class="user-menu-wrap" v-if="isLoggedIn">
+                    <a class="mini-photo-wrapper" href="#" @click="toggleMenu">
                         <img
+                            class="mini-photo"
                             src="https://s3.eu-central-1.amazonaws.com/bootstrapbaymisc/blog/24_days_bootstrap/fox.jpg"
-                            width="40"
-                            height="40"
-                            class="rounded-circle"
+                            width="36"
+                            height="36"
                         />
                     </a>
-
-                    <div
-                        class="dropdown-menu dropdown-menu-right"
-                        aria-labelledby="dropdownMenuLink"
-                        style="border-radius: 10px"
-                        :class="{ show: dropdown.isOpen }"
-                    >
-                        <a class="dropdown-item" href="#">Thông tin</a>
-                        <a class="dropdown-item" href="#">Đơn đặt phòng của tôi</a>
-                        <a class="dropdown-item" @click.prevent="logout"> Đăng xuất</a>
+                    <div :class="['menu-container', { active: isActive }]">
+                        <ul class="user-menu">
+                            <div class="profile-highlight">
+                                <img
+                                    src="https://s3.eu-central-1.amazonaws.com/bootstrapbaymisc/blog/24_days_bootstrap/fox.jpg"
+                                    alt="profile-img"
+                                    width="36"
+                                    height="36"
+                                />
+                                <div class="details">
+                                    <div id="profile-name">Kenny Lee</div>
+                                </div>
+                            </div>
+                            <li class="user-menu__item">
+                                <a class="user-menu-link" href="#">
+                                    <img
+                                        src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1604623/trophy.png"
+                                        alt="trophy_icon"
+                                        width="20"
+                                        height="20"
+                                    />
+                                    <div>Achievements</div>
+                                </a>
+                            </li>
+                            <li class="user-menu__item">
+                                <a class="user-menu-link" href="#">
+                                    <img
+                                        src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1604623/team.png"
+                                        alt="team_icon"
+                                        width="20"
+                                        height="20"
+                                    />
+                                    <div>Team</div>
+                                </a>
+                            </li>
+                            <li class="user-menu__item">
+                                <a class="user-menu-link" href="#">
+                                    <img
+                                        src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1604623/book.png"
+                                        alt="team_icon"
+                                        width="20"
+                                        height="20"
+                                    />
+                                    <div>Log History</div>
+                                </a>
+                            </li>
+                            <div class="footer">
+                                <li class="user-menu__item">
+                                    <a class="user-menu-link" style="color: #f44336" @click="logout"
+                                        >Logout</a
+                                    >
+                                </li>
+                            </div>
+                        </ul>
                     </div>
                 </div>
             </div>
@@ -88,9 +124,7 @@ import CONST_FRONTEND from './const';
 export default {
     data() {
         return {
-            dropdown: {
-                isOpen: false,
-            },
+            isActive: false,
             lastSearch: this.$store.state.lastSearch,
             list_home_screen: CONST_FRONTEND.home_screen_file,
         };
@@ -121,8 +155,8 @@ export default {
                 interval: 2000,
             });
         },
-        toggleDropdown() {
-            this.dropdown.isOpen = !this.dropdown.isOpen;
+        toggleMenu() {
+            this.isActive = !this.isActive;
         },
     },
     mounted() {
@@ -183,14 +217,6 @@ export default {
     min-height: 600px;
     background: no-repeat scroll center scroll;
 }
-.dropdown {
-    display: inline-block;
-    background-color: aliceblue;
-    flex-direction: row;
-    border: 1px solid white;
-    border-radius: 20px;
-    margin: 16px;
-}
 .text-content {
     color: white;
     font-size: 30px;
@@ -209,16 +235,130 @@ export default {
 .btn-sm {
     padding: 0.25rem 0rem;
 }
-.dropdown-item {
-    display: block;
-    width: 100%;
-    padding: 0.25rem 0.5rem;
-    clear: both;
+
+:root {
+    --nav-link-color: #666666;
+    --bg-color: #f3f5f4;
+    --navbar-color: #ffffff;
+    --border-gray: #e0e0e0;
+    --hover-gray: #f5f5f5;
+    --active-gray: #ebebeb;
+    --at-blue-light: #00afe9;
+    --at-blue-dark: #006ab8;
+    --red: #f44336;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #ffffff;
+    font-family: sans-serif;
+}
+
+ul {
+    list-style: none;
+}
+
+.user-menu-wrap {
+    position: relative;
+    width: 36px;
+    margin: 50px;
+    border: 1px solid rgba(0, 0, 0, 0);
+}
+
+.menu-container {
+    visibility: hidden;
+    opacity: 0;
+    transition: all 0.2s ease-in-out;
+}
+.menu-container.active {
+    visibility: visible;
+    opacity: 1;
+}
+
+.user-menu {
+    position: absolute;
+    right: -10px;
+    background-color: #ffffff;
+    width: 200px;
+    border-radius: 10px;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 0px;
+    margin-top: 20px;
+}
+
+.profile-highlight {
+    display: flex;
+    border-bottom: 1px solid var(--border-gray);
+    padding: 12px 16px;
+    margin-bottom: 6px;
+}
+.profile-highlight img {
+    width: 48px;
+    height: 48px;
+    border-radius: 25px;
+    object-fit: cover;
+}
+.profile-highlight .details {
+    display: flex;
+    flex-direction: column;
+    margin: auto 12px;
+}
+.profile-highlight .details #profile-name {
+    font-weight: 600;
+    font-size: 16px;
+}
+.profile-highlight .details #profile-footer {
+    font-weight: 300;
+    font-size: 14px;
+    margin-top: 4px;
+}
+
+.footer {
+    border-top: 1px solid var(--border-gray);
+    padding-top: 6px;
+    margin-top: 6px;
+}
+.footer .user-menu-link {
+    font-size: 13px;
+}
+
+.user-menu-link {
+    display: flex;
+    text-decoration: none;
+    color: #333333;
     font-weight: 400;
-    color: #eeae72;
-    text-align: inherit;
-    white-space: nowrap;
-    background-color: transparent;
-    border: 0;
+    font-size: 14px;
+    padding: 12px 16px;
+}
+.user-menu-link div {
+    margin: auto 10px;
+}
+.user-menu-link:hover {
+    background-color: var(--hover-gray);
+    color: #333333;
+}
+
+.user-menu:before {
+    position: absolute;
+    top: -16px;
+    left: 120px;
+    display: inline-block;
+    content: '';
+    border: 8px solid transparent;
+    border-bottom-color: var(--border-gray);
+}
+.user-menu:after {
+    position: absolute;
+    top: -14px;
+    left: 121px;
+    display: inline-block;
+    content: '';
+    border: 7px solid transparent;
+    border-bottom-color: #ffffff;
 }
 </style>
