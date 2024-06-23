@@ -145,7 +145,12 @@ const routes = [
         path: '/search',
         component: require('@/user/homestay/Search.vue').default,
         name: 'search',
-		props: (route) => ({ query: route.query })
+        props: (route) => ({ query: route.query }),
+    },
+    {
+        path: '/company/dashboard',
+        component: require('@/company/Dashboard.vue').default,
+        name: 'dashboard',
     },
 ];
 
