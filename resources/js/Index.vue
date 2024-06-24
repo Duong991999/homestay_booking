@@ -23,40 +23,40 @@
                     >Về chúng tôi</router-link
                 >
             </div>
-            <div class="d-flex justify-content-between">
+            <div class="d-flex justify-content-between" v-if="isLoggedIn">
                 <router-link
                     :to="{ name: 'dashboard' }"
-                    class="justify-content-between mr-4"
+                    class="justify-content-between mr-2"
                     style="text-decoration: none; font-size: 17px; color: rgb(237, 195, 169)"
                     >Quản lý doanh thu</router-link
                 >
                 <router-link
                     :to="{ name: 'company.homestay.index' }"
-                    class="justify-content-between mr-4"
+                    class="justify-content-between mr-2"
                     style="text-decoration: none; font-size: 17px; color: rgb(237, 195, 169)"
                     >Quản lý Homestay</router-link
                 >
                 <router-link
                     :to="{ name: 'room.index' }"
-                    class="justify-content-between mr-4"
+                    class="justify-content-between mr-2"
                     style="text-decoration: none; font-size: 17px; color: rgb(237, 195, 169)"
                     >Quản lý loại phòng</router-link
                 >
                 <router-link
                     :to="{ name: 'company.roomstatus.index' }"
-                    class="justify-content-between mr-4"
+                    class="justify-content-between mr-2"
                     style="text-decoration: none; font-size: 17px; color: rgb(237, 195, 169)"
                     >Quản lý phòng</router-link
                 >
                 <router-link
                     :to="{ name: 'company.booking.index' }"
-                    class="justify-content-between mr-4"
+                    class="justify-content-between mr-2"
                     style="text-decoration: none; font-size: 17px; color: rgb(237, 195, 169)"
                     >Quản lý đặt phòng</router-link
                 >
                 <router-link
                     :to="{ name: 'reviewlist' }"
-                    class="justify-content-between mr-4"
+                    class="justify-content-between mr-2"
                     style="text-decoration: none; font-size: 17px; color: rgb(237, 195, 169)"
                     >Quản lý đánh giá</router-link
                 >
