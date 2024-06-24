@@ -94,14 +94,14 @@ class BookingRepository extends BaseRepository implements BookingRepositoryInter
 						$bookingDetails->push($bookingDetail);
 					}
 					$bookingDetails = $this->model->find($booking['id'])->booking_details()->saveMany($bookingDetails);
-					if ($roomCount['create']) {
-						RoomCount::insert($roomCount['create']);
-					}
-					if ($roomCount['update']) {
-						foreach ($roomCount['update'] as $update) {
-							RoomCount::find($update['id'])->update(['count' => $update['count']]);
-						}
-					}
+					// if ($roomCount['create']) {
+					// 	RoomCount::insert($roomCount['create']);
+					// }
+					// if ($roomCount['update']) {
+					// 	foreach ($roomCount['update'] as $update) {
+					// 		RoomCount::find($update['id'])->update(['count' => $update['count']]);
+					// 	}
+					// }
 					return [
 						'status' => true,
 						'data' => $booking
@@ -122,7 +122,47 @@ class BookingRepository extends BaseRepository implements BookingRepositoryInter
 		}
 	}
 
-	public function findDetail($id){
+	public function findDetail($id)
+	{
 		return $this->model->with('booking_details')->find($id);
+	}
+
+	public function changeStatus($status, $bookingId)
+	{
+		$bookingDetails = Booking::with('booking_details')->find($bookingId)->toArray();
+		if ($status == 1 && $bookingDetails['status'] == 0) {
+			$data = app(BookingRepository::class)->checkCanBooking($bookingDetails['booking_details'], $bookingDetails['checkin_date'], $bookingDetails['checkout_date']);
+			if ($data['status']) {
+				$roomCount = $data['room_count'];
+				try {
+					$result = DB::transaction(function () use ($roomCount, $bookingId, $status) {
+						if ($roomCount['create']) {
+							RoomCount::insert($roomCount['create']);
+						}
+						if ($roomCount['update']) {
+							foreach ($roomCount['update'] as $update) {
+								RoomCount::find($update['id'])->update(['count' => $update['count']]);
+							}
+						}
+						$booking = $this->model->find($bookingId)->update(['status' => $status]);
+						return $booking;
+					});
+					return $this->model->find($bookingId);
+				} catch (QueryException $e) {
+					throw new HttpResponseException(
+						response()->json([
+							'success'   => false,
+							'message'   => 'Query errors',
+							'errors'    => $e->getMessage()
+						], Response::HTTP_BAD_REQUEST)
+					);
+				}
+			} else {
+				return $data;
+			}
+		} else {
+			$booking = $this->model->find($bookingId)->update(['status' => $status]);
+			return $this->model->find($bookingId);
+		}
 	}
 }

@@ -2,11 +2,11 @@
 
 namespace App\Repositories;
 
+use App\Booking;
 use App\Repositories\BaseRepository;
 use App\Room;
 use App\RoomType;
 use Carbon\Carbon;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class RoomRepository extends BaseRepository implements RoomRepositoryInterface
@@ -57,10 +57,13 @@ class RoomRepository extends BaseRepository implements RoomRepositoryInterface
 	public function assign($bookingId)
 	{
 		$bookingDetail = app(BookingRepository::class)->findDetail($bookingId)->toArray();
+		if ($bookingDetail['status'] > 1) {
+			return Booking::with('booking_details.rooms')->find($bookingId)->toArray();
+		}
 		$roomTypeList = array_column($bookingDetail['booking_details'], 'room_type_id');
 		$checkinDate = $bookingDetail['checkin_date'];
 		$checkoutDate = $bookingDetail['checkout_date'];
-		$rooms = $this->model->whereDoesntHave('booking_details', function ($query) use ($checkinDate, $checkoutDate) {
+		$rooms = $this->model->whereHas('booking_details', function ($query) use ($checkinDate, $checkoutDate) {
 			$query->whereHas('booking', function ($q) use ($checkinDate, $checkoutDate) {
 				return $q->where('checkin_date', '>', $checkoutDate)->orWhere('checkout_date', '<', $checkinDate);
 			});
@@ -75,26 +78,32 @@ class RoomRepository extends BaseRepository implements RoomRepositoryInterface
 						'room_id' => $room['id']
 					];
 					$count++;
-					if ($count == $detail['count']) {
-						break;
-					}
+				}
+				if ($count == $detail['count']) {
+					break;
 				}
 			}
+			if ($count < $detail['count']) {
+				return false;
+			}
 		}
+
 		DB::table('booking_detail_room')->insertOrIgnore($insert);
-		return true;
+		app(BookingRepository::class)->update($bookingId, ['status' => 2]);
+		return Booking::with('booking_details.rooms')->find($bookingId)->toArray();
 	}
-	public function getStatus($attributes, $id){
+	public function getStatus($attributes, $id)
+	{
 		$date = $attributes['date'] ?? Carbon::today()->format('Y-m-d');
 		$rooms = $this->model
-		->whereHas('booking_details', function ($query) use ($date) {
-			$query->whereHas('booking', function ($q) use ($date) {
-				return $q->where('checkin_date', '<=', $date)->where('checkout_date', '>=', $date);
-			});
-		})
-		->whereHas('room_type', function($q) use($id){
-			$q->where('homestay_id', $id);
-		})->get(['id'])->toArray();
+			->whereHas('booking_details', function ($query) use ($date) {
+				$query->whereHas('booking', function ($q) use ($date) {
+					return $q->where('checkin_date', '<=', $date)->where('checkout_date', '>=', $date);
+				});
+			})
+			->whereHas('room_type', function ($q) use ($id) {
+				$q->where('homestay_id', $id);
+			})->get(['id'])->toArray();
 		$bookedRooms = array_column($rooms, 'id');
 
 		// $roomsFilter = $this->model->with(['room_type'=> function($q){

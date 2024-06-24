@@ -38,8 +38,13 @@ class BookingController extends Controller
 	}
 
 	public function assign($id){
-		$this->roomRepo->assign($id);
-		return $this->success();
+		$data = $this->roomRepo->assign($id);
+		return $this->success($data);
+	}
+
+	public function changeStatus(Request $request, $id){
+		$data = $this->bookingRepo->changeStatus($request->get('status'), $id);
+		return $this->success($data);
 	}
 	
 }
