@@ -41,7 +41,7 @@
                             </form>
                         </div>
                     </div>
-                    <ul class="nav nav-tabs">
+                    <ul class="nav nav-tabs mb-2">
                         <li class="nav-item">
                             <a
                                 class="nav-link"
@@ -55,7 +55,6 @@
                             <a
                                 class="nav-link"
                                 :class="{ active: selectedTab === 'Chờ duyệt' }"
-                                hờ
                                 @click="selectedTab = 'Chờ duyệt'"
                                 >Chờ duyệt</a
                             >
@@ -64,9 +63,9 @@
                         <li class="nav-item">
                             <a
                                 class="nav-link"
-                                :class="{ active: selectedTab === 'Đã duyệt' }"
-                                @click="selectedTab = 'Đã duyệt'"
-                                >Đã duyệt</a
+                                :class="{ active: selectedTab === 'Duyệt' }"
+                                @click="selectedTab = 'Duyệt'"
+                                >Duyệt</a
                             >
                         </li>
                         <li class="nav-item">
@@ -117,17 +116,59 @@
                                         <h6 class="mb-0 fw-light">{{ booking.checkout }}</h6>
                                     </td>
                                     <td>
-                                        <div :class="`bg-${booking.statusColor} badge`">
+                                        <div :class="`bg-${statusColors[booking.status]} badge`">
                                             {{ booking.status }}
                                         </div>
                                     </td>
                                     <td>
-                                        <button
-                                            @click="viewBooking(booking)"
-                                            class="btn btn-sm btn-light mb-0"
-                                        >
-                                            View
-                                        </button>
+                                        <template v-if="selectedTab === 'Chờ duyệt'">
+                                            <button
+                                                @click="viewBooking(booking)"
+                                                class="btn btn-sm btn-light mb-1"
+                                            >
+                                                View
+                                            </button>
+                                            <button
+                                                @click="approveBooking(booking)"
+                                                class="btn btn-sm btn-success"
+                                            >
+                                                Duyệt
+                                            </button>
+                                            <button
+                                                @click="cancelBooking(booking)"
+                                                class="btn btn-sm btn-danger"
+                                            >
+                                                Hủy
+                                            </button>
+                                        </template>
+                                        <template v-else-if="selectedTab === 'Duyệt'">
+                                            <button
+                                                @click="viewBooking(booking)"
+                                                class="btn btn-sm btn-light mb-1"
+                                            >
+                                                View
+                                            </button>
+                                            <button
+                                                @click="checkinBooking(booking)"
+                                                class="btn btn-sm btn-primary"
+                                            >
+                                                Checkin
+                                            </button>
+                                        </template>
+                                        <template v-else-if="selectedTab === 'Nhận phòng'">
+                                            <button
+                                                @click="viewBooking(booking)"
+                                                class="btn btn-sm btn-light mb-1"
+                                            >
+                                                View
+                                            </button>
+                                            <button
+                                                @click="checkoutBooking(booking)"
+                                                class="btn btn-sm btn-info"
+                                            >
+                                                Checkout
+                                            </button>
+                                        </template>
                                     </td>
                                 </tr>
                             </tbody>
@@ -175,51 +216,73 @@
 export default {
     data() {
         return {
+            selectedTab: 'All',
+            selectedBooking: null, // Used for modal display
             bookings: [
                 {
                     guest: 'John Doe',
                     date: '2024-06-01',
                     checkin: '2024-06-10',
                     checkout: '2024-06-15',
-                    status: 'Confirmed',
-                    statusColor: 'success',
+                    status: 'Chờ duyệt',
                     link: '#',
                 },
                 {
                     guest: 'Jane Smith',
                     date: '2024-06-05',
-                    checkin: '2024-06-20',
-                    checkout: '2024-06-25',
-                    status: 'Pending',
-                    statusColor: 'warning',
+                    checkin: '2024-06-12',
+                    checkout: '2024-06-18',
+                    status: 'Duyệt',
                     link: '#',
                 },
                 {
                     guest: 'Michael Brown',
-                    date: '2024-06-07',
+                    date: '2024-06-08',
                     checkin: '2024-06-15',
                     checkout: '2024-06-20',
-                    status: 'Cancelled',
-                    statusColor: 'danger',
+                    status: 'Nhận phòng',
                     link: '#',
                 },
-                // Add more bookings here...
             ],
-            selectedTab: 'All',
-            selectedBooking: null,
+            statusColors: {
+                'Chờ duyệt': 'warning',
+                Duyệt: 'success',
+                'Nhận phòng': 'info',
+            },
         };
     },
     computed: {
         filteredBookings() {
             if (this.selectedTab === 'All') {
                 return this.bookings;
+            } else {
+                return this.bookings.filter((booking) => booking.status === this.selectedTab);
             }
-            return this.bookings.filter((booking) => booking.status === this.selectedTab);
         },
     },
     methods: {
         viewBooking(booking) {
             this.selectedBooking = booking;
+        },
+        approveBooking(booking) {
+            // Logic to approve booking
+            booking.status = 'Duyệt';
+            this.selectedBooking = null; // Close modal if open
+        },
+        cancelBooking(booking) {
+            // Logic to cancel booking
+            booking.status = 'Hủy';
+            this.selectedBooking = null; // Close modal if open
+        },
+        checkinBooking(booking) {
+            // Logic to check-in booking
+            booking.status = 'Nhận phòng';
+            this.selectedBooking = null; // Close modal if open
+        },
+        checkoutBooking(booking) {
+            // Logic to check-out booking
+            booking.status = 'Trả phòng';
+            this.selectedBooking = null; // Close modal if open
         },
         closeModal() {
             this.selectedBooking = null;
