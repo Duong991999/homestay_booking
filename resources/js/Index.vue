@@ -23,7 +23,7 @@
                     >Về chúng tôi</router-link
                 >
             </div>
-            <div class="d-flex justify-content-between">
+            <!-- <div class="d-flex justify-content-between">
                 <router-link
                     :to="{ name: 'dashboard' }"
                     class="justify-content-between mr-4"
@@ -60,7 +60,7 @@
                     style="text-decoration: none; font-size: 17px; color: rgb(237, 195, 169)"
                     >Quản lý đánh giá</router-link
                 >
-            </div>
+            </div> -->
 
             <div class="navbar-login">
                 <router-link
