@@ -1,6 +1,6 @@
 <template>
     <div>
-        <!-- Modal -->
+        <!-- Booking Modal -->
         <div
             class="modal fade"
             id="bookingModal"
@@ -15,34 +15,24 @@
                     </div>
                     <div class="modal-body">
                         <div class="mb-3">
-                            <label for="name" class="form-label">Tên homestay </label>
+                            <label for="name" class="form-label">Tên homestay</label>
                             <h6 class="form-control form-control-lg" style="border-radius: 10px">
                                 {{ selectedBooking.name }}
                             </h6>
                         </div>
                         <div class="row">
                             <div class="col-md-6">
-                                <label for="start_day" class="form-label d-block"
-                                    >Ngày bắt đầu</label
-                                >
+                                <label for="start_day" class="form-label d-block">Ngày bắt đầu</label>
                                 <div class="">
-                                    <h6
-                                        class="form-control form-control-lg"
-                                        style="border-radius: 10px"
-                                    >
+                                    <h6 class="form-control form-control-lg" style="border-radius: 10px">
                                         {{ selectedBooking.date }}
                                     </h6>
                                 </div>
                             </div>
                             <div class="col-md-6">
-                                <label for="close_day" class="form-label d-block"
-                                    >Ngày kết thúc</label
-                                >
+                                <label for="close_day" class="form-label d-block">Ngày kết thúc</label>
                                 <div class="">
-                                    <h6
-                                        class="form-control form-control-lg"
-                                        style="border-radius: 10px"
-                                    >
+                                    <h6 class="form-control form-control-lg" style="border-radius: 10px">
                                         {{ selectedBooking.date }}
                                     </h6>
                                 </div>
@@ -54,27 +44,19 @@
                                 {{ selectedBooking.date }}
                             </h6>
                         </div>
-
                         <div v-for="room in rooms" :key="room.id">
                             <div class="row">
                                 <div class="col-md-8">
                                     <label class="form-label d-block">Loại phòng</label>
-
                                     <div class="">
-                                        <h6
-                                            class="form-control form-control-lg"
-                                            style="border-radius: 10px"
-                                        >
+                                        <h6 class="form-control form-control-lg" style="border-radius: 10px">
                                             {{ room.type }}
                                         </h6>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <label class="form-label d-block">Số lượng phòng</label>
-                                    <h6
-                                        class="form-control form-control-lg"
-                                        style="border-radius: 10px"
-                                    >
+                                    <h6 class="form-control form-control-lg" style="border-radius: 10px">
                                         {{ room.count }}
                                     </h6>
                                 </div>
@@ -95,6 +77,57 @@
                             aria-label="Close"
                         >
                             Close
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Rating Modal -->
+        <div
+            class="modal fade"
+            id="ratingModal"
+            tabindex="-1"
+            aria-labelledby="ratingModalLabel"
+            aria-hidden="true"
+        >
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content" style="border-radius: 10px">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="ratingModalLabel">Đánh giá</h5>
+                    </div>
+                    <div class="modal-body">
+                        <div class="mb-3">
+                            <label for="rating" class="form-label">Rating</label>
+                            <input
+                                type="number"
+                                class="form-control form-control-lg"
+                                style="border-radius: 10px"
+                                v-model="rating"
+                                min="1"
+                                max="5"
+                            />
+                        </div>
+                        <div class="mb-3">
+                            <label for="review" class="form-label">Review</label>
+                            <textarea
+                                class="form-control form-control-lg"
+                                style="border-radius: 10px"
+                                v-model="review"
+                            ></textarea>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button
+                            type="button"
+                            class="btn btn-secondary"
+                            @click="closeRatingModal"
+                            aria-label="Close"
+                        >
+                            Close
+                        </button>
+                        <button type="button" class="btn btn-primary" @click="submitRating">
+                            Submit
                         </button>
                     </div>
                 </div>
@@ -160,17 +193,25 @@
                             <li class="nav-item">
                                 <a
                                     class="nav-link"
-                                    :class="{ active: selectedTab === 'Booked' }"
-                                    @click="selectedTab = 'Booked'"
-                                    >Booked</a
+                                    :class="{ active: selectedTab === 'Chờ duyệt' }"
+                                    @click="selectedTab = 'Chờ duyệt'"
+                                    >Chờ duyệt</a
                                 >
                             </li>
                             <li class="nav-item">
                                 <a
                                     class="nav-link"
-                                    :class="{ active: selectedTab === 'Reserved' }"
-                                    @click="selectedTab = 'Reserved'"
-                                    >Reserved</a
+                                    :class="{ active: selectedTab === 'Đã duyệt' }"
+                                    @click="selectedTab = 'Đã duyệt'"
+                                    >Đã duyệt</a
+                                >
+                            </li>
+                            <li class="nav-item">
+                                <a
+                                    class="nav-link"
+                                    :class="{ active: selectedTab === 'Hoàn thành' }"
+                                    @click="selectedTab = 'Hoàn thành'"
+                                    >Hoàn thành</a
                                 >
                             </li>
                         </ul>
@@ -211,6 +252,13 @@
                                                 @click.prevent="showModal(booking)"
                                                 >View</a
                                             >
+                                            <a
+                                                v-if="booking.status === 'Hoàn thành'"
+                                                href="#"
+                                                class="btn btn-sm btn-primary mb-0"
+                                                @click.prevent="showRatingModal(booking)"
+                                                >Đánh giá</a
+                                            >
                                         </td>
                                     </tr>
                                 </tbody>
@@ -231,32 +279,34 @@ export default {
         return {
             selectedBooking: {},
             selectedTab: 'All',
+            rating: 0,
+            review: '',
             bookings: [
                 {
                     name: 'Deluxe Pool View',
                     date: 'Nov 22 - 25',
-                    status: 'Booked',
+                    status: 'Đã duyệt',
                     statusColor: 'success',
                     link: '/booking_v/agent/bookings',
                 },
                 {
                     name: 'Deluxe Pool View with Breakfast',
                     date: 'Nov 24 - 28',
-                    status: 'Booked',
+                    status: 'Đã duyệt',
                     statusColor: 'success',
                     link: '/booking_v/agent/bookings',
                 },
                 {
                     name: 'Luxury Room with Balcony',
                     date: 'Nov 24 - 28',
-                    status: 'Reserved',
+                    status: 'Hoàn thành',
                     statusColor: 'info',
                     link: '/booking_v/agent/bookings',
                 },
                 {
                     name: 'Deluxe Room Twin Bed With Balcony',
                     date: 'Nov 28 - 30',
-                    status: 'Booked',
+                    status: 'Đã duyệt',
                     statusColor: 'success',
                     link: '/booking_v/agent/bookings',
                 },
@@ -285,6 +335,20 @@ export default {
         closeModal() {
             const modal = Modal.getInstance(document.getElementById('bookingModal'));
             modal.hide();
+        },
+        showRatingModal(booking) {
+            this.selectedBooking = booking;
+            const modal = new Modal(document.getElementById('ratingModal'));
+            modal.show();
+        },
+        closeRatingModal() {
+            const modal = Modal.getInstance(document.getElementById('ratingModal'));
+            modal.hide();
+        },
+        submitRating() {
+            // Implement your submit rating logic here
+            console.log(`Rating: ${this.rating}, Review: ${this.review}`);
+            this.closeRatingModal();
         },
     },
 };
