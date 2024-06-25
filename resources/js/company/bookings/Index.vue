@@ -10,35 +10,28 @@
                 </div>
                 <div class="card-body pb-0">
                     <div class="row g-3 align-items-center justify-content-between mb-3">
-                        <div class="col-md-8">
-                            <form class="rounded position-relative">
-                                <input
-                                    class="form-control pe-5"
-                                    type="search"
-                                    placeholder="Search"
-                                    aria-label="Search"
-                                />
+                        <div class="row col-lg-10">
+                            <div class="col-lg-5 m-2">
+                                <input class="input__field" type="date" v-model="checkin_date" />
+                                <span class="input__label">Tra cứu ngày</span>
+                            </div>
+                            <div class="col-lg-5 m-2">
                                 <button
-                                    class="btn border-0 px-3 py-0 position-absolute top-50 end-0 translate-middle-y"
-                                    type="submit"
+                                    class="btn border-0 m-2"
+                                    :disabled="loading"
+                                    style="
+                                        background-color: rgb(240 181 145 / 50%);
+                                        color: #ef7d4ae6;
+                                        width: 150px;
+                                        border-radius: 10px;
+                                    "
                                 >
-                                    <svg
-                                        class="svg-inline--fa fa-magnifying-glass"
-                                        aria-hidden="true"
-                                        focusable="false"
-                                        data-prefix="fas"
-                                        data-icon="magnifying-glass"
-                                        role="img"
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        viewBox="0 0 512 512"
-                                    >
-                                        <path
-                                            fill="currentColor"
-                                            d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z"
-                                        ></path>
-                                    </svg>
+                                    <span v-if="!loading">Tra cứu </span>
+                                    <span v-if="loading">
+                                        <i class="fas fa-circle-notch fa-spin"></i> Checking...
+                                    </span>
                                 </button>
-                            </form>
+                            </div>
                         </div>
                     </div>
                     <ul class="nav nav-tabs mb-2">
@@ -84,6 +77,14 @@
                                 >Trả phòng</a
                             >
                         </li>
+                        <li class="nav-item">
+                            <a
+                                class="nav-link"
+                                :class="{ active: selectedTab === 'Đã hủy' }"
+                                @click="selectedTab = 'Đã hủy'"
+                                >Đã hủy</a
+                            >
+                        </li>
                     </ul>
                     <div class="table-responsive border-0">
                         <table class="table align-middle p-4 mb-0 table-hover table-shrink">
@@ -121,13 +122,13 @@
                                         </div>
                                     </td>
                                     <td>
+                                        <button
+                                            @click="viewBooking(booking)"
+                                            class="btn btn-sm btn-light mb-1"
+                                        >
+                                            View
+                                        </button>
                                         <template v-if="selectedTab === 'Chờ duyệt'">
-                                            <button
-                                                @click="viewBooking(booking)"
-                                                class="btn btn-sm btn-light mb-1"
-                                            >
-                                                View
-                                            </button>
                                             <button
                                                 @click="approveBooking(booking)"
                                                 class="btn btn-sm btn-success"
@@ -143,12 +144,6 @@
                                         </template>
                                         <template v-else-if="selectedTab === 'Duyệt'">
                                             <button
-                                                @click="viewBooking(booking)"
-                                                class="btn btn-sm btn-light mb-1"
-                                            >
-                                                View
-                                            </button>
-                                            <button
                                                 @click="checkinBooking(booking)"
                                                 class="btn btn-sm btn-primary"
                                             >
@@ -156,12 +151,6 @@
                                             </button>
                                         </template>
                                         <template v-else-if="selectedTab === 'Nhận phòng'">
-                                            <button
-                                                @click="viewBooking(booking)"
-                                                class="btn btn-sm btn-light mb-1"
-                                            >
-                                                View
-                                            </button>
                                             <button
                                                 @click="checkoutBooking(booking)"
                                                 class="btn btn-sm btn-info"
@@ -186,7 +175,7 @@
             tabindex="-1"
             role="dialog"
         >
-            <div class="modal-dialog" role="document">
+            <div class="modal-dialog custom-modal-size" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title">{{ selectedBooking.guest }}</h5>
@@ -195,9 +184,69 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <p><strong>Ngày đặt:</strong> {{ selectedBooking.date }}</p>
-                        <p><strong>Ngày nhận phòng:</strong> {{ selectedBooking.checkin }}</p>
-                        <p><strong>Ngày trả phòng:</strong> {{ selectedBooking.checkout }}</p>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label for="start_day" class="form-label d-block"
+                                    >Ngày bắt đầu</label
+                                >
+                                <div class="">
+                                    <h6
+                                        class="form-control form-control-lg"
+                                        style="border-radius: 10px"
+                                    >
+                                        {{ selectedBooking.checkin }}
+                                    </h6>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="close_day" class="form-label d-block"
+                                    >Ngày kết thúc</label
+                                >
+                                <div class="">
+                                    <h6
+                                        class="form-control form-control-lg"
+                                        style="border-radius: 10px"
+                                    >
+                                        {{ selectedBooking.checkout }}
+                                    </h6>
+                                </div>
+                            </div>
+                        </div>
+                        <div v-for="room in selectedBooking.rooms" :key="room.id">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label class="form-label d-block">Loại phòng</label>
+
+                                    <div class="">
+                                        <h6
+                                            class="form-control form-control-lg"
+                                            style="border-radius: 10px"
+                                        >
+                                            {{ room.type }}
+                                        </h6>
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <label class="form-label d-block">Số lượng phòng</label>
+                                    <h6
+                                        class="form-control form-control-lg"
+                                        style="border-radius: 10px"
+                                    >
+                                        {{ room.count }}
+                                    </h6>
+                                </div>
+                                <div class="col-md-4">
+                                    <label class="form-label d-block" style="height: 22px"></label>
+                                    <h6
+                                        class="form-control form-control-lg border-0"
+                                        style="border-radius: 10px"
+                                    >
+                                        {{ room.count }} x {{ room.price }} =
+                                        {{ formatCurrency(room.price * room.count) }}
+                                    </h6>
+                                </div>
+                            </div>
+                        </div>
                         <p><strong>Trạng thái:</strong> {{ selectedBooking.status }}</p>
                     </div>
                     <div class="modal-footer">
@@ -226,6 +275,10 @@ export default {
                     checkout: '2024-06-15',
                     status: 'Chờ duyệt',
                     link: '#',
+                    rooms: [
+                        { id: 1, type: 'Single', count: 2, price: 100 },
+                        { id: 2, type: 'Double', count: 1, price: 150 },
+                    ],
                 },
                 {
                     guest: 'Jane Smith',
@@ -234,6 +287,7 @@ export default {
                     checkout: '2024-06-18',
                     status: 'Duyệt',
                     link: '#',
+                    rooms: [{ id: 3, type: 'Suite', count: 1, price: 300 }],
                 },
                 {
                     guest: 'Michael Brown',
@@ -242,12 +296,26 @@ export default {
                     checkout: '2024-06-20',
                     status: 'Nhận phòng',
                     link: '#',
+                    rooms: [
+                        { id: 4, type: 'Single', count: 1, price: 100 },
+                        { id: 5, type: 'Double', count: 2, price: 150 },
+                    ],
+                },
+                {
+                    guest: 'Sarah Johnson',
+                    date: '2024-06-10',
+                    checkin: '2024-06-18',
+                    checkout: '2024-06-22',
+                    status: 'Đã hủy',
+                    link: '#',
+                    rooms: [{ id: 6, type: 'Double', count: 1, price: 150 }],
                 },
             ],
             statusColors: {
                 'Chờ duyệt': 'warning',
                 Duyệt: 'success',
                 'Nhận phòng': 'info',
+                'Đã hủy': 'secondary',
             },
         };
     },
@@ -271,7 +339,7 @@ export default {
         },
         cancelBooking(booking) {
             // Logic to cancel booking
-            booking.status = 'Hủy';
+            booking.status = 'Đã hủy';
             this.selectedBooking = null; // Close modal if open
         },
         checkinBooking(booking) {
@@ -287,6 +355,11 @@ export default {
         closeModal() {
             this.selectedBooking = null;
         },
+        formatCurrency(value) {
+            return new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(
+                value
+            );
+        },
     },
 };
 </script>
@@ -299,6 +372,10 @@ export default {
 .modal {
     display: block;
     background: rgba(0, 0, 0, 0.5);
+}
+.custom-modal-size {
+    max-width: 80%; /* Adjust as needed */
+    width: 80%; /* Adjust as needed */
 }
 
 .modal-backdrop {
