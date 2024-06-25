@@ -11,6 +11,7 @@ use Illuminate\Database\QueryException;
 use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Request;
 
 class BookingRepository extends BaseRepository implements BookingRepositoryInterface
 {
@@ -164,5 +165,56 @@ class BookingRepository extends BaseRepository implements BookingRepositoryInter
 			$booking = $this->model->find($bookingId)->update(['status' => $status]);
 			return $this->model->find($bookingId);
 		}
+	}
+
+	public function paginateUserSearch($attributes)
+	{
+		$userId = auth()->user()->id;
+		$bookingWhere = ['user_id' => $userId];
+		if (isset($attributes['status'])) {
+			$bookingWhere['status'] = $attributes['status'];
+		}
+		if (isset($attributes['checkin_date'])) {
+			$bookingWhere['checkin_date'] = $attributes['checkin_date'];
+		}
+		if (isset($attributes['checkout_date'])) {
+			$bookingWhere['checkout_date'] = $attributes['checkout_date'];
+		}
+		$data  = $this->model->where($bookingWhere);
+		if (isset($attributes['date'])) {
+			$data = $data->where('checkin_date', '<=', $attributes['date'])->where('checkout_date', '>=', $attributes['date']);
+		}
+		if (isset($attributes['homestay_name'])) {
+			$data = $data->whereHas('homestay', function ($q1) use ($attributes) {
+				$q1->where('name', $attributes['homestay_name']);
+			});
+		}
+		return $data->orderBy('updated_at', 'desc')->paginate(10)->appends(Request::query());
+	}
+
+	public function paginateCompanySearch($attributes)
+	{
+		$userId = auth()->user()->id;
+		$bookingWhere = [];
+		if (isset($attributes['status'])) {
+			$bookingWhere['status'] = $attributes['status'];
+		}
+		if ($attributes['checkin_date'] ?? 0) {
+			$bookingWhere['checkin_date'] = $attributes['checkin_date'];
+		}
+		if ($attributes['checkout_date'] ?? 0) {
+			$bookingWhere['checkout_date'] = $attributes['checkout_date'];
+		}
+		$data  = $this->model;
+		if($bookingWhere){
+			$data = $data->where($bookingWhere);
+		}
+		if ($attributes['date'] ?? 0) {
+			$data = $data->where('checkin_date', '<=', $attributes['date'])->where('checkout_date', '>=', $attributes['date']);
+		}
+		$data = $data->whereHas('homestay', function ($q1) use ($userId) {
+			$q1->where('user_id', $userId);
+		});
+		return $data->orderBy('updated_at', 'desc')->paginate(10)->appends(Request::query());
 	}
 }

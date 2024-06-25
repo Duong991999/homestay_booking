@@ -46,5 +46,14 @@ class BookingController extends Controller
 		$data = $this->bookingRepo->changeStatus($request->get('status'), $id);
 		return $this->success($data);
 	}
-	
+
+	public function paginateUserSearch(Request $request){
+		$data = $this->bookingRepo->paginateUserSearch($request->all());
+		return $this->success($data);
+	}
+
+	public function paginateCompanySearch(Request $request){
+		$data = $this->bookingRepo->paginateCompanySearch($request->all());
+		return $this->success($data);
+	}
 }

@@ -18,6 +18,11 @@ class Booking extends Model
 		return $this->belongsTo(User::class);
 	}
 
+	public function homestay(): BelongsTo
+	{
+		return $this->belongsTo(Homestay::class);
+	}
+
 	public function booking_details(): HasMany
 	{
 		return $this->hasMany(BookingDetail::class);

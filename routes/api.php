@@ -94,4 +94,6 @@ Route::group(['prefix' => 'booking',], function(){
 	Route::post('/delete', [BookingController::class, 'delete']);
 	Route::get('/room-assign/{id}', [BookingController::class, 'assign']);
 	Route::post('/change-status/{id}', [BookingController::class, 'changeStatus']);
+	Route::get('/user-search', [BookingController::class, 'paginateUserSearch']);
+	Route::get('/company-search', [BookingController::class, 'paginateCompanySearch']);
 });

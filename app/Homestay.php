@@ -35,4 +35,8 @@ class Homestay extends Model
 	public function room_types(){
 		return $this->hasMany(RoomType::class);
 	}
+
+	public function bookings(){
+		return $this->hasMany(Booking::class);
+	}
 }
