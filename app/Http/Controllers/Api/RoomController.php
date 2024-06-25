@@ -45,4 +45,9 @@ class RoomController extends Controller
 		$this->roomRepo->delete($request->get('id'));
 		return $this->success();
 	}
+
+	public function status(Request $request, $id){
+		return $this->success($this->roomRepo->getStatus($request->all(), $id));
+
+	}
 }
