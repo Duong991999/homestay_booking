@@ -1,5 +1,5 @@
 <template>
-    <div class="card bg-transparent border-0" id="room-options" style="margin-top: 50px">
+    <div class="card bg-transparent border-0 w-100" id="room-options" style="margin-top: 50px">
         <div class="card-header border-bottom bg-transparent px-0 pt-0">
             <div class="d-sm-flex justify-content-sm-between align-items-center">
                 <h3 class="mb-2 mb-sm-0 font-weight-bold">Room Options</h3>
@@ -16,11 +16,14 @@
             </div>
         </div>
         <div class="card-body pt-4 p-0">
-            <div class="card shadow p-3" v-for="(room, index) in items" :key="index">
+            <div class="card shadow p-3 w-100" v-for="(room, index) in items" :key="index">
                 <div class="row g-4">
                     <div class="col-md-5 position-relative">
                         <img
-                            :src="room?.files[0]?.file_path ?? 'assets/image/slide_home_screens/_1.jpg'"
+                            :src="
+                                room?.files[0]?.file_path ??
+                                'assets/image/slide_home_screens/_1.jpg'
+                            "
                             alt="..."
                             width="200px"
                             style="border-radius: 15px"
@@ -112,10 +115,17 @@
                             </button>
                         </div>
                         <div class="modal-body">
-                            <img :src=" modalRoom?.files[0]?.file_path" alt="..." class="img-fluid mb-3" />
+                            <img
+                                :src="modalRoom?.files[0]?.file_path"
+                                alt="..."
+                                class="img-fluid mb-3"
+                            />
                             <p><strong>Features:</strong></p>
                             <ul>
-                                <li v-for="(feature, index) in modalRoom?.features ?? []" :key="index">
+                                <li
+                                    v-for="(feature, index) in modalRoom?.features ?? []"
+                                    :key="index"
+                                >
                                     {{ feature }}
                                 </li>
                             </ul>
@@ -157,15 +167,15 @@ export default {
             modalRoom: null,
         };
     },
-	props: {
-		items: {
-			type: Array,
-		}
-	},
+    props: {
+        items: {
+            type: Array,
+        },
+    },
     methods: {
         showModal(room) {
             this.modalRoom = room;
-			console.log(this.modalRoom?.files[0]?.file_path);
+            console.log(this.modalRoom?.files[0]?.file_path);
             const modal = new bootstrap.Modal(document.getElementById('detailsModal'));
             modal.show();
         },
