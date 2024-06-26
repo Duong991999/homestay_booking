@@ -1,5 +1,5 @@
 <template>
-    <div class="card bg-transparent border-0">
+    <div class="card bg-transparent border-0 w-100">
         <!----><!----><!---->
         <div class="card-header border-bottom bg-transparent px-0 pt-0">
             <h3 class="card-title mb-0 font-weight-bold">Amenities</h3>

@@ -4,6 +4,37 @@
             <div class="card-header border-bottom card-header-custom">
                 <h4 class="mb-0 title">Danh sách phòng</h4>
             </div>
+
+            <div class="row col-lg-10 m-4">
+                <div class="col-lg-5 m-2">
+                    <input
+                        class="input__field"
+                        type="date"
+                        v-model="checkin_date"
+                        @focus="isFocused = true"
+                        @blur="isFocused = false"
+                    />
+                    <span class="input__label">Tra cứu ngày</span>
+                </div>
+                <div class="col-lg-5 m-2">
+                    <button
+                        class="btn border-0 m-2"
+                        @click="check"
+                        :disabled="loading"
+                        style="
+                            background-color: rgb(240 181 145 / 50%);
+                            color: #ef7d4ae6;
+                            width: 150px;
+                            border-radius: 10px;
+                        "
+                    >
+                        <span v-if="!loading">Tra cứu </span>
+                        <span v-if="loading">
+                            <i class="fas fa-circle-notch fa-spin"></i> Checking...
+                        </span>
+                    </button>
+                </div>
+            </div>
             <div class="room-type m-4" v-for="(roomType, index) in roomTypes" :key="index">
                 <h5>{{ roomType.type }}</h5>
                 <div class="rooms">
@@ -44,7 +75,13 @@ export default {
                 },
                 // Thêm các loại phòng khác theo ý muốn
             ],
+            selectedDate: null,
         };
+    },
+    computed: {
+        dateState() {
+            return this.selectedDate ? true : false;
+        },
     },
 };
 </script>
@@ -94,5 +131,38 @@ export default {
 
 .title {
     font-weight: bold;
+}
+.input__label {
+    position: absolute;
+    left: 10px;
+    /* Điều chỉnh khoảng cách từ mép trái */
+    top: -10px;
+    /* Điều chỉnh khoảng cách từ mép trên */
+    background: white;
+    /* Đổi màu nền nếu cần */
+    padding: 0 5px;
+    /* Điều chỉnh padding nếu cần */
+    font-weight: bold;
+    color: #888;
+    /* Đổi màu chữ nếu cần */
+    z-index: 1;
+}
+
+.input__field {
+    box-sizing: border-box;
+    width: 100%;
+    border: 2px solid #ccc;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.input__field:focus + .input__label,
+.input__field:not(:placeholder-shown) + .input__label {
+    top: -10px;
+    /* Điều chỉnh vị trí khi input field được focus */
+    font-size: 12px;
+    /* Điều chỉnh kích thước chữ khi input field được focus */
+    color: #333;
+    /* Đổi màu chữ khi input field được focus */
 }
 </style>

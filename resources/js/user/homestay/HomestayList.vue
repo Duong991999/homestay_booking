@@ -9,6 +9,7 @@
             >
                 <div class="card shadow pb-0 w-100" style="border-radius: 1rem">
                     <img
+                        height="200px"
                         class="card-img-top"
                         :src="card.file_path"
                         :alt="card.file_name"
@@ -17,7 +18,7 @@
                     <div class="card-body">
                         <h5 class="card-title font-weight-bold">{{ card.name }}</h5>
                         <small>Địa chỉ</small>
-                        <small>{{card.address}}</small>
+                        <small>{{ card.address }}</small>
 
                         <ul class="nav nav-divider mb-2 mb-sm-3">
                             <div class="nav-item">
@@ -35,8 +36,10 @@
                     </div>
                     <div class="card-footer border-top">
                         <div class="d-flex justify-content-between align-items-center">
-							<router-link :to="{ name: 'detail', params: { id: card.id } }">Detail</router-link>
-						</div>
+                            <router-link :to="{ name: 'detail', params: { id: card.id } }"
+                                >Detail</router-link
+                            >
+                        </div>
                     </div>
                 </div>
             </div>
@@ -47,15 +50,14 @@
 <script>
 export default {
     data() {
-        return {
-        };
+        return {};
     },
-	props: {
-		items: {
-			type: Array,
-			default: []
-		}
-	},
+    props: {
+        items: {
+            type: Array,
+            default: [],
+        },
+    },
 };
 </script>
 
