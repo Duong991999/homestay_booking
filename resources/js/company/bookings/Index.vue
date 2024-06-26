@@ -1,5 +1,6 @@
 <template>
     <div class="row" style="margin-top: 100px">
+        <v-fullloading :loading="loading"></v-fullloading>
         <div class="col-12">
             <div class="card border w-100">
                 <div class="card-header border-bottom">
@@ -13,12 +14,17 @@
                         <div class="row col-lg-10">
                             <div class="col-lg-5 m-2">
                                 <input class="input__field" type="date" v-model="checkin_date" />
-                                <span class="input__label">Tra cứu ngày</span>
+                                <span class="input__label">Checkin Date</span>
+                            </div>
+							<div class="col-lg-5 m-2">
+                                <input class="input__field" type="date" v-model="checkout_date" />
+                                <span class="input__label">Checkout Date</span>
                             </div>
                             <div class="col-lg-5 m-2">
                                 <button
                                     class="btn border-0 m-2"
                                     :disabled="loading"
+									@click="fetchData()"
                                     style="
                                         background-color: rgb(240 181 145 / 50%);
                                         color: #ef7d4ae6;
@@ -26,7 +32,7 @@
                                         border-radius: 10px;
                                     "
                                 >
-                                    <span v-if="!loading">Tra cứu </span>
+                                    <span>Tra cứu </span>
                                     <span v-if="loading">
                                         <i class="fas fa-circle-notch fa-spin"></i> Checking...
                                     </span>
@@ -48,7 +54,7 @@
                             <a
                                 class="nav-link"
                                 :class="{ active: selectedTab === 'Chờ duyệt' }"
-                                @click="selectedTab = 'Chờ duyệt'"
+                                @click="selectedTab = 'Chờ duyệt';status=0; fetchData()"
                                 >Chờ duyệt</a
                             >
                         </li>
@@ -57,7 +63,7 @@
                             <a
                                 class="nav-link"
                                 :class="{ active: selectedTab === 'Duyệt' }"
-                                @click="selectedTab = 'Duyệt'"
+                                @click="selectedTab = 'Duyệt' ; status=1; fetchData()"
                                 >Duyệt</a
                             >
                         </li>
@@ -100,21 +106,21 @@
                                 </tr>
                             </thead>
                             <tbody class="border-top-0">
-                                <tr v-for="(booking, index) in filteredBookings" :key="index">
+                                <tr v-for="(booking, index) in bookings" :key="index">
                                     <td>
                                         <h6 class="mb-0">{{ index + 1 }}</h6>
                                     </td>
                                     <td>
                                         <h6 class="mb-0">
-                                            <a :href="booking.link">{{ booking.guest }}</a>
+                                            <a :href="booking.link">{{ booking.guest_name }}</a>
                                         </h6>
                                     </td>
-                                    <td>{{ booking.date }}</td>
+                                    <td>{{ booking.created_at }}</td>
                                     <td>
-                                        <h6 class="mb-0 fw-light">{{ booking.checkin }}</h6>
+                                        <h6 class="mb-0 fw-light">{{ booking.checkin_date }}</h6>
                                     </td>
                                     <td>
-                                        <h6 class="mb-0 fw-light">{{ booking.checkout }}</h6>
+                                        <h6 class="mb-0 fw-light">{{ booking.checkout_date }}</h6>
                                     </td>
                                     <td>
                                         <div :class="`bg-${statusColors[booking.status]} badge`">
@@ -130,7 +136,7 @@
                                         </button>
                                         <template v-if="selectedTab === 'Chờ duyệt'">
                                             <button
-                                                @click="approveBooking(booking)"
+                                                @click="updateStatus(booking.id, 1)"
                                                 class="btn btn-sm btn-success"
                                             >
                                                 Duyệt
@@ -144,7 +150,7 @@
                                         </template>
                                         <template v-else-if="selectedTab === 'Duyệt'">
                                             <button
-                                                @click="checkinBooking(booking)"
+                                                @click="checkinBooking(booking.id)"
                                                 class="btn btn-sm btn-primary"
                                             >
                                                 Checkin
@@ -166,6 +172,8 @@
                 </div>
             </div>
         </div>
+		<pagination :data="data" v-on:pagination-change-page="fetchData" align="center"></pagination>
+
 
         <!-- Modal -->
         <div
@@ -267,49 +275,26 @@ export default {
         return {
             selectedTab: 'All',
             selectedBooking: null, // Used for modal display
+			status:'',
+			phone_number:'',
+			checkin_date:'',
+			checkout_date:'',
+			user_name:'',
+			loading: false,
+			data: {},
             bookings: [
-                {
-                    guest: 'John Doe',
-                    date: '2024-06-01',
-                    checkin: '2024-06-10',
-                    checkout: '2024-06-15',
-                    status: 'Chờ duyệt',
-                    link: '#',
-                    rooms: [
-                        { id: 1, type: 'Single', count: 2, price: 100 },
-                        { id: 2, type: 'Double', count: 1, price: 150 },
-                    ],
-                },
-                {
-                    guest: 'Jane Smith',
-                    date: '2024-06-05',
-                    checkin: '2024-06-12',
-                    checkout: '2024-06-18',
-                    status: 'Duyệt',
-                    link: '#',
-                    rooms: [{ id: 3, type: 'Suite', count: 1, price: 300 }],
-                },
-                {
-                    guest: 'Michael Brown',
-                    date: '2024-06-08',
-                    checkin: '2024-06-15',
-                    checkout: '2024-06-20',
-                    status: 'Nhận phòng',
-                    link: '#',
-                    rooms: [
-                        { id: 4, type: 'Single', count: 1, price: 100 },
-                        { id: 5, type: 'Double', count: 2, price: 150 },
-                    ],
-                },
-                {
-                    guest: 'Sarah Johnson',
-                    date: '2024-06-10',
-                    checkin: '2024-06-18',
-                    checkout: '2024-06-22',
-                    status: 'Đã hủy',
-                    link: '#',
-                    rooms: [{ id: 6, type: 'Double', count: 1, price: 150 }],
-                },
+                // {
+                //     guest: 'John Doe',
+                //     date: '2024-06-01',
+                //     checkin: '2024-06-10',
+                //     checkout: '2024-06-15',
+                //     status: 'Chờ duyệt',
+                //     link: '#',
+                //     rooms: [
+                //         { id: 1, type: 'Single', count: 2, price: 100 },
+                //         { id: 2, type: 'Double', count: 1, price: 150 },
+                //     ],
+                // },
             ],
             statusColors: {
                 'Chờ duyệt': 'warning',
@@ -328,7 +313,47 @@ export default {
             }
         },
     },
+	async created(){
+		this.loading = true;
+		await this.fetchData()
+
+		this.loading = false;
+	},
     methods: {
+		async fetchData(page = 1) {
+			this.loading = true;
+			try {
+				const response = await axios.get(`/api/booking/company-search?page=${page}&status=${this.status}&phone_number=${this.phone_number}&checkin_date=${this.checkin_date}&checkout_date=${this.checkout_date}&user=${this.user_name}`);
+				console.log(response);
+				this.data = response.data.data;
+				this.bookings = this.data.data
+				console.log(this.bookings);
+				// this.items = this.data.data
+			} catch (error) {
+				console.error('Error fetching data:', error);
+			}
+			this.loading = false;
+		},
+		async updateStatus(bookingId, status) {
+			this.loading = true;
+			try {
+				const response = await axios.post(`/api/booking/change-status/${bookingId}`, {
+					status
+				});
+				if (response.data.success) {
+                    this.flashMessage.success({
+                        title: 'Duyet thanh cong',
+                        time: 2000,
+                    });
+                }
+				this.status = status;
+				this.selectedTab = 'Duyệt'
+				this.fetchData()
+			} catch (error) {
+				console.error('Error fetching data:', error);
+			}
+			this.loading = false;
+		},
         viewBooking(booking) {
             this.selectedBooking = booking;
         },
@@ -342,10 +367,23 @@ export default {
             booking.status = 'Đã hủy';
             this.selectedBooking = null; // Close modal if open
         },
-        checkinBooking(booking) {
-            // Logic to check-in booking
-            booking.status = 'Nhận phòng';
-            this.selectedBooking = null; // Close modal if open
+        async checkinBooking(bookingId) {
+			this.loading = true;
+			try {
+				const response = await axios.get(`/api/booking/room-assign/${bookingId}`);
+				if (response.data.success) {
+                    this.flashMessage.success({
+                        title: 'Duyet thanh cong',
+                        time: 2000,
+                    });
+                }
+				this.status = status;
+				this.selectedTab = 'Duyệt'
+				this.fetchData()
+			} catch (error) {
+				console.error('Error fetching data:', error);
+			}
+			this.loading = false;
         },
         checkoutBooking(booking) {
             // Logic to check-out booking

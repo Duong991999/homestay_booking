@@ -614,7 +614,9 @@ export default {
 			} else if (type === 'children' && this.children > 0) {
 				this.children--;
 			} else if (type === 'count' && index !== null && this.rooms[index].count_booking > 0) {
-				this.rooms[index].count_booking--
+				let roomUpdate = this.rooms[index]
+				roomUpdate.count_booking = roomUpdate.count_booking - 1
+				Vue.set(this.rooms, index, roomUpdate)
 			}
 		},
 		increaseCount(type, index = null) {
