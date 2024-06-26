@@ -60,7 +60,7 @@
                     style="text-decoration: none; font-size: 17px; color: rgb(237, 195, 169)"
                     >Quản lý đánh giá</router-link
                 >
-            </div>
+            </div> -->
 
             <div class="navbar-login">
                 <router-link
