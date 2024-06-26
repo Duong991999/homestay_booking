@@ -10,38 +10,31 @@
                 </div>
                 <div class="card-body pb-0">
                     <div class="row g-3 align-items-center justify-content-between mb-3">
-                        <div class="col-md-8">
-                            <form class="rounded position-relative">
-                                <input
-                                    class="form-control pe-5"
-                                    type="search"
-                                    placeholder="Search"
-                                    aria-label="Search"
-                                />
+                        <div class="row col-lg-10">
+                            <div class="col-lg-5 m-2">
+                                <input class="input__field" type="date" v-model="checkin_date" />
+                                <span class="input__label">Tra cứu ngày</span>
+                            </div>
+                            <div class="col-lg-5 m-2">
                                 <button
-                                    class="btn border-0 px-3 py-0 position-absolute top-50 end-0 translate-middle-y"
-                                    type="submit"
+                                    class="btn border-0 m-2"
+                                    :disabled="loading"
+                                    style="
+                                        background-color: rgb(240 181 145 / 50%);
+                                        color: #ef7d4ae6;
+                                        width: 150px;
+                                        border-radius: 10px;
+                                    "
                                 >
-                                    <svg
-                                        class="svg-inline--fa fa-magnifying-glass"
-                                        aria-hidden="true"
-                                        focusable="false"
-                                        data-prefix="fas"
-                                        data-icon="magnifying-glass"
-                                        role="img"
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        viewBox="0 0 512 512"
-                                    >
-                                        <path
-                                            fill="currentColor"
-                                            d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z"
-                                        ></path>
-                                    </svg>
+                                    <span v-if="!loading">Tra cứu </span>
+                                    <span v-if="loading">
+                                        <i class="fas fa-circle-notch fa-spin"></i> Checking...
+                                    </span>
                                 </button>
-                            </form>
+                            </div>
                         </div>
                     </div>
-                    <ul class="nav nav-tabs">
+                    <ul class="nav nav-tabs mb-2">
                         <li class="nav-item">
                             <a
                                 class="nav-link"
@@ -55,7 +48,6 @@
                             <a
                                 class="nav-link"
                                 :class="{ active: selectedTab === 'Chờ duyệt' }"
-                                hờ
                                 @click="selectedTab = 'Chờ duyệt'"
                                 >Chờ duyệt</a
                             >
@@ -64,9 +56,9 @@
                         <li class="nav-item">
                             <a
                                 class="nav-link"
-                                :class="{ active: selectedTab === 'Đã duyệt' }"
-                                @click="selectedTab = 'Đã duyệt'"
-                                >Đã duyệt</a
+                                :class="{ active: selectedTab === 'Duyệt' }"
+                                @click="selectedTab = 'Duyệt'"
+                                >Duyệt</a
                             >
                         </li>
                         <li class="nav-item">
@@ -83,6 +75,14 @@
                                 :class="{ active: selectedTab === 'Trả phòng' }"
                                 @click="selectedTab = 'Trả phòng'"
                                 >Trả phòng</a
+                            >
+                        </li>
+                        <li class="nav-item">
+                            <a
+                                class="nav-link"
+                                :class="{ active: selectedTab === 'Đã hủy' }"
+                                @click="selectedTab = 'Đã hủy'"
+                                >Đã hủy</a
                             >
                         </li>
                     </ul>
@@ -117,17 +117,47 @@
                                         <h6 class="mb-0 fw-light">{{ booking.checkout }}</h6>
                                     </td>
                                     <td>
-                                        <div :class="`bg-${booking.statusColor} badge`">
+                                        <div :class="`bg-${statusColors[booking.status]} badge`">
                                             {{ booking.status }}
                                         </div>
                                     </td>
                                     <td>
                                         <button
                                             @click="viewBooking(booking)"
-                                            class="btn btn-sm btn-light mb-0"
+                                            class="btn btn-sm btn-light mb-1"
                                         >
                                             View
                                         </button>
+                                        <template v-if="selectedTab === 'Chờ duyệt'">
+                                            <button
+                                                @click="approveBooking(booking)"
+                                                class="btn btn-sm btn-success"
+                                            >
+                                                Duyệt
+                                            </button>
+                                            <button
+                                                @click="cancelBooking(booking)"
+                                                class="btn btn-sm btn-danger"
+                                            >
+                                                Hủy
+                                            </button>
+                                        </template>
+                                        <template v-else-if="selectedTab === 'Duyệt'">
+                                            <button
+                                                @click="checkinBooking(booking)"
+                                                class="btn btn-sm btn-primary"
+                                            >
+                                                Checkin
+                                            </button>
+                                        </template>
+                                        <template v-else-if="selectedTab === 'Nhận phòng'">
+                                            <button
+                                                @click="checkoutBooking(booking)"
+                                                class="btn btn-sm btn-info"
+                                            >
+                                                Checkout
+                                            </button>
+                                        </template>
                                     </td>
                                 </tr>
                             </tbody>
@@ -145,7 +175,7 @@
             tabindex="-1"
             role="dialog"
         >
-            <div class="modal-dialog" role="document">
+            <div class="modal-dialog custom-modal-size" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title">{{ selectedBooking.guest }}</h5>
@@ -154,9 +184,69 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <p><strong>Ngày đặt:</strong> {{ selectedBooking.date }}</p>
-                        <p><strong>Ngày nhận phòng:</strong> {{ selectedBooking.checkin }}</p>
-                        <p><strong>Ngày trả phòng:</strong> {{ selectedBooking.checkout }}</p>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label for="start_day" class="form-label d-block"
+                                    >Ngày bắt đầu</label
+                                >
+                                <div class="">
+                                    <h6
+                                        class="form-control form-control-lg"
+                                        style="border-radius: 10px"
+                                    >
+                                        {{ selectedBooking.checkin }}
+                                    </h6>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="close_day" class="form-label d-block"
+                                    >Ngày kết thúc</label
+                                >
+                                <div class="">
+                                    <h6
+                                        class="form-control form-control-lg"
+                                        style="border-radius: 10px"
+                                    >
+                                        {{ selectedBooking.checkout }}
+                                    </h6>
+                                </div>
+                            </div>
+                        </div>
+                        <div v-for="room in selectedBooking.rooms" :key="room.id">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label class="form-label d-block">Loại phòng</label>
+
+                                    <div class="">
+                                        <h6
+                                            class="form-control form-control-lg"
+                                            style="border-radius: 10px"
+                                        >
+                                            {{ room.type }}
+                                        </h6>
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <label class="form-label d-block">Số lượng phòng</label>
+                                    <h6
+                                        class="form-control form-control-lg"
+                                        style="border-radius: 10px"
+                                    >
+                                        {{ room.count }}
+                                    </h6>
+                                </div>
+                                <div class="col-md-4">
+                                    <label class="form-label d-block" style="height: 22px"></label>
+                                    <h6
+                                        class="form-control form-control-lg border-0"
+                                        style="border-radius: 10px"
+                                    >
+                                        {{ room.count }} x {{ room.price }} =
+                                        {{ formatCurrency(room.price * room.count) }}
+                                    </h6>
+                                </div>
+                            </div>
+                        </div>
                         <p><strong>Trạng thái:</strong> {{ selectedBooking.status }}</p>
                     </div>
                     <div class="modal-footer">
@@ -175,54 +265,100 @@
 export default {
     data() {
         return {
+            selectedTab: 'All',
+            selectedBooking: null, // Used for modal display
             bookings: [
                 {
                     guest: 'John Doe',
                     date: '2024-06-01',
                     checkin: '2024-06-10',
                     checkout: '2024-06-15',
-                    status: 'Confirmed',
-                    statusColor: 'success',
+                    status: 'Chờ duyệt',
                     link: '#',
+                    rooms: [
+                        { id: 1, type: 'Single', count: 2, price: 100 },
+                        { id: 2, type: 'Double', count: 1, price: 150 },
+                    ],
                 },
                 {
                     guest: 'Jane Smith',
                     date: '2024-06-05',
-                    checkin: '2024-06-20',
-                    checkout: '2024-06-25',
-                    status: 'Pending',
-                    statusColor: 'warning',
+                    checkin: '2024-06-12',
+                    checkout: '2024-06-18',
+                    status: 'Duyệt',
                     link: '#',
+                    rooms: [{ id: 3, type: 'Suite', count: 1, price: 300 }],
                 },
                 {
                     guest: 'Michael Brown',
-                    date: '2024-06-07',
+                    date: '2024-06-08',
                     checkin: '2024-06-15',
                     checkout: '2024-06-20',
-                    status: 'Cancelled',
-                    statusColor: 'danger',
+                    status: 'Nhận phòng',
                     link: '#',
+                    rooms: [
+                        { id: 4, type: 'Single', count: 1, price: 100 },
+                        { id: 5, type: 'Double', count: 2, price: 150 },
+                    ],
                 },
-                // Add more bookings here...
+                {
+                    guest: 'Sarah Johnson',
+                    date: '2024-06-10',
+                    checkin: '2024-06-18',
+                    checkout: '2024-06-22',
+                    status: 'Đã hủy',
+                    link: '#',
+                    rooms: [{ id: 6, type: 'Double', count: 1, price: 150 }],
+                },
             ],
-            selectedTab: 'All',
-            selectedBooking: null,
+            statusColors: {
+                'Chờ duyệt': 'warning',
+                Duyệt: 'success',
+                'Nhận phòng': 'info',
+                'Đã hủy': 'secondary',
+            },
         };
     },
     computed: {
         filteredBookings() {
             if (this.selectedTab === 'All') {
                 return this.bookings;
+            } else {
+                return this.bookings.filter((booking) => booking.status === this.selectedTab);
             }
-            return this.bookings.filter((booking) => booking.status === this.selectedTab);
         },
     },
     methods: {
         viewBooking(booking) {
             this.selectedBooking = booking;
         },
+        approveBooking(booking) {
+            // Logic to approve booking
+            booking.status = 'Duyệt';
+            this.selectedBooking = null; // Close modal if open
+        },
+        cancelBooking(booking) {
+            // Logic to cancel booking
+            booking.status = 'Đã hủy';
+            this.selectedBooking = null; // Close modal if open
+        },
+        checkinBooking(booking) {
+            // Logic to check-in booking
+            booking.status = 'Nhận phòng';
+            this.selectedBooking = null; // Close modal if open
+        },
+        checkoutBooking(booking) {
+            // Logic to check-out booking
+            booking.status = 'Trả phòng';
+            this.selectedBooking = null; // Close modal if open
+        },
         closeModal() {
             this.selectedBooking = null;
+        },
+        formatCurrency(value) {
+            return new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(
+                value
+            );
         },
     },
 };
@@ -236,6 +372,10 @@ export default {
 .modal {
     display: block;
     background: rgba(0, 0, 0, 0.5);
+}
+.custom-modal-size {
+    max-width: 80%; /* Adjust as needed */
+    width: 80%; /* Adjust as needed */
 }
 
 .modal-backdrop {
