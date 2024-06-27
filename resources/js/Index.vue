@@ -6,8 +6,8 @@
             class="navbar navbar-custom navbar-expand-lg justify-content-between fixed-top text-center"
             style="height: 80px"
         >
-            <div>
-                <router-link class="navbar-brand mb-0 h1" :to="{ name: 'welcome' }">
+            <div class="row">
+                <router-link class="navbar-brand mb-0 ml-2 h1" :to="{ name: 'welcome' }">
                     <img
                         class=""
                         src="assets/image/slide_home_screens/logo.jpg"
@@ -19,48 +19,29 @@
                 <router-link
                     :to="{ name: 'auth.aboutus' }"
                     class="justify-content-between"
-                    style="text-decoration: none; font-size: 17px; color: rgb(237, 195, 169)"
+                    style="
+                        text-decoration: none;
+                        font-size: 17px;
+                        color: rgb(255, 120, 35);
+                        padding: 16px;
+                    "
                     >Về chúng tôi</router-link
                 >
+                <div v-if="isLoggedIn">
+                    <div class="dropdown">
+                        <button class="dropbtn">Quản lý</button>
+                        <div class="dropdown-content">
+                            <a
+                                v-for="option in dropdownOptions"
+                                :key="option.label"
+                                :href="option.href"
+                            >
+                                {{ option.label }}
+                            </a>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="d-flex justify-content-between" v-if="isLoggedIn">
-                <router-link
-                    :to="{ name: 'dashboard' }"
-                    class="justify-content-between mr-2"
-                    style="text-decoration: none; font-size: 17px; color: rgb(237, 195, 169)"
-                    >Quản lý doanh thu</router-link
-                >
-                <router-link
-                    :to="{ name: 'company.homestay.index' }"
-                    class="justify-content-between mr-2"
-                    style="text-decoration: none; font-size: 17px; color: rgb(237, 195, 169)"
-                    >Quản lý Homestay</router-link
-                >
-                <router-link
-                    :to="{ name: 'room.index' }"
-                    class="justify-content-between mr-2"
-                    style="text-decoration: none; font-size: 17px; color: rgb(237, 195, 169)"
-                    >Quản lý loại phòng</router-link
-                >
-                <router-link
-                    :to="{ name: 'company.roomstatus.index' }"
-                    class="justify-content-between mr-2"
-                    style="text-decoration: none; font-size: 17px; color: rgb(237, 195, 169)"
-                    >Quản lý phòng</router-link
-                >
-                <router-link
-                    :to="{ name: 'company.booking.index' }"
-                    class="justify-content-between mr-2"
-                    style="text-decoration: none; font-size: 17px; color: rgb(237, 195, 169)"
-                    >Quản lý đặt phòng</router-link
-                >
-                <router-link
-                    :to="{ name: 'reviewlist' }"
-                    class="justify-content-between mr-2"
-                    style="text-decoration: none; font-size: 17px; color: rgb(237, 195, 169)"
-                    >Quản lý đánh giá</router-link
-                >
-            </div> -->
 
             <div class="navbar-login">
                 <router-link
@@ -97,46 +78,18 @@
                                     width="36"
                                     height="36"
                                 />
-                                <div class="details">
-                                    <div id="profile-name">Kenny Lee</div>
-                                </div>
                             </div>
                             <li class="user-menu__item">
-                                <a class="user-menu-link" href="#">
-                                    <img
-                                        src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1604623/trophy.png"
-                                        alt="trophy_icon"
-                                        width="20"
-                                        height="20"
-                                    />
-                                    <div>Achievements</div>
-                                </a>
-                            </li>
-                            <li class="user-menu__item">
-                                <a class="user-menu-link" href="#">
-                                    <img
-                                        src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1604623/team.png"
-                                        alt="team_icon"
-                                        width="20"
-                                        height="20"
-                                    />
-                                    <div>Team</div>
-                                </a>
-                            </li>
-                            <li class="user-menu__item">
-                                <a class="user-menu-link" href="#">
-                                    <img
-                                        src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1604623/book.png"
-                                        alt="team_icon"
-                                        width="20"
-                                        height="20"
-                                    />
-                                    <div>Log History</div>
+                                <a class="user-menu-link" href="#/user/mybooking">
+                                    <div>Đơn đặt phòng của tôi</div>
                                 </a>
                             </li>
                             <div class="footer">
                                 <li class="user-menu__item">
-                                    <a class="user-menu-link" style="color: #f44336" @click="logout"
+                                    <a
+                                        class="user-menu-link"
+                                        style="color: #f44336; font-size: 17px; padding-left: 23px"
+                                        @click="logout"
                                         >Logout</a
                                     >
                                 </li>
@@ -148,7 +101,7 @@
         </nav>
 
         <div class="container-lg mt-2 mb-2 px-2">
-            <div class="container-lg mt-2 mb-2 px-2">
+            <div>
                 <router-view></router-view>
             </div>
         </div>
@@ -165,6 +118,14 @@ export default {
             isActive: false,
             lastSearch: this.$store.state.lastSearch,
             list_home_screen: CONST_FRONTEND.home_screen_file,
+            dropdownOptions: [
+                { label: 'Quản lý doanh thu', href: '#/company/dashboard' }, // Replace with actual URLs
+                { label: 'Quản lý Homestay', href: '#/company/homestay/index' },
+                { label: 'Quản lý loại phòng', href: '#/room/index' },
+                { label: 'Quản lý phòng', href: '#/company/roomstatus/index' },
+                { label: 'Quản lý đặt phòng', href: '#/company/bookings/index' },
+                { label: 'Quản lý đánh giá', href: '#/reviewlist' },
+            ],
         };
     },
     computed: {
@@ -223,7 +184,7 @@ export default {
 
 .navbar-brand {
     font-size: 30px;
-    color: rgb(237, 195, 169);
+    color: rgb(255, 120, 35);
     justify-content: center;
     margin-right: 4rem;
 }
@@ -232,7 +193,7 @@ export default {
 }
 .nav-link-1 {
     background-color: rgb(248, 236, 223);
-    color: rgb(253, 143, 75);
+    color: rgb(255, 120, 35);
     padding: 8px 20px;
     margin: 10px;
     justify-content: center;
@@ -292,7 +253,6 @@ export default {
 
 body {
     background-color: #ffffff;
-    font-family: sans-serif;
 }
 
 ul {
@@ -320,9 +280,9 @@ ul {
     position: absolute;
     right: -10px;
     background-color: #ffffff;
-    width: 200px;
+    width: 230px;
     border-radius: 10px;
-    border: 1px solid rgba(0, 0, 0, 0.15);
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
     padding-top: 5px;
     padding-bottom: 5px;
     padding-left: 0px;
@@ -368,25 +328,24 @@ ul {
 .user-menu-link {
     display: flex;
     text-decoration: none;
-    color: #333333;
+    color: rgb(255, 120, 35);
     font-weight: 400;
-    font-size: 14px;
+    font-size: 17px;
     padding: 12px 16px;
 }
 .user-menu-link div {
     margin: auto 10px;
 }
+
 .user-menu-link:hover {
-    background-color: var(--hover-gray);
-    color: #333333;
+    background-color: #fee0a9;
+    color: rgb(255, 120, 35);
 }
 
 .user-menu:before {
-    position: absolute;
-    top: -16px;
+    top: -5px;
     left: 120px;
     display: inline-block;
-    content: '';
     border: 8px solid transparent;
     border-bottom-color: var(--border-gray);
 }
@@ -398,5 +357,50 @@ ul {
     content: '';
     border: 7px solid transparent;
     border-bottom-color: #ffffff;
+}
+
+/*  */
+.dropbtn {
+    background-color: #ffffff;
+    color: rgb(255, 120, 35);
+    padding: 16px;
+    font-size: 17px;
+    border: none;
+    cursor: pointer;
+    border-radius: 10px;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #ffffff;
+    border-radius: 10px;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+}
+
+.dropdown-content a {
+    color: rgb(255, 120, 35);
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content a:hover {
+    background-color: #fee0a9;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown:hover .dropbtn {
+    background-color: #ffffff;
 }
 </style>

@@ -62,7 +62,7 @@
         <!--Form-->
         <div class="row position-absolute" style="top: 500px; z-index: 1">
             <div class="col-xl-10 position-relative z-1 mt-n3 mt-xl-n9">
-                <h6 class="d-none d-xl-block mb-3">Check Availability</h6>
+                <h6 class="d-none d-xl-block mb-3">Tìm kiếm</h6>
                 <form
                     class="card shadow rounded-3 position-relative p-4 pe-md-5 pb-5 pb-md-4"
                     style="width: 950px; border-radius: 20px"
@@ -103,7 +103,7 @@
                             <button
                                 class="btn btn-primary custom-bg border-0"
                                 type="submit"
-								@click.prevent="searchHomestay()"
+                                @click.prevent="searchHomestay()"
                                 style="border-radius: 50px; width: 4rem; height: 4rem"
                             >
                                 <img
@@ -634,9 +634,9 @@ export default {
                 },
                 // Add more slides as needed
             ],
-			address: '',
-			checkinDate: '',
-			checkoutDate: '',
+            address: '',
+            checkinDate: '',
+            checkoutDate: '',
         };
     },
     created() {
@@ -681,13 +681,16 @@ export default {
                 });
             }
         },
-		searchHomestay(){
-			this.$router.push({ name: 'search', query:{
-				address: this.address,
-				checkinDate: this.checkinDate,
-				checkoutDate: this.checkoutDate,
-			} });
-		}
+        searchHomestay() {
+            this.$router.push({
+                name: 'search',
+                query: {
+                    address: this.address,
+                    checkinDate: this.checkinDate,
+                    checkoutDate: this.checkoutDate,
+                },
+            });
+        },
     },
     mounted() {
         // Add mounted hook to handle scroll event
@@ -699,14 +702,6 @@ export default {
 </script>
 
 <style scoped>
-.dropdown {
-    display: inline-block;
-    background-color: aliceblue;
-    flex-direction: row;
-    border: 1px solid white;
-    border-radius: 20px;
-    margin: 16px;
-}
 .text-content {
     color: white;
     font-size: 30px;

@@ -2,21 +2,12 @@
     <div class="card bg-transparent border-0 w-100" id="room-options" style="margin-top: 50px">
         <div class="card-header border-bottom bg-transparent px-0 pt-0">
             <div class="d-sm-flex justify-content-sm-between align-items-center">
-                <h3 class="mb-2 mb-sm-0 font-weight-bold">Room Options</h3>
-                <div class="col-sm-6 p-0">
-                    <v-multi-select
-                        v-model="selectedRoom"
-                        placeholder="Select Room"
-                        :options="roomOptions"
-                        mode="single"
-                        id="roomSelect"
-                        style="border-radius: 10px"
-                    ></v-multi-select>
-                </div>
+                <h3 class="mb-2 mb-sm-0 font-weight-bold">Danh sách phòng</h3>
+                <div class="col-sm-6 p-0"></div>
             </div>
         </div>
         <div class="card-body pt-4 p-0">
-            <div class="card shadow p-3 w-100" v-for="(room, index) in items" :key="index">
+            <div class="card shadow p-3 w-100 m-0 mb-2" v-for="(room, index) in items" :key="index">
                 <div class="row g-4">
                     <div class="col-md-5 position-relative">
                         <img
@@ -28,31 +19,10 @@
                             width="200px"
                             style="border-radius: 15px"
                         />
-                        <button
-                            type="button"
-                            class="btn btn-link text-decoration-underline p-0 mb-0 mt-1"
-                            @click="showModal(room)"
-                        >
-                            <svg
-                                width="1em"
-                                height="1em"
-                                viewBox="0 0 16 16"
-                                fill="currentColor"
-                                role="img"
-                                focusable="false"
-                                class="me-1"
-                            >
-                                <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0"></path>
-                                <path
-                                    d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8m8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7"
-                                ></path>
-                            </svg>
-                            View more details
-                        </button>
                     </div>
                     <div class="col-md-7">
                         <div
-                            class="card-body d-flex flex-column h-100"
+                            class="card-body d-flex flex-column"
                             style="padding-left: 10px; padding-top: 0px; padding-bottom: 0px"
                         >
                             <h5 class="card-title">
@@ -78,13 +48,36 @@
                             >
                                 <div class="d-flex align-items-center">
                                     <h5 class="fw-bold mb-0 me-1">{{ room.price }}</h5>
-                                    <span class="mb-0 me-2">/day</span>
+                                    <span class="mb-0 me-2">/ngày</span>
                                     <span class="text-decoration-line-through mb-0">{{
                                         room.originalPrice
                                     }}</span>
                                 </div>
                                 <div class="mt-3 mt-sm-0">
-                                    <a href="#" class="btn btn-sm btn-primary mb-0">Select Room</a>
+                                    <button
+                                        type="button"
+                                        class="btn btn-link text-decoration-none p-0 mb-0 mt-1"
+                                        @click="showModal(room)"
+                                    >
+                                        <svg
+                                            width="1em"
+                                            height="1em"
+                                            viewBox="0 0 16 16"
+                                            fill="currentColor"
+                                            role="img"
+                                            focusable="false"
+                                            class="me-1"
+                                            style="margin-bottom: 2px"
+                                        >
+                                            <path
+                                                d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0"
+                                            ></path>
+                                            <path
+                                                d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8m8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7"
+                                            ></path>
+                                        </svg>
+                                        Xem phòng
+                                    </button>
                                 </div>
                             </div>
                         </div>

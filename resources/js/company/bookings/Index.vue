@@ -152,7 +152,7 @@
                                     </td>
                                     <td>
                                         <button
-                                            @click="viewBooking(booking)"
+                                            @click="viewBooking(booking), showDetail(booking.id)"
                                             class="btn btn-sm btn-light mb-1"
                                         >
                                             View
@@ -218,7 +218,7 @@
             <div class="modal-dialog custom-modal-size" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title">{{ selectedBooking.guest }}</h5>
+                        <h5 class="modal-title">{{ details.guest_name }}</h5>
                         <button type="button" class="close" @click="closeModal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -234,7 +234,7 @@
                                         class="form-control form-control-lg"
                                         style="border-radius: 10px"
                                     >
-                                        {{ selectedBooking.checkin }}
+                                        {{ details.checkin_date }}
                                     </h6>
                                 </div>
                             </div>
@@ -247,12 +247,12 @@
                                         class="form-control form-control-lg"
                                         style="border-radius: 10px"
                                     >
-                                        {{ selectedBooking.checkout }}
+                                        {{ details.checkout }}
                                     </h6>
                                 </div>
                             </div>
                         </div>
-                        <div v-for="room in selectedBooking.rooms" :key="room.id">
+                        <div v-for="room in rooms" :key="room.id">
                             <div class="row">
                                 <div class="col-md-6">
                                     <label class="form-label d-block">Loại phòng</label>
@@ -315,6 +315,7 @@ export default {
             loading: false,
             data: {},
             bookings: [],
+            details: [],
             statusColors: {
                 'Chờ duyệt': 'warning',
                 Duyệt: 'success',
@@ -384,8 +385,25 @@ export default {
             this.loading = false;
         },
         viewBooking(booking) {
+            this.loading = true;
             this.selectedBooking = booking;
+            this.loading = false;
         },
+        async showDetail(bookingId) {
+            this.loading = true;
+            try {
+                const response = await axios.get(`/api/booking/show/${bookingId}`);
+                console.log(response);
+                this.data = response.data.data;
+                this.details = this.data.data;
+                console.log(this.details);
+                // this.items = this.data.data
+            } catch (error) {
+                console.error('Error fetching data:', error);
+            }
+            this.loading = false;
+        },
+
         approveBooking(booking) {
             // Logic to approve booking
             booking.status = 'Duyệt';

@@ -196,7 +196,7 @@
                                             >
                                             to prefill all details and get access to secret deals
                                         </div>
-                                        <div class="row">
+                                        <div class="row mb-2">
                                             <div class="col-md-6">
                                                 <label for="checkin_date" class="form-label d-block"
                                                     >Ngày bắt đầu</label
@@ -253,7 +253,10 @@
                                                     <div class="">
                                                         <h6
                                                             class="form-control form-control-lg"
-                                                            style="border-radius: 10px"
+                                                            style="
+                                                                border-radius: 10px;
+                                                                height: 50px;
+                                                            "
                                                         >
                                                             {{ room.name }}
                                                         </h6>
@@ -265,7 +268,7 @@
                                                     >
                                                     <h6
                                                         class="form-control form-control-lg"
-                                                        style="border-radius: 10px"
+                                                        style="border-radius: 10px; height: 50px"
                                                     >
                                                         {{ room.count_booking ?? 0 }}
                                                     </h6>
@@ -332,7 +335,6 @@
                     <div>
                         <div class="card w-100" style="margin-top: 100px">
                             <h6 class="text-uppercase font-weight-bolder m-4">Đặt phòng</h6>
-
                             <div class="mt-2 mb-2">
                                 <div class="row justify-content-around">
                                     <div class="col-lg-5">
@@ -746,12 +748,6 @@ label {
     font-weight: bolder;
 }
 
-.dropdown-menu {
-    position: absolute;
-    inset: auto auto 0px 0px;
-    margin: 0px;
-    transform: translate3d(0px, -47.1111px, 0px);
-}
 
 .guest-selector-count {
     margin-bottom: 0;
@@ -791,7 +787,4 @@ label {
     /* Đổi màu chữ khi input field được focus */
 }
 
-.dropdown-menu.show {
-    display: block;
-}
 </style>
