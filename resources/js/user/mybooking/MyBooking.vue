@@ -22,17 +22,27 @@
                         </div>
                         <div class="row">
                             <div class="col-md-6">
-                                <label for="start_day" class="form-label d-block">Ngày bắt đầu</label>
+                                <label for="start_day" class="form-label d-block"
+                                    >Ngày bắt đầu</label
+                                >
                                 <div class="">
-                                    <h6 class="form-control form-control-lg" style="border-radius: 10px">
+                                    <h6
+                                        class="form-control form-control-lg"
+                                        style="border-radius: 10px"
+                                    >
                                         {{ selectedBooking.date }}
                                     </h6>
                                 </div>
                             </div>
                             <div class="col-md-6">
-                                <label for="close_day" class="form-label d-block">Ngày kết thúc</label>
+                                <label for="close_day" class="form-label d-block"
+                                    >Ngày kết thúc</label
+                                >
                                 <div class="">
-                                    <h6 class="form-control form-control-lg" style="border-radius: 10px">
+                                    <h6
+                                        class="form-control form-control-lg"
+                                        style="border-radius: 10px"
+                                    >
                                         {{ selectedBooking.date }}
                                     </h6>
                                 </div>
@@ -49,14 +59,20 @@
                                 <div class="col-md-8">
                                     <label class="form-label d-block">Loại phòng</label>
                                     <div class="">
-                                        <h6 class="form-control form-control-lg" style="border-radius: 10px">
+                                        <h6
+                                            class="form-control form-control-lg"
+                                            style="border-radius: 10px"
+                                        >
                                             {{ room.type }}
                                         </h6>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <label class="form-label d-block">Số lượng phòng</label>
-                                    <h6 class="form-control form-control-lg" style="border-radius: 10px">
+                                    <h6
+                                        class="form-control form-control-lg"
+                                        style="border-radius: 10px"
+                                    >
                                         {{ room.count }}
                                     </h6>
                                 </div>
@@ -136,6 +152,7 @@
 
         <!-- Bookings Table -->
         <div class="row">
+            <v-fullloading :loading="loading"></v-fullloading>
             <div class="col-12">
                 <div class="card border w-100">
                     <div class="card-header border-bottom">
@@ -278,6 +295,7 @@ export default {
     data() {
         return {
             selectedBooking: {},
+            loading: false,
             selectedTab: 'All',
             rating: 0,
             review: '',

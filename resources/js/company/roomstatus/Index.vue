@@ -1,5 +1,5 @@
 <template>
-    <div class="container mt-5">
+    <div class="container" style="margin-top: 100px">
         <div class="card w-100 border">
             <div class="card-header border-bottom card-header-custom">
                 <h4 class="mb-0 title">Danh sách phòng</h4>
