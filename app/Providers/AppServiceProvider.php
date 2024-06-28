@@ -12,6 +12,8 @@ use App\Repositories\RoomRepository;
 use App\Repositories\RoomRepositoryInterface;
 use App\Repositories\BookingRepository;
 use App\Repositories\BookingRepositoryInterface;
+use App\Repositories\ReviewRepository;
+use App\Repositories\ReviewRepositoryInterface;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
 
@@ -29,6 +31,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(RoomTypeRepositoryInterface::class, RoomTypeRepository::class);
         $this->app->bind(RoomRepositoryInterface::class, RoomRepository::class);
         $this->app->bind(BookingRepositoryInterface::class, BookingRepository::class);
+        $this->app->bind(ReviewRepositoryInterface::class, ReviewRepository::class);
     }
 
     /**

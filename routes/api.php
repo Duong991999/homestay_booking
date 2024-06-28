@@ -6,6 +6,7 @@ use App\Http\Controllers\Api\HomestayController;
 use App\Http\Controllers\Api\RoomTypeController;
 use App\Http\Controllers\Api\RoomController;
 use App\Http\Controllers\Api\BookingController;
+use App\Http\Controllers\Api\ReviewController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -82,7 +83,6 @@ Route::group(['prefix' => 'room',], function(){
 	Route::get('/all/{id}', [RoomController::class, 'all']);
 	Route::post('/update/{id}', [RoomController::class, 'update']);
 	Route::post('/delete', [RoomController::class, 'delete']);
-
 });
 
 Route::group(['prefix' => 'booking',], function(){
@@ -96,4 +96,9 @@ Route::group(['prefix' => 'booking',], function(){
 	Route::post('/change-status/{id}', [BookingController::class, 'changeStatus']);
 	Route::get('/user-search', [BookingController::class, 'paginateUserSearch']);
 	Route::get('/company-search', [BookingController::class, 'paginateCompanySearch']);
+});
+
+Route::group(['prefix' => 'review',], function(){
+	Route::post('/store', [ReviewController::class, 'store']);
+	Route::get('/paginate/{id}', [ReviewController::class, 'paginate']);
 });

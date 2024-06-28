@@ -97,7 +97,7 @@ class HomestayRepository extends BaseRepository implements HomestayRepositoryInt
 		try {
 			$result = DB::transaction(function() use($attributes, $id){
 				$this->model->find($id)->update($attributes);
-				if($attributes['category_id']){
+				if($attributes['category_id'] ?? false){
 					$this->model->find($id)->categories()->sync($attributes['category_id']);
 				}
 

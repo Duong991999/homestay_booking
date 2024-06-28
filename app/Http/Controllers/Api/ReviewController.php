@@ -2,40 +2,26 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Booking;
-use App\Http\Resources\ReviewResource;
-use App\Review;
+use App\Http\Requests\ReviewRequest;
+use App\Repositories\ReviewRepositoryInterface;
 use Illuminate\Http\Request;
 
 class ReviewController extends Controller
 {
-    public function show($id)
+	protected $reviewRepo;
+
+	public function __construct(ReviewRepositoryInterface $reviewRepo)
     {
-        return new ReviewResource(Review::findOrFail($id));
+        $this->reviewRepo = $reviewRepo;
     }
+	public function store(ReviewRequest $request){
+		$data = $this->reviewRepo->createDetail($request->all());
+		return $this->success($data);
+	}
 
-    public function store(Request $request)
-    {
-        $data = $request->validate([
-            'id' => 'required|size:36|unique:reviews',
-            'content' => 'required|min:2',
-            'rating' => 'required|in:1,2,3,4,5'
-        ]);
+	public function paginate($id){
+		$data = $this->reviewRepo->paginate($id);
+		return $this->success($data);
+	}
 
-        $booking = Booking::findByReviewKey($data['id']);
-
-        if (null === $booking) {
-            return abort(404);
-        }
-
-        $booking->review_key = '';
-        $booking->save();
-
-        $review = Review::make($data);
-        $review->booking_id = $booking->id;
-        $review->bookable_id = $booking->bookable_id;
-        $review->save();
-
-        return new ReviewResource($review);
-    }
 }

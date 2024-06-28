@@ -16,7 +16,7 @@ class Homestay extends Model
      * @var array
      */
     protected $fillable = [
-        'name', 'content', 'user_id', 'city_code', 'district_code', 'ward_code', 'city_name', 'district_name', 'ward_name', 'address', 'min_price', 'max_price'
+        'name', 'content', 'user_id', 'city_code', 'district_code', 'ward_code', 'city_name', 'district_name', 'ward_name', 'address', 'min_price', 'max_price', 'rating'
     ];
 
 	public function categories(): BelongsToMany
