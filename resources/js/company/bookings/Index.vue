@@ -70,10 +70,10 @@
 
 						<li class="nav-item pointer">
 							<a class="nav-link" :class="{ active: selectedTab === 'Duyệt' }" @click="
-								selectedTab = 'Duyệt';
+								selectedTab = 'Đã duyệt';
 							status = 1;
 							fetchData();
-							">Duyệt({{ countBooking.approve ?? 0 }})</a>
+							">Đã duyệt({{ countBooking.approve ?? 0 }})</a>
 						</li>
 						<li class="nav-item pointer">
 							<a class="nav-link" :class="{ active: selectedTab === 'Nhận phòng' }" @click="
@@ -191,7 +191,7 @@
 												<i class="fa fa-solid fa-trash" style="color: #1f2632"></i>
 											</button>
 										</template>
-										<template v-else-if="selectedTab === 'Duyệt'">
+										<template v-else-if="selectedTab === 'Đã duyệt'">
 											<button @click="
 												checkinBooking(booking.id),
 												updateStatus(booking.id, 2)
@@ -340,6 +340,8 @@ export default {
 		async fetchData(page = 1) {
 			this.loading = true;
 			try {
+				this.data = {};
+				this.bookings = [];
 				const response = await axios.get(
 					`/api/booking/company-search?page=${page}&status=${this.status}&phone_number=${this.phone_number}&checkin_date=${this.checkin_date}&checkout_date=${this.checkout_date}&guest_name=${this.guest_name}&order_by=${this.order_by}`
 				);
@@ -366,7 +368,7 @@ export default {
 				}
 				this.status = status;
 				if ((this.status = 1)) {
-					this.selectedTab = 'Duyệt';
+					this.selectedTab = 'Đã duyệt';
 					this.fetchData();
 				} else if ((this.status = 2)) {
 					this.selectedTab = 'Nhận phòng';
@@ -389,10 +391,8 @@ export default {
 			this.loading = true;
 			try {
 				const response = await axios.get(`/api/booking/show/${bookingId}`);
-				console.log(response);
 				this.data = response.data.data;
 				this.details = this.data.data;
-				// this.items = this.data.data
 			} catch (error) {
 				console.error('Error fetching data:', error);
 			}
