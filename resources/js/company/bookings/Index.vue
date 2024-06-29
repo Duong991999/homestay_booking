@@ -2,35 +2,37 @@
     <div class="row" style="margin-top: 100px">
         <v-fullloading :loading="loading"></v-fullloading>
         <div class="col-12">
-            <div class="card border w-100">
-                <div class="card-header border-bottom">
-                    <h5 class="card-header-title">
-                        Đặt phòng
-                        <span class="badge bg-opacity-10 text-primary ms-2">20 Đơn</span>
-                    </h5>
+            <div
+                class="card w-100"
+                style="border-color: black; border-width: 1px; border-radius: 10px"
+            >
+                <div
+                    class="card-header border-bottom"
+                    style="
+                        border-color: black;
+                        border-width: 1px;
+                        border-top-left-radius: 10px;
+                        border-top-right-radius: 10px;
+                    "
+                >
+                    <h4 class="title">Danh sách đặt phòng</h4>
                 </div>
                 <div class="card-body pb-0">
                     <div class="row g-3 align-items-center justify-content-between mb-3">
-                        <div class="row col-lg-10">
-                            <div class="col-lg-5 m-2">
+                        <div class="row col-lg-12">
+                            <div class="col-lg-4 m-2">
                                 <input class="input__field" type="date" v-model="checkin_date" />
-                                <span class="input__label">Checkin Date</span>
+                                <span class="input__label">Ngày nhận phòng</span>
                             </div>
-                            <div class="col-lg-5 m-2">
+                            <div class="col-lg-4 m-2">
                                 <input class="input__field" type="date" v-model="checkout_date" />
-                                <span class="input__label">Checkout Date</span>
+                                <span class="input__label">Ngày trả phòng</span>
                             </div>
-                            <div class="col-lg-5 m-2">
+                            <div class="col-lg-2 m-2">
                                 <button
-                                    class="btn border-0 m-2"
+                                    class="btn border-0 m-2 btn-search"
                                     :disabled="loading"
                                     @click="fetchData()"
-                                    style="
-                                        background-color: rgb(240 181 145 / 50%);
-                                        color: #ef7d4ae6;
-                                        width: 150px;
-                                        border-radius: 10px;
-                                    "
                                 >
                                     <span>Tra cứu </span>
                                     <span v-if="loading">
@@ -49,7 +51,7 @@
                                     selectedTab = 'All';
                                     fetchData();
                                 "
-                                >All</a
+                                >Tất cả</a
                             >
                         </li>
 
@@ -115,9 +117,19 @@
                             >
                         </li>
                     </ul>
-                    <div class="table-responsive border-0">
+                    <div
+                        class="table-responsive border-0"
+                        style="border-top-left-radius: 10px; border-top-right-radius: 10px"
+                    >
                         <table class="table align-middle p-4 mb-0 table-hover table-shrink">
-                            <thead class="table-light">
+                            <thead
+                                class="table-light"
+                                style="
+                                    background-color: #ffeac64a;
+                                    border-top-left-radius: 10px;
+                                    border-top-right-radius: 10px;
+                                "
+                            >
                                 <tr>
                                     <th scope="col" class="border-0 rounded-start">#</th>
                                     <th scope="col" class="border-0">Khách</th>
@@ -154,21 +166,38 @@
                                         <button
                                             @click="viewBooking(booking), showDetail(booking.id)"
                                             class="btn btn-sm btn-light mb-1"
+                                            style="border-radius: 10px; width: 40px; height: 40px"
                                         >
-                                            View
+                                            <i class="fa fa-solid fa-eye"></i>
                                         </button>
                                         <template v-if="selectedTab === 'Chờ duyệt'">
                                             <button
                                                 @click="updateStatus(booking.id, 1)"
-                                                class="btn btn-sm btn-success"
+                                                class="btn btn-sm btn-success mb-1 p-2"
+                                                style="
+                                                    border-radius: 10px;
+                                                    width: 40px;
+                                                    height: 40px;
+                                                "
                                             >
-                                                Duyệt
+                                                <i
+                                                    class="fa fa-solid fa-check"
+                                                    style="color: #192843"
+                                                ></i>
                                             </button>
                                             <button
                                                 @click="cancelBooking(booking)"
-                                                class="btn btn-sm btn-danger"
+                                                class="btn btn-sm btn-danger mb-1 p-2"
+                                                style="
+                                                    border-radius: 10px;
+                                                    width: 40px;
+                                                    height: 40px;
+                                                "
                                             >
-                                                Hủy
+                                                <i
+                                                    class="fa fa-solid fa-trash"
+                                                    style="color: #1f2632"
+                                                ></i>
                                             </button>
                                         </template>
                                         <template v-else-if="selectedTab === 'Duyệt'">
@@ -177,9 +206,17 @@
                                                     checkinBooking(booking.id),
                                                         updateStatus(booking.id, 2)
                                                 "
-                                                class="btn btn-sm btn-primary"
+                                                class="btn btn-sm btn-primary mb-1 p-2"
+                                                style="
+                                                    border-radius: 10px;
+                                                    width: 40px;
+                                                    height: 40px;
+                                                "
                                             >
-                                                Checkin
+                                                <i
+                                                    class="fa fa-solid fa-check"
+                                                    style="color: #192843"
+                                                ></i>
                                             </button>
                                         </template>
                                         <template v-else-if="selectedTab === 'Nhận phòng'">
@@ -188,9 +225,17 @@
                                                     checkoutBooking(booking.id),
                                                         updateStatus(booking.id, 3)
                                                 "
-                                                class="btn btn-sm btn-info"
+                                                class="btn btn-sm btn-info mb-1 p-2"
+                                                style="
+                                                    border-radius: 10px;
+                                                    width: 40px;
+                                                    height: 40px;
+                                                "
                                             >
-                                                Checkout
+                                                <i
+                                                    class="fa fa-solid fa-check"
+                                                    style="color: #192843"
+                                                ></i>
                                             </button>
                                         </template>
                                     </td>
@@ -466,7 +511,9 @@ export default {
 .table-responsive {
     margin-bottom: 15px;
 }
-
+.card-header {
+    background-color: rgb(255, 255, 255);
+}
 .modal {
     display: block;
     background: rgba(0, 0, 0, 0.5);
@@ -486,7 +533,28 @@ export default {
 }
 
 .nav-tabs .nav-link.active {
-    background-color: #007bff;
-    color: white;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    background-color: #fcad37;
+    color: #513306;
+}
+.nav-link:hover {
+    background-color: #faf7df;
+    color: #ffa217;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+.btn-search {
+    background-color: #fcad37;
+    color: #513306;
+    width: 150px;
+    border-radius: 10px;
+}
+.btn-search:hover {
+    background-color: #faf7df;
+    color: #ffa217;
+}
+.title {
+    font-weight: bold;
 }
 </style>
