@@ -148,7 +148,7 @@
 											{{ booking.bill_value }}
 										</h6>
 									</td>
-									<td class="align-middle">{{ booking.created_at }}</td>
+									<td class="align-middle">{{ booking.created_at.split(" ")[0] }}</td>
 									<td class="align-middle">
 										<h6 class="mb-0 fw-light text-center">
 											{{ booking.checkin_date }}
