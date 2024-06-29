@@ -13,52 +13,69 @@
                         border-width: 1px;
                         border-top-left-radius: 10px;
                         border-top-right-radius: 10px;
-                    ">
-					<h4 class="title">Danh sách đặt phòng</h4>
-				</div>
-				<div class="card-body pb-0">
-					<div class="row g-3 align-items-center justify-content-between mb-3">
-						<div class="row col-lg-12 align-item-center">
-							<div class="col-lg-2">
-								<input class="input__field" type="date" v-model="checkin_date" />
-								<span class="input__label">Ngày nhận phòng</span>
-							</div>
-							<div class="col-lg-2">
-								<input class="input__field" type="date" v-model="checkout_date" />
-								<span class="input__label">Ngày trả phòng</span>
-							</div>
-							<div class="col-lg-2">
-								<input class="input__field" type="text" v-model="guest_name" />
-								<span class="input__label">Tên khách hàng</span>
-							</div>
-							<div class="col-lg-2">
-								<input class="input__field" type="text" v-model="phone_number" />
-								<span class="input__label">Số điện thoại</span>
-							</div>
-							<div class="col-lg-2">
-								<select class="form-select input__field" aria-label="Default select example">
-									<option selected value="0"></option>
-									<option value="1">Tên ↓</option>
-									<option value="2">Tên ↑</option>
-
-									<option value="2">Two</option>
-									<option value="3">Three</option></select>
-								<span class="input__label">Sắp xếp theo</span>
-							</div>
-							<div class="col-lg-2">
-								<button class="btn border-0 btn-search" :disabled="loading" @click="fetchData()">
-									<span>Tra cứu</span>
-								</button>
-							</div>
-						</div>
-					</div>
-					<ul class="nav nav-tabs mb-2">
-						<li class="nav-item pointer">
-							<a class="nav-link" :class="{ active: selectedTab === 'All' }" @click="
-								selectedTab = 'All';
-							fetchData();
-							">All({{ countBooking.all ?? 0 }})</a>
-						</li>
+                    "
+                >
+                    <h4 class="title">Danh sách đặt phòng</h4>
+                </div>
+                <div class="card-body pb-0">
+                    <div class="row g-3 align-items-center justify-content-between mb-3">
+                        <div class="row col-lg-12 align-item-center">
+                            <div class="col-lg-2">
+                                <input class="input__field" type="date" v-model="checkin_date" />
+                                <span class="input__label">Ngày nhận phòng</span>
+                            </div>
+                            <div class="col-lg-2">
+                                <input class="input__field" type="date" v-model="checkout_date" />
+                                <span class="input__label">Ngày trả phòng</span>
+                            </div>
+                            <div class="col-lg-2">
+                                <input class="input__field" type="text" v-model="guest_name" />
+                                <span class="input__label">Tên khách hàng</span>
+                            </div>
+                            <div class="col-lg-2">
+                                <input class="input__field" type="text" v-model="phone_number" />
+                                <span class="input__label">Số điện thoại</span>
+                            </div>
+                            <div class="col-lg-2">
+                                <select
+                                    class="form-select input__field"
+                                    aria-label="Default select example"
+                                >
+                                    <option selected value="0"></option>
+                                    <option value="1">Tên ↓</option>
+                                    <option value="2">Tên ↑</option>
+                                    <option value="3">Ngày nhận phòng ↓</option>
+                                    <option value="4">Ngày nhận phòng ↑</option>
+                                    <option value="5">Ngày trả phòng ↓</option>
+                                    <option value="6">Ngày trả phòng ↑</option>
+                                    <option value="7">Giá tiền ↓</option>
+                                    <option value="8">Giá tiền ↑</option>
+                                </select>
+                                <span class="input__label">Sắp xếp theo</span>
+                            </div>
+                            <div class="col-lg-2">
+                                <button
+                                    class="btn border-0 btn-search"
+                                    :disabled="loading"
+                                    @click="fetchData()"
+                                >
+                                    <span>Tra cứu</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <ul class="nav nav-tabs mb-2">
+                        <li class="nav-item pointer">
+                            <a
+                                class="nav-link"
+                                :class="{ active: selectedTab === 'All' }"
+                                @click="
+                                    selectedTab = 'All';
+                                    fetchData();
+                                "
+                                >All({{ countBooking.all ?? 0 }})</a
+                            >
+                        </li>
 
                         <li class="nav-item pointer">
                             <a
@@ -401,8 +418,8 @@ export default {
             phone_number: '',
             checkin_date: '',
             checkout_date: '',
-			guest_name: '',
-			order_by: '',
+            guest_name: '',
+            order_by: '',
             user_name: '',
             loading: false,
             data: {},
@@ -636,7 +653,7 @@ export default {
     cursor: pointer;
 }
 
-.align-item-center{
-	align-items: center;
+.align-item-center {
+    align-items: center;
 }
 </style>
