@@ -315,7 +315,7 @@
                                     <h6 class="mb-0 mr-2 d-flex mt-1 textt">
                                         {{ homestay.rating }}
                                     </h6>
-                                    <i class="fa-solid fa-star" style="color: #ffd43b"></i>
+                                    <i class="fa fa-solid fa-star" style="color: #ffd43b"></i>
                                 </div>
                             </div>
                         </div>
@@ -443,10 +443,8 @@
 </template>
 <script>
 import CONST_FRONTEND from '@/const';
-import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 
 export default {
-    components: { FontAwesomeIcon },
     data() {
         return {
             list_home_screen: CONST_FRONTEND.home_screen_file,
