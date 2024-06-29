@@ -8,7 +8,6 @@ import Vuex from 'vuex';
 import Index from './Index.vue';
 import router from './routes';
 import FatalError from './shared/components/FatalError.vue';
-import StarRating from './shared/components/StarRating.vue';
 import Success from './shared/components/Success.vue';
 import ValidationErrors from './shared/components/ValidationErrors.vue';
 import Loading from './shared/components/Loading.vue';
@@ -31,7 +30,6 @@ Vue.use(VueApexCharts);
 
 Vue.filter('fromNow', (value) => moment(value).fromNow());
 Vue.component('footer-component', FooterComponent);
-Vue.component('star-rating', StarRating);
 Vue.component('fatal-error', FatalError);
 Vue.component('success', Success);
 Vue.component('v-errors', ValidationErrors);
