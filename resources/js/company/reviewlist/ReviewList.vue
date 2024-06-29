@@ -1,5 +1,6 @@
 <template>
     <div class="row" style="margin-top: 80px">
+        <v-fullloading :loading="loading"></v-fullloading>
         <div class="col-12">
             <div
                 class="card rounded-3 w-100"
@@ -140,6 +141,7 @@ export default {
     },
     data() {
         return {
+            loading: false,
             reviews: [
                 {
                     author: 'Nguyễn Thị Lan',

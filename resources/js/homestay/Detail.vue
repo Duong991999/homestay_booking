@@ -367,7 +367,7 @@
                                                     style="border-radius: 15px"
                                                 />
                                             </div>
-                                            <div class="col-md-9">
+                                            <div class="col-md-7 ml-2">
                                                 <div
                                                     class="card-body d-flex flex-column h-100"
                                                     style="
@@ -381,13 +381,26 @@
                                                             room?.name
                                                         }}</a>
                                                     </h5>
+                                                    <div
+                                                        class="d-sm-flex justify-content-sm-between align-items-center mt-auto"
+                                                    >
+                                                        <div class="d-flex align-items-center">
+                                                            <h5 class="fw-bold mb-0 me-1">
+                                                                {{ room.price }} VND
+                                                            </h5>
+                                                            <span class="mb-0 me-2">/ngày</span>
+                                                        </div>
+                                                    </div>
 
                                                     <!---->
                                                     <div
                                                         class="row align-items-center"
                                                         style="margin-right: 10px"
                                                     >
-                                                        <button class="btn btn-md btn-link">
+                                                        <button
+                                                            class="btn btn-count p-0 m-2"
+                                                            style="border-radius: 10px"
+                                                        >
                                                             <svg
                                                                 width="1em"
                                                                 height="1em"
@@ -411,7 +424,10 @@
                                                         <h6 class="guest-selector-count mb-0">
                                                             {{ room.count_booking ?? 0 }}
                                                         </h6>
-                                                        <button class="btn btn-md btn-link">
+                                                        <button
+                                                            class="btn btn-count p-0 m-2"
+                                                            style="border-radius: 10px"
+                                                        >
                                                             <svg
                                                                 width="1em"
                                                                 height="1em"
@@ -433,17 +449,6 @@
                                                                 ></path>
                                                             </svg>
                                                         </button>
-                                                    </div>
-
-                                                    <div
-                                                        class="d-sm-flex justify-content-sm-between align-items-center mt-auto"
-                                                    >
-                                                        <div class="d-flex align-items-center">
-                                                            <h5 class="fw-bold mb-0 me-1">
-                                                                {{ room.price }} VND
-                                                            </h5>
-                                                            <span class="mb-0 me-2">/ngày</span>
-                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -779,5 +784,11 @@ label {
     font-size: 13px;
     width: 50px;
     height: 20px;
+}
+.btn-count {
+    color: rgb(251, 115, 18);
+}
+.btn-count:hover {
+    color: rgb(255, 203, 166);
 }
 </style>

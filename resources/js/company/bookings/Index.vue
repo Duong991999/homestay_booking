@@ -142,14 +142,21 @@
                                 "
                             >
                                 <tr>
-                                    <th scope="col" class="border-0 rounded-start">#</th>
-                                    <th scope="col" class="border-0">Khách</th>
-                                    <th scope="col" class="border-0">Số điện thoại</th>
-                                    <th scope="col" class="border-0">Ngày đặt</th>
-                                    <th scope="col" class="border-0">Ngày nhận phòng</th>
-                                    <th scope="col" class="border-0">Ngày trả phòng</th>
-                                    <th scope="col" class="border-0">Trạng thái</th>
-                                    <th scope="col" class="border-0 rounded-end">Action</th>
+                                    <th scope="col" class="border-0 rounded-start text-center">
+                                        #
+                                    </th>
+                                    <th scope="col" class="border-0 text-center">Khách</th>
+                                    <th scope="col" class="border-0 text-center">Số điện thoại</th>
+                                    <th scope="col" class="border-0 text-center">Giá tiền</th>
+                                    <th scope="col" class="border-0 text-center">Ngày đặt</th>
+                                    <th scope="col" class="border-0 text-center">
+                                        Ngày nhận phòng
+                                    </th>
+                                    <th scope="col" class="border-0 text-center">Ngày trả phòng</th>
+                                    <th scope="col" class="border-0 text-center">Trạng thái</th>
+                                    <th scope="col" class="border-0 rounded-end text-center">
+                                        Action
+                                    </th>
                                 </tr>
                             </thead>
                             <tbody class="border-top-0">
@@ -164,6 +171,9 @@
                                     </td>
                                     <td>
                                         <h6 class="mb-0 fw-light">{{ booking.phone_number }}</h6>
+                                    </td>
+                                    <td>
+                                        <h6 class="mb-0 fw-light">{{ booking.bill_value }}</h6>
                                     </td>
                                     <td>{{ booking.created_at }}</td>
                                     <td>
