@@ -1,5 +1,7 @@
 require('./bootstrap');
 require('@vueform/multiselect/themes/default.css');
+require('@/css/main.css');
+
 
 import Vue from 'vue';
 import moment from 'moment';
