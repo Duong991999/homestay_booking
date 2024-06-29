@@ -63,9 +63,9 @@ class RoomRepository extends BaseRepository implements RoomRepositoryInterface
 		$roomTypeList = array_column($bookingDetail['booking_details'], 'room_type_id');
 		$checkinDate = $bookingDetail['checkin_date'];
 		$checkoutDate = $bookingDetail['checkout_date'];
-		$rooms = $this->model->whereHas('booking_details', function ($query) use ($checkinDate, $checkoutDate) {
+		$rooms = $this->model->whereDoesntHave('booking_details', function ($query) use ($checkinDate, $checkoutDate) {
 			$query->whereHas('booking', function ($q) use ($checkinDate, $checkoutDate) {
-				return $q->where('checkin_date', '>', $checkoutDate)->orWhere('checkout_date', '<', $checkinDate);
+				return $q->where('checkin_date', '<=', $checkoutDate)->where('checkout_date', '>=', $checkinDate);
 			});
 		})->whereIn('room_type_id', $roomTypeList)->get()->toArray();
 		$insert = [];
