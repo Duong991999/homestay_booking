@@ -1,30 +1,55 @@
 <template>
-    <div class="row">
+    <div class="row" style="margin-top: 80px">
         <div class="col-12">
-            <div class="card border rounded-3 w-100">
-                <div class="card-header border-bottom">
-                    <h5 class="card-header-title">Nhận xét</h5>
+            <div
+                class="card rounded-3 w-100"
+                style="border-color: black; border-width: 1px; border-radius: 10px"
+            >
+                <div
+                    class="card-header border-bottom"
+                    style="
+                        border-color: black;
+                        border-width: 1px;
+                        border-top-left-radius: 10px;
+                        border-top-right-radius: 10px;
+                    "
+                >
+                    <h4 class="title">Nhận xét</h4>
                 </div>
-                <div class="card-body mb-4">
+                <div class="card-body mb-4 m-2">
                     <div v-for="(review, index) in reviews" :key="index" class="review-card">
-                        <div class="bg-light p-3" style="border-radius: 10px">
+                        <div
+                            class="p-4"
+                            style="
+                                border-width: 1px;
+                                border-radius: 10px;
+                                background-color: #eff4e5;
+                            "
+                        >
                             <div class="d-sm-flex justify-content-between">
                                 <div class="d-sm-flex align-items-center mb-3">
-                                    <img
-                                        class="avatar avatar-md rounded-circle float-start m-3"
-                                        :src="review.avatar"
-                                        alt="avatar"
-                                    />
-                                    <div>
-                                        <h6 class="m-0">{{ review.author }}</h6>
-                                        <span class="me-3 small">{{ review.date }}</span>
+                                    <i class="fa-solid fa-user fa" style="color: #1e2b43"></i>
+                                    <div
+                                        class="d-flex justify-content-between align-items-center row"
+                                        style="width: 700px"
+                                    >
+                                        <h5 class="ml-4 m-0" style="font-weight: bold">
+                                            {{ review.author }}
+                                        </h5>
+                                        <div>
+                                            <star-rating
+                                                class="align-items-center"
+                                                :star-size="20"
+                                                :show-rating="false"
+                                                v-model="review.rating"
+                                                :read-only="true"
+                                            ></star-rating>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                            <h6 class="fw-normal">
-                                <span class="text-body">Review on:</span> {{ review.resort }}
-                            </h6>
-                            <p>{{ review.content }}</p>
+
+                            <p class="mt-4">{{ review.content }}</p>
                             <div v-if="review.images.length" class="row g-4">
                                 <div v-for="(image, index) in review.images" :key="index">
                                     <a class="glightbox m-2" :href="image">
@@ -32,7 +57,7 @@
                                     </a>
                                 </div>
                             </div>
-                            <div class="mt-3">
+                            <!-- <div class="mt-3">
                                 <div class="d-flex justify-content-between align-items-center">
                                     <button class="btn btn-sm mb-0" @click="toggleReply(index)">
                                         <svg
@@ -96,7 +121,7 @@
                                         /></a>
                                     </div>
                                 </div>
-                            </div>
+                            </div> -->
                         </div>
                         <hr v-if="index < reviews.length - 1" />
                     </div>
@@ -107,8 +132,12 @@
 </template>
 
 <script>
+import StarRating from 'vue-star-rating';
 export default {
     name: 'Reviews',
+    components: {
+        StarRating,
+    },
     data() {
         return {
             reviews: [
@@ -120,6 +149,7 @@ export default {
                     images: ['assets/image/fake/fake1.jpg', 'assets/image/fake/fake2.jpg'],
                     showReply: false,
                     avatar: 'assets/image/icon/user.png',
+                    rating: '4',
                 },
                 {
                     author: 'Lê Văn Tuấn',
@@ -129,6 +159,7 @@ export default {
                     images: [],
                     showReply: false,
                     avatar: 'assets/image/icon/user.png',
+                    rating: '4',
                 },
                 {
                     author: 'Hoàng Thị Minh Anh',
@@ -139,6 +170,7 @@ export default {
                         '/booking_v/assets/09-DF5sdfsd.jpg',
                         '/booking_v/assets/10-RTGVDSF.jpg',
                     ],
+                    rating: '5',
                     showReply: false,
                     avatar: 'assets/image/icon/user.png',
                 },
@@ -150,6 +182,7 @@ export default {
                     images: ['/booking_v/assets/11-DFGert.jpg', '/booking_v/assets/12-SFDfsdf.jpg'],
                     showReply: false,
                     avatar: 'assets/image/icon/user.png',
+                    rating: '3',
                 },
             ],
         };
