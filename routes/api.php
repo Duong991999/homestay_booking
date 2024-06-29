@@ -96,6 +96,7 @@ Route::group(['prefix' => 'booking',], function(){
 	Route::post('/change-status/{id}', [BookingController::class, 'changeStatus']);
 	Route::get('/user-search', [BookingController::class, 'paginateUserSearch']);
 	Route::get('/company-search', [BookingController::class, 'paginateCompanySearch']);
+	Route::get('/count', [BookingController::class, 'count']);
 });
 
 Route::group(['prefix' => 'review',], function(){

@@ -9,5 +9,5 @@ interface BookingRepositoryInterface extends BaseRepositoryInterface
 	public function changeStatus($status, $id);
 	public function paginateUserSearch($attributes);
 	public function paginateCompanySearch($attributes);
-
+	public function count();
 }

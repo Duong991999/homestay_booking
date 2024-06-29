@@ -217,4 +217,31 @@ class BookingRepository extends BaseRepository implements BookingRepositoryInter
 		});
 		return $data->orderBy('updated_at', 'desc')->paginate(10)->appends(Request::query());
 	}
+	public function count()
+	{
+		$myHomestayId = auth()->user()->homestays[0]->id;
+		$result =  $this->model->where('homestay_id', $myHomestayId)
+			->select('status', DB::raw('count(*) as count'))
+			->groupBy('status')
+			->get();
+		$data = ['all' => 0, 'cancel' => 0, 'wait' => 0, 'approve' => 0, 'checkin' => 0, 'checkout' => 0, 'review' => 0];
+		foreach ($result as $item) {
+			$status = $item->status;
+			if ($status == -1) {
+				$data['cancel'] = $item->count;
+			} elseif ($status == 0) {
+				$data['wait'] = $item->count;
+			} elseif ($status == 1) {
+				$data['approve'] = $item->count;
+			} elseif ($status == 2) {
+				$data['checkin'] = $item->count;
+			} elseif ($status == 3) {
+				$data['checkout'] = $item->count;
+			} elseif ($status == 4) {
+				$data['review'] = $item->count;
+			}
+			$data['all'] += $item->count;
+		}
+		return $data;
+	}
 }

@@ -34,16 +34,13 @@
                                     :disabled="loading"
                                     @click="fetchData()"
                                 >
-                                    <span>Tra cứu </span>
-                                    <span v-if="loading">
-                                        <i class="fas fa-circle-notch fa-spin"></i> Checking...
-                                    </span>
+                                    <span>Tra cứu</span>
                                 </button>
                             </div>
                         </div>
                     </div>
                     <ul class="nav nav-tabs mb-2">
-                        <li class="nav-item">
+                        <li class="nav-item pointer">
                             <a
                                 class="nav-link"
                                 :class="{ active: selectedTab === 'All' }"
@@ -51,11 +48,11 @@
                                     selectedTab = 'All';
                                     fetchData();
                                 "
-                                >Tất cả</a
+                                >All({{countBooking.all ?? 0}})</a
                             >
                         </li>
 
-                        <li class="nav-item">
+                        <li class="nav-item pointer">
                             <a
                                 class="nav-link"
                                 :class="{ active: selectedTab === 'Chờ duyệt' }"
@@ -64,11 +61,11 @@
                                     status = 0;
                                     fetchData();
                                 "
-                                >Chờ duyệt</a
+                                >Chờ duyệt({{countBooking.wait ?? 0}})</a
                             >
                         </li>
 
-                        <li class="nav-item">
+                        <li class="nav-item pointer">
                             <a
                                 class="nav-link"
                                 :class="{ active: selectedTab === 'Duyệt' }"
@@ -77,10 +74,10 @@
                                     status = 1;
                                     fetchData();
                                 "
-                                >Duyệt</a
+                                >Duyệt({{countBooking.approve ?? 0}})</a
                             >
                         </li>
-                        <li class="nav-item">
+                        <li class="nav-item pointer">
                             <a
                                 class="nav-link"
                                 :class="{ active: selectedTab === 'Nhận phòng' }"
@@ -89,10 +86,10 @@
                                     status = 2;
                                     fetchData();
                                 "
-                                >Nhận phòng</a
+                                >Nhận phòng({{countBooking.checkin ?? 0}})</a
                             >
                         </li>
-                        <li class="nav-item">
+                        <li class="nav-item pointer">
                             <a
                                 class="nav-link"
                                 :class="{ active: selectedTab === 'Trả phòng' }"
@@ -101,10 +98,22 @@
                                     status = 3;
                                     fetchData();
                                 "
-                                >Trả phòng</a
+                                >Trả phòng({{countBooking.checkout ?? 0}})</a
                             >
                         </li>
-                        <li class="nav-item">
+						<li class="nav-item pointer">
+                            <a
+                                class="nav-link"
+                                :class="{ active: selectedTab === 'Đã đánh giá' }"
+                                @click="
+                                    selectedTab = 'Đã đánh giá';
+                                    status = -1;
+                                    fetchData();
+                                "
+                                >Đã đánh giá({{countBooking.review ?? 0}})</a
+                            >
+                        </li>
+                        <li class="nav-item pointer">
                             <a
                                 class="nav-link"
                                 :class="{ active: selectedTab === 'Đã hủy' }"
@@ -113,7 +122,7 @@
                                     status = -1;
                                     fetchData();
                                 "
-                                >Đã hủy</a
+                                >Đã hủy({{countBooking.cancel ?? 0}})</a
                             >
                         </li>
                     </ul>
@@ -158,8 +167,8 @@
                                         <h6 class="mb-0 fw-light">{{ booking.checkout_date }}</h6>
                                     </td>
                                     <td>
-                                        <div :class="`bg-${statusColors[booking.status]} badge`">
-                                            {{ booking.status }}
+                                        <div :class="`bg-${statusColors[booking.status]} badge text-white`">
+                                            {{ filter(booking.status) }}
                                         </div>
                                     </td>
                                     <td>
@@ -362,11 +371,17 @@ export default {
             bookings: [],
             details: [],
             statusColors: {
-                'Chờ duyệt': 'warning',
-                Duyệt: 'success',
-                'Nhận phòng': 'info',
-                'Đã hủy': 'secondary',
+                "-1": 'danger',
+                "0": 'warning',
+                "1": 'success',
+                '2': 'info',
+                '3': 'secondary',
+                '4': 'dark',
             },
+			title: 'Tất cả',
+			countBooking:{
+
+			}
         };
     },
     computed: {
@@ -381,7 +396,6 @@ export default {
     async created() {
         this.loading = true;
         await this.fetchData();
-
         this.loading = false;
     },
     methods: {
@@ -391,11 +405,11 @@ export default {
                 const response = await axios.get(
                     `/api/booking/company-search?page=${page}&status=${this.status}&phone_number=${this.phone_number}&checkin_date=${this.checkin_date}&checkout_date=${this.checkout_date}&user=${this.user_name}`
                 );
-                console.log(response);
                 this.data = response.data.data;
                 this.bookings = this.data.data;
-                console.log(this.bookings);
-                // this.items = this.data.data
+				console.log(this.bookings);
+                const countResponse = await axios.get(`/api/booking/count`);
+				this.countBooking = countResponse.data.data;
             } catch (error) {
                 console.error('Error fetching data:', error);
             }
@@ -503,6 +517,23 @@ export default {
                 value
             );
         },
+		filter(status) {
+			if (status == -1) {
+				return 'Đã huỷ'
+			} else if (status == 0) {
+				return 'Chờ duyệt'
+			} else if (status == 1) {
+				return 'Đã duyệt'
+
+			} else if (status == 2) {
+				return 'Đã nhận phòng'
+			} else if (status == 3) {
+				return 'Đã trả phòng'
+
+			} else if (status == 4) {
+				return 'Đã đánh giá'
+			}
+		}
     },
 };
 </script>
@@ -556,5 +587,8 @@ export default {
 }
 .title {
     font-weight: bold;
+}
+.pointer{
+	cursor: pointer;
 }
 </style>

@@ -56,4 +56,9 @@ class BookingController extends Controller
 		$data = $this->bookingRepo->paginateCompanySearch($request->all());
 		return $this->success($data);
 	}
+
+	public function count(){
+		$data = $this->bookingRepo->count();
+		return $this->success($data);
+	}
 }

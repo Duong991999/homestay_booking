@@ -30,13 +30,14 @@ export default {
 	methods: {
 		handleFileInputChange(event) {
 			const files = event.target.files;
+			let count = this.imageList.length
 			if (files && files.length > 0) {
 				for (let i = 0; i < files.length; i++) {
 					const file = files[i];
-					let idImg = `from-input-${this.imageList.length}`
+					let idImg = `from-input-${count}`
 					this.addFileList[idImg] = file;
+					count++
 					const reader = new FileReader();
-
 					reader.onload = (e) => {
 						const image = {
 							type: 'from-input',
@@ -46,7 +47,6 @@ export default {
 						};
 						this.imageList.push(image);
 					};
-
 					reader.readAsDataURL(file);
 				}
 			}
