@@ -206,21 +206,46 @@ class BookingRepository extends BaseRepository implements BookingRepositoryInter
 			$bookingWhere['checkout_date'] = $attributes['checkout_date'];
 		}
 		$data  = $this->model;
-		if($bookingWhere){
+		if ($bookingWhere) {
 			$data = $data->where($bookingWhere);
 		}
 		if ($attributes['date'] ?? 0) {
 			$data = $data->where('checkin_date', '<=', $attributes['date'])->where('checkout_date', '>=', $attributes['date']);
 		}
+		if (isset($attributes['phone_number'])) {
+			$data = $data->where('phone_number', 'like', "%" . $attributes['phone_number'] . "%");
+		}
+		if (isset($attributes['guest_name'])) {
+			$data = $data->where('guest_name', 'like', "%" . $attributes['guest_name'] . "%");
+		}
 		$data = $data->whereHas('homestay', function ($q1) use ($userId) {
 			$q1->where('user_id', $userId);
 		});
-		return $data->orderBy('updated_at', 'desc')->paginate(10)->appends(Request::query());
+		$orderBy = ['updated_at', 'desc'];
+		if ($attributes['order_by'] ?? 0) {
+			$orderBy = explode(' ', $attributes['order_by']);
+		}
+
+		return $data->orderBy($orderBy[0], $orderBy[1])->paginate(10)->appends(Request::query());
 	}
-	public function count()
+	public function count($attributes)
 	{
 		$myHomestayId = auth()->user()->homestays[0]->id;
-		$result =  $this->model->where('homestay_id', $myHomestayId)
+		$bookingWhere = ['homestay_id' => $myHomestayId];
+		if ($attributes['checkin_date'] ?? 0) {
+			$bookingWhere['checkin_date'] = $attributes['checkin_date'];
+		}
+		if ($attributes['checkout_date'] ?? 0) {
+			$bookingWhere['checkout_date'] = $attributes['checkout_date'];
+		}
+		$result =  $this->model->where($bookingWhere);
+		if (isset($attributes['phone_number'])) {
+			$result = $result->where('phone_number', 'like', "%" . $attributes['phone_number'] . "%");
+		}
+		if (isset($attributes['guest_name'])) {
+			$result = $result->where('guest_name', 'like', "%" . $attributes['guest_name'] . "%");
+		}
+		$result = $result
 			->select('status', DB::raw('count(*) as count'))
 			->groupBy('status')
 			->get();

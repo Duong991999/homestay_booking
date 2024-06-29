@@ -529,12 +529,13 @@ export default {
 				Vue.set(this.rooms, index, roomUpdate);
 			}
 		},
-		handleClickOutside(event) {
-			const dropdownContainer = this.$refs.dropdownContainer;
-			if (!dropdownContainer.contains(event.target)) {
-				this.closeDropdown();
-			}
-		},
+		// handleClickOutside(event) {
+		// 	const dropdownContainer = this.$refs.dropdownContainer;
+		// 	console.log(dropdownContainer);
+		// 	if (!dropdownContainer.contains(event.target)) {
+		// 		this.closeDropdown();
+		// 	}
+		// },
 		showBookingConfirmationModal() {
 			this.phone_number = this.user.phone_number;
 			this.email = this.user.email;
@@ -556,11 +557,11 @@ export default {
 		},
 	},
 	mounted() {
-		document.addEventListener('click', this.handleClickOutside);
+		// document.addEventListener('click', this.handleClickOutside);
 		// this.calculateTotalCost();
 	},
 	beforeUnmount() {
-		document.removeEventListener('click', this.handleClickOutside);
+		// document.removeEventListener('click', this.handleClickOutside);
 	},
 	async created() {
 		this.loading = true;

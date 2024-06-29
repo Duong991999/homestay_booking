@@ -57,8 +57,8 @@ class BookingController extends Controller
 		return $this->success($data);
 	}
 
-	public function count(){
-		$data = $this->bookingRepo->count();
+	public function count(Request $request){
+		$data = $this->bookingRepo->count($request->all());
 		return $this->success($data);
 	}
 }

@@ -31,16 +31,18 @@
 								<span class="input__label">Số điện thoại</span>
 							</div>
 							<div class="col-lg-2">
-								<select class="form-select input__field" aria-label="Default select example">
+								<select class="form-select input__field" aria-label="Default select example" v-model="order_by">
 									<option selected value="0"></option>
-									<option value="1">Tên ↓</option>
-									<option value="2">Tên ↑</option>
-									<option value="3">Ngày nhận phòng ↓</option>
-									<option value="4">Ngày nhận phòng ↑</option>
-									<option value="5">Ngày trả phòng ↓</option>
-									<option value="6">Ngày trả phòng ↑</option>
-									<option value="7">Giá tiền ↓</option>
-									<option value="8">Giá tiền ↑</option>
+									<option value="status desc">Trạng thái ↓</option>
+									<option value="status asc">Trạng thái ↑</option>
+									<option value="created_at desc">Ngày đặt ↓</option>
+									<option value="created_at asc">Ngày đặt ↑</option>
+									<option value="checkin_date desc">Ngày nhận phòng ↓</option>
+									<option value="checkin_date asc">Ngày nhận phòng ↑</option>
+									<option value="checkout_date desc">Ngày trả phòng ↓</option>
+									<option value="checkout_date asc">Ngày trả phòng ↑</option>
+									<option value="bill_value desc">Giá tiền ↓</option>
+									<option value="bill_value asc">Giá tiền ↑</option>
 								</select>
 								<span class="input__label">Sắp xếp theo</span>
 							</div>
@@ -304,7 +306,6 @@ export default {
 			checkout_date: '',
 			guest_name: '',
 			order_by: '',
-			user_name: '',
 			loading: false,
 			data: {},
 			bookings: [],
@@ -340,12 +341,11 @@ export default {
 			this.loading = true;
 			try {
 				const response = await axios.get(
-					`/api/booking/company-search?page=${page}&status=${this.status}&phone_number=${this.phone_number}&checkin_date=${this.checkin_date}&checkout_date=${this.checkout_date}&user=${this.user_name}`
+					`/api/booking/company-search?page=${page}&status=${this.status}&phone_number=${this.phone_number}&checkin_date=${this.checkin_date}&checkout_date=${this.checkout_date}&guest_name=${this.guest_name}&order_by=${this.order_by}`
 				);
 				this.data = response.data.data;
 				this.bookings = this.data.data;
-				console.log(this.bookings);
-				const countResponse = await axios.get(`/api/booking/count`);
+				const countResponse = await axios.get(`/api/booking/count?phone_number=${this.phone_number}&checkin_date=${this.checkin_date}&checkout_date=${this.checkout_date}&guest_name=${this.guest_name}`);
 				this.countBooking = countResponse.data.data;
 			} catch (error) {
 				console.error('Error fetching data:', error);
