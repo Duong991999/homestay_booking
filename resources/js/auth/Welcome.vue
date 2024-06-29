@@ -288,7 +288,7 @@
                 <div class="col-sm-6 col-xl-3" v-for="homestay in homestays" :key="homestay.id">
                     <div
                         class="card card-img-scale overflow-hidden bg-transparent"
-                        style="width: 90%; height: 500px"
+                        style="width: 90%; height: 520px"
                     >
                         <div class="card-img-scale-wrapper rounded-3">
                             <img
@@ -306,13 +306,18 @@
                                     >{{ homestay.name }}</a
                                 >
                             </h5>
-                            <i class="fa-solid fa-location-dot" style="color: #ff4747"></i>
+                            <div class="mt-2 ml-2 row align-items-center mb-1">
+                                <i class="fa fa-solid fa-location-dot" style="color: #511f1f"></i>
+                                <h6 class="mb-0 mr-2 d-flex text">
+                                    {{ homestay.location }}
+                                </h6>
+                            </div>
                             <div class="mt-auto d-flex justify-content-between mb-2">
                                 <h6 class="text mb-0">
                                     {{ homestay.price }} VND <small class="fw-light">/ngày</small>
                                 </h6>
-                                <div class="row mr-2">
-                                    <h6 class="mb-0 mr-2 d-flex mt-1 textt">
+                                <div class="row mr-2 align-items-center">
+                                    <h6 class="mb-0 mr-2 d-flex text">
                                         {{ homestay.rating }}
                                     </h6>
                                     <i class="fa fa-solid fa-star" style="color: #ffd43b"></i>

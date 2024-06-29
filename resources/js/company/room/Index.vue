@@ -1,11 +1,19 @@
 <template>
     <div class="col-12" style="margin-top: 150px">
-        <div class="card border w-100">
-            <div class="card-header border-bottom row d-flex justify-content-between m-0">
-                <h5 class="card-header-title">
-                    My Listings
+        <div class="card w-100" style="border-color: black; border-width: 1px; border-radius: 10px">
+            <div
+                class="card-header border-bottom row d-flex justify-content-between m-0"
+                style="
+                    border-color: black;
+                    border-width: 1px;
+                    border-top-left-radius: 10px;
+                    border-top-right-radius: 10px;
+                "
+            >
+                <h4 class="mb-0 title">
+                    Danh sách loại phòng
                     <span class="badge bg-opacity-10 ms-2">{{ listings.length }} Items</span>
-                </h5>
+                </h4>
                 <button class="btn btn-primary p-2 mb-0" style="border-radius: 10px">
                     Thêm loại phòng
                 </button>
@@ -14,7 +22,7 @@
                 <div
                     v-for="(listing, index) in listings"
                     :key="index"
-                    class="card border w-100 m-0"
+                    class="card border w-100 m-0 mt-2 mb-2"
                 >
                     <div class="row g-4">
                         <div class="col-md-3 col-lg-2">
@@ -22,6 +30,7 @@
                                 :src="listing.image"
                                 class="card-img rounded-2 m-2"
                                 alt="Card image"
+                                style="border-radius: 10px"
                             />
                         </div>
                         <div class="col-lg-10" ms="9">
@@ -32,30 +41,14 @@
                                 <h5 class="card-title mb-0 mt-2 me-5">
                                     <a href="#" class="">{{ listing.title }}</a>
                                 </h5>
-                                <small>
-                                    <svg
-                                        width="1em"
-                                        height="1em"
-                                        viewBox="0 0 16 16"
-                                        fill="currentColor"
-                                        role="img"
-                                        focusable="false"
-                                        class="me-1 mb-1"
-                                    >
-                                        <path
-                                            d="M12.166 8.94c-.524 1.062-1.234 2.12-1.96 3.07A32 32 0 0 1 8 14.58a32 32 0 0 1-2.206-2.57c-.726-.95-1.436-2.008-1.96-3.07C3.304 7.867 3 6.862 3 6a5 5 0 0 1 10 0c0 .862-.305 1.867-.834 2.94M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10"
-                                        ></path>
-                                        <path
-                                            d="M8 8a2 2 0 1 1 0-4 2 2 0 0 1 0 4m0 1a3 3 0 1 0 0-6 3 3 0 0 0 0 6"
-                                        ></path>
-                                    </svg>
-                                    {{ listing.address }}
+                                <small class="mt-2">
+                                    {{ listing.content }}
                                 </small>
                                 <div
                                     class="d-sm-flex justify-content-sm-between align-items-center mb-2 mt-md-auto"
                                 >
                                     <div class="d-flex align-items-center">
-                                        <h5 class="fw-bold mb-0 me-1">${{ listing.price }}</h5>
+                                        <h5 class="fw-bold mb-0 me-1">{{ listing.price }}VND</h5>
                                         <span class="mb-0 me-2">/day</span>
                                     </div>
                                     <div class=" " style="margin-right: 20px">
@@ -121,12 +114,63 @@ export default {
             listings: [
                 {
                     image: 'assets/image/slide_home_screens/_1.jpg',
-                    title: 'Pride moon Village Resort & Spa',
-                    address: '31J W Spark Street, California - 24578',
-                    price: 1586,
+                    title: 'Phòng Deluxe',
+                    content:
+                        'Phòng rộng rãi với giường đôi, tiện nghi hiện đại và ban công nhìn ra vườn.',
+                    price: 158600,
+                },
+                {
+                    image: 'assets/image/slide_home_screens/_2.jpg',
+                    title: 'Phòng Superior',
+                    content:
+                        'Phòng tiện nghi với giường đơn hoặc giường đôi, nội thất sang trọng và phòng tắm riêng.',
+                    price: 120000,
+                },
+                {
+                    image: 'assets/image/slide_home_screens/_3.jpg',
+                    title: 'Phòng Standard',
+                    content:
+                        'Phòng tiêu chuẩn với đầy đủ tiện nghi cơ bản, phù hợp cho khách lưu trú ngắn hạn.',
+                    price: 175000,
+                },
+                {
+                    image: 'assets/image/slide_home_screens/_4.jpg',
+                    title: 'Phòng Gia Đình',
+                    content:
+                        'Phòng rộng lớn phù hợp cho gia đình, có giường đôi và giường đơn, không gian thoải mái.',
+                    price: 145000,
+                },
+                {
+                    image: 'assets/image/slide_home_screens/_5.jpg',
+                    title: 'Phòng Suite',
+                    content:
+                        'Phòng cao cấp với không gian rộng, bao gồm phòng khách riêng và ban công nhìn ra biển.',
+                    price: 160000,
+                },
+                {
+                    image: 'assets/image/slide_home_screens/_6.jpg',
+                    title: 'Phòng Tiết Kiệm',
+                    content:
+                        'Phòng nhỏ gọn với giá cả phải chăng, thích hợp cho khách du lịch tiết kiệm.',
+                    price: 110000,
+                },
+                {
+                    image: 'assets/image/slide_home_screens/_7.jpg',
+                    title: 'Phòng Tổng Thống',
+                    content:
+                        'Phòng sang trọng nhất với đầy đủ tiện nghi cao cấp, mang đến trải nghiệm đẳng cấp.',
+                    price: 130000,
                 },
             ],
         };
     },
 };
 </script>
+<style>
+.card-header {
+    background-color: white;
+}
+.title {
+    font-weight: bold;
+}
+</style>

@@ -117,7 +117,7 @@ export default {
             dropdownOptions: [
                 { label: 'Quản lý doanh thu', href: '#/company/dashboard' }, // Replace with actual URLs
                 { label: 'Quản lý Homestay', href: '#/company/homestay/index' },
-                { label: 'Quản lý loại phòng', href: '#/room/index' },
+                { label: 'Quản lý loại phòng', href: '#/company/room/index' },
                 { label: 'Quản lý phòng', href: '#/company/roomstatus/index' },
                 { label: 'Quản lý đặt phòng', href: '#/company/bookings/index' },
                 { label: 'Quản lý đánh giá', href: '#/reviewlist' },

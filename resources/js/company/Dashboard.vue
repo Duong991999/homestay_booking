@@ -124,10 +124,21 @@
         </div>
         <div class="row">
             <div class="col-xl-7 p-0">
-                <div class="card border h-100" style="width: auto">
+                <div
+                    class="card h-100"
+                    style="width: auto; border-color: black; border-width: 1px; border-radius: 10px"
+                >
                     <!----><!----><!---->
-                    <div class="card-header border-bottom">
-                        <h5 class="card-header-title">Đơn đặt phòng</h5>
+                    <div
+                        class="card-header border-bottom"
+                        style="
+                            border-color: black;
+                            border-width: 1px;
+                            border-top-left-radius: 10px;
+                            border-top-right-radius: 10px;
+                        "
+                    >
+                        <h4 class="title">Thông kê đặt phòng</h4>
                     </div>
                     <div class="card-body">
                         <apexchart
@@ -141,12 +152,21 @@
                 </div>
             </div>
             <div class="col-xl-5 p-0">
-                <div class="card border h-100" style="width: auto">
+                <div
+                    class="card h-100"
+                    style="width: auto; border-color: black; border-width: 1px; border-radius: 10px"
+                >
                     <!----><!----><!---->
                     <div
                         class="card-header border-bottom d-flex justify-content-between align-items-center"
+                        style="
+                            border-color: black;
+                            border-width: 1px;
+                            border-top-left-radius: 10px;
+                            border-top-right-radius: 10px;
+                        "
                     >
-                        <h5 class="card-header-title">Trạng thái đơn đặt phòng</h5>
+                        <h4 class="title">Trạng thái đặt phòng</h4>
                     </div>
                     <div class="card-body mt-4">
                         <apexchart type="pie" :options="chartOptions" :series="series"></apexchart>
@@ -266,5 +286,8 @@ export default {
 }
 .ms-3 {
     margin-left: 1rem;
+}
+.title {
+    font-weight: bold;
 }
 </style>

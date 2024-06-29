@@ -1,7 +1,15 @@
 <template>
     <div class="container" style="margin-top: 100px">
-        <div class="card w-100 border">
-            <div class="card-header border-bottom card-header-custom">
+        <div class="card w-100" style="border-color: black; border-width: 1px; border-radius: 10px">
+            <div
+                class="card-header border-bottom card-header-custom"
+                style="
+                    border-color: black;
+                    border-width: 1px;
+                    border-top-left-radius: 10px;
+                    border-top-right-radius: 10px;
+                "
+            >
                 <h4 class="mb-0 title">Danh sách phòng</h4>
             </div>
 
@@ -17,17 +25,7 @@
                     <span class="input__label">Tra cứu ngày</span>
                 </div>
                 <div class="col-lg-5 m-2">
-                    <button
-                        class="btn border-0 m-2"
-                        @click="check"
-                        :disabled="loading"
-                        style="
-                            background-color: rgb(240 181 145 / 50%);
-                            color: #ef7d4ae6;
-                            width: 150px;
-                            border-radius: 10px;
-                        "
-                    >
+                    <button class="btn btn-search border-0 m-2" @click="check" :disabled="loading">
                         <span v-if="!loading">Tra cứu </span>
                         <span v-if="loading">
                             <i class="fas fa-circle-notch fa-spin"></i> Checking...
@@ -35,7 +33,11 @@
                     </button>
                 </div>
             </div>
-            <div class="room-type m-4" v-for="(roomType, index) in roomTypes" :key="index">
+            <div
+                class="room-type mt-2 ml-4 mr-4"
+                v-for="(roomType, index) in roomTypes"
+                :key="index"
+            >
                 <h5>{{ roomType.type }}</h5>
                 <div class="rooms">
                     <div
@@ -57,7 +59,7 @@ export default {
         return {
             roomTypes: [
                 {
-                    type: 'Phòng Đơn',
+                    type: 'Phòng Deluxe',
                     rooms: [
                         { number: '101', status: 'available' },
                         { number: '102', status: 'occupied' },
@@ -66,14 +68,42 @@ export default {
                     ],
                 },
                 {
-                    type: 'Phòng Đôi',
+                    type: 'Superior',
                     rooms: [
                         { number: '201', status: 'available' },
                         { number: '202', status: 'available' },
                         { number: '203', status: 'occupied' },
                     ],
                 },
-                // Thêm các loại phòng khác theo ý muốn
+                {
+                    type: 'Phòng Standard',
+                    rooms: [
+                        { number: '301', status: 'available' },
+                        { number: '302', status: 'occupied' },
+                        { number: '303', status: 'available' },
+                    ],
+                },
+                {
+                    type: 'Phòng Suite',
+                    rooms: [
+                        { number: '401', status: 'available' },
+                        { number: '402', status: 'occupied' },
+                    ],
+                },
+                {
+                    type: 'Phòng Tiết Kiệm',
+                    rooms: [
+                        { number: '501', status: 'occupied' },
+                        { number: '502', status: 'available' },
+                    ],
+                },
+                {
+                    type: 'Phòng Tổng Thống',
+                    rooms: [
+                        { number: '601', status: 'available' },
+                        { number: '602', status: 'occupied' },
+                    ],
+                },
             ],
             selectedDate: null,
         };
@@ -164,5 +194,14 @@ export default {
     /* Điều chỉnh kích thước chữ khi input field được focus */
     color: #333;
     /* Đổi màu chữ khi input field được focus */
+}
+.btn-search {
+    background-color: #fcad37;
+    color: #513306;
+    border-radius: 10px;
+}
+.btn-search:hover {
+    background-color: #faf7df;
+    color: #ffa217;
 }
 </style>
