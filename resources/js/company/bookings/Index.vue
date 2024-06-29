@@ -53,18 +53,17 @@
 					</div>
 					<ul class="nav nav-tabs mb-2">
 						<li class="nav-item pointer">
-							<a class="nav-link" :class="{ active: selectedTab === 'All' }" @click="
-								selectedTab = 'All';
-							fetchData();
-							">All({{ countBooking.all ?? 0 }})</a>
+							<a class="nav-link" :class="{ active: selectedTab === 'All' }"
+								@click="selectedTab = 'All'; status = ''; fetchData();">
+								All({{ countBooking.all ?? 0 }})
+							</a>
 						</li>
 
 						<li class="nav-item pointer">
-							<a class="nav-link" :class="{ active: selectedTab === 'Chờ duyệt' }" @click="
-								selectedTab = 'Chờ duyệt';
-							status = 0;
-							fetchData();
-							">Chờ duyệt({{ countBooking.wait ?? 0 }})</a>
+							<a class="nav-link" :class="{ active: selectedTab === 'Chờ duyệt' }"
+								@click="selectedTab = 'Chờ duyệt'; status = 0; fetchData();">
+								Chờ duyệt({{ countBooking.wait ?? 0 }})
+							</a>
 						</li>
 
 						<li class="nav-item pointer">
