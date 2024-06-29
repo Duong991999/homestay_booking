@@ -1,5 +1,5 @@
 <template>
-    <div class="row justify-content-center h-100" style="margin-top: 80px">
+    <div class="row justify-content-center h-100" style="margin-top: 100px">
         <div class="col-12">
             <div class="shadow bg-mode rounded-3 overflow-hidden" style="border-radius: 20px">
                 <div class="row g-0 align-items-center">
@@ -45,7 +45,7 @@
                         <div class="p-4 p-sm-7 align-items-center">
                             <form>
                                 <div class="form-group">
-                                    <label for="name">Name</label>
+                                    <label for="name">Tên</label>
                                     <input
                                         type="text"
                                         name="name"
@@ -57,9 +57,22 @@
                                     />
                                     <v-errors :errors="errorFor('name')"></v-errors>
                                 </div>
+                                <div class="form-group">
+                                    <label for="name">Số điên thoại</label>
+                                    <input
+                                        type="text"
+                                        name="name"
+                                        placeholder="Enter your name"
+                                        class="form-control"
+                                        v-model="user.phone_number"
+                                        :class="[{ 'is-invalid': errorFor('phone_number') }]"
+                                        style="border-radius: 10px; height: 42px"
+                                    />
+                                    <v-errors :errors="errorFor('phone_number')"></v-errors>
+                                </div>
 
                                 <div class="form-group">
-                                    <label for="email">E-mail</label>
+                                    <label for="email">Tài khoản</label>
                                     <input
                                         type="text"
                                         name="email"
@@ -73,7 +86,7 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="password">Password</label>
+                                    <label for="password">Mật khẩu</label>
                                     <input
                                         type="password"
                                         name="password"
@@ -87,7 +100,7 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="password_confirmation">Re-type Password</label>
+                                    <label for="password_confirmation">Nhập lại mặt khẩu</label>
                                     <input
                                         type="password"
                                         name="password_confirmation"
@@ -106,23 +119,22 @@
 
                                 <button
                                     type="submit"
-                                    class="btn btn-lg btn-block"
+                                    class="btn btn-lg btn-block nav-link-1"
                                     :disabled="loading"
                                     @click.prevent="register"
-                                    style="background-color: antiquewhite; color: #ee6363"
                                 >
-                                    Register
+                                    Đăng kí
                                 </button>
 
                                 <hr />
 
                                 <div>
-                                    Already have an account?
+                                    Bạn đã có tài khoản.
                                     <router-link
                                         :to="{ name: 'login' }"
-                                        class="font-weight-bold text-decoration-none"
-                                        style="color: rgb(237, 195, 169)"
-                                        >Log-in</router-link
+                                        class="font-weight-bold text-decoration-none nav-link-2"
+                                
+                                        >Đăng nhập</router-link
                                     >
                                 </div>
                             </form>
@@ -145,6 +157,7 @@ export default {
                 name: null,
                 email: null,
                 password: null,
+                phone_number: null,
                 password_confirmation: null,
             },
             loading: false,
@@ -172,4 +185,26 @@ export default {
     },
 };
 </script>
-<style></style>
+<style>
+.nav-link-1 {
+    background-color: rgb(252, 169, 81);
+    color: #543400fe;
+    justify-content: center;
+
+    border-radius: 5px;
+}
+.nav-link-1:hover {
+    background-color: #faf7df;
+    color: #ffa217;
+}
+.nav-link-2 {
+    color: #543400fe;
+    justify-content: center;
+
+    border-radius: 5px;
+}
+.nav-link-2:hover {
+    color: #ffa217;
+}
+</style>
+</style>

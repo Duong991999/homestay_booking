@@ -2,7 +2,7 @@
     <div class="card bg-transparent border-0 w-100">
         <!----><!----><!---->
         <div class="card-header border-bottom bg-transparent px-0 pt-0">
-            <h3 class="card-title mb-0 font-weight-bold">Amenities</h3>
+            <h3 class="card-title mb-0 font-weight-bold">Tiện ích</h3>
         </div>
         <div class="card-body pt-4 p-0">
             <!----><!---->
@@ -16,7 +16,7 @@
                             height="17px"
                             alt="Activities"
                         />
-                        Activities
+                        Hoạt động
                     </h6>
                     <ul class="list-group list-group-borderless mt-2 mb-0">
                         <li
@@ -54,7 +54,7 @@
                             width="17px"
                             height="17px"
                             alt="payments"
-                        />Payment Method
+                        />Thanh toán
                     </h6>
                     <ul class="list-group list-group-borderless mt-2 mb-0">
                         <li
@@ -93,7 +93,7 @@
                             height="17px"
                             alt="services"
                         />
-                        Services
+                        Dịch vụ
                     </h6>
                     <ul class="list-group list-group-borderless mt-2 mb-0">
                         <li
@@ -132,7 +132,7 @@
                             height="17px"
                             alt="safety"
                         />
-                        Safety &amp; Security
+                        An toàn &amp; An ninh
                     </h6>
                     <ul class="list-group list-group-borderless mt-2 mb-4 mb-sm-5">
                         <li class="list-group-item pb-0">
@@ -154,7 +154,7 @@
                                     d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209L241 337c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L335 175c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z"
                                 ></path>
                             </svg>
-                            Doctor on Call
+                            Y tế khẩn cấp
                         </li>
                     </ul>
                 </div>
@@ -167,18 +167,18 @@
 export default {
     data() {
         return {
-            activities: ['Swimming pool', 'Spa', 'Kids play area', 'Gym'],
-            payments: ['Credit card (Visa, Master card)', 'Cash', 'Debit Card'],
+            activities: ['Hồ bơi', 'Spa', 'Khu vui chơi trẻ em', 'Phòng tập gym'],
+            payments: ['Thẻ tín dụng (Visa, Master card)', 'Tiền mặt', 'Thẻ ghi nợ'],
             services: [
-                'Dry cleaning',
-                'Room Service',
-                'Special service',
-                'Waiting Area',
-                'Secrete smoking area',
-                'Concierge',
-                'Laundry facilities',
-                'Ironing Service',
-                'Lift',
+                'Giặt khô',
+                'Dịch vụ phòng',
+                'Dịch vụ đặc biệt',
+                'Khu vực chờ',
+                'Khu vực hút thuốc bí mật',
+                'Dịch vụ hướng dẫn',
+                'Cơ sở giặt là',
+                'Dịch vụ ủi đồ',
+                'Thang máy',
             ],
         };
     },

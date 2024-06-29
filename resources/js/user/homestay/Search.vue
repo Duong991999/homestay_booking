@@ -37,7 +37,7 @@
 			</div>
 		</div>
 		<div class="mt-4">
-			<label class="btn btn-primary btn-primary-check mb-0 collapsed p-2" for="btn-check-soft"
+			<label class="btn btn-custor btn-primary-check mb-0 collapsed p-2" for="btn-check-soft"
 				data-bs-toggle="collapse" data-bs-target="#collapseFilter" aria-controls="collapseFilter"
 				aria-expanded="false" style="border-radius: 10px" @click="toggleReply"><svg width="1em" height="1em"
 					viewBox="0 0 16 16" fill="currentColor" role="img" focusable="false" class="fa-fe me-1 mb-1">
@@ -49,7 +49,7 @@
 			</label>
 
 			<div v-if="show" class="mt-3">
-				<div class="card bg-light p-4 mt-4 w-100" style="border-radius: 20px">
+				<div class="card  p-4 mt-4 w-100" style="border-radius: 20px;background-color:rgb(255 253 250);">
 					<!----><!----><!---->
 					<form class="row g-4 px-4">
 						<div class="col-md-5 col-lg-6">
@@ -152,7 +152,8 @@
 						<div class="col-12 d-flex justify-content-end">
 							<button class="btn btn-md btn-link p-0 mb-0 text-decoration-none" type="button"
 								style="margin-right: 30px">
-								Xóa hết</button><button class="btn btn-dark mb-0 ms-3 text-decoration-none"
+								Xóa hết</button>
+								<button class="btn btn-search mb-0 ms-3 text-decoration-none"
 								type="button"
 								@click.prevent="fetchData()">
 								Tìm kiếm
@@ -415,5 +416,18 @@ export default {
 	color: #fff;
 	background-color: #0a0d0e;
 	border-color: #7b8a8b;
+}
+.btn-custor{
+	background-color: #fcad37 ;
+	color:#513306
+}
+.btn-search{
+	background-color: #fcad37 ;
+	color:#513306;
+	border-radius:10px ;
+}
+.btn-search:hover{
+	background-color: #faf7df;
+    color: #ffa217;
 }
 </style>

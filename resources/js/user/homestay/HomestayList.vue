@@ -16,29 +16,36 @@
                         style="border-top-left-radius: 1rem; border-top-right-radius: 1rem"
                     />
                     <div class="card-body">
-                        <h5 class="card-title font-weight-bold">{{ card.name }}</h5>
-                        <small>Địa chỉ</small>
-                        <small>{{ card.address }}</small>
+                        <h5 class="card-title font-weight-bold text ml-2">{{ card.name }}</h5>
+                        <h6 class="ml-2">{{ card.address }}</h6>
 
                         <ul class="nav nav-divider mb-2 mb-sm-3">
                             <div class="nav-item">
                                 <li
-                                    class="bg-success badge"
+                                    class="badge"
                                     v-for="(feature, fIndex) in card.features"
                                     :key="fIndex"
-                                    style="font-size: 13px; margin: 5px"
+                                    style="
+                                        font-size: 13px;
+                                        margin: 5px;
+                                        background-color: rgb(248 242 196);
+                                    "
                                 >
                                     {{ feature }}
                                 </li>
                             </div>
                         </ul>
-                        <h6>{{ card.min_price }}-{{ card.max_price }}</h6>
-                    </div>
-                    <div class="card-footer border-top">
-                        <div class="d-flex justify-content-between align-items-center">
-                            <router-link :to="{ name: 'detail', params: { id: card.id } }"
-                                >Detail</router-link
-                            >
+                        <div class="row d-flex justify-content-between align-items-center">
+                            <h6 class="mb-0 ml-3">
+                                {{ card.min_price }} VND - {{ card.max_price }} VND
+                            </h6>
+                            <div class="mr-2">
+                                <router-link
+                                    class="btn-search p-2 text-decoration-none"
+                                    :to="{ name: 'detail', params: { id: card.id } }"
+                                    >Detail</router-link
+                                >
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -113,5 +120,20 @@ export default {
     cursor: auto;
     background-color: #efacac;
     border-color: transparent;
+}
+.text {
+    color: #543400fe;
+}
+.text:hover {
+    color: #ffa217;
+}
+.btn-search {
+    background-color: #fcad37;
+    color: #513306;
+    border-radius: 10px;
+}
+.btn-search:hover {
+    background-color: #faf7df;
+    color: #ffa217;
 }
 </style>

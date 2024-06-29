@@ -13,46 +13,33 @@
                         <!----><!---->
                         <div class="row">
                             <div class="col-6">
-                                <h5 class="fw-light mb-4 font-weight-bold">Main Highlights</h5>
+                                <h4 class="fw-light mb-2 font-weight-bold">Điểm nổi bật</h4>
                             </div>
-                            <div class="col-6">
-                                <h6>Hình thức :{{ homestay.category }}</h6>
+                            <div class="col-6 row align-items-center">
+                                <h5>Hình thức :</h5>
+                                <ul class="nav nav-divider align-items-center">
+                                    <div class="nav-item">
+                                        <li
+                                            class="badge"
+                                            v-for="(category, fIndex) in homestay.categories"
+                                            :key="fIndex"
+                                            style="
+                                                font-size: 13px;
+                                                margin: 5px;
+                                                background-color: rgb(248 242 196);
+                                            "
+                                        >
+                                            {{ homestay.categories.name }}
+                                        </li>
+                                    </div>
+                                </ul>
                             </div>
                         </div>
                         <p class="mb-3">
                             {{ homestay.content }}
                         </p>
 
-                        <div class="collapse" id="collapseContent">
-                            <p class="my-3">
-                                We focus a great deal on the understanding of behavioral psychology
-                                and influence triggers which are crucial for becoming a well rounded
-                                Digital Marketer. We understand that theory is important to build a
-                                solid foundation, we understand that theory alone isn't going to get
-                                the job done so that's why this rickets is packed with practical
-                                hands-on examples that you can follow step by step.
-                            </p>
-                            <p class="mb-0">
-                                Behavioral psychology and influence triggers which are crucial for
-                                becoming a well rounded Digital Marketer. We understand that theory
-                                is important to build a solid foundation, we understand that theory
-                                alone isn't going to get the job done so that's why this tickets is
-                                packed with practical hands-on examples that you can follow step by
-                                step.
-                            </p>
-                        </div>
-                        <a
-                            class="p-0 mb-4 mt-2 btn-more d-flex align-items-center collapsed"
-                            data-bs-toggle="collapse"
-                            href="#collapseContent"
-                            role="button"
-                            aria-expanded="false"
-                            aria-controls="collapseContent"
-                        >
-                            See <span class="see-more ms-1">more</span
-                            ><span class="see-less ms-1">less</span></a
-                        >
-                        <h5 class="fw-light mb-2 font-weight-bold">Advantages</h5>
+                        <h5 class="fw-light mb-2 font-weight-bold">Ưu điểm</h5>
                         <ul class="list-group list-group-borderless mb-0">
                             <li
                                 v-for="(advantage, index) in advantages"
@@ -390,7 +377,9 @@
                                                     "
                                                 >
                                                     <h5 class="card-title">
-                                                        <a href="#">{{ room?.name }}</a>
+                                                        <a class="text-decoration-none text">{{
+                                                            room?.name
+                                                        }}</a>
                                                     </h5>
 
                                                     <!---->
@@ -451,9 +440,9 @@
                                                     >
                                                         <div class="d-flex align-items-center">
                                                             <h5 class="fw-bold mb-0 me-1">
-                                                                {{ room.price }}
+                                                                {{ room.price }} VND
                                                             </h5>
-                                                            <span class="mb-0 me-2">/day</span>
+                                                            <span class="mb-0 me-2">/ngày</span>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -512,10 +501,10 @@ export default {
             currentUser: {},
             rooms: [],
             advantages: [
-                'Every hotel staff to have Proper PPT kit for COVID-19',
-                'Every staff member wears face masks and gloves at all service times.',
-                'Hotel staff ensures to maintain social distancing at all times.',
-                'The hotel has In-Room Dining options available',
+                'Nhân viên khách sạn phải có bộ PPT phù hợp để ứng phó với COVID-19',
+                'Mọi nhân viên đều đeo khẩu trang và găng tay trong mọi thời gian phục vụ.',
+                'Nhân viên khách sạn đảm bảo luôn duy trì giãn cách xã hội.',
+                'Khách sạn có sẵn các lựa chọn Ăn uống tại phòng',
             ],
             homestay: {
                 name: null,
@@ -528,6 +517,7 @@ export default {
                 files: [],
             },
             isDropdownVisible: false,
+
             adults: 1,
             children: 0,
             quantity: 1,
@@ -748,7 +738,6 @@ label {
     font-weight: bolder;
 }
 
-
 .guest-selector-count {
     margin-bottom: 0;
 }
@@ -786,5 +775,9 @@ label {
     color: #333;
     /* Đổi màu chữ khi input field được focus */
 }
-
+.badge {
+    font-size: 13px;
+    width: 50px;
+    height: 20px;
+}
 </style>

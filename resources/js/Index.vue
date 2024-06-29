@@ -18,13 +18,8 @@
                 </router-link>
                 <router-link
                     :to="{ name: 'auth.aboutus' }"
-                    class="justify-content-between"
-                    style="
-                        text-decoration: none;
-                        font-size: 17px;
-                        color: rgb(255, 120, 35);
-                        padding: 16px;
-                    "
+                    class="about justify-content-between"
+                    style="text-decoration: none; font-size: 17px; padding: 16px"
                     >Về chúng tôi</router-link
                 >
                 <div v-if="isLoggedIn">
@@ -49,7 +44,7 @@
                     class="nav-link-1"
                     v-if="!isLoggedIn"
                     style="text-decoration: none"
-                    >Register</router-link
+                    >Đăng kí</router-link
                 >
 
                 <router-link
@@ -57,7 +52,7 @@
                     class="nav-link-1"
                     v-if="!isLoggedIn"
                     style="text-decoration: none"
-                    >Sign-in</router-link
+                    >Đăng nhập</router-link
                 >
 
                 <div class="user-menu-wrap" v-if="isLoggedIn">
@@ -65,8 +60,9 @@
                         <img
                             class="mini-photo"
                             src="https://s3.eu-central-1.amazonaws.com/bootstrapbaymisc/blog/24_days_bootstrap/fox.jpg"
-                            width="36"
-                            height="36"
+                            width="50"
+                            height="50"
+                            style="border-radius: 10px"
                         />
                     </a>
                     <div :class="['menu-container', { active: isActive }]">
@@ -85,12 +81,12 @@
                                 </a>
                             </li>
                             <div class="footer">
-                                <li class="user-menu__item">
+                                <li class="logout">
                                     <a
                                         class="user-menu-link"
-                                        style="color: #f44336; font-size: 17px; padding-left: 23px"
+                                        style="font-size: 17px; padding-left: 23px"
                                         @click="logout"
-                                        >Logout</a
+                                        >Đăng xuất</a
                                     >
                                 </li>
                             </div>
@@ -162,7 +158,7 @@ export default {
         // Add mounted hook to handle scroll event
         const navEl = document.querySelector('.navbar');
         window.addEventListener('scroll', () => {
-            if (window.scrollY >= 100) {
+            if (window.scrollY >= 0) {
                 navEl.classList.add('navbar-scrolled');
             } else {
                 navEl.classList.remove('navbar-scrolled');
@@ -176,7 +172,8 @@ export default {
 
 <style scoped>
 .navbar {
-    transition: all 0.5s;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    transition: all 0.01s;
 }
 .navbar-custom {
     height: 50px;
@@ -192,21 +189,26 @@ export default {
     flex-direction: row;
 }
 .nav-link-1 {
-    background-color: rgb(248, 236, 223);
-    color: rgb(255, 120, 35);
+    background-color: rgb(252, 169, 81);
+    color: #543400fe;
     padding: 8px 20px;
     margin: 10px;
     justify-content: center;
-    border: 1px solid rgb(253, 143, 75);
+
     border-radius: 5px;
 }
+.nav-link-1:hover {
+    background-color: #faf7df;
+    color: #ffa217;
+}
+
 .navbar-title {
     display: flex;
     align-items: center;
     justify-content: space-between;
 }
 .navbar-scrolled {
-    background-color: rgb(255 255 255);
+    background-color: rgb(255, 255, 255);
     box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
 }
 .carousel-item {
@@ -252,7 +254,7 @@ export default {
 }
 
 body {
-    background-color: #ffffff;
+    background-color: #e1dddd;
 }
 
 ul {
@@ -262,7 +264,6 @@ ul {
 .user-menu-wrap {
     position: relative;
     width: 36px;
-    margin: 50px;
     border: 1px solid rgba(0, 0, 0, 0);
 }
 
@@ -288,7 +289,6 @@ ul {
     padding-left: 0px;
     margin-top: 20px;
 }
-
 .profile-highlight {
     display: flex;
     border-bottom: 1px solid var(--border-gray);
@@ -328,7 +328,7 @@ ul {
 .user-menu-link {
     display: flex;
     text-decoration: none;
-    color: rgb(255, 120, 35);
+    color: #543400fe;
     font-weight: 400;
     font-size: 17px;
     padding: 12px 16px;
@@ -336,10 +336,12 @@ ul {
 .user-menu-link div {
     margin: auto 10px;
 }
-
+logout:hover {
+    color: #f01000 !important;
+}
 .user-menu-link:hover {
-    background-color: #fee0a9;
-    color: rgb(255, 120, 35);
+    background-color: #faf7df;
+    color: #ffa217;
 }
 
 .user-menu:before {
@@ -360,9 +362,16 @@ ul {
 }
 
 /*  */
+.about {
+    color: #543400fe;
+}
+.about:hover {
+    color: #ffa217;
+}
+
 .dropbtn {
     background-color: #ffffff;
-    color: rgb(255, 120, 35);
+    color: #543400fe;
     padding: 16px;
     font-size: 17px;
     border: none;
@@ -386,14 +395,18 @@ ul {
 }
 
 .dropdown-content a {
-    color: rgb(255, 120, 35);
+    color: #543400fe;
     padding: 12px 16px;
     text-decoration: none;
     display: block;
 }
 
+.dropbtn:hover {
+    color: #ffa217;
+}
 .dropdown-content a:hover {
-    background-color: #fee0a9;
+    background-color: #faf7df;
+    color: #ffa217;
 }
 
 .dropdown:hover .dropdown-content {

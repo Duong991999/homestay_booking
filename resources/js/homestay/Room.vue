@@ -22,11 +22,11 @@
                     </div>
                     <div class="col-md-7">
                         <div
-                            class="card-body d-flex flex-column"
+                            class="card-body d-flex flex-column h-100"
                             style="padding-left: 10px; padding-top: 0px; padding-bottom: 0px"
                         >
                             <h5 class="card-title">
-                                <a href="#">{{ room.name }}</a>
+                                <a class="text text-decoration-none">{{ room.name }}</a>
                             </h5>
                             <ul class="nav nav-divider mb-2">
                                 <!-- <li
@@ -36,9 +36,6 @@
                                 >
                                     {{ feature }}
                                 </li> -->
-                                <li class="nav-item">
-                                    <a href="#" class="mb-0 text-primary">More+</a>
-                                </li>
                             </ul>
                             <p v-if="room.cancellation" class="text-success mb-0">
                                 {{ room.cancellation }}
@@ -47,7 +44,7 @@
                                 class="d-sm-flex justify-content-sm-between align-items-center mt-auto"
                             >
                                 <div class="d-flex align-items-center">
-                                    <h5 class="fw-bold mb-0 me-1">{{ room.price }}</h5>
+                                    <h5 class="fw-bold mb-0 me-1">{{ room.price }}VND</h5>
                                     <span class="mb-0 me-2">/ngày</span>
                                     <span class="text-decoration-line-through mb-0">{{
                                         room.originalPrice
@@ -56,7 +53,7 @@
                                 <div class="mt-3 mt-sm-0">
                                     <button
                                         type="button"
-                                        class="btn btn-link text-decoration-none p-0 mb-0 mt-1"
+                                        class="btn btn-search text-decoration-none p-2 mb-0 mt-1"
                                         @click="showModal(room)"
                                     >
                                         <svg
@@ -189,5 +186,20 @@ export default {
     content: '•';
     padding: 0 0.7rem;
     opacity: 0.8;
+}
+.btn-search {
+    background-color: #fcad37;
+    color: #513306;
+    border-radius: 10px;
+}
+.btn-search:hover {
+    background-color: #faf7df;
+    color: #ffa217;
+}
+.text {
+    color: #543400fe;
+}
+.text:hover {
+    color: #ffa217;
 }
 </style>

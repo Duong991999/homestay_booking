@@ -251,6 +251,7 @@ export default {
 .card {
     width: 250px;
     height: auto;
+    background-color: rgb(255, 255, 255);
 }
 .flex-centered {
     display: flex;
