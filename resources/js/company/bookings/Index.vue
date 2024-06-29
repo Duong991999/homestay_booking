@@ -161,37 +161,45 @@
                             </thead>
                             <tbody class="border-top-0">
                                 <tr v-for="(booking, index) in bookings" :key="index">
-                                    <td>
+                                    <td class="align-middle">
                                         <h6 class="mb-0">{{ index + 1 }}</h6>
                                     </td>
-                                    <td>
-                                        <h6 class="mb-0">
+                                    <td class="align-middle">
+                                        <h6 class="mb-0 text-center text-center">
                                             <a :href="booking.link">{{ booking.guest_name }}</a>
                                         </h6>
                                     </td>
-                                    <td>
-                                        <h6 class="mb-0 fw-light">{{ booking.phone_number }}</h6>
+                                    <td class="align-middle">
+                                        <h6 class="mb-0 fw-light text-center">
+                                            {{ booking.phone_number }}
+                                        </h6>
                                     </td>
-                                    <td>
-                                        <h6 class="mb-0 fw-light">{{ booking.bill_value }}</h6>
+                                    <td class="align-middle">
+                                        <h6 class="mb-0 fw-light text-center">
+                                            {{ booking.bill_value }}
+                                        </h6>
                                     </td>
-                                    <td>{{ booking.created_at }}</td>
-                                    <td>
-                                        <h6 class="mb-0 fw-light">{{ booking.checkin_date }}</h6>
+                                    <td class="align-middle">{{ booking.created_at }}</td>
+                                    <td class="align-middle">
+                                        <h6 class="mb-0 fw-light text-center">
+                                            {{ booking.checkin_date }}
+                                        </h6>
                                     </td>
-                                    <td>
-                                        <h6 class="mb-0 fw-light">{{ booking.checkout_date }}</h6>
+                                    <td class="align-middle">
+                                        <h6 class="mb-0 fw-light text-center">
+                                            {{ booking.checkout_date }}
+                                        </h6>
                                     </td>
-                                    <td>
+                                    <td class="align-middle">
                                         <div
                                             :class="`bg-${
                                                 statusColors[booking.status]
-                                            } badge text-white`"
+                                            } badge text-white text-center`"
                                         >
                                             {{ filter(booking.status) }}
                                         </div>
                                     </td>
-                                    <td>
+                                    <td class="align-middle">
                                         <button
                                             @click="viewBooking(booking), showDetail(booking.id)"
                                             class="btn btn-sm btn-light mb-1"
