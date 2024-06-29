@@ -224,9 +224,10 @@ class BookingRepository extends BaseRepository implements BookingRepositoryInter
 		$orderBy = ['updated_at', 'desc'];
 		if ($attributes['order_by'] ?? 0) {
 			$orderBy = explode(' ', $attributes['order_by']);
+			return $data->orderBy(...$orderBy)->orderBy('updated_at', 'desc')->paginate(10)->appends(Request::query());
 		}
+		return $data->orderBy(...$orderBy)->paginate(10)->appends(Request::query());
 
-		return $data->orderBy($orderBy[0], $orderBy[1])->paginate(10)->appends(Request::query());
 	}
 	public function count($attributes)
 	{
