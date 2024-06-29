@@ -38,7 +38,9 @@
 							<div class="col-lg-2">
 								<select class="form-select input__field" aria-label="Default select example">
 									<option selected value="0"></option>
-									<option value="1">Ten <i class="fa fa-solid fa-arrow-up"></i></option>
+									<option value="1">Tên ↓</option>
+									<option value="2">Tên ↑</option>
+
 									<option value="2">Two</option>
 									<option value="3">Three</option></select>
 								<span class="input__label">Sắp xếp theo</span>
@@ -399,6 +401,8 @@ export default {
             phone_number: '',
             checkin_date: '',
             checkout_date: '',
+			guest_name: '',
+			order_by: '',
             user_name: '',
             loading: false,
             data: {},
