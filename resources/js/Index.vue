@@ -120,7 +120,7 @@ export default {
                 { label: 'Quản lý loại phòng', href: '#/company/room/index' },
                 { label: 'Quản lý phòng', href: '#/company/roomstatus/index' },
                 { label: 'Quản lý đặt phòng', href: '#/company/bookings/index' },
-                { label: 'Quản lý đánh giá', href: '#/reviewlist' },
+                { label: 'Quản lý đánh giá', href: '#/company/reviewlist' },
             ],
         };
     },

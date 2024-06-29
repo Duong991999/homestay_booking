@@ -164,7 +164,7 @@
 			</div>
 		</div>
 		<div>
-			<homestay-list :items="homestayList""></homestay-list>
+			<homestay-list :items="homestayList"></homestay-list>
 			<pagination :data="data" v-on:pagination-change-page="fetchData" align="center"></pagination>
 		</div>
 	</div>
