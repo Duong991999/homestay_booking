@@ -3,8 +3,8 @@
         <div class="row g-4 g-lg-5">
             <div class="col-lg-6 position-relative mb-4 mb-md-0">
                 <h1 class="mb-4 mt-md-5 display-5 font-weight-bold">
-                    Find the top <br /><span class="position-relative z-index-9">
-                        Homestay nearby.
+                    Tìm kiếm <br /><span class="position-relative z-index-9">
+                        Homestay hàng dầu.
                         <span
                             class="position-absolute top-50 start-50 translate-middle z-index-n1 d-none d-md-block mt-4"
                             style="top: 0px; fill: antiquewhite"
@@ -17,8 +17,8 @@
                     ></span>
                 </h1>
                 <p class="mb-4">
-                    We bring you not only a stay option, but an experience in your budget to enjoy
-                    the luxury.
+                    Chúng tôi mang đến cho bạn không chỉ một lựa chọn lưu trú mà còn là trải nghiệm
+                    phù hợp túi tiền của bạn để tận hưởng sự sang trọng.
                 </p>
             </div>
 
@@ -62,7 +62,7 @@
         <!--Form-->
         <div class="row position-absolute" style="top: 500px; z-index: 1">
             <div class="col-xl-10 position-relative z-1 mt-n3 mt-xl-n9">
-                <h6 class="d-none d-xl-block mb-3">Tìm kiếm</h6>
+                <h6 class="d-none d-xl-block mb-5"></h6>
                 <form
                     class="card shadow rounded-3 position-relative p-4 pe-md-5 pb-5 pb-md-4"
                     style="width: 950px; border-radius: 20px"
@@ -145,14 +145,18 @@
                         >
                             <div class="cards-wrapper">
                                 <div class="card">
-                                    <img
-                                        src="assets/image/slide_home_screens/_2.jpg"
-                                        class="card-img-top"
-                                        alt="..."
-                                        style="border-radius: 20px"
-                                    />
-                                    <div class="card-body">
-                                        <h4 class="card-title text-center">{{ slide.title }}</h4>
+                                    <div style="height: 210px">
+                                        <img
+                                            :src="slide.image"
+                                            class="card-img-top"
+                                            alt="..."
+                                            style="border-radius: 20px"
+                                        />
+                                    </div>
+                                    <div class="card-body" style="padding: 7px">
+                                        <h5 class="card-title text-center mb-0">
+                                            {{ slide.title }}
+                                        </h5>
                                         <h6 class="card-text text-center">
                                             {{ slide.description }}
                                         </h6>
@@ -197,10 +201,10 @@
                     />
                 </div>
                 <div class="col-lg-5">
-                    <h2 class="mb-3 mb-lg-5 font-weight-bold">The Best Holidays Start Here!</h2>
-                    <p class="mb-3 mb-lg-5 font-weight-light">
-                        Book your hotel with us and don't forget to grab an awesome hotel deal to
-                        save massive on your stay.
+                    <h2 class="mb-2 mb-lg-5 font-weight-bold">Ngày mới bắt dầu từ đây</h2>
+                    <p class="mb-2 mb-lg-5 font-weight-light">
+                        Hãy đặt phòng khách sạn với chúng tôi và đừng quên nhận ưu đãi khách sạn
+                        tuyệt vời để tiết kiệm đáng kể cho kỳ nghỉ của bạn.
                     </p>
                     <div class="row g-4">
                         <div class="col-sm-6">
@@ -216,13 +220,12 @@
                                     src="assets/image/icon/restaurant.png"
                                     alt=""
                                     class="rounded-3 mx-auto"
-                                    style="width: 27px; height: 27px; margin-top: 10px"
+                                    style="width: 30px; height: 30px"
                                 />
                             </div>
-                            <h5 class="mt-2 font-weight-bold">Quality Food</h5>
+                            <h5 class="mt-2 font-weight-bold">Chất lượng</h5>
                             <p class="mb-0">
-                                Departure defective arranging rapturous did. Conduct denied adding
-                                worthy little.
+                                Homestay chất lượng - Trải nghiệm tuyệt vời từng phút giây
                             </p>
                         </div>
                         <div class="col-sm-6">
@@ -234,11 +237,11 @@
                                     src="assets/image/icon/time.png"
                                     alt=""
                                     class="rounded-3 mx-auto"
-                                    style="width: 30px; height: 30px; margin-top: 10px"
+                                    style="width: 30px; height: 30px"
                                 />
                             </div>
-                            <h5 class="mt-2 font-weight-bold">Quick Services</h5>
-                            <p class="mb-0">Supposing so be resolving breakfast am or perfectly.</p>
+                            <h5 class="mt-2 font-weight-bold">Nhanh chóng</h5>
+                            <p class="mb-0">Đặt Homestay trong nháy mắt - Nhanh chóng và dễ dàng</p>
                         </div>
                         <div class="col-sm-6">
                             <div
@@ -249,13 +252,11 @@
                                     src="assets/image/icon/secure.png"
                                     alt=""
                                     class="rounded-3 mx-auto"
-                                    style="width: 30px; height: 30px; margin-top: 10px"
+                                    style="width: 30px; height: 30px"
                                 />
                             </div>
-                            <h5 class="mt-2 font-weight-bold">High Security</h5>
-                            <p class="mb-0">
-                                Arranging rapturous did believe him all had supported.
-                            </p>
+                            <h5 class="mt-2 font-weight-bold">Bảo mật</h5>
+                            <p class="mb-0">Homestay an tâm - Bảo mật thông tin tuyệt đối</p>
                         </div>
                         <div class="col-sm-6">
                             <div
@@ -266,11 +267,11 @@
                                     src="assets/image/icon/thunder.png"
                                     alt=""
                                     class="rounded-3 mx-auto"
-                                    style="width: 30px; height: 30px; margin-top: 10px"
+                                    style="width: 30px; height: 30px"
                                 />
                             </div>
-                            <h5 class="mt-2 font-weight-bold">24 Hours Alert</h5>
-                            <p class="mb-0">Rapturous did believe him all had supported.</p>
+                            <h5 class="mt-2 font-weight-bold">Tiện lợi</h5>
+                            <p class="mb-0">Homestay tiện lợi - Chỉ vài click để đặt phòng</p>
                         </div>
                     </div>
                 </div>
@@ -279,210 +280,49 @@
         <!--tab-->
         <div class="container" style="margin-top: 80px">
             <div class="row mb-4">
-                <div class="col-12 text-center"><h2 class="mb-0">Featured Hotels</h2></div>
+                <div class="col-12 text-center">
+                    <h2 class="mb-0">Những Homestay nổi bật</h2>
+                </div>
             </div>
             <div class="row">
-                <div class="col-sm-6 col-xl-3">
+                <div class="col-sm-6 col-xl-3" v-for="homestay in homestays" :key="homestay.id">
                     <div
                         class="card card-img-scale overflow-hidden bg-transparent"
-                        style="width: 90%"
+                        style="width: 90%; height: 500px"
                     >
                         <div class="card-img-scale-wrapper rounded-3">
                             <img
-                                src="assets/image/slide_home_screens/_2.jpg"
-                                alt="about1"
-                                class="rounded-3 position-relative"
-                                style="height: 400px; width: 100%; border-radius: 10px"
+                                :src="homestay.image"
+                                alt="homestay"
+                                class="d-block rounded-3 object-fit-cover"
+                                style="border-radius: 10px; height: 400px; width: 100%"
                             />
-                            <div
-                                class="position-absolute start-0 p-2"
-                                style="top: 360px; width: 40%"
-                            >
-                                <div
-                                    class="text-bg-dark rounded-pill stretched-link d-flex justify-content-center"
-                                    style="background-color: black; height: 25px"
-                                >
-                                    <img
-                                        src="assets/image/icon/placeholder.png"
-                                        alt="about1"
-                                        class="rounded-3 position-relative"
-                                        style="height: 17px; width: 13px; padding-top: 7px"
-                                    />
-                                    <h6 style="color: aliceblue; font-weight: 1px">Hà Nội</h6>
-                                </div>
-                            </div>
                         </div>
                         <div class="card-body p-0">
-                            <!----><!---->
                             <h5 class="card-title" style="padding-top: 10px">
                                 <a
                                     href="#"
-                                    class="stretched-link text-decoration-none font-weight-bold text-dark"
-                                    >Hotel</a
+                                    class="stretched-link text-decoration-none font-weight-bold text"
+                                    >{{ homestay.name }}</a
                                 >
                             </h5>
-                            <div class="d-flex justify-content-between align-items-center">
-                                <h6 class="text-success mb-0 text-dark">
-                                    454VND <small class="fw-light">/starting at</small>
+                            <i class="fa-solid fa-location-dot" style="color: #ff4747"></i>
+                            <div class="mt-auto d-flex justify-content-between mb-2">
+                                <h6 class="text mb-0">
+                                    {{ homestay.price }} VND <small class="fw-light">/ngày</small>
                                 </h6>
-                                <h6 class="mb-0 d-flex">5.4</h6>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-6 col-xl-3 ml-0">
-                    <div
-                        class="card card-img-scale overflow-hidden bg-transparent"
-                        style="width: 90%"
-                    >
-                        <div class="card-img-scale-wrapper rounded-3">
-                            <img
-                                src="assets/image/slide_home_screens/_2.jpg"
-                                alt="about1"
-                                class="rounded-3 position-relative"
-                                style="height: 400px; width: 100%; border-radius: 10px"
-                            />
-                            <div
-                                class="position-absolute start-0 p-2"
-                                style="top: 360px; width: 40%"
-                            >
-                                <div
-                                    class="text-bg-dark rounded-pill stretched-link d-flex justify-content-center"
-                                    style="background-color: black; height: 25px"
-                                >
-                                    <img
-                                        src="assets/image/icon/placeholder.png"
-                                        alt="about1"
-                                        class="rounded-3 position-relative"
-                                        style="height: 17px; width: 13px; padding-top: 7px"
-                                    />
-                                    <h6 style="color: aliceblue; font-size: 17px; font-weight: 1px">
-                                        Hà Nội
+                                <div class="row mr-2">
+                                    <h6 class="mb-0 mr-2 d-flex mt-1 textt">
+                                        {{ homestay.rating }}
                                     </h6>
+                                    <i class="fa-solid fa-star" style="color: #ffd43b"></i>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="card-body p-0">
-                            <!----><!---->
-                            <h5 class="card-title" style="padding-top: 10px">
-                                <a
-                                    href="#"
-                                    class="stretched-link text-decoration-none font-weight-bold text-dark"
-                                    >Hotel</a
-                                >
-                            </h5>
-                            <div class="d-flex justify-content-between align-items-center">
-                                <h6 class="text-success mb-0 text-dark">
-                                    454VND <small class="fw-light">/starting at</small>
-                                </h6>
-                                <h6 class="mb-0 d-flex">5.4</h6>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-6 col-xl-3">
-                    <div
-                        class="card card-img-scale overflow-hidden bg-transparent"
-                        style="width: 90%"
-                    >
-                        <div class="card-img-scale-wrapper rounded-3">
-                            <img
-                                src="assets/image/slide_home_screens/_2.jpg"
-                                alt="about1"
-                                class="rounded-3 position-relative"
-                                style="height: 400px; width: 100%; border-radius: 10px"
-                            />
-                            <div
-                                class="position-absolute start-0 p-2"
-                                style="top: 360px; width: 40%"
-                            >
-                                <div
-                                    class="text-bg-dark rounded-pill stretched-link d-flex justify-content-center"
-                                    style="background-color: black; height: 25px"
-                                >
-                                    <img
-                                        src="assets/image/icon/placeholder.png"
-                                        alt="about1"
-                                        class="rounded-3 position-relative"
-                                        style="height: 17px; width: 13px; padding-top: 7px"
-                                    />
-                                    <h6 style="color: aliceblue; font-size: 17px; font-weight: 1px">
-                                        Hà Nội
-                                    </h6>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card-body p-0">
-                            <!----><!---->
-                            <h5 class="card-title" style="padding-top: 10px">
-                                <a
-                                    href="#"
-                                    class="stretched-link text-decoration-none font-weight-bold text-dark"
-                                    >Hotel</a
-                                >
-                            </h5>
-                            <div class="d-flex justify-content-between align-items-center">
-                                <h6 class="text-success mb-0 text-dark">
-                                    454VND <small class="fw-light">/starting at</small>
-                                </h6>
-                                <h6 class="mb-0 d-flex">5.4</h6>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-6 col-xl-3">
-                    <div
-                        class="card card-img-scale overflow-hidden bg-transparent"
-                        style="width: 90%"
-                    >
-                        <div class="card-img-scale-wrapper rounded-3">
-                            <img
-                                src="assets/image/slide_home_screens/_2.jpg"
-                                alt="about1"
-                                class="rounded-3 position-relative"
-                                style="height: 400px; width: 100%; border-radius: 10px"
-                            />
-                            <div
-                                class="position-absolute start-0 p-2"
-                                style="top: 360px; width: 40%"
-                            >
-                                <div
-                                    class="text-bg-dark rounded-pill stretched-link d-flex justify-content-center"
-                                    style="background-color: black; height: 25px"
-                                >
-                                    <img
-                                        src="assets/image/icon/placeholder.png"
-                                        alt="about1"
-                                        class="rounded-3 position-relative"
-                                        style="height: 17px; width: 13px; padding-top: 7px"
-                                    />
-                                    <h6 style="color: aliceblue; font-size: 17px; font-weight: 1px">
-                                        Hà Nội
-                                    </h6>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card-body p-0">
-                            <!----><!---->
-                            <h5 class="card-title" style="padding-top: 10px">
-                                <a
-                                    href="#"
-                                    class="stretched-link text-decoration-none font-weight-bold text-dark"
-                                    >Hotel</a
-                                >
-                            </h5>
-                            <div class="d-flex justify-content-between align-items-center">
-                                <h6 class="text-success mb-0 text-dark">
-                                    454VND <small class="fw-light">/starting at</small>
-                                </h6>
-                                <h6 class="mb-0 d-flex">5.4</h6>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-
         <!--comment-->
         <div id="carousel-comment" class="carousel slide" data-ride="carousel">
             <div class="carousel-inner">
@@ -603,8 +443,10 @@
 </template>
 <script>
 import CONST_FRONTEND from '@/const';
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 
 export default {
+    components: { FontAwesomeIcon },
     data() {
         return {
             list_home_screen: CONST_FRONTEND.home_screen_file,
@@ -618,21 +460,66 @@ export default {
             // showContainer: true,
             slides: [
                 {
-                    image: 'assets/image/slide_home_screens/_2.jpg',
-                    title: 'Địa điểm',
-                    description: 'Số homestay',
-                },
-                {
                     image: 'assets/image/slide_home_screens/_1.jpg',
-                    title: 'Địa điểm',
-                    description: 'Số homestay',
+                    title: 'Hà Nội',
+                    description: ' 29 Homestay',
+                },
+                {
+                    image: 'assets/image/slide_home_screens/_7.jpg',
+                    title: 'TP.Hồ Chí MInh',
+                    description: '39 homestay',
+                },
+                {
+                    image: 'assets/image/slide_home_screens/_4.jpg',
+                    title: 'Huế',
+                    description: '18 homestay',
                 },
                 {
                     image: 'assets/image/slide_home_screens/_2.jpg',
-                    title: 'Địa điểm',
-                    description: 'Số homestay',
+                    title: 'Hải Phòng',
+                    description: '25 homestay',
+                },
+                {
+                    image: 'assets/image/slide_home_screens/_2.jpg',
+                    title: 'Đà Nẵng',
+                    description: '37 homestay',
                 },
                 // Add more slides as needed
+            ],
+            homestays: [
+                {
+                    id: 1,
+                    image: 'assets/image/slide_home_screens/_3.jpg',
+                    location: 'Hà Nội',
+                    name: 'Burning Sun',
+                    price: 454000,
+                    rating: 5,
+                },
+                {
+                    id: 2,
+                    image: 'assets/image/slide_home_screens/_4.jpg',
+                    location: 'TP.Hồ Chí Minh',
+                    name: 'Homestay Kim Nhã',
+                    price: 454000,
+                    rating: 4.5,
+                },
+                {
+                    id: 3,
+                    image: 'assets/image/slide_home_screens/_5.jpg',
+                    location: 'Hà Nội',
+                    name: 'Homestay Nguyễn Chí Thanh',
+                    price: 454000,
+                    rating: 4.5,
+                },
+                {
+                    id: 4,
+                    image: 'assets/image/slide_home_screens/_6.jpg',
+                    location: 'Hải Phòng',
+                    name: 'Homestay Kim Phượng',
+                    price: 454000,
+                    rating: 4,
+                },
+                // Add more homestay objects as needed
             ],
             address: '',
             checkinDate: '',
@@ -662,24 +549,19 @@ export default {
                 interval: 2000,
             });
         },
-        scrollNext() {
-            const carouselWidth = this.$refs.carouselInner.scrollWidth;
-            if (this.scrollPosition < carouselWidth - this.cardWidth * 3) {
-                this.scrollPosition += this.cardWidth;
-                this.$refs.carouselInner.scrollTo({
-                    left: this.scrollPosition,
-                    behavior: 'smooth',
-                });
-            }
-        },
         scrollPrevious() {
-            if (this.scrollPosition > 0) {
-                this.scrollPosition -= this.cardWidth;
-                this.$refs.carouselInner.scrollTo({
-                    left: this.scrollPosition,
-                    behavior: 'smooth',
-                });
-            }
+            const carouselInner = this.$refs.carouselInner;
+            carouselInner.scrollBy({
+                left: -carouselInner.offsetWidth,
+                behavior: 'smooth',
+            });
+        },
+        scrollNext() {
+            const carouselInner = this.$refs.carouselInner;
+            carouselInner.scrollBy({
+                left: carouselInner.offsetWidth,
+                behavior: 'smooth',
+            });
         },
         searchHomestay() {
             this.$router.push({
@@ -709,10 +591,10 @@ export default {
     padding: 16px;
 }
 .custom-bg {
-    background-color: #f87f06d2;
+    background-color: #c56f0cd2;
 }
 .custom-bg:hover {
-    background-color: #04419c;
+    background-color: #ffa217;
 }
 .location_choice {
     margin: 10px auto;
@@ -775,5 +657,11 @@ export default {
     font-size: 12px; /* Điều chỉnh kích thước chữ khi input field được focus */
     color: #333; /* Đổi màu chữ khi input field được focus */
     border-radius: 10px;
+}
+.text {
+    color: #543400fe;
+}
+.text:hover {
+    color: #ffa217;
 }
 </style>

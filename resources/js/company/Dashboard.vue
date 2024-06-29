@@ -25,8 +25,8 @@
                                 </svg>
                             </div>
                             <div class="ms-3">
-                                <h4>56</h4>
-                                <span>Total Listings</span>
+                                <h4>6</h4>
+                                <span>Homestay</span>
                             </div>
                         </div>
                     </div>
@@ -55,8 +55,8 @@
                                 </svg>
                             </div>
                             <div class="ms-3">
-                                <h4>$2,55,365</h4>
-                                <span>Earning</span>
+                                <h5>255365 VND</h5>
+                                <span>Doanh thu</span>
                             </div>
                         </div>
                     </div>
@@ -84,8 +84,8 @@
                                 </svg>
                             </div>
                             <div class="ms-3">
-                                <h4>15K</h4>
-                                <span>Visitors</span>
+                                <h4>31</h4>
+                                <span>Khách hàng</span>
                             </div>
                         </div>
                     </div>
@@ -113,8 +113,8 @@
                                 </svg>
                             </div>
                             <div class="ms-3">
-                                <h4>12K</h4>
-                                <span>Total Reviews</span>
+                                <h4>15</h4>
+                                <span>Bình luận</span>
                             </div>
                         </div>
                     </div>
@@ -127,7 +127,7 @@
                 <div class="card border h-100" style="width: auto">
                     <!----><!----><!---->
                     <div class="card-header border-bottom">
-                        <h5 class="card-header-title">Booking stats</h5>
+                        <h5 class="card-header-title">Đơn đặt phòng</h5>
                     </div>
                     <div class="card-body">
                         <apexchart
@@ -146,14 +146,7 @@
                     <div
                         class="card-header border-bottom d-flex justify-content-between align-items-center"
                     >
-                        <h5 class="card-header-title">Booking Traffic</h5>
-                        <a
-                            aria-current="page"
-                            href="/booking_v/agent/dashboard"
-                            class="router-link-active router-link-exact-active btn btn-link p-0 mb-0"
-                        >
-                            View all
-                        </a>
+                        <h5 class="card-header-title">Trạng thái đơn đặt phòng</h5>
                     </div>
                     <div class="card-body mt-4">
                         <apexchart type="pie" :options="chartOptions" :series="series"></apexchart>
@@ -194,7 +187,7 @@ export default {
                     curve: 'straight',
                 },
                 title: {
-                    text: 'Product Trends by Month',
+                    text: 'Số đơn đặt phòng theo tháng',
                     align: 'left',
                 },
                 grid: {
@@ -212,7 +205,7 @@ export default {
                 chart: {
                     type: 'pie',
                 },
-                labels: ['Team A', 'Team B', 'Team C', 'Team D', 'Team E'],
+                labels: ['Nhận phòng', 'Đã duyệt', 'Chờ duyệt', 'Đã hủy', 'Trả phòng'],
                 dataLabels: {
                     enabled: false,
                 },
@@ -251,6 +244,7 @@ export default {
 .card {
     width: 250px;
     height: auto;
+    background-color: rgb(255, 255, 255);
 }
 .flex-centered {
     display: flex;

@@ -1,5 +1,5 @@
 <template>
-    <div class="row justify-content-center h-100" style="margin-top: 80px">
+    <div class="row justify-content-center h-100" style="margin-top: 100px">
         <v-fullloading :loading="loading"></v-fullloading>
         <div class="col-12">
             <div class="shadow bg-mode rounded-3 overflow-hidden" style="border-radius: 20px">
@@ -38,7 +38,7 @@
                         <div class="p-4 p-sm-7 align-items-center">
                             <form>
                                 <div class="form-group">
-                                    <label for="email">E-mail</label>
+                                    <label for="email">Tài khoản</label>
                                     <input
                                         type="text"
                                         name="email"
@@ -52,7 +52,7 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="email">Password</label>
+                                    <label for="email">Mật khẩu</label>
                                     <input
                                         type="password"
                                         name="password"
@@ -72,24 +72,22 @@
                                     {{ message_errors }}
                                 </div>
                                 <button
-                                    type="submit"
-                                    class="btn btn-lg btn-block"
+                                    type="submit "
+                                    class="btn btn-lg btn-block nav-link-1"
                                     :disabled="loading"
                                     @click.prevent="login"
-                                    style="background-color: antiquewhite; color: #ee6363"
                                 >
-                                    Log-in
+                                    Đăng nhập
                                 </button>
 
                                 <hr />
 
                                 <div>
-                                    No account yet?
+                                    Bạn đã có tài khoản chưa?
                                     <router-link
                                         :to="{ name: 'register' }"
-                                        class="font-weight-bold text-decoration-none"
-                                        style="color: rgb(237, 195, 169)"
-                                        >Register</router-link
+                                        class="font-weight-bold text-decoration-none nav-link-2"
+                                        >Đăng kí</router-link
                                     >
                                 </div>
                             </form>
@@ -139,4 +137,25 @@ export default {
     },
 };
 </script>
-<style></style>
+<style>
+.nav-link-1 {
+    background-color: rgb(252, 169, 81);
+    color: #543400fe;
+    justify-content: center;
+
+    border-radius: 5px;
+}
+.nav-link-1:hover {
+    background-color: #faf7df;
+    color: #ffa217;
+}
+.nav-link-2 {
+    color: #543400fe;
+    justify-content: center;
+
+    border-radius: 5px;
+}
+.nav-link-2:hover {
+    color: #ffa217;
+}
+</style>
