@@ -130,7 +130,9 @@
                         class="table-responsive border-0"
                         style="border-top-left-radius: 10px; border-top-right-radius: 10px"
                     >
-                        <table class="table align-middle p-4 mb-0 table-hover table-shrink">
+                        <table
+                            class="table align-middle p-4 mb-0 table-hover table-shrink text-center"
+                        >
                             <thead
                                 class="table-light"
                                 style="
