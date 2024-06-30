@@ -20,10 +20,13 @@ mix.js('resources/js/app.js', 'public/js').vue().sass('resources/sass/app.scss',
 });
 const path = require('path');
 mix.webpackConfig({
-  resolve: {
-    alias: {
-      '@': path.resolve(__dirname, 'resources/js'),
-    },
-  },
+	resolve: {
+		alias: {
+			'@': path.resolve(__dirname, 'resources/js'),
+		},
+	},
+	// watchOptions: {
+	// 	ignored: /node_modules/
+	// }
 });
 

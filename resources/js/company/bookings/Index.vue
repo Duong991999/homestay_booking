@@ -13,7 +13,7 @@
 				</div>
 				<div class="card-body pb-0">
 					<div class="row g-3 align-items-center justify-content-between mb-3">
-						<div class="row col-lg-12 align-item-center">
+						<div class="row col-lg-12 align-items-center">
 							<div class="col-lg-2">
 								<input class="input__field" type="date" v-model="checkin_date" />
 								<span class="input__label">Ngày nhận phòng</span>
@@ -31,7 +31,8 @@
 								<span class="input__label">Số điện thoại</span>
 							</div>
 							<div class="col-lg-2">
-								<select class="form-select input__field" aria-label="Default select example" v-model="order_by">
+								<select class="form-select input__field" aria-label="Default select example"
+									v-model="order_by">
 									<option selected value="0"></option>
 									<option value="status desc">Trạng thái ↓</option>
 									<option value="status asc">Trạng thái ↑</option>
@@ -230,7 +231,7 @@
 			<div class="modal-dialog custom-modal-size" role="document">
 				<div class="modal-content">
 					<div class="modal-header">
-						<h5 class="modal-title">{{ details.guest_name }}</h5>
+						<h5 class="modal-title">{{ selectedBooking.guest_name }}</h5>
 						<button type="button" class="close" @click="closeModal" aria-label="Close">
 							<span aria-hidden="true">&times;</span>
 						</button>
@@ -238,49 +239,68 @@
 					<div class="modal-body">
 						<div class="row">
 							<div class="col-md-6">
-								<label for="start_day" class="form-label d-block">Ngày bắt đầu</label>
+								<label for="start_day" class="form-label d-block">Tên khách hàng</label>
 								<div class="">
 									<h6 class="form-control form-control-lg" style="border-radius: 10px">
-										{{ details.checkin_date }}
+										{{ selectedBooking.guest_name }}
 									</h6>
 								</div>
 							</div>
 							<div class="col-md-6">
-								<label for="close_day" class="form-label d-block">Ngày kết thúc</label>
+								<label for="close_day" class="form-label d-block">Số điện thoại</label>
 								<div class="">
 									<h6 class="form-control form-control-lg" style="border-radius: 10px">
-										{{ details.checkout }}
+										{{ selectedBooking.phone_number }}
+									</h6>
+								</div>
+							</div>
+							<div class="col-md-6">
+								<label for="start_day" class="form-label d-block">Ngày nhận phòng</label>
+								<div class="">
+									<h6 class="form-control form-control-lg" style="border-radius: 10px">
+										{{ selectedBooking.checkin_date }}
+									</h6>
+								</div>
+							</div>
+							<div class="col-md-6">
+								<label for="close_day" class="form-label d-block">Ngày trả phòng</label>
+								<div class="">
+									<h6 class="form-control form-control-lg" style="border-radius: 10px">
+										{{ selectedBooking.checkout_date }}
 									</h6>
 								</div>
 							</div>
 						</div>
-						<div v-for="room in rooms" :key="room.id">
-							<div class="row">
-								<div class="col-md-6">
-									<label class="form-label d-block">Loại phòng</label>
-
-									<div class="">
+						<div v-for="booking_detail in selectedBooking.booking_details" :key="booking_detail.id">
+							<div v-for="booking_detail_room in booking_detail.rooms" :key="booking_detail_room.id">
+								<div class="row">
+									<div class="col-md-6">
+										<label class="form-label d-block">Loại phòng</label>
+										<div class="">
+											<h6 class="form-control form-control-lg" style="border-radius: 10px">
+												{{ room.type }}
+											</h6>
+										</div>
+									</div>
+									<div class="col-md-2">
+										<label class="form-label d-block">Số lượng phòng</label>
 										<h6 class="form-control form-control-lg" style="border-radius: 10px">
-											{{ room.type }}
+											{{ room.count }}
+										</h6>
+									</div>
+									<div class="col-md-4">
+										<label class="form-label d-block" style="height: 22px"></label>
+										<h6 class="form-control form-control-lg border-0" style="border-radius: 10px">
+											{{ room.count }} x {{ room.price }} =
+											{{ formatCurrency(room.price * room.count) }}
 										</h6>
 									</div>
 								</div>
-								<div class="col-md-2">
-									<label class="form-label d-block">Số lượng phòng</label>
-									<h6 class="form-control form-control-lg" style="border-radius: 10px">
-										{{ room.count }}
-									</h6>
-								</div>
-								<div class="col-md-4">
-									<label class="form-label d-block" style="height: 22px"></label>
-									<h6 class="form-control form-control-lg border-0" style="border-radius: 10px">
-										{{ room.count }} x {{ room.price }} =
-										{{ formatCurrency(room.price * room.count) }}
-									</h6>
-								</div>
+
+
 							</div>
 						</div>
-						<p><strong>Trạng thái:</strong> {{ selectedBooking.status }}</p>
+						<p><strong>Trạng thái:</strong> {{ filter(selectedBooking.status) }}</p>
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-secondary" @click="closeModal">
@@ -391,8 +411,8 @@ export default {
 			this.loading = true;
 			try {
 				const response = await axios.get(`/api/booking/show/${bookingId}`);
-				this.data = response.data.data;
-				this.details = this.data.data;
+				console.log(response.data.data);
+				this.selectedBooking = response.data.data;
 			} catch (error) {
 				console.error('Error fetching data:', error);
 			}
@@ -534,9 +554,5 @@ export default {
 
 .pointer {
 	cursor: pointer;
-}
-
-.align-item-center {
-	align-items: center;
 }
 </style>

@@ -28,6 +28,8 @@ services:
       - laravel
     depends_on:
       - app
+    environment:
+      - CHOKIDAR_USEPOLLING=true
   nginx:
     container_name: nginx
     image: nginx:stable-alpine

@@ -101,7 +101,7 @@
                 <router-view></router-view>
             </div>
         </div>
-        <footer-component></footer-component>
+        <footer-component v-if="this.$route.meta.footer"></footer-component>
     </div>
 </template>
 
@@ -129,20 +129,20 @@ export default {
             lastSearchComputed: 'lastSearch',
             isLoggedIn: 'isLoggedIn',
         }),
-        ...mapGetters({
+		...mapGetters({
             itemsInBasket: 'itemsInBasket',
-        }),
+		}),
         somethingElse() {
             return 1 + 2;
         },
     },
     methods: {
         async logout() {
-            try {
-                await axios.post('/api/auth/logout');
-                this.$store.dispatch('logout');
+			try {
+            await axios.post('/api/auth/logout');
+            this.$store.dispatch('logout');
             } catch (error) {
-                this.$store.dispatch('logout');
+            this.$store.dispatch('logout');
             }
         },
         initializeCarousel() {
@@ -153,7 +153,7 @@ export default {
         toggleMenu() {
             this.isActive = !this.isActive;
         },
-    },
+	},
     mounted() {
         // Add mounted hook to handle scroll event
         const navEl = document.querySelector('.navbar');

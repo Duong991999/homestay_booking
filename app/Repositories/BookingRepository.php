@@ -125,7 +125,9 @@ class BookingRepository extends BaseRepository implements BookingRepositoryInter
 
 	public function findDetail($id)
 	{
-		return $this->model->with('booking_details')->find($id);
+		return $this->model->with(['booking_details' => function($q){
+			return $q->with('rooms');
+		} ])->find($id);
 	}
 
 	public function changeStatus($status, $bookingId)
