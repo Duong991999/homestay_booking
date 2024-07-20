@@ -9,7 +9,7 @@
             <form class="row g-3">
                 <div class="col-12">
                     <label class="form-label"
-                        >Upload your profile photo<span class="text-danger">*</span></label
+                        >Upload your profile photos<span class="text-danger">*</span></label
                     >
                     <div class="d-flex align-items-center">
                         <label
